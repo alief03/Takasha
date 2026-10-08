@@ -1,0 +1,23 @@
+// Root build.gradle for Takasha multi-project (1.21.11 & 26.2)
+
+subprojects {
+    repositories {
+        maven {
+            name = "Fabric"
+            url = "https://maven.fabricmc.net/"
+        }
+        mavenCentral()
+    }
+}
+
+task buildAll {
+    group = 'build'
+    description = 'Kompilasi semua target Minecraft'
+    dependsOn ':versions:1.21.11:build', ':versions:26.2:build'
+}
+
+task cleanAll {
+    group = 'build'
+    description = 'Clean semua subproject'
+    dependsOn ':versions:1.21.11:clean', ':versions:26.2:clean'
+}

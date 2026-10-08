@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "sakura_weapons",
+  "version": "${version}",
+  "name": "Takasha",
+  "description": "Takasha: Animated Multi-Set Weapons, Armor & Arsenal for Minecraft Java 1.21.11.",
+  "authors": [
+    "Boma Narakasura"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net"
+  },
+  "license": "ARR",
+  "icon": "assets/sakura_weapons/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.sakura.weapons.SakuraWeaponsMod"
+    ],
+    "client": [
+      "net.sakura.weapons.SakuraWeaponsClient"
+    ]
+  },
+  "mixins": [
+    "sakura_weapons.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.19.3",
+    "minecraft": ">=1.21.11- <=1.21.11",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}

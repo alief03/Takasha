@@ -1,0 +1,32 @@
+{
+  "replace": false,
+  "values": [
+    "sakura_weapons:sakura_sword",
+    "sakura_weapons:sakura_bigsword",
+    "sakura_weapons:sakura_katana",
+    "sakura_weapons:sakura_dagger",
+    "sakura_weapons:sakura_spear",
+    "sakura_weapons:sakura_halberd",
+    "sakura_weapons:sakura_hammer",
+    "sakura_weapons:sakura_club",
+    "sakura_weapons:sakura_gauntlet",
+    "sakura_weapons:pink_legacy_sword",
+    "sakura_weapons:pink_legacy_spear",
+    "sakura_weapons:pink_legacy_halberd",
+    "sakura_weapons:pink_legacy_hammer",
+    "sakura_weapons:pink_legacy_staff",
+    "sakura_weapons:valentine_sword",
+    "sakura_weapons:valentine_spear",
+    "sakura_weapons:valentine_hammer",
+    "sakura_weapons:valentine_staff",
+    "sakura_weapons:dragon_mecha_overlord_sword",
+    "sakura_weapons:dragon_mecha_overlord_great_sword",
+    "sakura_weapons:dragon_mecha_overlord_rapier_sword",
+    "sakura_weapons:dragon_mecha_overlord_dagger",
+    "sakura_weapons:dragon_mecha_overlord_spear",
+    "sakura_weapons:dragon_mecha_overlord_staff",
+    "sakura_weapons:dragon_mecha_overlord_scythe",
+    "sakura_weapons:dragon_mecha_overlord_hammer",
+    "sakura_weapons:dragon_mecha_overlord_trident"
+  ]
+}

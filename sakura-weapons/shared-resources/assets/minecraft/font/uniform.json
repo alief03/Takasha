@@ -1,0 +1,28 @@
+{
+  "providers": [
+    {
+      "type": "reference",
+      "id": "minecraft:include/space"
+    },
+    {
+      "type": "reference",
+      "id": "minecraft:include/unifont"
+    },
+    {
+      "type": "bitmap",
+      "file": "sakura:font/anvil_side_list.png",
+      "ascent": 13,
+      "height": 266,
+      "chars": [
+        "\uE100"
+      ]
+    },
+    {
+      "type": "space",
+      "advances": {
+        "\uE101": 50,
+        "\uE102": 22
+      }
+    }
+  ]
+}

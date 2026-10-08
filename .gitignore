@@ -1,0 +1,79 @@
+# ==============================================================================
+# 1. BAHAN MENTAH & ASET WEAPON SET (EXCLUDED BY USER REQUEST)
+# ==============================================================================
+Bahan Set/
+
+# Direktori aset weapon set tematik (Blockbench 3D & textures)
+**/assets/dragon_mecha_overlord/
+**/assets/pink_legacy/
+**/assets/sakura/
+**/assets/valentine/
+
+# Model & tekstur weapon items di namespace sakura_weapons
+**/assets/sakura_weapons/models/item/
+**/assets/sakura_weapons/textures/item/
+**/assets/sakura_weapons/items/
+
+# Aset CIT & Model/Tekstur Senjata di namespace minecraft
+**/assets/minecraft/optifine/
+**/assets/minecraft/citresewn/
+**/assets/minecraft/items/
+**/assets/minecraft/models/item/
+**/assets/minecraft/textures/entity/
+**/assets/minecraft/textures/item/
+**/assets/minecraft/textures/models/
+**/assets/minecraft/textures/textures/
+**/assets/minecraft/textures/*sakura*
+**/assets/minecraft/textures/*pink_legacy*
+**/assets/minecraft/textures/*empty*
+**/assets/minecraft/textures/misc/empty*
+
+# Aset Resource Pack (berisi weapon sets)
+sakura-resourcepack/
+
+# ==============================================================================
+# 2. GRADLE, LOOM & BUILD CACHES
+# ==============================================================================
+.gradle/
+**/build/
+!src/**/build/
+build/
+bin/
+loom-cache/
+.fabric/
+
+# ==============================================================================
+# 3. FILE BESAR & DIREKTORI SEMENTARA (>100MB GitHub Blocker)
+# ==============================================================================
+referensi-rp/
+scratch/
+
+# ==============================================================================
+# 4. BINARI RILIS (UPLOAD VIA GITHUB RELEASES)
+# ==============================================================================
+Hasil mod/
+Hasil RP/
+*.jar
+!gradle/wrapper/*.jar
+!sakura-weapons/gradle/wrapper/*.jar
+
+# ==============================================================================
+# 5. PYTHON ENVIRONMENTS & CACHE
+# ==============================================================================
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+.pytest_cache/
+
+# ==============================================================================
+# 6. IDE & OPERATING SYSTEM CONFIG
+# ==============================================================================
+.vscode/
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+desktop.ini
