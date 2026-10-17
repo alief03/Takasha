@@ -1,0 +1,75 @@
+{
+  "itemGroup.takasha_rpg.utility": "Takasha RPG - Utilitas & Sihir Kuno",
+  "itemGroup.takasha_rpg.armor": "Takasha RPG - Armor Sets Legendaris",
+  "itemGroup.takasha_rpg.economy": "Takasha RPG - Ekonomi & Koin",
+
+  "key.takasha_rpg.category": "Takasha RPG",
+  "key.takasha_rpg.toggle_hud": "Beralih HUD Scoreboard",
+
+  "item.takasha_rpg.rpg_coin": "Koin Perunggu RPG ($1)",
+  "item.takasha_rpg.rpg_gold_coin": "Koin Emas RPG ($100)",
+  "item.takasha_rpg.rpg_platinum_bar": "Batangan Platinum RPG ($10,000)",
+  "item.takasha_rpg.takasha_gem": "Permata Takasha (Gems)",
+
+  "item.takasha_rpg.white_scroll": "White Scroll (Perlindungan Hancur)",
+  "item.takasha_rpg.black_scroll": "Black Scroll (Pengekstrak Buku)",
+  "item.takasha_rpg.transmute_scroll": "Transmutation Scroll (Pengacak Enchant)",
+  "item.takasha_rpg.holy_scroll": "Holy Scroll (Pembersih Kutukan)",
+  "item.takasha_rpg.randomization_scroll": "Randomization Scroll",
+  "item.takasha_rpg.magic_dust": "Magic Dust (+Peluang Sukses)",
+  "item.takasha_rpg.mystery_dust": "Mystery Dust (Serbuk Misterius)",
+  "item.takasha_rpg.slot_increaser_1": "Slot Increaser I (+1 Slot)",
+  "item.takasha_rpg.slot_increaser_2": "Slot Increaser II (+2 Slot)",
+  "item.takasha_rpg.slot_increaser_3": "Slot Increaser III (+3 Slot)",
+  "item.takasha_rpg.item_rename_tag": "Item Rename Tag",
+
+  "item.takasha_rpg.stat_tracker_kills": "Stat Tracker: Pembunuhan (Kills)",
+  "item.takasha_rpg.stat_tracker_blocks": "Stat Tracker: Blok Ditambang (Blocks)",
+  "item.takasha_rpg.stat_tracker_damage": "Stat Tracker: Kerusakan Diberikan (Damage)",
+
+  "item.takasha_rpg.home_expansion_scroll": "Home Expansion Scroll (+1 Maks Home)",
+  "item.takasha_rpg.tome_pocket_crafting": "Tome of Pocket Crafting (/workbench)",
+  "item.takasha_rpg.scroll_disposal": "Scroll of Instant Disposal (/trash)",
+  "item.takasha_rpg.codex_enchanter": "Codex of Ancient Enchanter (/ce)",
+  "item.takasha_rpg.tome_tinkerer": "Tome of Master Tinkerer (/tinker)",
+  "item.takasha_rpg.scroll_alchemist": "Scroll of Alchemical Mastery (/alchem)",
+  "item.takasha_rpg.codex_void_ender": "Codex of Void Ender Link (/enderchest)",
+  "item.takasha_rpg.sigil_gourmet_feast": "Sigil of Eternal Feast (/feed)",
+  "item.takasha_rpg.sigil_vitality_recovery": "Sigil of Absolute Vitality (/heal)",
+  "item.takasha_rpg.sigil_soul_extraction": "Sigil of Soul Extraction (/withdrawsouls)",
+
+  "item.takasha_rpg.paladin_helmet": "Helm Paladin Suci",
+  "item.takasha_rpg.paladin_chestplate": "Zirah Dada Paladin Suci",
+  "item.takasha_rpg.paladin_leggings": "Celana Zirah Paladin Suci",
+  "item.takasha_rpg.paladin_boots": "Sepatu Zirah Paladin Suci",
+
+  "item.takasha_rpg.phantom_helmet": "Topeng Bayangan Phantom",
+  "item.takasha_rpg.phantom_chestplate": "Zirah Dada Bayangan Phantom",
+  "item.takasha_rpg.phantom_leggings": "Celana Bayangan Phantom",
+  "item.takasha_rpg.phantom_boots": "Sepatu Bayangan Phantom",
+
+  "item.takasha_rpg.necromancer_helmet": "Tengkorak Kutukan Necromancer",
+  "item.takasha_rpg.necromancer_chestplate": "Jubah Jiwa Necromancer",
+  "item.takasha_rpg.necromancer_leggings": "Celana Jiwa Necromancer",
+  "item.takasha_rpg.necromancer_boots": "Sepatu Jiwa Necromancer",
+
+  "item.takasha_rpg.berserker_helmet": "Helm Kemurkaan Berserker",
+  "item.takasha_rpg.berserker_chestplate": "Zirah Dada Kemurkaan Berserker",
+  "item.takasha_rpg.berserker_leggings": "Celana Kemurkaan Berserker",
+  "item.takasha_rpg.berserker_boots": "Sepatu Kemurkaan Berserker",
+
+  "item.takasha_rpg.ranger_helmet": "Tudung Pengintai Ranger",
+  "item.takasha_rpg.ranger_chestplate": "Rompi Pengintai Ranger",
+  "item.takasha_rpg.ranger_leggings": "Celana Pengintai Ranger",
+  "item.takasha_rpg.ranger_boots": "Sepatu Pengintai Ranger",
+
+  "item.takasha_rpg.guardian_helmet": "Helm Benteng Guardian",
+  "item.takasha_rpg.guardian_chestplate": "Zirah Dada Benteng Guardian",
+  "item.takasha_rpg.guardian_leggings": "Celana Benteng Guardian",
+  "item.takasha_rpg.guardian_boots": "Sepatu Benteng Guardian",
+
+  "item.takasha_rpg.voidwalker_helmet": "Mahkota Dimensi Voidwalker",
+  "item.takasha_rpg.voidwalker_chestplate": "Zirah Dimensi Voidwalker",
+  "item.takasha_rpg.voidwalker_leggings": "Celana Dimensi Voidwalker",
+  "item.takasha_rpg.voidwalker_boots": "Sepatu Dimensi Voidwalker"
+}

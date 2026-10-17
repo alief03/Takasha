@@ -13,11 +13,12 @@ subprojects {
 task buildAll {
     group = 'build'
     description = 'Kompilasi semua target Minecraft'
-    dependsOn ':versions:1.21.11:build', ':versions:26.2:build'
+    dependsOn ':versions:1.21.11:build', ':versions:26.2:build', ':takasha-rpg:build'
 }
 
 task cleanAll {
     group = 'build'
     description = 'Clean semua subproject'
-    dependsOn ':versions:1.21.11:clean', ':versions:26.2:clean'
+    dependsOn ':versions:1.21.11:clean', ':versions:26.2:clean', ':takasha-rpg:clean'
 }
+

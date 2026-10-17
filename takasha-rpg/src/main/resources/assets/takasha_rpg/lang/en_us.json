@@ -1,0 +1,75 @@
+{
+  "itemGroup.takasha_rpg.utility": "Takasha RPG - Utility & Ancient Magic",
+  "itemGroup.takasha_rpg.armor": "Takasha RPG - Legendary Armor Sets",
+  "itemGroup.takasha_rpg.economy": "Takasha RPG - Economy & Currency",
+
+  "key.takasha_rpg.category": "Takasha RPG",
+  "key.takasha_rpg.toggle_hud": "Toggle Scoreboard HUD",
+
+  "item.takasha_rpg.rpg_coin": "RPG Bronze Coin ($1)",
+  "item.takasha_rpg.rpg_gold_coin": "RPG Gold Coin ($100)",
+  "item.takasha_rpg.rpg_platinum_bar": "RPG Platinum Bar ($10,000)",
+  "item.takasha_rpg.takasha_gem": "Takasha Gem",
+
+  "item.takasha_rpg.white_scroll": "White Scroll (Anti Break)",
+  "item.takasha_rpg.black_scroll": "Black Scroll (Book Extractor)",
+  "item.takasha_rpg.transmute_scroll": "Transmutation Scroll (Reroll)",
+  "item.takasha_rpg.holy_scroll": "Holy Scroll (Purification)",
+  "item.takasha_rpg.randomization_scroll": "Randomization Scroll",
+  "item.takasha_rpg.magic_dust": "Magic Dust (+Success Rate)",
+  "item.takasha_rpg.mystery_dust": "Mystery Dust",
+  "item.takasha_rpg.slot_increaser_1": "Slot Increaser I (+1 Slot)",
+  "item.takasha_rpg.slot_increaser_2": "Slot Increaser II (+2 Slots)",
+  "item.takasha_rpg.slot_increaser_3": "Slot Increaser III (+3 Slots)",
+  "item.takasha_rpg.item_rename_tag": "Item Rename Tag",
+
+  "item.takasha_rpg.stat_tracker_kills": "Stat Tracker: Mob & Player Kills",
+  "item.takasha_rpg.stat_tracker_blocks": "Stat Tracker: Blocks Mined",
+  "item.takasha_rpg.stat_tracker_damage": "Stat Tracker: Damage Dealt",
+
+  "item.takasha_rpg.home_expansion_scroll": "Home Expansion Scroll (+1 Max Home)",
+  "item.takasha_rpg.tome_pocket_crafting": "Tome of Pocket Crafting (/workbench)",
+  "item.takasha_rpg.scroll_disposal": "Scroll of Instant Disposal (/trash)",
+  "item.takasha_rpg.codex_enchanter": "Codex of Ancient Enchanter (/ce)",
+  "item.takasha_rpg.tome_tinkerer": "Tome of Master Tinkerer (/tinker)",
+  "item.takasha_rpg.scroll_alchemist": "Scroll of Alchemical Mastery (/alchem)",
+  "item.takasha_rpg.codex_void_ender": "Codex of Void Ender Link (/enderchest)",
+  "item.takasha_rpg.sigil_gourmet_feast": "Sigil of Eternal Feast (/feed)",
+  "item.takasha_rpg.sigil_vitality_recovery": "Sigil of Absolute Vitality (/heal)",
+  "item.takasha_rpg.sigil_soul_extraction": "Sigil of Soul Extraction (/withdrawsouls)",
+
+  "item.takasha_rpg.paladin_helmet": "Holy Paladin Helmet",
+  "item.takasha_rpg.paladin_chestplate": "Holy Paladin Chestplate",
+  "item.takasha_rpg.paladin_leggings": "Holy Paladin Leggings",
+  "item.takasha_rpg.paladin_boots": "Holy Paladin Boots",
+
+  "item.takasha_rpg.phantom_helmet": "Phantom Shadow Mask",
+  "item.takasha_rpg.phantom_chestplate": "Phantom Shadow Chestplate",
+  "item.takasha_rpg.phantom_leggings": "Phantom Shadow Leggings",
+  "item.takasha_rpg.phantom_boots": "Phantom Shadow Boots",
+
+  "item.takasha_rpg.necromancer_helmet": "Necromancer Cursed Skull",
+  "item.takasha_rpg.necromancer_chestplate": "Necromancer Soul Robe",
+  "item.takasha_rpg.necromancer_leggings": "Necromancer Soul Leggings",
+  "item.takasha_rpg.necromancer_boots": "Necromancer Soul Boots",
+
+  "item.takasha_rpg.berserker_helmet": "Berserker Wrath Helmet",
+  "item.takasha_rpg.berserker_chestplate": "Berserker Wrath Chestplate",
+  "item.takasha_rpg.berserker_leggings": "Berserker Wrath Leggings",
+  "item.takasha_rpg.berserker_boots": "Berserker Wrath Boots",
+
+  "item.takasha_rpg.ranger_helmet": "Ranger Scout Hood",
+  "item.takasha_rpg.ranger_chestplate": "Ranger Scout Vest",
+  "item.takasha_rpg.ranger_leggings": "Ranger Scout Leggings",
+  "item.takasha_rpg.ranger_boots": "Ranger Scout Boots",
+
+  "item.takasha_rpg.guardian_helmet": "Guardian Fortress Helmet",
+  "item.takasha_rpg.guardian_chestplate": "Guardian Fortress Chestplate",
+  "item.takasha_rpg.guardian_leggings": "Guardian Fortress Leggings",
+  "item.takasha_rpg.guardian_boots": "Guardian Fortress Boots",
+
+  "item.takasha_rpg.voidwalker_helmet": "Voidwalker Crown",
+  "item.takasha_rpg.voidwalker_chestplate": "Voidwalker Chestplate",
+  "item.takasha_rpg.voidwalker_leggings": "Voidwalker Leggings",
+  "item.takasha_rpg.voidwalker_boots": "Voidwalker Boots"
+}
