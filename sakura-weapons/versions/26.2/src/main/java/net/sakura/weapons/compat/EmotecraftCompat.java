@@ -71,6 +71,15 @@ public class EmotecraftCompat {
     private static Method getAnimManagerMethod = null;
     private static Method setAnimManagerMethod = null;
 
+    private static final Map<String, Object> NETWORK_ANIMATION_CACHE = new java.util.concurrent.ConcurrentHashMap<>();
+
+    public static void registerNetworkAnimation(String id, Object animation) {
+        if (id != null && !id.isBlank() && animation != null) {
+            NETWORK_ANIMATION_CACHE.put(id, animation);
+            NETWORK_ANIMATION_CACHE.put(id.toLowerCase(Locale.ROOT), animation);
+        }
+    }
+
     private static volatile List<EmoteEntry> cachedEmotes = null;
     private static final java.util.concurrent.atomic.AtomicBoolean IS_DISK_SCANNING = new java.util.concurrent.atomic.AtomicBoolean(false);
 
@@ -171,12 +180,86 @@ public class EmotecraftCompat {
                     }
                 } catch (Throwable ignored) {}
 
+                // 5. Register dynamic hooks to ClientEmoteEvents (captures local player and server/online remote players)
+                try {
+                    Class<?> clientEmoteEventsClass = Class.forName("io.github.kosmx.emotes.api.events.client.ClientEmoteEvents");
+
+                    try {
+                        Field emotePlayField = clientEmoteEventsClass.getField("EMOTE_PLAY");
+                        Object emotePlayEventObj = emotePlayField.get(null);
+                        if (emotePlayEventObj != null) {
+                            Class<?> playEventInterface = Class.forName("io.github.kosmx.emotes.api.events.client.ClientEmoteEvents$EmotePlayEvent");
+                            Object playProxy = java.lang.reflect.Proxy.newProxyInstance(
+                                playEventInterface.getClassLoader(),
+                                new Class<?>[]{playEventInterface},
+                                (proxy, method, args) -> {
+                                    if ("onEmotePlay".equals(method.getName()) && args != null && args.length >= 3) {
+                                        Object anim = args[0];
+                                        float tick = args[1] instanceof Number num ? num.floatValue() : 0.0f;
+                                        UUID playerUUID = (UUID) args[2];
+                                        net.sakura.weapons.client.replay.PlayerEmoteRecorder.onEmotePlayEvent(playerUUID, anim, tick);
+                                    }
+                                    return null;
+                                }
+                            );
+                            registerEventListener(emotePlayEventObj, playProxy);
+                        }
+                    } catch (Throwable t) {
+                        SakuraWeaponsMod.LOGGER.warn("Failed to hook ClientEmoteEvents.EMOTE_PLAY: {}", t.getMessage());
+                    }
+
+                    try {
+                        Field emoteStopField = clientEmoteEventsClass.getField("EMOTE_STOP");
+                        Object emoteStopEventObj = emoteStopField.get(null);
+                        if (emoteStopEventObj != null) {
+                            Class<?> stopEventInterface = Class.forName("io.github.kosmx.emotes.api.events.client.ClientEmoteEvents$EmoteStopEvent");
+                            Object stopProxy = java.lang.reflect.Proxy.newProxyInstance(
+                                stopEventInterface.getClassLoader(),
+                                new Class<?>[]{stopEventInterface},
+                                (proxy, method, args) -> {
+                                    if ("onEmoteStop".equals(method.getName()) && args != null && args.length >= 2) {
+                                        UUID playerUUID = (UUID) args[0];
+                                        UUID emoteUUID = (UUID) args[1];
+                                        net.sakura.weapons.client.replay.PlayerEmoteRecorder.onEmoteStopEvent(playerUUID, emoteUUID);
+                                    }
+                                    return null;
+                                }
+                            );
+                            registerEventListener(emoteStopEventObj, stopProxy);
+                        }
+                    } catch (Throwable t) {
+                        SakuraWeaponsMod.LOGGER.warn("Failed to hook ClientEmoteEvents.EMOTE_STOP: {}", t.getMessage());
+                    }
+                } catch (Throwable t) {
+                    SakuraWeaponsMod.LOGGER.warn("ClientEmoteEvents reflection setup note: {}", t.getMessage());
+                }
+
                 SakuraWeaponsMod.LOGGER.info("Emotecraft mod detected: KosmX Emotecraft 3.4.0 integration initialized.");
             } catch (Throwable t) {
                 SakuraWeaponsMod.LOGGER.warn("Emotecraft mod detected but reflection initialization failed: {}", t.getMessage());
             }
         }
         EMOTECRAFT_LOADED = loaded;
+    }
+
+    private static void registerEventListener(Object eventObj, Object listenerProxy) {
+        if (eventObj == null || listenerProxy == null) return;
+        try {
+            for (Method m : eventObj.getClass().getMethods()) {
+                if (m.getName().equals("register") && m.getParameterCount() == 1) {
+                    m.invoke(eventObj, listenerProxy);
+                    return;
+                }
+            }
+            for (Method m : eventObj.getClass().getMethods()) {
+                if ((m.getName().startsWith("reg") || m.getName().startsWith("add") || m.getName().startsWith("listen")) && m.getParameterCount() == 1) {
+                    m.invoke(eventObj, listenerProxy);
+                    return;
+                }
+            }
+        } catch (Throwable t) {
+            SakuraWeaponsMod.LOGGER.warn("Failed to register event listener to {}: {}", eventObj, t.getMessage());
+        }
     }
 
     public static boolean isEmotecraftAvailable() {
@@ -259,11 +342,11 @@ public class EmotecraftCompat {
         return loopTypeLoop != null ? loopTypeLoop : (loopTypePlayOnce != null ? loopTypePlayOnce : null);
     }
 
-    private static float getAnimationLength(Object animObj) {
+    public static float getAnimationLength(Object animObj) {
         if (animObj == null) return 1.0f;
         try {
             for (Method m : animObj.getClass().getMethods()) {
-                if (m.getName().equals("length") && m.getParameterCount() == 0) {
+                if ((m.getName().equals("length") || m.getName().equals("getLength")) && m.getParameterCount() == 0) {
                     Object res = m.invoke(animObj);
                     if (res instanceof Number num) return num.floatValue();
                 }
@@ -313,6 +396,14 @@ public class EmotecraftCompat {
      * Mode 2: Stand (play once and return to standing)
      */
     public static void playEmoteSafely(LivingEntity entity, String emoteId, byte playMode) {
+        playEmoteSafely(entity, emoteId, playMode, 0.0f);
+    }
+
+    /**
+     * Plays an emote on a living avatar entity with a specific play mode and starting tick offset.
+     * Essential for zero-desync replay timeline scrubbing and smooth forward/rewind jumps.
+     */
+    public static void playEmoteSafely(LivingEntity entity, String emoteId, byte playMode, float startTickOffset) {
         if (!EMOTECRAFT_LOADED || entity == null || emoteId == null || emoteId.isBlank()) {
             return;
         }
@@ -330,10 +421,10 @@ public class EmotecraftCompat {
 
             // Execute play on entity (NEVER pass null loopType!)
             if (playEmote4ArgMethod != null && resolvedLoopType != null && playEmote4ArgMethod.getDeclaringClass().isInstance(entity)) {
-                playEmote4ArgMethod.invoke(entity, emoteAnimation, resolvedLoopType, 0.0f, true);
+                playEmote4ArgMethod.invoke(entity, emoteAnimation, resolvedLoopType, startTickOffset, true);
                 return;
             } else if (playEmote3ArgMethod != null && playEmote3ArgMethod.getDeclaringClass().isInstance(entity)) {
-                playEmote3ArgMethod.invoke(entity, emoteAnimation, 0.0f, true);
+                playEmote3ArgMethod.invoke(entity, emoteAnimation, startTickOffset, true);
                 return;
             }
 
@@ -341,10 +432,10 @@ public class EmotecraftCompat {
             for (Method m : entity.getClass().getMethods()) {
                 if (m.getName().equals("emotecraft$playEmote") && m.getDeclaringClass().isInstance(entity)) {
                     if (m.getParameterCount() == 4 && resolvedLoopType != null) {
-                        m.invoke(entity, emoteAnimation, resolvedLoopType, 0.0f, true);
+                        m.invoke(entity, emoteAnimation, resolvedLoopType, startTickOffset, true);
                         return;
                     } else if (m.getParameterCount() == 3) {
-                        m.invoke(entity, emoteAnimation, 0.0f, true);
+                        m.invoke(entity, emoteAnimation, startTickOffset, true);
                         return;
                     }
                 }
@@ -352,6 +443,217 @@ public class EmotecraftCompat {
         } catch (Throwable t) {
             SakuraWeaponsMod.LOGGER.warn("Failed to safely play emote '{}' on entity {}: {}", emoteId, entity.getId(), t.getMessage());
         }
+    }
+
+    /**
+     * Resolves the active emote ID currently playing on a living entity.
+     */
+    public static String getActiveEmoteId(LivingEntity entity) {
+        if (!EMOTECRAFT_LOADED || entity == null) return null;
+        try {
+            for (Method m : entity.getClass().getMethods()) {
+                if (m.getName().equals("emotecraft$getEmote") && m.getParameterCount() == 0 && m.getDeclaringClass().isInstance(entity)) {
+                    Object emotePlayer = m.invoke(entity);
+                    if (emotePlayer != null) {
+                        // 1. Try to get animation object (KosmX 3.4.0 uses getCurrentAnimationInstance)
+                        Object animation = null;
+                        for (Method em : emotePlayer.getClass().getMethods()) {
+                            if ((em.getName().equals("getCurrentAnimationInstance")
+                                    || em.getName().equals("getCurrentAnimation")
+                                    || em.getName().equals("getData")
+                                    || em.getName().equals("getAnimation")
+                                    || em.getName().equals("getEmote"))
+                                    && em.getParameterCount() == 0) {
+                                animation = em.invoke(emotePlayer);
+                                if (animation != null) break;
+                            }
+                        }
+                        if (animation != null) {
+                            String foundId = findEmoteIdFromAnimation(animation);
+                            if (foundId != null && !foundId.isBlank()) {
+                                registerNetworkAnimation(foundId, animation);
+                                return foundId;
+                            }
+                        }
+                        // 2. Direct UUID/name getter on emotePlayer
+                        for (Method em : emotePlayer.getClass().getMethods()) {
+                            if ((em.getName().equals("getUuid") || em.getName().equals("uuid") || em.getName().equals("getId")) && em.getParameterCount() == 0) {
+                                Object u = em.invoke(emotePlayer);
+                                if (u != null) return u.toString();
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (Throwable ignored) {}
+        return null;
+    }
+
+    /**
+     * Gets the duration in ticks of the currently active emote on the entity.
+     */
+    public static int getActiveEmoteDuration(LivingEntity entity) {
+        if (!EMOTECRAFT_LOADED || entity == null) return 60;
+        try {
+            for (Method m : entity.getClass().getMethods()) {
+                if (m.getName().equals("emotecraft$getEmote") && m.getParameterCount() == 0 && m.getDeclaringClass().isInstance(entity)) {
+                    Object emotePlayer = m.invoke(entity);
+                    if (emotePlayer != null) {
+                        for (Method em : emotePlayer.getClass().getMethods()) {
+                            if ((em.getName().equals("getCurrentAnimationInstance")
+                                    || em.getName().equals("getCurrentAnimation")
+                                    || em.getName().equals("getData")
+                                    || em.getName().equals("getAnimation")
+                                    || em.getName().equals("getEmote"))
+                                    && em.getParameterCount() == 0) {
+                                Object anim = em.invoke(emotePlayer);
+                                if (anim != null) {
+                                    float len = getAnimationLength(anim);
+                                    if (len > 0) return Math.round(len);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (Throwable ignored) {}
+        return 60;
+    }
+
+    /**
+     * Resolves the play mode of the currently playing emote on the entity.
+     */
+    public static byte getActiveEmotePlayMode(LivingEntity entity) {
+        if (!EMOTECRAFT_LOADED || entity == null) return 0;
+        try {
+            for (Method m : entity.getClass().getMethods()) {
+                if (m.getName().equals("emotecraft$getEmote") && m.getParameterCount() == 0 && m.getDeclaringClass().isInstance(entity)) {
+                    Object emotePlayer = m.invoke(entity);
+                    if (emotePlayer != null) {
+                        for (Method em : emotePlayer.getClass().getMethods()) {
+                            if (em.getName().equals("isLoop") && em.getParameterCount() == 0) {
+                                Object res = em.invoke(emotePlayer);
+                                if (Boolean.FALSE.equals(res)) return 2; // Once
+                                return 0; // Loop
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (Throwable ignored) {}
+        return 0;
+    }
+
+    /**
+     * Reverse lookup: finds the ID / UUID string of an Emotecraft Animation instance.
+     */
+    public static String findEmoteIdFromAnimation(Object animation) {
+        if (animation == null) return null;
+        try {
+            // 0. EmoteHolder.findIfPresent(animation)
+            if (emoteHolderClass != null) {
+                try {
+                    for (Method m : emoteHolderClass.getMethods()) {
+                        if (m.getName().equals("findIfPresent") && m.getParameterCount() == 1) {
+                            Object holder = m.invoke(null, animation);
+                            if (holder != null) {
+                                if (holderGetUuidMethod != null) {
+                                    Object u = holderGetUuidMethod.invoke(holder);
+                                    if (u != null) {
+                                        String idStr = u.toString();
+                                        registerNetworkAnimation(idStr, animation);
+                                        return idStr;
+                                    }
+                                }
+                            }
+                            break;
+                        }
+                    }
+                } catch (Throwable ignored) {}
+            }
+
+            // 1. Direct record accessors / methods on Animation
+            for (Method m : animation.getClass().getMethods()) {
+                if ((m.getName().equals("uuid") || m.getName().equals("getUuid") || m.getName().equals("get")) && m.getParameterCount() == 0) {
+                    Object u = m.invoke(animation);
+                    if (u != null) {
+                        String idStr = u.toString();
+                        registerNetworkAnimation(idStr, animation);
+                        return idStr;
+                    }
+                }
+                if ((m.getName().equals("getNameOrId") || m.getName().equals("getId") || m.getName().equals("id")) && m.getParameterCount() == 0) {
+                    Object res = m.invoke(animation);
+                    if (res != null && !res.toString().isBlank()) {
+                        String idStr = res.toString();
+                        registerNetworkAnimation(idStr, animation);
+                        return idStr;
+                    }
+                }
+                if (m.getName().equals("data") && m.getParameterCount() == 0) {
+                    Object data = m.invoke(animation);
+                    if (data != null) {
+                        for (Method dm : data.getClass().getMethods()) {
+                            if (dm.getName().equals("getRaw") && dm.getParameterCount() == 1) {
+                                Object idVal = dm.invoke(data, "id");
+                                if (idVal == null) idVal = dm.invoke(data, "name");
+                                if (idVal != null && !idVal.toString().isBlank()) {
+                                    String idStr = idVal.toString();
+                                    registerNetworkAnimation(idStr, animation);
+                                    return idStr;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // 2. Iterate EmoteHolder.list
+            if (listField != null) {
+                Object listObj = listField.get(null);
+                if (listObj instanceof Iterable<?> iterable) {
+                    for (Object holder : iterable) {
+                        if (holder == null) continue;
+                        Object holderAnim = getEmoteFromHolder(holder);
+                        if (holderAnim == animation || (holderAnim != null && holderAnim.equals(animation))) {
+                            if (holderGetUuidMethod != null) {
+                                Object u = holderGetUuidMethod.invoke(holder);
+                                if (u != null) {
+                                    String idStr = u.toString();
+                                    registerNetworkAnimation(idStr, animation);
+                                    return idStr;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // 3. Fallback fields
+            for (Field f : animation.getClass().getFields()) {
+                if (f.getName().equals("uuid") || f.getName().equals("id")) {
+                    Object val = f.get(animation);
+                    if (val != null) {
+                        String idStr = val.toString();
+                        registerNetworkAnimation(idStr, animation);
+                        return idStr;
+                    }
+                }
+                if (f.getName().equals("name")) {
+                    Object val = f.get(animation);
+                    if (val instanceof net.minecraft.network.chat.Component comp) {
+                        String nameStr = comp.getString();
+                        registerNetworkAnimation(nameStr, animation);
+                        return nameStr;
+                    } else if (val != null) {
+                        String nameStr = val.toString();
+                        registerNetworkAnimation(nameStr, animation);
+                        return nameStr;
+                    }
+                }
+            }
+        } catch (Throwable ignored) {}
+        return null;
     }
 
     /**
@@ -401,6 +703,7 @@ public class EmotecraftCompat {
     public static void resetAnimStateSafely(LivingEntity entity) {
         if (!EMOTECRAFT_LOADED || entity == null) return;
         try {
+            stopEmoteSafely(entity);
             Method getEmoteMethod = null;
             for (Method m : entity.getClass().getMethods()) {
                 if (m.getName().equals("emotecraft$getEmote") && m.getParameterCount() == 0 && m.getDeclaringClass().isInstance(entity)) {
@@ -420,6 +723,37 @@ public class EmotecraftCompat {
                         stop.invoke(emotePlayer);
                     } catch (Throwable ignored) {}
                 }
+            }
+
+            // Also clear PlayerAnimationLib animManager if present
+            Object animManager = null;
+            if (getAnimManagerMethod != null && getAnimManagerMethod.getDeclaringClass().isInstance(entity)) {
+                animManager = getAnimManagerMethod.invoke(entity);
+            } else {
+                for (Method m : entity.getClass().getMethods()) {
+                    if (m.getName().equals("playerAnimLib$getAnimManager") && m.getDeclaringClass().isInstance(entity)) {
+                        animManager = m.invoke(entity);
+                        break;
+                    }
+                }
+            }
+            if (animManager != null) {
+                for (Method m : animManager.getClass().getMethods()) {
+                    if ((m.getName().equals("clear") || m.getName().equals("reset") || m.getName().equals("stop")) && m.getParameterCount() == 0) {
+                        try { m.invoke(animManager); } catch (Throwable ignored) {}
+                    }
+                }
+                try {
+                    Method getStack = animManager.getClass().getMethod("getAnimationStack");
+                    Object stack = getStack.invoke(animManager);
+                    if (stack != null) {
+                        for (Method m : stack.getClass().getMethods()) {
+                            if ((m.getName().equals("clear") || m.getName().equals("reset") || m.getName().equals("remove")) && m.getParameterCount() == 0) {
+                                try { m.invoke(stack); } catch (Throwable ignored) {}
+                            }
+                        }
+                    }
+                } catch (Throwable ignored) {}
             }
         } catch (Throwable ignored) {}
     }
@@ -763,6 +1097,12 @@ public class EmotecraftCompat {
      * Locates the underlying Emotecraft/PlayerAnim Animation object by UUID or name.
      */
     private static Object findEmoteAnimation(String emoteId) {
+        if (emoteId == null || emoteId.isBlank()) return null;
+        Object cached = NETWORK_ANIMATION_CACHE.get(emoteId);
+        if (cached != null) return cached;
+        cached = NETWORK_ANIMATION_CACHE.get(emoteId.toLowerCase(Locale.ROOT));
+        if (cached != null) return cached;
+
         try {
             if (emoteHolderClass != null) {
                 // 1. Try direct UUID lookup
@@ -820,6 +1160,41 @@ public class EmotecraftCompat {
         return null;
     }
 
+    public static final Identifier SAKURA_EMOTE_LOGO =
+        Identifier.fromNamespaceAndPath("sakura_weapons", "textures/gui/emotecraft_logo.png");
+
+    private static String normalizeKey(String input) {
+        if (input == null || input.isBlank()) return "";
+        int slashIdx = input.indexOf('/');
+        String s = (slashIdx >= 0) ? input.substring(0, slashIdx) : input;
+        return s.toLowerCase(Locale.ROOT).replaceAll("[^a-z0-9]", "");
+    }
+
+    private static void addEmoteDedup(Map<String, EmoteEntry> targetMap, Set<String> seenKeys, EmoteEntry entry) {
+        if (entry == null || entry.id() == null || entry.id().isBlank()) return;
+
+        String normId = normalizeKey(entry.id());
+        String normName = normalizeKey(entry.displayName());
+
+        boolean alreadySeen = (!normId.isEmpty() && seenKeys.contains(normId))
+                           || (!normName.isEmpty() && seenKeys.contains(normName));
+
+        if (alreadySeen) {
+            return;
+        }
+
+        if (!normId.isEmpty()) seenKeys.add(normId);
+        if (!normName.isEmpty()) seenKeys.add(normName);
+
+        int slashIdx = entry.displayName().indexOf('/');
+        if (slashIdx >= 0 && slashIdx + 1 < entry.displayName().length()) {
+            String sub = normalizeKey(entry.displayName().substring(slashIdx + 1));
+            if (!sub.isEmpty()) seenKeys.add(sub);
+        }
+
+        targetMap.put(entry.id().toLowerCase(Locale.ROOT), entry);
+    }
+
     /**
      * Preheats the emote cache asynchronously during client initialization.
      */
@@ -840,12 +1215,13 @@ public class EmotecraftCompat {
         }
 
         Map<String, EmoteEntry> emoteMap = new LinkedHashMap<>();
+        Set<String> seenKeys = new HashSet<>();
 
-        // 1. Fast in-memory Emotecraft EmoteHolder.list
-        loadInMemoryEmotes(emoteMap);
+        // 1. Fast in-memory Emotecraft EmoteHolder.list (highest priority)
+        loadInMemoryEmotes(emoteMap, seenKeys);
 
-        // 2. Built-in presets
-        addBuiltinEmotes(emoteMap);
+        // 2. Built-in presets (fallback for missing standard animations)
+        addBuiltinEmotes(emoteMap, seenKeys);
 
         List<EmoteEntry> fastList = new ArrayList<>(emoteMap.values());
         fastList.sort(Comparator.comparing(EmoteEntry::displayName, String.CASE_INSENSITIVE_ORDER));
@@ -857,7 +1233,7 @@ public class EmotecraftCompat {
         return cachedEmotes;
     }
 
-    private static void loadInMemoryEmotes(Map<String, EmoteEntry> emoteMap) {
+    private static void loadInMemoryEmotes(Map<String, EmoteEntry> emoteMap, Set<String> seenKeys) {
         if (!EMOTECRAFT_LOADED || listField == null) return;
         try {
             Object listObj = listField.get(null);
@@ -914,7 +1290,7 @@ public class EmotecraftCompat {
 
                         if (id != null) {
                             if (name == null || name.isBlank()) name = id;
-                            emoteMap.put(id.toLowerCase(), new EmoteEntry(id, name, author, iconId));
+                            addEmoteDedup(emoteMap, seenKeys, new EmoteEntry(id, name, author, iconId));
                         }
                     } catch (Throwable ignored) {}
                 }
@@ -922,7 +1298,7 @@ public class EmotecraftCompat {
         } catch (Throwable ignored) {}
     }
 
-    private static void addBuiltinEmotes(Map<String, EmoteEntry> emoteMap) {
+    private static void addBuiltinEmotes(Map<String, EmoteEntry> emoteMap, Set<String> seenKeys) {
         Object[][] builtins = {
             {"wave", "Wave / Melambai", "Built-in", Identifier.fromNamespaceAndPath("emotecraft", "emotes/waving.png")},
             {"point", "Point / Menunjuk", "Built-in", Identifier.fromNamespaceAndPath("emotecraft", "emotes/point.png")},
@@ -941,10 +1317,7 @@ public class EmotecraftCompat {
         };
 
         for (Object[] b : builtins) {
-            String key = ((String) b[0]).toLowerCase();
-            if (!emoteMap.containsKey(key)) {
-                emoteMap.put(key, new EmoteEntry((String) b[0], (String) b[1], (String) b[2], (Identifier) b[3]));
-            }
+            addEmoteDedup(emoteMap, seenKeys, new EmoteEntry((String) b[0], (String) b[1], (String) b[2], (Identifier) b[3]));
         }
     }
 
@@ -953,11 +1326,37 @@ public class EmotecraftCompat {
             java.util.concurrent.CompletableFuture.runAsync(() -> {
                 try {
                     Map<String, EmoteEntry> diskMap = new LinkedHashMap<>();
-                    loadInMemoryEmotes(diskMap);
+                    Set<String> seenKeys = new HashSet<>();
 
-                    Path emotesDir = Minecraft.getInstance().gameDirectory.toPath().resolve("emotes");
-                    if (Files.exists(emotesDir) && Files.isDirectory(emotesDir)) {
-                        try (Stream<Path> stream = Files.walk(emotesDir, 2)) {
+                    // 1. In-memory first
+                    loadInMemoryEmotes(diskMap, seenKeys);
+
+                    // 2. Scan standard .minecraft/emotes/ and ModrinthApp profile emotes directories
+                    List<Path> scanDirs = new ArrayList<>();
+                    Path gameEmotesDir = Minecraft.getInstance().gameDirectory.toPath().resolve("emotes");
+                    if (Files.exists(gameEmotesDir) && Files.isDirectory(gameEmotesDir)) {
+                        scanDirs.add(gameEmotesDir);
+                    }
+
+                    try {
+                        String userHome = System.getProperty("user.home");
+                        if (userHome != null) {
+                            Path modrinthProfiles = Path.of(userHome, "AppData", "Roaming", "ModrinthApp", "profiles");
+                            if (Files.exists(modrinthProfiles) && Files.isDirectory(modrinthProfiles)) {
+                                try (Stream<Path> profStream = Files.list(modrinthProfiles)) {
+                                    profStream.filter(Files::isDirectory).forEach(p -> {
+                                        Path pEmotes = p.resolve("emotes");
+                                        if (Files.exists(pEmotes) && Files.isDirectory(pEmotes)) {
+                                            scanDirs.add(pEmotes);
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                    } catch (Throwable ignored) {}
+
+                    for (Path dir : scanDirs) {
+                        try (Stream<Path> stream = Files.walk(dir, 2)) {
                             stream.filter(Files::isRegularFile).forEach(path -> {
                                 String fileName = path.getFileName().toString();
                                 if (fileName.endsWith(".json")) {
@@ -968,21 +1367,18 @@ public class EmotecraftCompat {
                                         String author = json.has("author") ? json.get("author").getAsString() : "";
                                         String id = json.has("uuid") ? json.get("uuid").getAsString() : fileName.replace(".json", "");
 
-                                        if (!diskMap.containsKey(id.toLowerCase())) {
-                                            diskMap.put(id.toLowerCase(), new EmoteEntry(id, name, author, EMOTECRAFT_LOGO));
-                                        }
+                                        addEmoteDedup(diskMap, seenKeys, new EmoteEntry(id, name, author, EMOTECRAFT_LOGO));
                                     } catch (Throwable ignored) {}
                                 } else if (fileName.endsWith(".emotecraft")) {
                                     String base = fileName.replace(".emotecraft", "");
-                                    if (!diskMap.containsKey(base.toLowerCase())) {
-                                        diskMap.put(base.toLowerCase(), new EmoteEntry(base, formatDisplayName(base), "Emotecraft", EMOTECRAFT_LOGO));
-                                    }
+                                    addEmoteDedup(diskMap, seenKeys, new EmoteEntry(base, formatDisplayName(base), "Emotecraft", EMOTECRAFT_LOGO));
                                 }
                             });
-                        }
+                        } catch (Throwable ignored) {}
                     }
 
-                    addBuiltinEmotes(diskMap);
+                    // 3. Built-in presets last
+                    addBuiltinEmotes(diskMap, seenKeys);
 
                     List<EmoteEntry> fullList = new ArrayList<>(diskMap.values());
                     fullList.sort(Comparator.comparing(EmoteEntry::displayName, String.CASE_INSENSITIVE_ORDER));

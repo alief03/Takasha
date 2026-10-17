@@ -11,8 +11,10 @@ import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.FishingRodItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.equipment.Equippable;
+import net.minecraft.world.item.equipment.ArmorType;
 import net.sakura.weapons.SakuraWeaponsMod;
 import net.sakura.weapons.client.render.ModEquipmentAssets;
+import net.sakura.weapons.item.SakuraArmorMaterials;
 import net.sakura.weapons.item.SakuraToolMaterial;
 import net.sakura.weapons.item.custom.SakuraBowItem;
 import net.sakura.weapons.item.custom.SakuraHammerItem;
@@ -97,23 +99,18 @@ public class DragonMechaOverlordItems {
 
     public static final Item DRAGON_MECHA_OVERLORD_KEY = register("dragon_mecha_overlord_key", Item::new,
         new Item.Properties().stacksTo(64));
-
     // Armor Set (4 Items)
     public static final Item DRAGON_MECHA_OVERLORD_HELMET = register("dragon_mecha_overlord_helmet", Item::new,
-        new Item.Properties().stacksTo(1).component(DataComponents.EQUIPPABLE,
-            Equippable.builder(EquipmentSlot.HEAD).setAsset(ModEquipmentAssets.DRAGON_MECHA_OVERLORD).build()));
+        new Item.Properties().humanoidArmor(SakuraArmorMaterials.DRAGON_MECHA_OVERLORD, ArmorType.HELMET));
 
     public static final Item DRAGON_MECHA_OVERLORD_CHESTPLATE = register("dragon_mecha_overlord_chestplate", Item::new,
-        new Item.Properties().stacksTo(1).component(DataComponents.EQUIPPABLE,
-            Equippable.builder(EquipmentSlot.CHEST).setAsset(ModEquipmentAssets.DRAGON_MECHA_OVERLORD).build()));
+        new Item.Properties().humanoidArmor(SakuraArmorMaterials.DRAGON_MECHA_OVERLORD, ArmorType.CHESTPLATE));
 
     public static final Item DRAGON_MECHA_OVERLORD_LEGGINGS = register("dragon_mecha_overlord_leggings", Item::new,
-        new Item.Properties().stacksTo(1).component(DataComponents.EQUIPPABLE,
-            Equippable.builder(EquipmentSlot.LEGS).setAsset(ModEquipmentAssets.DRAGON_MECHA_OVERLORD).build()));
+        new Item.Properties().humanoidArmor(SakuraArmorMaterials.DRAGON_MECHA_OVERLORD, ArmorType.LEGGINGS));
 
     public static final Item DRAGON_MECHA_OVERLORD_BOOTS = register("dragon_mecha_overlord_boots", Item::new,
-        new Item.Properties().stacksTo(1).component(DataComponents.EQUIPPABLE,
-            Equippable.builder(EquipmentSlot.FEET).setAsset(ModEquipmentAssets.DRAGON_MECHA_OVERLORD).build()));
+        new Item.Properties().humanoidArmor(SakuraArmorMaterials.DRAGON_MECHA_OVERLORD, ArmorType.BOOTS));
 
     public static void registerModItems() {
         SakuraWeaponsMod.LOGGER.info("Registered 25 Dragon Mecha Overlord Items for Minecraft 26.2");

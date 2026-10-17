@@ -9,14 +9,17 @@
     "ItemFrameInvisibilityMixin"
   ],
   "client": [
+    "AbstractClientPlayerMixin",
     "AvatarRendererMixin",
     "EquipmentLayerRendererMixin",
     "ItemFrameRenderStateMixin",
     "ItemFrameRendererMixin",
     "TakashaNpcEntityClientMixin",
     "flashback.MainMenuBarMixin",
+    "flashback.ReplayServerMixin",
     "flashback.ReplayUIMixin",
-    "flashback.SelectedEntityPopupMixin"
+    "flashback.SelectedEntityPopupMixin",
+    "client.TakashaClientPacketListenerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

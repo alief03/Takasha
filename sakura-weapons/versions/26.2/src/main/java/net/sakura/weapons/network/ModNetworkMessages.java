@@ -43,6 +43,15 @@ public class ModNetworkMessages {
                     if (preset > 0 && preset <= 32) {
                         // Canonical preset pose: applyPosePreset() has configured exact limb articulations
                         npc.applyPosePreset(preset);
+                    } else if (preset == 0 && (payload.emoteId() == null || payload.emoteId().isBlank())) {
+                        // Neutral preset 0 with cleared emote: apply clean neutral standing pose
+                        npc.applyPosePreset(0);
+                        if (payload.headPose() != null) npc.setHeadPose(payload.headPose());
+                        if (payload.bodyPose() != null) npc.setBodyPose(payload.bodyPose());
+                        if (payload.leftArmPose() != null) npc.setLeftArmPose(payload.leftArmPose());
+                        if (payload.rightArmPose() != null) npc.setRightArmPose(payload.rightArmPose());
+                        if (payload.leftLegPose() != null) npc.setLeftLegPose(payload.leftLegPose());
+                        if (payload.rightLegPose() != null) npc.setRightLegPose(payload.rightLegPose());
                     } else {
                         // Custom static pose (preset 0): synchronize custom limb rotations from payload
                         npc.setHeadPose(payload.headPose());

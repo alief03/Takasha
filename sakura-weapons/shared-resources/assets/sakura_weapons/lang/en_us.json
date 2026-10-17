@@ -103,5 +103,7 @@
   "item.sakura_weapons.dragon_mecha_overlord_leggings": "Dragon Mecha Overlord Leggings",
   "item.sakura_weapons.dragon_mecha_overlord_boots": "Dragon Mecha Overlord Boots",
   "entity.sakura_weapons.takasha_npc": "Takasha NPC",
-  "item.sakura_weapons.takasha_npc_spawn_egg": "Takasha NPC Spawn Egg"
+  "item.sakura_weapons.takasha_npc_spawn_egg": "Takasha NPC Spawn Egg",
+  "entity.sakura_weapons.takasha_maid": "Takasha Maid Companion",
+  "item.sakura_weapons.takasha_maid_spawn_egg": "Takasha Maid Spawn Egg"
 }

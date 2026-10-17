@@ -149,12 +149,10 @@ public class TakashaNpcModel extends PlayerModel {
             float degToRad = (float) (Math.PI / 180.0);
             int preset = npcState.posePreset;
 
-            boolean isSitting = (preset == 8 || (npcState.emoteId != null && !npcState.emoteId.isBlank() && (npcState.emoteId.toLowerCase(java.util.Locale.ROOT).contains("sit") || npcState.emoteId.toLowerCase(java.util.Locale.ROOT).contains("duduk"))));
-            boolean isFloorSitting = (preset == 9 || preset == 10 || preset == 11 || preset == 14 || (npcState.emoteId != null && !npcState.emoteId.isBlank() && (npcState.emoteId.toLowerCase(java.util.Locale.ROOT).contains("zen") || npcState.emoteId.toLowerCase(java.util.Locale.ROOT).contains("seiza") || npcState.emoteId.toLowerCase(java.util.Locale.ROOT).contains("bersila"))));
-            boolean isKneeling = (preset == 13 || (npcState.emoteId != null && !npcState.emoteId.isBlank() && (npcState.emoteId.toLowerCase(java.util.Locale.ROOT).contains("kneel") || npcState.emoteId.toLowerCase(java.util.Locale.ROOT).contains("lutut"))));
-            boolean isCrouching = (preset == 12 || npcState.currentPose == net.minecraft.world.entity.Pose.CROUCHING);
+            boolean isSitting = (preset == 1 || (npcState.emoteId != null && !npcState.emoteId.isBlank() && (npcState.emoteId.toLowerCase(java.util.Locale.ROOT).contains("sit") || npcState.emoteId.toLowerCase(java.util.Locale.ROOT).contains("duduk"))));
+            boolean isCrouching = (preset == 3 || npcState.currentPose == net.minecraft.world.entity.Pose.CROUCHING);
 
-            // Pivot adjustments for Chair Sitting (8), Floor Sitting (9, 10, 11, 14), Kneeling (13), and Crouching (12)
+            // Pivot adjustments for Chair Sitting (1) and Crouching (3)
             if (isSitting) {
                 // Chair / Edge sitting: lower torso by 8.5 pixels, translate thighs forward
                 this.head.y = 8.5F;
@@ -169,34 +167,6 @@ public class TakashaNpcModel extends PlayerModel {
                 this.leftLeg.z = -3.5F;
                 this.rightLeg.y = 17.5F;
                 this.rightLeg.z = -3.5F;
-            } else if (isFloorSitting) {
-                // Floor sitting / Meditation / Seiza / Duduk Bersandar: lower torso down to floor
-                this.head.y = 11.5F;
-                this.head.z = 0.0F;
-                this.body.y = 11.5F;
-                this.body.z = 0.0F;
-                this.leftArm.y = 13.5F;
-                this.leftArm.z = 0.0F;
-                this.rightArm.y = 13.5F;
-                this.rightArm.z = 0.0F;
-                this.leftLeg.y = 20.5F;
-                this.leftLeg.z = -2.5F;
-                this.rightLeg.y = 20.5F;
-                this.rightLeg.z = -2.5F;
-            } else if (isKneeling) {
-                // Knight Kneeling: lower torso by 7.0 pixels so the knee rests on the floor
-                this.head.y = 7.0F;
-                this.head.z = 0.0F;
-                this.body.y = 7.0F;
-                this.body.z = 0.0F;
-                this.leftArm.y = 9.0F;
-                this.leftArm.z = 0.0F;
-                this.rightArm.y = 9.0F;
-                this.rightArm.z = 0.0F;
-                this.leftLeg.y = 16.0F;
-                this.leftLeg.z = -2.0F;
-                this.rightLeg.y = 16.0F;
-                this.rightLeg.z = -2.0F;
             } else if (isCrouching) {
                 // Tactical Crouch / Sneaking
                 this.head.y = 4.0F;
@@ -227,7 +197,7 @@ public class TakashaNpcModel extends PlayerModel {
                 this.rightLeg.z = 0.0F;
             }
 
-            // UNCONDITIONAL BASELINE POSING FOR ALL 32 PRESETS (1..32) AND DEFAULT POSES:
+            // UNCONDITIONAL BASELINE POSING FOR 4 CORE PRESETS (0..3) AND DEFAULT POSES:
             // SynchedEntityData Euler rotations from npcState are ALWAYS applied as the foundational anatomy!
             // Head
             this.head.xRot = npcState.headPose.x() * degToRad;
@@ -379,131 +349,26 @@ public class TakashaNpcModel extends PlayerModel {
         }
 
         switch (preset) {
-            case 1, 2, 5, 6, 7 -> { // 🛌 Sleeping poses (Relaxed joints)
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendLeg(this.leftLeg, this.leftPants, 0.25f);
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendLeg(this.rightLeg, this.rightPants, 0.25f);
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.leftArm, this.leftSleeve, -0.35f);
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.rightArm, this.rightSleeve, -0.35f);
-            }
-            case 3 -> { // 🛌 Tidur Miring Kanan (Right Side Sleeping)
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.rightArm, this.rightSleeve, -1.2f);
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.leftArm, this.leftSleeve, -0.3f);
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendLeg(this.rightLeg, this.rightPants, 0.45f);
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendLeg(this.leftLeg, this.leftPants, 0.35f);
-            }
-            case 4 -> { // 🛌 Tidur Miring Kiri (Left Side Sleeping)
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.leftArm, this.leftSleeve, -1.2f);
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.rightArm, this.rightSleeve, -0.3f);
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendLeg(this.leftLeg, this.leftPants, 0.45f);
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendLeg(this.rightLeg, this.rightPants, 0.35f);
-            }
-            case 8 -> { // 🧘 Duduk Kursi (Chair Sitting)
+            case 1 -> { // 🧘 Duduk Kursi (Chair Sitting)
                 net.sakura.weapons.compat.BendableCuboidsCompat.bendLeg(this.leftLeg, this.leftPants, 1.45f);
                 net.sakura.weapons.compat.BendableCuboidsCompat.bendLeg(this.rightLeg, this.rightPants, 1.45f);
                 net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.leftArm, this.leftSleeve, -0.6f);
                 net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.rightArm, this.rightSleeve, -0.6f);
             }
-            case 9 -> { // 🧘 Duduk Sandar (Reclined Floor Sitting)
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendLeg(this.leftLeg, this.leftPants, 0.05f);
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendLeg(this.rightLeg, this.rightPants, 0.05f);
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.leftArm, this.leftSleeve, -0.4f);
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.rightArm, this.rightSleeve, -0.4f);
+            case 2 -> { // 🛌 Tidur (Sleeping)
+                net.sakura.weapons.compat.BendableCuboidsCompat.bendLeg(this.leftLeg, this.leftPants, 0.25f);
+                net.sakura.weapons.compat.BendableCuboidsCompat.bendLeg(this.rightLeg, this.rightPants, 0.25f);
+                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.leftArm, this.leftSleeve, -0.35f);
+                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.rightArm, this.rightSleeve, -0.35f);
             }
-            case 10 -> { // 🧘 Duduk Bersila (Cross-Legged Sitting)
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendLeg(this.leftLeg, this.leftPants, 1.45f);
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendLeg(this.rightLeg, this.rightPants, 1.45f);
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.leftArm, this.leftSleeve, -0.8f);
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.rightArm, this.rightSleeve, -0.8f);
-            }
-            case 11 -> { // 🧘 Meditasi Zen (Zen Meditation)
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendLeg(this.leftLeg, this.leftPants, 1.45f);
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendLeg(this.rightLeg, this.rightPants, 1.45f);
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.leftArm, this.leftSleeve, -1.1f);
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.rightArm, this.rightSleeve, -1.1f);
-            }
-            case 12 -> { // 🧘 Jongkok Siaga (Tactical Crouch)
+            case 3 -> { // 🧘 Jongkok (Crouching)
                 net.sakura.weapons.compat.BendableCuboidsCompat.bendLeg(this.leftLeg, this.leftPants, 1.45f);
                 net.sakura.weapons.compat.BendableCuboidsCompat.bendLeg(this.rightLeg, this.rightPants, 1.45f);
                 net.sakura.weapons.compat.BendableCuboidsCompat.bendBody(this.body, this.jacket, 0.35f);
                 net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.leftArm, this.leftSleeve, -0.9f);
                 net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.rightArm, this.rightSleeve, -0.9f);
             }
-            case 13 -> { // 🧘 Berlutut Ksatria (One-knee Kneeling)
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendLeg(this.leftLeg, this.leftPants, 1.35f);
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendLeg(this.rightLeg, this.rightPants, 1.45f);
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.rightArm, this.rightSleeve, -0.7f);
-            }
-            case 14 -> { // 🧘 Bersimpuh Seiza (Traditional Seiza Sitting)
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendLeg(this.leftLeg, this.leftPants, 1.45f);
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendLeg(this.rightLeg, this.rightPants, 1.45f);
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.leftArm, this.leftSleeve, -0.4f);
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.rightArm, this.rightSleeve, -0.4f);
-            }
-            case 16 -> { // ⚔ Siap Bertarung (Combat Guard)
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.leftArm, this.leftSleeve, -1.1f);
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.rightArm, this.rightSleeve, -0.9f);
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendLeg(this.leftLeg, this.leftPants, 0.35f);
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendLeg(this.rightLeg, this.rightPants, 0.35f);
-            }
-            case 17 -> { // ⚔ Cabut Katana Iaido
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.leftArm, this.leftSleeve, -1.2f);
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.rightArm, this.rightSleeve, -1.4f);
-            }
-            case 18 -> { // ⚔ Senjata Akimbo (Dual Wielding)
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.leftArm, this.leftSleeve, -0.75f);
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.rightArm, this.rightSleeve, -0.75f);
-            }
-            case 19 -> { // ⚔ Bidik Busur (Bow Aiming)
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.leftArm, this.leftSleeve, -0.15f);
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.rightArm, this.rightSleeve, -1.45f);
-            }
-            case 20 -> { // ⚔ Kuda-kuda Tombak
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.rightArm, this.rightSleeve, -0.3f);
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.leftArm, this.leftSleeve, -0.8f);
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendLeg(this.leftLeg, this.leftPants, 0.3f);
-            }
-            case 21 -> { // ⚔ Palu Godam
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.rightArm, this.rightSleeve, -1.2f);
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.leftArm, this.leftSleeve, -1.0f);
-            }
-            case 22 -> { // ⚔ Pasang Perisai
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.leftArm, this.leftSleeve, -1.2f);
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.rightArm, this.rightSleeve, -0.4f);
-            }
-            case 24 -> { // ⚔ Tebasan Melompat
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.rightArm, this.rightSleeve, -0.5f);
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendLeg(this.rightLeg, this.rightPants, 0.4f);
-            }
-            case 25 -> { // 🎭 Bersedekap Dada (Cross Arms)
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.leftArm, this.leftSleeve, -1.35f);
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.rightArm, this.rightSleeve, -1.35f);
-            }
-            case 26 -> { // 🎭 Hormat Ksatria (Knight Salute)
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.rightArm, this.rightSleeve, -1.45f);
-            }
-            case 27 -> { // 🎭 Hormat Bungkuk (Bowing)
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendBody(this.body, this.jacket, 0.35f);
-            }
-            case 28 -> { // 🎭 Menunjuk Arah (Pointing)
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.leftArm, this.leftSleeve, -0.45f);
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.rightArm, this.rightSleeve, -0.1f);
-            }
-            case 29 -> { // 🎭 Melambai Ramah (Waving)
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.rightArm, this.rightSleeve, -1.25f);
-            }
-            case 30 -> { // 🎭 Menangis Terisak
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.leftArm, this.leftSleeve, -1.4f);
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.rightArm, this.rightSleeve, -1.4f);
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendBody(this.body, this.jacket, 0.2f);
-            }
-            case 31 -> { // 🎭 Facepalm
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.rightArm, this.rightSleeve, -1.45f);
-            }
-            case 32 -> { // 🎭 Berpikir Keras
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.rightArm, this.rightSleeve, -1.35f);
-                net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.leftArm, this.leftSleeve, -0.5f);
-            }
-            default -> { // 0: Default Stand & unhandled (Natural joint relaxation, subtle life-like curve)
+            default -> { // 0: Berdiri Biasa (Standing)
                 net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.leftArm, this.leftSleeve, -0.12f);
                 net.sakura.weapons.compat.BendableCuboidsCompat.bendArm(this.rightArm, this.rightSleeve, -0.10f);
                 net.sakura.weapons.compat.BendableCuboidsCompat.bendLeg(this.leftLeg, this.leftPants, 0.08f);

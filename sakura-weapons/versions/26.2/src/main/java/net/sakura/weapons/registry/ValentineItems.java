@@ -10,9 +10,11 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.FishingRodItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.item.equipment.Equippable;
 import net.sakura.weapons.SakuraWeaponsMod;
 import net.sakura.weapons.client.render.ModEquipmentAssets;
+import net.sakura.weapons.item.SakuraArmorMaterials;
 import net.sakura.weapons.item.SakuraToolMaterial;
 import net.sakura.weapons.item.custom.SakuraBowItem;
 import net.sakura.weapons.item.custom.SakuraHammerItem;
@@ -85,20 +87,16 @@ public class ValentineItems {
 
     // Armor Set
     public static final Item VALENTINE_HELMET = register("valentine_helmet", Item::new,
-        new Item.Properties().stacksTo(1).component(DataComponents.EQUIPPABLE,
-            Equippable.builder(EquipmentSlot.HEAD).setAsset(ModEquipmentAssets.VALENTINE).build()));
+        new Item.Properties().humanoidArmor(SakuraArmorMaterials.VALENTINE, ArmorType.HELMET));
 
     public static final Item VALENTINE_CHESTPLATE = register("valentine_chestplate", Item::new,
-        new Item.Properties().stacksTo(1).component(DataComponents.EQUIPPABLE,
-            Equippable.builder(EquipmentSlot.CHEST).setAsset(ModEquipmentAssets.VALENTINE).build()));
+        new Item.Properties().humanoidArmor(SakuraArmorMaterials.VALENTINE, ArmorType.CHESTPLATE));
 
     public static final Item VALENTINE_LEGGINGS = register("valentine_leggings", Item::new,
-        new Item.Properties().stacksTo(1).component(DataComponents.EQUIPPABLE,
-            Equippable.builder(EquipmentSlot.LEGS).setAsset(ModEquipmentAssets.VALENTINE).build()));
+        new Item.Properties().humanoidArmor(SakuraArmorMaterials.VALENTINE, ArmorType.LEGGINGS));
 
     public static final Item VALENTINE_BOOTS = register("valentine_boots", Item::new,
-        new Item.Properties().stacksTo(1).component(DataComponents.EQUIPPABLE,
-            Equippable.builder(EquipmentSlot.FEET).setAsset(ModEquipmentAssets.VALENTINE).build()));
+        new Item.Properties().humanoidArmor(SakuraArmorMaterials.VALENTINE, ArmorType.BOOTS));
 
     public static void registerModItems() {
         SakuraWeaponsMod.LOGGER.info("Registered 20 Valentine Items for Minecraft 26.2");

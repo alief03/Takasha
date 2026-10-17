@@ -19,6 +19,9 @@
     ],
     "client": [
       "net.sakura.weapons.SakuraWeaponsClient"
+    ],
+    "modmenu": [
+      "net.sakura.weapons.client.compat.TakashaModMenuApi"
     ]
   },
   "mixins": [

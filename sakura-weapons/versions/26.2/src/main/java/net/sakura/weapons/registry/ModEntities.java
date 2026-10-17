@@ -28,8 +28,24 @@ public class ModEntities {
             .build(TAKASHA_NPC_KEY)
     );
 
+    public static final ResourceKey<EntityType<?>> TAKASHA_MAID_KEY = ResourceKey.create(
+        Registries.ENTITY_TYPE,
+        Identifier.fromNamespaceAndPath(SakuraWeaponsMod.MOD_ID, "takasha_maid")
+    );
+
+    public static final EntityType<net.sakura.weapons.entity.TakashaMaidEntity> TAKASHA_MAID = Registry.register(
+        BuiltInRegistries.ENTITY_TYPE,
+        TAKASHA_MAID_KEY,
+        EntityType.Builder.<net.sakura.weapons.entity.TakashaMaidEntity>of(net.sakura.weapons.entity.TakashaMaidEntity::new, MobCategory.CREATURE)
+            .sized(0.6f, 1.5f)
+            .clientTrackingRange(10)
+            .updateInterval(3)
+            .build(TAKASHA_MAID_KEY)
+    );
+
     public static void initialize() {
         FabricDefaultAttributeRegistry.register(TAKASHA_NPC, TakashaNpcEntity.createAttributes());
-        SakuraWeaponsMod.LOGGER.info("Registered Takasha NPC Entity for Minecraft 26.2");
+        FabricDefaultAttributeRegistry.register(TAKASHA_MAID, net.sakura.weapons.entity.TakashaMaidEntity.createAttributes());
+        SakuraWeaponsMod.LOGGER.info("Registered Takasha NPC and Maid Entities for Minecraft 26.2");
     }
 }

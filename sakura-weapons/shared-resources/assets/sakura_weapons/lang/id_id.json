@@ -103,5 +103,7 @@
   "item.sakura_weapons.dragon_mecha_overlord_leggings": "Celana Zirah Dragon Mecha Overlord",
   "item.sakura_weapons.dragon_mecha_overlord_boots": "Sepatu Dragon Mecha Overlord",
   "entity.sakura_weapons.takasha_npc": "NPC Takasha",
-  "item.sakura_weapons.takasha_npc_spawn_egg": "Telur Spawn NPC Takasha"
+  "item.sakura_weapons.takasha_npc_spawn_egg": "Telur Spawn NPC Takasha",
+  "entity.sakura_weapons.takasha_maid": "Pendamping Maid Takasha",
+  "item.sakura_weapons.takasha_maid_spawn_egg": "Telur Spawn Maid Takasha"
 }

@@ -26,27 +26,25 @@ public final class DragonMechaOverlordArmorUtil {
             return false;
         }
 
-        // 1. Conflict Guard: Items with CustomModelData are managed by server plugins (ItemsAdder / Oraxen)
-        if (stack.has(DataComponents.CUSTOM_MODEL_DATA)) {
-            return false;
-        }
-
-        // 2. Conflict Guard: Custom NBT tags from Bukkit/Paper plugins
-        CustomData customData = stack.get(DataComponents.CUSTOM_DATA);
-        if (customData != null) {
-            String tagString = customData.copyTag().toString().toLowerCase();
-            if (tagString.contains("itemsadder") || tagString.contains("oraxen") || tagString.contains("publicbukkitvalues")) {
-                return false;
-            }
-        }
-
-        // 3. Check if native ModItem Dragon Mecha Overlord armor
+        // 1. Check if native ModItem Dragon Mecha Overlord armor (Always takes top priority)
         Identifier itemId = BuiltInRegistries.ITEM.getKey(stack.getItem());
         if ("sakura_weapons".equals(itemId.getNamespace())) {
             String path = itemId.getPath();
             if (path.equals("dragon_mecha_overlord_helmet") || path.equals("dragon_mecha_overlord_chestplate")
                     || path.equals("dragon_mecha_overlord_leggings") || path.equals("dragon_mecha_overlord_boots")) {
                 return true;
+            }
+        }
+
+        // 2. Custom NBT tags (supports ItemsAdder / Oraxen set integration or guards against foreign items)
+        CustomData customData = stack.get(DataComponents.CUSTOM_DATA);
+        if (customData != null) {
+            String tagString = customData.copyTag().toString().toLowerCase();
+            if (tagString.contains("dragon_mecha_overlord")) {
+                return true;
+            }
+            if (tagString.contains("itemsadder") || tagString.contains("oraxen") || tagString.contains("publicbukkitvalues")) {
+                return false;
             }
         }
 

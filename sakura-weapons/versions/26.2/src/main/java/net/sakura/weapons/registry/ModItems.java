@@ -9,8 +9,10 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.FishingRodItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.item.equipment.Equippable;
 import net.sakura.weapons.SakuraWeaponsMod;
+import net.sakura.weapons.item.SakuraArmorMaterials;
 import net.sakura.weapons.item.SakuraToolMaterial;
 import net.sakura.weapons.item.custom.SakuraBigswordItem;
 import net.sakura.weapons.item.custom.SakuraBowItem;
@@ -135,20 +137,16 @@ public class ModItems {
         new Item.Properties().hoe(SakuraToolMaterial.SAKURA, -3.0f, 0.0f));
 
     public static final Item PINK_LEGACY_HELMET = register("pink_legacy_helmet", Item::new,
-        new Item.Properties().stacksTo(1).component(DataComponents.EQUIPPABLE,
-            Equippable.builder(EquipmentSlot.HEAD).setAsset(net.sakura.weapons.client.render.ModEquipmentAssets.PINK_LEGACY).build()));
+        new Item.Properties().humanoidArmor(SakuraArmorMaterials.PINK_LEGACY, ArmorType.HELMET));
 
     public static final Item PINK_LEGACY_CHESTPLATE = register("pink_legacy_chestplate", Item::new,
-        new Item.Properties().stacksTo(1).component(DataComponents.EQUIPPABLE,
-            Equippable.builder(EquipmentSlot.CHEST).setAsset(net.sakura.weapons.client.render.ModEquipmentAssets.PINK_LEGACY).build()));
+        new Item.Properties().humanoidArmor(SakuraArmorMaterials.PINK_LEGACY, ArmorType.CHESTPLATE));
 
     public static final Item PINK_LEGACY_LEGGINGS = register("pink_legacy_leggings", Item::new,
-        new Item.Properties().stacksTo(1).component(DataComponents.EQUIPPABLE,
-            Equippable.builder(EquipmentSlot.LEGS).setAsset(net.sakura.weapons.client.render.ModEquipmentAssets.PINK_LEGACY).build()));
+        new Item.Properties().humanoidArmor(SakuraArmorMaterials.PINK_LEGACY, ArmorType.LEGGINGS));
 
     public static final Item PINK_LEGACY_BOOTS = register("pink_legacy_boots", Item::new,
-        new Item.Properties().stacksTo(1).component(DataComponents.EQUIPPABLE,
-            Equippable.builder(EquipmentSlot.FEET).setAsset(net.sakura.weapons.client.render.ModEquipmentAssets.PINK_LEGACY).build()));
+        new Item.Properties().humanoidArmor(SakuraArmorMaterials.PINK_LEGACY, ArmorType.BOOTS));
 
     public static final Item PINK_LEGACY_WINGS = register("pink_legacy_wings", Item::new,
         new Item.Properties().stacksTo(1).equippable(EquipmentSlot.CHEST));
@@ -158,6 +156,10 @@ public class ModItems {
 
     public static final Item TAKASHA_NPC_SPAWN_EGG = register("takasha_npc_spawn_egg",
         props -> new net.minecraft.world.item.SpawnEggItem(props.spawnEgg(ModEntities.TAKASHA_NPC)),
+        new Item.Properties());
+
+    public static final Item TAKASHA_MAID_SPAWN_EGG = register("takasha_maid_spawn_egg",
+        props -> new net.minecraft.world.item.SpawnEggItem(props.spawnEgg(ModEntities.TAKASHA_MAID)),
         new Item.Properties());
 
     public static final Item NPC_SPAWNER_WAND = register("npc_spawner_wand",

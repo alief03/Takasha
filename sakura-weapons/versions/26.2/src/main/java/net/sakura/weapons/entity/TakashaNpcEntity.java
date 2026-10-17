@@ -205,10 +205,12 @@ public class TakashaNpcEntity extends Avatar {
         super.onSyncedDataUpdated(key);
         if (DATA_POSE_PRESET.equals(key)) {
             int preset = this.entityData.get(DATA_POSE_PRESET);
-            applyEntityPoseForPreset(preset);
-            if (preset > 0 && preset <= 32) {
-                applyPosePreset(preset);
+            if (preset < 0 || preset > 3) {
+                preset = 0;
+                this.entityData.set(DATA_POSE_PRESET, 0);
             }
+            applyEntityPoseForPreset(preset);
+            applyPosePreset(preset);
         } else if (DATA_YAW_ROTATION.equals(key)) {
             float yaw = this.entityData.get(DATA_YAW_ROTATION);
             this.setYRot(yaw);
@@ -235,6 +237,7 @@ public class TakashaNpcEntity extends Avatar {
                 } else {
                     net.sakura.weapons.compat.EmotecraftCompat.stopEmoteSafely(this);
                     net.sakura.weapons.compat.EmotecraftCompat.resetAnimStateSafely(this);
+                    applyPosePreset(getPosePreset());
                 }
             } else if (DATA_SKIN_URL.equals(key)) {
                 String skinUrl = getSkinUrl();
@@ -562,6 +565,9 @@ public class TakashaNpcEntity extends Avatar {
     }
 
     public void setPosePreset(int preset) {
+        if (preset < 0 || preset > 3) {
+            preset = 0;
+        }
         this.entityData.set(DATA_POSE_PRESET, preset);
         applyPosePreset(preset);
     }
@@ -608,6 +614,7 @@ public class TakashaNpcEntity extends Avatar {
             } else {
                 net.sakura.weapons.compat.EmotecraftCompat.stopEmoteSafely(this);
                 net.sakura.weapons.compat.EmotecraftCompat.resetAnimStateSafely(this);
+                applyPosePreset(getPosePreset());
             }
         }
     }
@@ -773,97 +780,31 @@ public class TakashaNpcEntity extends Avatar {
     }
 
     public boolean isLyingDownPose() {
-        int preset = getPosePreset();
-        return preset >= 1 && preset <= 7;
+        return getPosePreset() == 2;
     }
 
     public boolean isSittingPose() {
-        int preset = getPosePreset();
-        return (preset >= 8 && preset <= 11) || (preset >= 12 && preset <= 14);
+        return getPosePreset() == 1;
     }
 
     public boolean isFloorSittingPose() {
-        int preset = getPosePreset();
-        return preset == 10 || preset == 11 || preset == 14;
+        return false;
+    }
+
+    public boolean isCrouchingPose() {
+        return getPosePreset() == 3;
     }
 
     /**
-     * Applies standard rotation vectors for 32 distinct expressive presets categorized into:
-     * - 1..7: 🛌 Tidur & Rebahan (Kasur, Tengkurap, Miring R/L, Rebahan, Peluk Senjata, Terkapar KO)
-     * - 8..14: 🧘 Duduk & Bersimpuh (Kursi, Bersandar, Bersila, Meditasi, Jongkok, Berlutut, Seiza)
-     * - 15..24: ⚔ Kuda-kuda Tempur & Senjata (Siaga, Combat, Iaido, Akimbo, Busur, Tombak, Palu, Perisai, Tusuk, Tebas)
-     * - 25..32: 🎭 Gestur & Emote Statis (Sedekap, Hormat, Bungkuk, Menunjuk, Melambai, Menangis, Facepalm, Berpikir)
-     * - 0: Bebas / Natural Relaxed Standing
+     * Applies standard rotation vectors for 4 core presets:
+     * - 0: Berdiri Biasa (Natural Relaxed Standing)
+     * - 1: Duduk (Chair / Bench Sitting)
+     * - 2: Tidur (Lying Down / Bed Sleeping)
+     * - 3: Jongkok (Crouching / Sneaking)
      */
     public void applyPosePreset(int preset) {
         switch (preset) {
-            // --- Kategori 1: 🛌 Tidur & Rebahan (1..7) ---
-            case 1 -> { // Tidur Terlentang Kasur (Vanilla Bed Sleeping)
-                setHeadPose(new Rotations(0f, 0f, 0f));
-                setBodyPose(new Rotations(0f, 0f, 0f));
-                setRightArmPose(new Rotations(-15f, -10f, 5f));
-                setLeftArmPose(new Rotations(-15f, 10f, -5f));
-                setRightLegPose(new Rotations(0f, 0f, 2f));
-                setLeftLegPose(new Rotations(0f, 0f, -2f));
-                setPose(Pose.SLEEPING);
-            }
-            case 2 -> { // Tidur Tengkurap (Prone Sleeping)
-                setHeadPose(new Rotations(0f, 55f, 0f));
-                setBodyPose(new Rotations(0f, 0f, 0f));
-                setRightArmPose(new Rotations(-130f, 20f, -30f));
-                setLeftArmPose(new Rotations(-130f, -20f, 30f));
-                setRightLegPose(new Rotations(0f, 5f, 5f));
-                setLeftLegPose(new Rotations(0f, -5f, -5f));
-                setPose(Pose.SLEEPING);
-            }
-            case 3 -> { // Tidur Miring Kanan (Right Side Sleeping)
-                setHeadPose(new Rotations(0f, 15f, 10f));
-                setBodyPose(new Rotations(0f, 0f, 5f));
-                setRightArmPose(new Rotations(-80f, 15f, 20f));
-                setLeftArmPose(new Rotations(-20f, 10f, 5f));
-                setRightLegPose(new Rotations(25f, 0f, 5f));
-                setLeftLegPose(new Rotations(35f, 0f, 0f));
-                setPose(Pose.SLEEPING);
-            }
-            case 4 -> { // Tidur Miring Kiri (Left Side Sleeping)
-                setHeadPose(new Rotations(0f, -15f, -10f));
-                setBodyPose(new Rotations(0f, 0f, -5f));
-                setRightArmPose(new Rotations(-20f, -10f, -5f));
-                setLeftArmPose(new Rotations(-80f, -15f, -20f));
-                setRightLegPose(new Rotations(35f, 0f, 0f));
-                setLeftLegPose(new Rotations(25f, 0f, -5f));
-                setPose(Pose.SLEEPING);
-            }
-            case 5 -> { // Rebahan Santai Melamun (Lazing / Stargazing)
-                setHeadPose(new Rotations(-5f, 0f, 0f));
-                setBodyPose(new Rotations(0f, 0f, 0f));
-                setRightArmPose(new Rotations(-140f, -35f, 45f));
-                setLeftArmPose(new Rotations(-140f, 35f, -45f));
-                setRightLegPose(new Rotations(30f, 20f, 15f));
-                setLeftLegPose(new Rotations(0f, -5f, -5f));
-                setPose(Pose.SLEEPING);
-            }
-            case 6 -> { // Tidur Memeluk Senjata (Warrior's Rest)
-                setHeadPose(new Rotations(-10f, 10f, 0f));
-                setBodyPose(new Rotations(0f, 0f, 0f));
-                setRightArmPose(new Rotations(-45f, -25f, 15f));
-                setLeftArmPose(new Rotations(-40f, 25f, -15f));
-                setRightLegPose(new Rotations(5f, 0f, 5f));
-                setLeftLegPose(new Rotations(0f, 0f, -5f));
-                setPose(Pose.SLEEPING);
-            }
-            case 7 -> { // Terkapar Kalah KO (Battlefield Knocked Out)
-                setHeadPose(new Rotations(15f, 40f, -10f));
-                setBodyPose(new Rotations(0f, 5f, 0f));
-                setRightArmPose(new Rotations(-30f, 40f, 60f));
-                setLeftArmPose(new Rotations(-50f, -30f, -70f));
-                setRightLegPose(new Rotations(20f, 15f, 25f));
-                setLeftLegPose(new Rotations(-10f, -20f, -30f));
-                setPose(Pose.SLEEPING);
-            }
-
-            // --- Kategori 2: 🧘 Duduk & Bersimpuh (8..14) ---
-            case 8 -> { // Duduk di Kursi Santai (Chair Sitting)
+            case 1 -> { // 1: Duduk (Sitting)
                 setHeadPose(new Rotations(0f, 0f, 0f));
                 setBodyPose(new Rotations(0f, 0f, 0f));
                 setRightArmPose(new Rotations(-25f, 0f, 10f));
@@ -872,34 +813,16 @@ public class TakashaNpcEntity extends Avatar {
                 setLeftLegPose(new Rotations(-90f, -5f, 0f));
                 setPose(Pose.SITTING);
             }
-            case 9 -> { // Duduk Bersandar (Leaning Sitting)
-                setHeadPose(new Rotations(-10f, 0f, 0f));
-                setBodyPose(new Rotations(-10f, 0f, 0f));
-                setRightArmPose(new Rotations(-35f, 15f, 15f));
-                setLeftArmPose(new Rotations(-35f, -15f, -15f));
-                setRightLegPose(new Rotations(-80f, 15f, 0f));
-                setLeftLegPose(new Rotations(-80f, -15f, 0f));
-                setPose(Pose.SITTING);
-            }
-            case 10 -> { // Duduk Bersila di Lantai (Floor Cross-Legged)
+            case 2 -> { // 2: Tidur (Sleeping)
                 setHeadPose(new Rotations(0f, 0f, 0f));
                 setBodyPose(new Rotations(0f, 0f, 0f));
-                setRightArmPose(new Rotations(-35f, -15f, 10f));
-                setLeftArmPose(new Rotations(-35f, 15f, -10f));
-                setRightLegPose(new Rotations(-60f, 25f, 45f));
-                setLeftLegPose(new Rotations(-60f, -25f, -45f));
-                setPose(Pose.SITTING);
+                setRightArmPose(new Rotations(-15f, -10f, 5f));
+                setLeftArmPose(new Rotations(-15f, 10f, -5f));
+                setRightLegPose(new Rotations(0f, 0f, 2f));
+                setLeftLegPose(new Rotations(0f, 0f, -2f));
+                setPose(Pose.SLEEPING);
             }
-            case 11 -> { // Meditasi Hening (Deep Meditation)
-                setHeadPose(new Rotations(15f, 0f, 0f));
-                setBodyPose(new Rotations(0f, 0f, 0f));
-                setRightArmPose(new Rotations(-45f, -25f, 10f));
-                setLeftArmPose(new Rotations(-45f, 25f, -10f));
-                setRightLegPose(new Rotations(-70f, 30f, 50f));
-                setLeftLegPose(new Rotations(-70f, -30f, -50f));
-                setPose(Pose.SITTING);
-            }
-            case 12 -> { // Jongkok Siaga (Crouching Sentry)
+            case 3 -> { // 3: Jongkok (Crouching)
                 setHeadPose(new Rotations(0f, 0f, 0f));
                 setBodyPose(new Rotations(25f, 0f, 0f));
                 setRightArmPose(new Rotations(-40f, 10f, 5f));
@@ -908,193 +831,7 @@ public class TakashaNpcEntity extends Avatar {
                 setLeftLegPose(new Rotations(-30f, 0f, 0f));
                 setPose(Pose.CROUCHING);
             }
-            case 13 -> { // Berlutut Ksatria (One-Knee Kneeling)
-                setHeadPose(new Rotations(15f, 0f, 0f));
-                setBodyPose(new Rotations(10f, 0f, 0f));
-                setRightArmPose(new Rotations(-30f, 0f, 10f));
-                setLeftArmPose(new Rotations(-30f, 0f, -10f));
-                setRightLegPose(new Rotations(-85f, 0f, 0f));
-                setLeftLegPose(new Rotations(-35f, 0f, 0f));
-                setPose(Pose.CROUCHING);
-            }
-            case 14 -> { // Bersimpuh Sopan / Seiza (Seiza Japanese Kneeling)
-                setHeadPose(new Rotations(10f, 0f, 0f));
-                setBodyPose(new Rotations(5f, 0f, 0f));
-                setRightArmPose(new Rotations(-25f, 10f, 5f));
-                setLeftArmPose(new Rotations(-25f, -10f, -5f));
-                setRightLegPose(new Rotations(-75f, 0f, 0f));
-                setLeftLegPose(new Rotations(-75f, 0f, 0f));
-                setPose(Pose.CROUCHING);
-            }
-
-            // --- Kategori 3: ⚔ Kuda-kuda Tempur & Senjata (15..24) ---
-            case 15 -> { // Siaga Berdiri (Standing Guard)
-                setHeadPose(new Rotations(0f, 5f, 0f));
-                setBodyPose(new Rotations(0f, 0f, 0f));
-                setRightArmPose(new Rotations(-15f, 0f, 10f));
-                setLeftArmPose(new Rotations(-10f, 0f, -10f));
-                setRightLegPose(new Rotations(5f, 5f, 0f));
-                setLeftLegPose(new Rotations(-5f, -5f, 0f));
-                setPose(Pose.STANDING);
-            }
-            case 16 -> { // Siap Bertarung (Combat Stance)
-                setHeadPose(new Rotations(-5f, 15f, 0f));
-                setBodyPose(new Rotations(5f, 20f, 0f));
-                setRightArmPose(new Rotations(-70f, 25f, 15f));
-                setLeftArmPose(new Rotations(-45f, -20f, -10f));
-                setRightLegPose(new Rotations(-15f, 15f, 0f));
-                setLeftLegPose(new Rotations(20f, -10f, 0f));
-                setPose(Pose.STANDING);
-            }
-            case 17 -> { // Iaido Katana Draw (Iaido Ready)
-                setHeadPose(new Rotations(5f, -10f, 0f));
-                setBodyPose(new Rotations(10f, -15f, 0f));
-                setRightArmPose(new Rotations(-35f, -30f, 20f));
-                setLeftArmPose(new Rotations(-15f, 35f, -20f));
-                setRightLegPose(new Rotations(25f, 10f, 0f));
-                setLeftLegPose(new Rotations(-20f, -10f, 0f));
-                setPose(Pose.STANDING);
-            }
-            case 18 -> { // Senjata Ganda (Dual Wield Akimbo)
-                setHeadPose(new Rotations(0f, 0f, 0f));
-                setBodyPose(new Rotations(0f, 0f, 0f));
-                setRightArmPose(new Rotations(-65f, -20f, 10f));
-                setLeftArmPose(new Rotations(-65f, 20f, -10f));
-                setRightLegPose(new Rotations(5f, 5f, 0f));
-                setLeftLegPose(new Rotations(-5f, -5f, 0f));
-                setPose(Pose.STANDING);
-            }
-            case 19 -> { // Membidik Busur (Bow Aiming)
-                setHeadPose(new Rotations(0f, -75f, 0f));
-                setBodyPose(new Rotations(0f, -75f, 0f));
-                setRightArmPose(new Rotations(-85f, -45f, 45f));
-                setLeftArmPose(new Rotations(-90f, 0f, 0f));
-                setRightLegPose(new Rotations(-10f, 30f, 0f));
-                setLeftLegPose(new Rotations(25f, -20f, 0f));
-                setPose(Pose.STANDING);
-            }
-            case 20 -> { // Kuda-kuda Tombak (Spear Thrust Stance)
-                setHeadPose(new Rotations(0f, 10f, 0f));
-                setBodyPose(new Rotations(5f, 15f, 0f));
-                setRightArmPose(new Rotations(-75f, 15f, 0f));
-                setLeftArmPose(new Rotations(-60f, -25f, 20f));
-                setRightLegPose(new Rotations(-25f, 10f, 0f));
-                setLeftLegPose(new Rotations(30f, -10f, 0f));
-                setPose(Pose.STANDING);
-            }
-            case 21 -> { // Mengangkat Palu Godam (Great Hammer Hold)
-                setHeadPose(new Rotations(-5f, -10f, 0f));
-                setBodyPose(new Rotations(5f, -15f, 0f));
-                setRightArmPose(new Rotations(-120f, -25f, 20f));
-                setLeftArmPose(new Rotations(-95f, 30f, -20f));
-                setRightLegPose(new Rotations(15f, 10f, 0f));
-                setLeftLegPose(new Rotations(-15f, -10f, 0f));
-                setPose(Pose.STANDING);
-            }
-            case 22 -> { // Memasang Perisai (Shield Defense)
-                setHeadPose(new Rotations(0f, 10f, 0f));
-                setBodyPose(new Rotations(5f, 25f, 0f));
-                setRightArmPose(new Rotations(-25f, 15f, 10f));
-                setLeftArmPose(new Rotations(-65f, 10f, 25f));
-                setRightLegPose(new Rotations(-10f, 15f, 0f));
-                setLeftLegPose(new Rotations(15f, -10f, 0f));
-                setPose(Pose.STANDING);
-            }
-            case 23 -> { // Tusukan Cepat (Dagger / Rapier Thrust)
-                setHeadPose(new Rotations(-5f, 5f, 0f));
-                setBodyPose(new Rotations(15f, 10f, 0f));
-                setRightArmPose(new Rotations(-85f, 10f, 5f));
-                setLeftArmPose(new Rotations(-25f, -15f, -20f));
-                setRightLegPose(new Rotations(-20f, 5f, 0f));
-                setLeftLegPose(new Rotations(25f, -5f, 0f));
-                setPose(Pose.STANDING);
-            }
-            case 24 -> { // Tebasan Melompat (Overhead Slash)
-                setHeadPose(new Rotations(-15f, 0f, 0f));
-                setBodyPose(new Rotations(-10f, 0f, 0f));
-                setRightArmPose(new Rotations(-165f, -15f, 10f));
-                setLeftArmPose(new Rotations(-150f, 15f, -10f));
-                setRightLegPose(new Rotations(20f, 10f, 5f));
-                setLeftLegPose(new Rotations(-10f, -10f, -5f));
-                setPose(Pose.STANDING);
-            }
-
-            // --- Kategori 4: 🎭 Gestur & Emote Statis (25..32) ---
-            case 25 -> { // Bersedekap Dada (Arms Crossed)
-                setHeadPose(new Rotations(-5f, 0f, 0f));
-                setBodyPose(new Rotations(0f, 0f, 0f));
-                setRightArmPose(new Rotations(-50f, 40f, -60f));
-                setLeftArmPose(new Rotations(-50f, -40f, 60f));
-                setRightLegPose(new Rotations(5f, 0f, 2f));
-                setLeftLegPose(new Rotations(-5f, 0f, -2f));
-                setPose(Pose.STANDING);
-            }
-            case 26 -> { // Hormat Ksatria (Knight's Salute)
-                setHeadPose(new Rotations(5f, 0f, 0f));
-                setBodyPose(new Rotations(0f, 0f, 0f));
-                setRightArmPose(new Rotations(-65f, -35f, 40f));
-                setLeftArmPose(new Rotations(-5f, 0f, -5f));
-                setRightLegPose(new Rotations(0f, 0f, 2f));
-                setLeftLegPose(new Rotations(0f, 0f, -2f));
-                setPose(Pose.STANDING);
-            }
-            case 27 -> { // Membungkuk Sopan (Respectful Bow)
-                setHeadPose(new Rotations(20f, 0f, 0f));
-                setBodyPose(new Rotations(30f, 0f, 0f));
-                setRightArmPose(new Rotations(-10f, 0f, 5f));
-                setLeftArmPose(new Rotations(-10f, 0f, -5f));
-                setRightLegPose(new Rotations(0f, 0f, 2f));
-                setLeftLegPose(new Rotations(0f, 0f, -2f));
-                setPose(Pose.STANDING);
-            }
-            case 28 -> { // Menunjuk Tegas (Heroic Pointing)
-                setHeadPose(new Rotations(-5f, 0f, 0f));
-                setBodyPose(new Rotations(0f, 0f, 0f));
-                setRightArmPose(new Rotations(-90f, 0f, 0f));
-                setLeftArmPose(new Rotations(-15f, 0f, -15f));
-                setRightLegPose(new Rotations(10f, 5f, 0f));
-                setLeftLegPose(new Rotations(-10f, -5f, 0f));
-                setPose(Pose.STANDING);
-            }
-            case 29 -> { // Melambai Ramah (Friendly Wave)
-                setHeadPose(new Rotations(-5f, 0f, 0f));
-                setBodyPose(new Rotations(0f, 0f, 0f));
-                setRightArmPose(new Rotations(-140f, 0f, 25f));
-                setLeftArmPose(new Rotations(-5f, 0f, -5f));
-                setRightLegPose(new Rotations(0f, 0f, 2f));
-                setLeftLegPose(new Rotations(0f, 0f, -2f));
-                setPose(Pose.STANDING);
-            }
-            case 30 -> { // Menangis Terisak (Weeping / Grief)
-                setHeadPose(new Rotations(25f, 0f, 0f));
-                setBodyPose(new Rotations(15f, 0f, 0f));
-                setRightArmPose(new Rotations(-75f, 45f, -25f));
-                setLeftArmPose(new Rotations(-75f, -45f, 25f));
-                setRightLegPose(new Rotations(0f, 0f, 2f));
-                setLeftLegPose(new Rotations(0f, 0f, -2f));
-                setPose(Pose.STANDING);
-            }
-            case 31 -> { // Facepalm (Embarrassed)
-                setHeadPose(new Rotations(10f, 10f, 0f));
-                setBodyPose(new Rotations(0f, 0f, 0f));
-                setRightArmPose(new Rotations(-120f, -30f, 25f));
-                setLeftArmPose(new Rotations(-10f, 0f, -10f));
-                setRightLegPose(new Rotations(5f, 0f, 2f));
-                setLeftLegPose(new Rotations(-5f, 0f, -2f));
-                setPose(Pose.STANDING);
-            }
-            case 32 -> { // Berpikir Keras (Deep Thinking)
-                setHeadPose(new Rotations(10f, 15f, -5f));
-                setBodyPose(new Rotations(0f, 0f, 0f));
-                setRightArmPose(new Rotations(-80f, -25f, 20f));
-                setLeftArmPose(new Rotations(-45f, 30f, -15f));
-                setRightLegPose(new Rotations(0f, 0f, 2f));
-                setLeftLegPose(new Rotations(0f, 0f, -2f));
-                setPose(Pose.STANDING);
-            }
-
-            // --- Default: 0 Bebas / Natural Relaxed Standing ---
-            default -> {
+            default -> { // 0: Berdiri Biasa (Standing)
                 setHeadPose(new Rotations(-1.5f, 2.0f, 0f));
                 setBodyPose(new Rotations(1.0f, 0f, 0f));
                 setRightArmPose(new Rotations(2.0f, 0f, 3.5f));
@@ -1106,16 +843,12 @@ public class TakashaNpcEntity extends Avatar {
         }
     }
 
-    // -----------------------------------------------------------------------------------------
     public void applyEntityPoseForPreset(int preset) {
-        if (preset >= 1 && preset <= 7) {
-            setPose(Pose.SLEEPING);
-        } else if (preset >= 8 && preset <= 11) {
-            setPose(Pose.SITTING);
-        } else if (preset >= 12 && preset <= 14) {
-            setPose(Pose.CROUCHING);
-        } else {
-            setPose(Pose.STANDING);
+        switch (preset) {
+            case 1 -> setPose(Pose.SITTING);
+            case 2 -> setPose(Pose.SLEEPING);
+            case 3 -> setPose(Pose.CROUCHING);
+            default -> setPose(Pose.STANDING);
         }
     }
 
@@ -1190,6 +923,9 @@ public class TakashaNpcEntity extends Avatar {
         input.read("right_leg_pose", Rotations.CODEC).ifPresent(this::setRightLegPose);
 
         int preset = input.getIntOr("pose_preset", 0);
+        if (preset < 0 || preset > 3) {
+            preset = 0;
+        }
         this.entityData.set(DATA_POSE_PRESET, preset);
         if (preset > 0) {
             applyPosePreset(preset);

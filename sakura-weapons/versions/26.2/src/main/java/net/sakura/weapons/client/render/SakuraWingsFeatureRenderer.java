@@ -187,19 +187,15 @@ public class SakuraWingsFeatureRenderer<S extends HumanoidRenderState, M extends
         }
         // ONLY Elytra is supported as base item for wings (Chestplates are strictly ignored)
         if (stack.is(Items.ELYTRA)) {
-            // Server Plugin Conflict Guard (ItemsAdder / Oraxen):
-            // If the item in the chest slot already carries server-side CustomModelData
-            // or specific ItemsAdder custom data, yield rendering to prevent double wings / z-fighting.
+            // Server Plugin Conflict Guard (foreign items with unrelated ItemsAdder / Oraxen data):
             try {
-                if (stack.has(net.minecraft.core.component.DataComponents.CUSTOM_MODEL_DATA)) {
-                    return null;
-                }
                 if (stack.has(net.minecraft.core.component.DataComponents.CUSTOM_DATA)) {
                     var customData = stack.get(net.minecraft.core.component.DataComponents.CUSTOM_DATA);
                     if (customData != null) {
                         var tag = customData.copyTag();
                         String tagString = tag.toString().toLowerCase();
-                        if (tagString.contains("itemsadder") || tagString.contains("oraxen") || tagString.contains("ia_gui")) {
+                        if ((tagString.contains("itemsadder") || tagString.contains("oraxen") || tagString.contains("ia_gui"))
+                                && !tagString.contains("wing") && !tagString.contains("dragon") && !tagString.contains("valentine") && !tagString.contains("sakura")) {
                             return null;
                         }
                     }

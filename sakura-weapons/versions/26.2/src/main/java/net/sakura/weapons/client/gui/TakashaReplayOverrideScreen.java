@@ -113,7 +113,7 @@ public class TakashaReplayOverrideScreen extends Screen {
 
         this.presetButton = Button.builder(Component.literal(getPresetLabel(this.selectedPreset)), btn -> cyclePreset(1))
             .bounds(controlsLeft + 20, row1Y, 172, 18)
-            .tooltip(Tooltip.create(Component.literal("Klik untuk ganti pose preset (1..32)")))
+            .tooltip(Tooltip.create(Component.literal("Klik untuk ganti pose preset (0..3)")))
             .build();
         this.addRenderableWidget(this.presetButton);
 
@@ -565,7 +565,9 @@ public class TakashaReplayOverrideScreen extends Screen {
                 }
 
                 Identifier icon = entry.iconId() != null ? entry.iconId() : EmotecraftCompat.EMOTECRAFT_LOGO;
-                extractor.blit(icon, dropX + 7, iy + 2, 12, 12, 0.0f, 0.0f, 1.0f, 1.0f);
+                int iconX = dropX + 7;
+                int iconY = iy + 2;
+                extractor.blit(icon, iconX, iconY, iconX + 12, iconY + 12, 0.0f, 1.0f, 0.0f, 1.0f);
 
                 String displayName = (isSelected ? "✔ " : "") + entry.displayName();
                 int textColor = isSelected ? 0xFFFFB6C1 : (isHovered ? 0xFFFFFFFF : 0xFFDDDDDD);

@@ -28,8 +28,6 @@ public final class TakashaStudioWindow {
 
     private static final ImString npcFilterQuery = new ImString(64);
     private static final ImString emoteSearchQuery = new ImString(64);
-    private static int activePresetCategory = 0; // 0: All, 1: Combat, 2: Casual, 3: Valentine, 4: Mecha
-
     private static final String[] MODE_LABELS = {"Loop", "Tahan (Freeze)", "Sekali (Once)"};
 
     private TakashaStudioWindow() {}
@@ -214,39 +212,15 @@ public final class TakashaStudioWindow {
             ImGui.textUnformatted("| Emote: " + activeEmote);
         }
 
-        // Category Filter
-        if (ImGui.button("Semua##catAll")) activePresetCategory = 0;
-        ImGui.sameLine();
-        if (ImGui.button("Combat##catCombat")) activePresetCategory = 1;
-        ImGui.sameLine();
-        if (ImGui.button("Casual/Idle##catCasual")) activePresetCategory = 2;
-        ImGui.sameLine();
-        if (ImGui.button("Valentine##catVal")) activePresetCategory = 3;
-        ImGui.sameLine();
-        if (ImGui.button("Dragon Mecha##catMecha")) activePresetCategory = 4;
-
-        // Preset Grid
-        int start = 1, end = 32;
-        if (activePresetCategory == 1) { start = 1; end = 8; }
-        else if (activePresetCategory == 2) { start = 9; end = 16; }
-        else if (activePresetCategory == 3) { start = 17; end = 24; }
-        else if (activePresetCategory == 4) { start = 25; end = 32; }
-
-        if (ImGui.beginChild("preset_grid_child", 0f, 110f, true)) {
-            if (ImGui.button("0: Bebas (Default)##p0")) {
-                apply(id, 0, activeEmote, activeMode);
-            }
-            ImGui.sameLine();
-
-            int col = 1;
-            for (int p = start; p <= end; p++) {
-                String label = p + ": " + FlashbackSakuraPanel.presetName(p);
+        // 4 Core Pose Presets
+        if (ImGui.beginChild("preset_grid_child", 0f, 40f, true)) {
+            for (int p = 0; p < TakashaNpcScreen.PRESET_DISPLAY_NAMES.length; p++) {
+                String label = FlashbackSakuraPanel.presetName(p);
                 boolean isCurrent = (activePreset == p);
                 if (ImGui.button((isCurrent ? "> " : "") + label + "##p" + p)) {
-                    apply(id, p, "", activeMode);
+                    apply(id, p, p == 0 ? activeEmote : "", activeMode);
                 }
-                col++;
-                if (col % 2 != 0 && p < end) {
+                if (p < TakashaNpcScreen.PRESET_DISPLAY_NAMES.length - 1) {
                     ImGui.sameLine();
                 }
             }

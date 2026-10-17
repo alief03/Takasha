@@ -67,8 +67,9 @@ public class TakashaNpcRenderer extends LivingEntityRenderer<TakashaNpcEntity, A
         state.leftArmPose = !entity.getOffhandItem().isEmpty() ? net.minecraft.client.model.HumanoidModel.ArmPose.ITEM : net.minecraft.client.model.HumanoidModel.ArmPose.EMPTY;
 
         if (state instanceof TakashaNpcRenderState npcState) {
-            int currentReplayTick = net.sakura.weapons.compat.flashback.FlashbackCompatHelper.getCurrentReplayTick();
-            var override = net.sakura.weapons.client.replay.ReplayPoseOverrideManager.getOverride(entity.getUUID(), currentReplayTick);
+            boolean flashbackActive = net.sakura.weapons.compat.flashback.FlashbackCompatHelper.isFlashbackActive();
+            int currentReplayTick = flashbackActive ? net.sakura.weapons.compat.flashback.FlashbackCompatHelper.getCurrentReplayTick() : 0;
+            var override = flashbackActive ? net.sakura.weapons.client.replay.ReplayPoseOverrideManager.getOverride(entity.getUUID(), currentReplayTick) : null;
             int preset = (override != null && override.hasPreset()) ? override.preset() : entity.getPosePreset();
             String emote = (override != null && override.hasEmote()) ? override.emoteId() : ((override != null && override.hasPreset()) ? "" : entity.getEmoteId());
             byte emoteMode = (override != null) ? override.playMode() : entity.getEmotePlayMode();
@@ -80,7 +81,7 @@ public class TakashaNpcRenderer extends LivingEntityRenderer<TakashaNpcEntity, A
                 if (override.getRightArmRotations() != null) entity.setRightArmPose(override.getRightArmRotations());
                 if (override.getLeftLegRotations() != null) entity.setLeftLegPose(override.getLeftLegRotations());
                 if (override.getRightLegRotations() != null) entity.setRightLegPose(override.getRightLegRotations());
-            } else if (preset > 0 && preset <= 32) {
+            } else if (preset > 0 && preset <= 3) {
                 entity.applyPosePreset(preset);
             } else if (preset == 0 && emote != null && !emote.isBlank()) {
                 if (override != null && override.hasEmote()) {
@@ -94,6 +95,8 @@ public class TakashaNpcRenderer extends LivingEntityRenderer<TakashaNpcEntity, A
                         entity.setLeftLegPose(rots[5]);
                     }
                 }
+            } else if (preset == 0 && (emote == null || emote.isBlank())) {
+                entity.applyPosePreset(0);
             }
 
             npcState.headPose = entity.getHeadPose();
@@ -216,30 +219,12 @@ public class TakashaNpcRenderer extends LivingEntityRenderer<TakashaNpcEntity, A
             if (npcState.isSmall) {
                 poseStack.scale(0.5f, 0.5f, 0.5f);
             }
-            if (npcState.posePreset >= 1 && npcState.posePreset <= 7) {
+            if (npcState.posePreset == 2) {
                 // First-class Lying Down / Bed Alignment:
                 // When entity is in sleeping/lying pose without a vanilla bed block or during ReplayMod playback,
                 // apply PoseStack rotation directly so the NPC rests horizontally flat on ground or mattress.
-                switch (npcState.posePreset) {
-                    case 2 -> { // Prone / Tengkurap: face and chest down
-                        poseStack.mulPose(com.mojang.math.Axis.XP.rotationDegrees(90.0F));
-                        poseStack.translate(0.0, 0.2, 0.25);
-                    }
-                    case 3 -> { // Right side / Miring Kanan: roll onto right side along spine (YP)
-                        poseStack.mulPose(com.mojang.math.Axis.XP.rotationDegrees(-90.0F));
-                        poseStack.translate(0.0, 0.2, -0.3125);
-                        poseStack.mulPose(com.mojang.math.Axis.YP.rotationDegrees(90.0F));
-                    }
-                    case 4 -> { // Left side / Miring Kiri: roll onto left side along spine (YP)
-                        poseStack.mulPose(com.mojang.math.Axis.XP.rotationDegrees(-90.0F));
-                        poseStack.translate(0.0, 0.2, -0.3125);
-                        poseStack.mulPose(com.mojang.math.Axis.YP.rotationDegrees(-90.0F));
-                    }
-                    default -> { // 1 (Bed), 5 (Lazing), 6 (Warrior's Rest), 7 (KO): On back / Terlentang
-                        poseStack.mulPose(com.mojang.math.Axis.XP.rotationDegrees(-90.0F));
-                        poseStack.translate(0.0, 0.2, -0.25);
-                    }
-                }
+                poseStack.mulPose(com.mojang.math.Axis.XP.rotationDegrees(-90.0F));
+                poseStack.translate(0.0, 0.2, -0.25);
             } else if (npcState.posePreset == 0 && npcState.emoteId != null && !npcState.emoteId.isBlank()) {
                 String eKey = npcState.emoteId.toLowerCase(java.util.Locale.ROOT);
                 if (eKey.contains("sleep") || eKey.contains("tidur") || eKey.contains("rebahan") || eKey.contains("lay") || eKey.contains("rest")) {

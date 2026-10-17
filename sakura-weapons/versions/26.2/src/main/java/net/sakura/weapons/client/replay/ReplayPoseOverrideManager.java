@@ -33,7 +33,75 @@ public class ReplayPoseOverrideManager {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private static final Map<UUID, PoseOverride> OVERRIDES = new ConcurrentHashMap<>();
     private static final Map<UUID, TimelineTrack> TIMELINE_TRACKS = new ConcurrentHashMap<>();
+    private static final Map<UUID, PlayerTimelineTrack> PLAYER_TRACKS = new ConcurrentHashMap<>();
+    private static volatile UUID loadedSessionId = null;
     private static boolean loaded = false;
+
+    private static void ensureLoaded() {
+        UUID currentSession = net.sakura.weapons.compat.flashback.FlashbackCompatHelper.getActiveReplayOrRecordId();
+        if (!loaded || (currentSession != null && !currentSession.equals(loadedSessionId))) {
+            loadSession(currentSession);
+        }
+    }
+
+    public static class PlayerEmoteKeyframe {
+        public int startTick = 0;
+        public int durationTicks = 60;
+        public String emoteId = "";
+        public byte playMode = 0; // 0: Loop, 1: Hold (Tahan), 2: Stand (Sekali)
+
+        public PlayerEmoteKeyframe() {}
+
+        public PlayerEmoteKeyframe(int startTick, int durationTicks, String emoteId, byte playMode) {
+            this.startTick = startTick;
+            this.durationTicks = durationTicks > 0 ? durationTicks : 60;
+            this.emoteId = emoteId != null ? emoteId : "";
+            this.playMode = playMode;
+        }
+
+        public boolean isActiveAt(int tick) {
+            if (emoteId == null || emoteId.isBlank()) return false;
+            if (tick < startTick) return false;
+            if (playMode == 2) {
+                return tick <= (startTick + durationTicks);
+            }
+            return tick <= (startTick + Math.max(durationTicks, 60));
+        }
+
+        public float getProgress(int tick) {
+            if (durationTicks <= 0) return 0f;
+            float elapsed = (float) (tick - startTick);
+            if (playMode == 1) {
+                return Math.min(elapsed / (float) durationTicks, 1.0f);
+            }
+            if (playMode == 0) {
+                return (elapsed % (float) durationTicks) / (float) durationTicks;
+            }
+            return Math.min(Math.max(elapsed / (float) durationTicks, 0f), 1f);
+        }
+    }
+
+    public static class PlayerTimelineTrack {
+        public String playerName = "";
+        public final TreeMap<Integer, PlayerEmoteKeyframe> keyframes = new TreeMap<>();
+
+        public PlayerTimelineTrack() {}
+
+        public PlayerTimelineTrack(String playerName) {
+            this.playerName = playerName != null ? playerName : "";
+        }
+
+        public PlayerEmoteKeyframe getActiveKeyframeAt(int tick) {
+            if (keyframes.isEmpty()) return null;
+            Map.Entry<Integer, PlayerEmoteKeyframe> entry = keyframes.floorEntry(tick);
+            if (entry == null) return null;
+            PlayerEmoteKeyframe kf = entry.getValue();
+            if (kf != null && kf.isActiveAt(tick)) {
+                return kf;
+            }
+            return null;
+        }
+    }
 
     public static class PoseOverride {
         public int posePreset = 0;
@@ -100,12 +168,12 @@ public class ReplayPoseOverrideManager {
     }
 
     public static boolean hasOverride(UUID uuid) {
-        if (!loaded) load();
+        ensureLoaded();
         return uuid != null && (OVERRIDES.containsKey(uuid) || TIMELINE_TRACKS.containsKey(uuid));
     }
 
     public static PoseOverride getOverride(UUID uuid) {
-        if (!loaded) load();
+        ensureLoaded();
         return uuid != null ? OVERRIDES.get(uuid) : null;
     }
 
@@ -114,7 +182,7 @@ public class ReplayPoseOverrideManager {
      * otherwise falls back to static override.
      */
     public static PoseOverride getOverride(UUID uuid, int tick) {
-        if (!loaded) load();
+        ensureLoaded();
         if (uuid == null) return null;
 
         TimelineTrack track = TIMELINE_TRACKS.get(uuid);
@@ -129,18 +197,21 @@ public class ReplayPoseOverrideManager {
 
     public static void setOverride(UUID uuid, PoseOverride override) {
         if (uuid == null || override == null) return;
+        ensureLoaded();
         OVERRIDES.put(uuid, override);
         save();
     }
 
     public static void setOverride(UUID uuid, int preset, String emoteId, byte playMode) {
         if (uuid == null) return;
+        ensureLoaded();
         OVERRIDES.put(uuid, new PoseOverride(preset, emoteId, playMode, 0.0f));
         save();
     }
 
     public static void removeOverride(UUID uuid) {
         if (uuid == null) return;
+        ensureLoaded();
         OVERRIDES.remove(uuid);
         TIMELINE_TRACKS.remove(uuid);
         save();
@@ -148,14 +219,14 @@ public class ReplayPoseOverrideManager {
 
     public static void setKeyframe(UUID uuid, int tick, PoseOverride override) {
         if (uuid == null || override == null) return;
-        if (!loaded) load();
+        ensureLoaded();
         TIMELINE_TRACKS.computeIfAbsent(uuid, k -> new TimelineTrack()).keyframes.put(tick, override);
         save();
     }
 
     public static void removeKeyframe(UUID uuid, int tick) {
         if (uuid == null) return;
-        if (!loaded) load();
+        ensureLoaded();
         TimelineTrack track = TIMELINE_TRACKS.get(uuid);
         if (track != null) {
             track.keyframes.remove(tick);
@@ -167,13 +238,80 @@ public class ReplayPoseOverrideManager {
     }
 
     public static TimelineTrack getTimelineTrack(UUID uuid) {
-        if (!loaded) load();
+        ensureLoaded();
         return uuid != null ? TIMELINE_TRACKS.get(uuid) : null;
+    }
+
+    public static void recordPlayerKeyframe(UUID uuid, String name, int tick, int duration, String emoteId, byte playMode) {
+        if (uuid == null) return;
+        ensureLoaded();
+        PlayerTimelineTrack track = PLAYER_TRACKS.computeIfAbsent(uuid, k -> new PlayerTimelineTrack(name));
+        if (name != null && !name.isBlank()) {
+            track.playerName = name;
+        }
+        track.keyframes.put(tick, new PlayerEmoteKeyframe(tick, duration, emoteId, playMode));
+        save();
+    }
+
+    public static void updatePlayerKeyframeDuration(UUID uuid, int tick, int newDuration) {
+        if (uuid == null) return;
+        ensureLoaded();
+        PlayerTimelineTrack track = PLAYER_TRACKS.get(uuid);
+        if (track != null) {
+            PlayerEmoteKeyframe kf = track.keyframes.get(tick);
+            if (kf != null) {
+                kf.durationTicks = newDuration;
+                save();
+            }
+        }
+    }
+
+    public static void setPlayerKeyframe(UUID uuid, String name, int tick, int duration, String emoteId, byte playMode) {
+        recordPlayerKeyframe(uuid, name, tick, duration, emoteId, playMode);
+    }
+
+    public static void removePlayerKeyframe(UUID uuid, int tick) {
+        if (uuid == null) return;
+        ensureLoaded();
+        PlayerTimelineTrack track = PLAYER_TRACKS.get(uuid);
+        if (track != null) {
+            track.keyframes.remove(tick);
+            if (track.keyframes.isEmpty()) {
+                PLAYER_TRACKS.remove(uuid);
+            }
+            save();
+        }
+    }
+
+    public static PlayerEmoteKeyframe getPlayerKeyframe(UUID uuid, int tick) {
+        ensureLoaded();
+        if (uuid == null) return null;
+        PlayerTimelineTrack track = PLAYER_TRACKS.get(uuid);
+        if (track != null) {
+            return track.getActiveKeyframeAt(tick);
+        }
+        return null;
+    }
+
+    public static PlayerTimelineTrack getPlayerTrack(UUID uuid) {
+        ensureLoaded();
+        return uuid != null ? PLAYER_TRACKS.get(uuid) : null;
+    }
+
+    public static Map<UUID, PlayerTimelineTrack> getAllPlayerTracks() {
+        ensureLoaded();
+        return PLAYER_TRACKS;
+    }
+
+    public static boolean hasPlayerTrack(UUID uuid) {
+        ensureLoaded();
+        return uuid != null && PLAYER_TRACKS.containsKey(uuid);
     }
 
     public static void clearAll() {
         OVERRIDES.clear();
         TIMELINE_TRACKS.clear();
+        PLAYER_TRACKS.clear();
         save();
     }
 
@@ -185,9 +323,16 @@ public class ReplayPoseOverrideManager {
         return new File(dir, "active_replay_overrides.json");
     }
 
+    private static File getSessionStorageFile(UUID sessionId) {
+        File dir = new File(Minecraft.getInstance().gameDirectory, "takasha_cache/replay_players");
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        return new File(dir, sessionId + ".json");
+    }
+
     public static synchronized void save() {
         try {
-            File file = getStorageFile();
             Map<String, Object> root = new HashMap<>();
 
             Map<String, PoseOverride> staticMap = new HashMap<>();
@@ -206,18 +351,59 @@ public class ReplayPoseOverrideManager {
             }
             root.put("timeline_tracks", trackMap);
 
+            Map<String, Map<String, Object>> playerTrackMap = new HashMap<>();
+            for (Map.Entry<UUID, PlayerTimelineTrack> entry : PLAYER_TRACKS.entrySet()) {
+                Map<String, Object> trackData = new HashMap<>();
+                trackData.put("name", entry.getValue().playerName);
+                Map<String, PlayerEmoteKeyframe> tickMap = new HashMap<>();
+                for (Map.Entry<Integer, PlayerEmoteKeyframe> kf : entry.getValue().keyframes.entrySet()) {
+                    tickMap.put(kf.getKey().toString(), kf.getValue());
+                }
+                trackData.put("keyframes", tickMap);
+                playerTrackMap.put(entry.getKey().toString(), trackData);
+            }
+            root.put("player_timeline_tracks", playerTrackMap);
+
+            File file = getStorageFile();
             try (FileWriter writer = new FileWriter(file)) {
                 GSON.toJson(root, writer);
             }
+
+            UUID sessionId = loadedSessionId != null ? loadedSessionId : net.sakura.weapons.compat.flashback.FlashbackCompatHelper.getActiveReplayOrRecordId();
+            if (sessionId != null) {
+                loadedSessionId = sessionId;
+                File sessionFile = getSessionStorageFile(sessionId);
+                try (FileWriter writer = new FileWriter(sessionFile)) {
+                    GSON.toJson(root, writer);
+                }
+            }
         } catch (Throwable t) {
-            SakuraWeaponsMod.LOGGER.warn("Failed to persist ReplayMod pose overrides: {}", t.getMessage());
+            SakuraWeaponsMod.LOGGER.warn("Failed to persist ReplayMod pose/player overrides: {}", t.getMessage());
         }
     }
 
-    public static synchronized void load() {
+    public static synchronized void loadSession(UUID sessionId) {
+        if (sessionId != null && sessionId.equals(loadedSessionId) && loaded) {
+            return;
+        }
+        loadedSessionId = sessionId;
         loaded = true;
+        loadForSession(sessionId);
+    }
+
+    public static synchronized void load() {
+        UUID currentSessionId = net.sakura.weapons.compat.flashback.FlashbackCompatHelper.getActiveReplayOrRecordId();
+        loadSession(currentSessionId);
+    }
+
+    private static void loadForSession(UUID sessionId) {
+        OVERRIDES.clear();
+        TIMELINE_TRACKS.clear();
+        PLAYER_TRACKS.clear();
+
         try {
-            File file = getStorageFile();
+            File sessionFile = sessionId != null ? getSessionStorageFile(sessionId) : null;
+            File file = (sessionFile != null && sessionFile.exists()) ? sessionFile : getStorageFile();
             if (!file.exists()) return;
 
             try (FileReader reader = new FileReader(file)) {
@@ -225,9 +411,7 @@ public class ReplayPoseOverrideManager {
                 if (rootElement.isJsonObject()) {
                     JsonObject root = rootElement.getAsJsonObject();
 
-                    // Check if new multi-section structure
-                    if (root.has("static_overrides") || root.has("timeline_tracks")) {
-                        OVERRIDES.clear();
+                    if (root.has("static_overrides") || root.has("timeline_tracks") || root.has("player_timeline_tracks")) {
                         if (root.has("static_overrides")) {
                             Type mapType = new TypeToken<Map<String, PoseOverride>>() {}.getType();
                             Map<String, PoseOverride> staticMap = GSON.fromJson(root.get("static_overrides"), mapType);
@@ -240,7 +424,6 @@ public class ReplayPoseOverrideManager {
                             }
                         }
 
-                        TIMELINE_TRACKS.clear();
                         if (root.has("timeline_tracks")) {
                             Type trackType = new TypeToken<Map<String, Map<String, PoseOverride>>>() {}.getType();
                             Map<String, Map<String, PoseOverride>> tracks = GSON.fromJson(root.get("timeline_tracks"), trackType);
@@ -261,12 +444,38 @@ public class ReplayPoseOverrideManager {
                                 }
                             }
                         }
+
+                        if (root.has("player_timeline_tracks")) {
+                            JsonObject pTracks = root.getAsJsonObject("player_timeline_tracks");
+                            for (String uuidStr : pTracks.keySet()) {
+                                try {
+                                    UUID uuid = UUID.fromString(uuidStr);
+                                    JsonObject pData = pTracks.getAsJsonObject(uuidStr);
+                                    String pName = pData.has("name") ? pData.get("name").getAsString() : "";
+                                    PlayerTimelineTrack track = new PlayerTimelineTrack(pName);
+                                    if (pData.has("keyframes")) {
+                                        JsonObject kfs = pData.getAsJsonObject("keyframes");
+                                        for (String tickStr : kfs.keySet()) {
+                                            try {
+                                                int tick = Integer.parseInt(tickStr);
+                                                PlayerEmoteKeyframe kf = GSON.fromJson(kfs.get(tickStr), PlayerEmoteKeyframe.class);
+                                                if (kf != null) {
+                                                    track.keyframes.put(tick, kf);
+                                                }
+                                            } catch (Exception ignored) {}
+                                        }
+                                    }
+                                    if (!track.keyframes.isEmpty()) {
+                                        PLAYER_TRACKS.put(uuid, track);
+                                    }
+                                } catch (Exception ignored) {}
+                            }
+                        }
                     } else {
                         // Legacy single-map format fallback
                         Type type = new TypeToken<Map<String, PoseOverride>>() {}.getType();
                         Map<String, PoseOverride> stringMap = GSON.fromJson(root, type);
                         if (stringMap != null) {
-                            OVERRIDES.clear();
                             for (Map.Entry<String, PoseOverride> entry : stringMap.entrySet()) {
                                 try {
                                     OVERRIDES.put(UUID.fromString(entry.getKey()), entry.getValue());
@@ -277,7 +486,7 @@ public class ReplayPoseOverrideManager {
                 }
             }
         } catch (Throwable t) {
-            SakuraWeaponsMod.LOGGER.warn("Failed to load ReplayMod pose overrides: {}", t.getMessage());
+            SakuraWeaponsMod.LOGGER.warn("Failed to load ReplayMod pose/player overrides: {}", t.getMessage());
         }
     }
 }

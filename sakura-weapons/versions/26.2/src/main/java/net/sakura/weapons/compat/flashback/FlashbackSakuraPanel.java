@@ -6,6 +6,7 @@ import imgui.moulberry90.type.ImString;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Rotations;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.sakura.weapons.client.gui.TakashaNpcScreen;
 import net.sakura.weapons.client.gui.TakashaReplayOverrideScreen;
 import net.sakura.weapons.client.replay.ReplayPoseOverrideManager;
@@ -16,9 +17,9 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * ImGui section rendered inside Flashback's entity popup exclusively for Takasha NPCs.
+ * ImGui section rendered inside Flashback's entity popup for Takasha NPCs and Players.
  * Provides live pose presets, searchable Emotecraft emote selection, limb rotation sliders,
- * and seamless replay studio integration.
+ * and multi-player replay timeline keyframe controls.
  */
 public final class FlashbackSakuraPanel {
 
@@ -26,16 +27,28 @@ public final class FlashbackSakuraPanel {
     private static final ImString emoteSearchQuery = new ImString(64);
     private static boolean showEmoteList = false;
 
+    // Player Emote Editor State
+    private static final ImString playerEmoteSearchQuery = new ImString(64);
+    private static boolean showPlayerEmoteList = false;
+    private static String selectedPlayerEmote = "";
+    private static byte selectedPlayerMode = 0;
+    private static int selectedPlayerDuration = 60;
+
     private FlashbackSakuraPanel() {}
 
     public static void render(Entity entity) {
-        // Exclusively process TakashaNpcEntity (Player entities remain untouched)
-        if (!(entity instanceof TakashaNpcEntity npc)) return;
+        if (entity instanceof TakashaNpcEntity npc) {
+            renderNpcSection(npc);
+        } else if (entity instanceof Player player) {
+            renderPlayerSection(player);
+        }
+    }
 
+    private static void renderNpcSection(TakashaNpcEntity npc) {
         UUID id = npc.getUUID();
         int currentTick = FlashbackCompatHelper.getCurrentReplayTick();
 
-        ImGui.pushID("sakura_panel");
+        ImGui.pushID("sakura_npc_panel");
         ImGui.separator();
         if (ImGui.collapsingHeader("Sakura: Pose & Emote (NPC)")) {
             ReplayPoseOverrideManager.PoseOverride ov = ReplayPoseOverrideManager.getOverride(id, currentTick);
@@ -144,6 +157,138 @@ public final class FlashbackSakuraPanel {
 
             if (ov != null) {
                 ImGui.textUnformatted("Override aktif (rekaman asli aman)");
+            }
+        }
+        ImGui.popID();
+    }
+
+    private static void renderPlayerSection(Player player) {
+        UUID id = player.getUUID();
+        String name = player.getGameProfile() != null ? player.getGameProfile().name() : player.getName().getString();
+        int currentTick = FlashbackCompatHelper.getCurrentReplayTick();
+
+        ImGui.pushID("sakura_player_panel");
+        ImGui.separator();
+        if (ImGui.collapsingHeader("Sakura: Emote Pemain (" + cleanAscii(name) + ")")) {
+            ReplayPoseOverrideManager.PlayerEmoteKeyframe currentKf = ReplayPoseOverrideManager.getPlayerKeyframe(id, currentTick);
+            ReplayPoseOverrideManager.PlayerTimelineTrack track = ReplayPoseOverrideManager.getPlayerTrack(id);
+
+            ImGui.textUnformatted("Pemain: " + cleanAscii(name) + " (Tick Replay: " + currentTick + ")");
+
+            if (currentKf != null && currentKf.isActiveAt(currentTick)) {
+                ImGui.textUnformatted("Status: Memutar [Tick " + currentKf.startTick + " - " + (currentKf.startTick + currentKf.durationTicks) + "]");
+                ImGui.textUnformatted("Emote: " + cleanAscii(currentKf.emoteId) + " (" + MODE_LABELS[Math.floorMod(currentKf.playMode, MODE_LABELS.length)] + ")");
+            } else {
+                ImGui.textUnformatted("Status: Berdiri Netral / Idle");
+            }
+
+            ImGui.spacing();
+
+            // Emote Selection for Player
+            String displayEmote = !selectedPlayerEmote.isBlank() ? selectedPlayerEmote : (currentKf != null ? currentKf.emoteId : "");
+            ImGui.textUnformatted("Pilihan Emote: " + (displayEmote.isBlank() ? "(belum dipilih)" : cleanAscii(displayEmote)));
+            if (ImGui.button((showPlayerEmoteList ? "Tutup Daftar Emote" : "Pilih Emote Emotecraft...") + "##togglePlayerEmotes")) {
+                showPlayerEmoteList = !showPlayerEmoteList;
+            }
+            if (!displayEmote.isBlank()) {
+                ImGui.sameLine();
+                if (ImGui.button("Reset Pilihan##clearPlayerEmoteChoice")) {
+                    selectedPlayerEmote = "";
+                }
+            }
+
+            if (showPlayerEmoteList) {
+                ImGui.inputTextWithHint("##playerEmoteSearch", "Cari emote pemain...", playerEmoteSearchQuery);
+                String query = playerEmoteSearchQuery.get().trim().toLowerCase();
+
+                if (ImGui.beginChild("sakura_player_emotes_child", 0, 110, true)) {
+                    List<EmotecraftCompat.EmoteEntry> emotes = EmotecraftCompat.getDetectedEmotes();
+                    boolean anyMatched = false;
+                    for (EmotecraftCompat.EmoteEntry entry : emotes) {
+                        String eName = entry.displayName();
+                        String eid = entry.id();
+                        if (query.isEmpty() || eName.toLowerCase().contains(query) || eid.toLowerCase().contains(query)) {
+                            anyMatched = true;
+                            boolean isSelected = displayEmote.equalsIgnoreCase(eid);
+                            String label = entry.toString();
+                            if (ImGui.selectable(cleanAscii(label) + "##p_" + eid, isSelected)) {
+                                selectedPlayerEmote = eid;
+                                showPlayerEmoteList = false;
+                            }
+                        }
+                    }
+                    if (!anyMatched) {
+                        ImGui.textUnformatted("Tidak ada emote yang cocok.");
+                    }
+                    ImGui.endChild();
+                }
+            }
+
+            // Mode Selection
+            ImGui.spacing();
+            ImGui.textUnformatted("Mode: " + MODE_LABELS[Math.floorMod(selectedPlayerMode, MODE_LABELS.length)]);
+            ImGui.sameLine();
+            if (ImGui.button("Ganti Mode##playerModeBtn")) {
+                selectedPlayerMode = (byte) ((selectedPlayerMode + 1) % MODE_LABELS.length);
+            }
+
+            // Duration Slider
+            int[] durationArr = new int[]{selectedPlayerDuration};
+            if (ImGui.sliderInt("Durasi (Tick)##pDuration", durationArr, 10, 1200)) {
+                selectedPlayerDuration = Math.max(10, durationArr[0]);
+            }
+
+            // Keyframe Operations
+            ImGui.spacing();
+            String emoteToApply = !selectedPlayerEmote.isBlank() ? selectedPlayerEmote : (currentKf != null ? currentKf.emoteId : "");
+            if (ImGui.button("Pasang Keyframe (Tick " + currentTick + ")##addKfBtn")) {
+                if (!emoteToApply.isBlank()) {
+                    ReplayPoseOverrideManager.setPlayerKeyframe(id, name, currentTick, selectedPlayerDuration, emoteToApply, selectedPlayerMode);
+                }
+            }
+
+            if (currentKf != null) {
+                ImGui.sameLine();
+                if (ImGui.button("Hapus Keyframe (Tick " + currentKf.startTick + ")##delCurrentKfBtn")) {
+                    ReplayPoseOverrideManager.removePlayerKeyframe(id, currentKf.startTick);
+                }
+            }
+
+            ImGui.sameLine();
+            if (ImGui.button("Hentikan Emote di Sini (Netral)##stopKfBtn")) {
+                ReplayPoseOverrideManager.setPlayerKeyframe(id, name, currentTick, 20, "", (byte) 2);
+            }
+
+            // Existing Keyframes List
+            ImGui.spacing();
+            int kfCount = track != null ? track.keyframes.size() : 0;
+            if (ImGui.treeNode("Timeline Keyframe (" + kfCount + ")##playerTimelineList")) {
+                if (track == null || track.keyframes.isEmpty()) {
+                    ImGui.textUnformatted("Belum ada keyframe tersimpan.");
+                } else {
+                    Integer toRemoveTick = null;
+                    for (var entry : track.keyframes.entrySet()) {
+                        var kf = entry.getValue();
+                        String kfDesc = "[Tick " + kf.startTick + " - " + (kf.startTick + kf.durationTicks) + "] "
+                            + (kf.emoteId.isBlank() ? "(STOP / Netral)" : cleanAscii(kf.emoteId))
+                            + " [" + MODE_LABELS[Math.floorMod(kf.playMode, MODE_LABELS.length)] + "]";
+                        ImGui.textUnformatted(kfDesc);
+                        ImGui.sameLine();
+                        if (ImGui.button("Hapus##delKf_" + kf.startTick)) {
+                            toRemoveTick = kf.startTick;
+                        }
+                    }
+                    if (toRemoveTick != null) {
+                        ReplayPoseOverrideManager.removePlayerKeyframe(id, toRemoveTick);
+                    }
+
+                    ImGui.spacing();
+                    if (ImGui.button("Hapus Semua Keyframe##delAllKfs")) {
+                        track.keyframes.clear();
+                        ReplayPoseOverrideManager.save();
+                    }
+                }
+                ImGui.treePop();
             }
         }
         ImGui.popID();

@@ -35,39 +35,10 @@ import java.util.function.Consumer;
 public class TakashaNpcScreen extends AbstractContainerScreen<TakashaNpcMenu> {
 
     public static final String[] PRESET_DISPLAY_NAMES = {
-        "0: Bebas / Custom",
-        "1: 🛌 Tidur Kasur",
-        "2: 🛌 Tidur Tengkurap",
-        "3: 🛌 Tidur Miring R",
-        "4: 🛌 Tidur Miring L",
-        "5: 🛌 Rebahan Santai",
-        "6: 🛌 Peluk Senjata",
-        "7: 🛌 Terkapar KO",
-        "8: 🧘 Duduk Kursi",
-        "9: 🧘 Duduk Sandar",
-        "10: 🧘 Duduk Bersila",
-        "11: 🧘 Meditasi Zen",
-        "12: 🧘 Jongkok Intai",
-        "13: 🧘 Berlutut Kaki",
-        "14: 🧘 Bersimpuh Seiza",
-        "15: ⚔ Siaga Berdiri",
-        "16: ⚔ Siap Bertarung",
-        "17: ⚔ Cabut Katana",
-        "18: ⚔ Senjata Akimbo",
-        "19: ⚔ Bidik Busur",
-        "20: ⚔ Kuda-kuda Tombak",
-        "21: ⚔ Palu Godam",
-        "22: ⚔ Pasang Perisai",
-        "23: ⚔ Tusukan Cepat",
-        "24: ⚔ Tebas Melompat",
-        "25: 🎭 Sedekap Dada",
-        "26: 🎭 Hormat Ksatria",
-        "27: 🎭 Hormat Bungkuk",
-        "28: 🎭 Menunjuk Arah",
-        "29: 🎭 Melambai Sapa",
-        "30: 🎭 Tangis Terisak",
-        "31: 🎭 Malu Facepalm",
-        "32: 🎭 Berpikir Keras"
+        "0: Berdiri Biasa",
+        "1: Duduk",
+        "2: Tidur",
+        "3: Jongkok"
     };
 
     private static final String[] PERM_DISPLAY_NAMES = {
@@ -519,7 +490,7 @@ public class TakashaNpcScreen extends AbstractContainerScreen<TakashaNpcMenu> {
         TakashaNpcEntity npc = this.menu.getNpc();
         if (npc != null) {
             npc.setPosePreset(this.currentPreset);
-            if (this.currentPreset > 0 && this.currentPreset <= 32) {
+            if (this.currentPreset >= 0 && this.currentPreset <= 3) {
                 npc.applyPosePreset(this.currentPreset);
             }
             // Automatically snap bed height offset when selecting any Lying Down preset (1..7)
@@ -705,7 +676,19 @@ public class TakashaNpcScreen extends AbstractContainerScreen<TakashaNpcMenu> {
                     npc.setLeftLegPose(rots[5]);
                 }
             } else {
+                // Singleworld clean reset: reset to neutral standing pose (preset 0) and neutral rotations
+                this.currentPreset = 0;
+                this.poseButton.setMessage(Component.literal(getPresetLabel(0)));
+                npc.setPosePreset(0);
+                npc.applyPosePreset(0);
                 EmotecraftCompat.stopEmoteSafely(npc);
+                EmotecraftCompat.resetAnimStateSafely(npc);
+                npc.setHeadPose(new Rotations(-1.5f, 2.0f, 0f));
+                npc.setBodyPose(new Rotations(1.0f, 0f, 0f));
+                npc.setRightArmPose(new Rotations(2.0f, 0f, 3.5f));
+                npc.setLeftArmPose(new Rotations(-1.0f, 0f, -3.5f));
+                npc.setRightLegPose(new Rotations(1.5f, 2.0f, 1.0f));
+                npc.setLeftLegPose(new Rotations(-1.5f, -2.0f, -1.0f));
             }
         }
         playUiClick();
@@ -808,7 +791,7 @@ public class TakashaNpcScreen extends AbstractContainerScreen<TakashaNpcMenu> {
         applySkinInput();
         TakashaNpcEntity npc = this.menu.getNpc();
         if (npc != null) {
-            if (this.currentPreset > 0 && this.currentPreset <= 32) {
+            if (this.currentPreset > 0 && this.currentPreset <= 3) {
                 npc.setPosePreset(this.currentPreset);
                 npc.applyPosePreset(this.currentPreset);
             } else if (!this.currentEmoteId.isEmpty()) {
@@ -824,6 +807,17 @@ public class TakashaNpcScreen extends AbstractContainerScreen<TakashaNpcMenu> {
                     npc.setRightLegPose(rots[4]);
                     npc.setLeftLegPose(rots[5]);
                 }
+            } else if (this.currentPreset == 0) {
+                npc.setPosePreset(0);
+                npc.applyPosePreset(0);
+                EmotecraftCompat.stopEmoteSafely(npc);
+                EmotecraftCompat.resetAnimStateSafely(npc);
+                npc.setHeadPose(new Rotations(-1.5f, 2.0f, 0f));
+                npc.setBodyPose(new Rotations(1.0f, 0f, 0f));
+                npc.setRightArmPose(new Rotations(2.0f, 0f, 3.5f));
+                npc.setLeftArmPose(new Rotations(-1.0f, 0f, -3.5f));
+                npc.setRightLegPose(new Rotations(1.5f, 2.0f, 1.0f));
+                npc.setLeftLegPose(new Rotations(-1.5f, -2.0f, -1.0f));
             }
         }
         Rotations head = npc != null ? npc.getHeadPose() : new Rotations(0, 0, 0);
@@ -1273,7 +1267,9 @@ public class TakashaNpcScreen extends AbstractContainerScreen<TakashaNpcMenu> {
 
                 // 12x12 Emote Icon or Emotecraft Official Mod Logo fallback (NO text emojis)
                 Identifier icon = entry.iconId() != null ? entry.iconId() : EmotecraftCompat.EMOTECRAFT_LOGO;
-                extractor.blit(icon, dropX + 7, iy + 2, 12, 12, 0.0f, 0.0f, 1.0f, 1.0f);
+                int iconX = dropX + 7;
+                int iconY = iy + 2;
+                extractor.blit(icon, iconX, iconY, iconX + 12, iconY + 12, 0.0f, 1.0f, 0.0f, 1.0f);
 
                 String displayName = (isSelected ? "✔ " : "") + entry.displayName();
                 int textColor = isSelected ? 0xFFFFB6C1 : (isHovered ? 0xFFFFFFFF : 0xFFDDDDDD);

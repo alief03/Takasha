@@ -46,6 +46,7 @@ public class ModItemGroups {
                 output.accept(ModItems.SAKURA_KEY);
                 output.accept(ModItems.SAKURA_WING);
                 output.accept(ModItems.TAKASHA_NPC_SPAWN_EGG);
+                output.accept(ModItems.TAKASHA_MAID_SPAWN_EGG);
                 output.accept(ModItems.NPC_SPAWNER_WAND);
 
                 // Pink Legacy Set

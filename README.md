@@ -13,7 +13,7 @@
   <img src="https://img.shields.io/badge/Java-25%20LTS-orange?style=for-the-badge&logo=openjdk" alt="Java 25 LTS" />
   <img src="https://img.shields.io/badge/Fabric%20Loader-0.19.3+-green?style=for-the-badge&logo=fabric" alt="Fabric Loader" />
   <img src="https://img.shields.io/badge/Fabric%20API-0.161.0+26.2-blueviolet?style=for-the-badge" alt="Fabric API" />
-  <img src="https://img.shields.io/badge/Version-2.2.0-pink?style=for-the-badge" alt="Version 2.2.0" />
+  <img src="https://img.shields.io/badge/Version-2.5.0-pink?style=for-the-badge" alt="Version 2.5.0" />
   <img src="https://img.shields.io/badge/Runtime-Mojang%20Unobfuscated-lightgrey?style=for-the-badge" alt="Unobfuscated" />
 </p>
 
@@ -434,6 +434,19 @@ Untuk menambahkan kategori item baru ke dalam katalog Anvil dan registrasi mod:
 
 ## 12. Riwayat Rilis & Semantic Versioning
 
+* **v2.5.0+26.2 (Touhou Maid Companion Update):**
+  - **Touhou Little Maid Engine Port:** Porting dan adaptasi penuh model engine Bedrock Touhou Little Maid ke Minecraft Java 26.2 (Fabric, Java 25 LTS).
+  - **Dynamic Bedrock Geometry Renderer:** Deserializer universal Bedrock 1.10.0 & 1.12.0 (Array UV & Per-Face UV box) dengan rendering langsung via native `SubmitNodeCollector.submitCustomGeometry` Minecraft 26.2.
+  - **Entitas Pendamping Takasha Maid (`TakashaMaidEntity`):** Entitas tamable yang bisa dijinakkan dengan kue/makanan manis, memiliki toggle Duduk/Ikuti, tas penyimpanan 36 slot, AI Auto-Farm (panen & tanam ulang otomatis), dan AI Auto-Fish (mancing otomatis dengan custom loot).
+  - **SubScreen GUI & Model Selector:** Antarmuka interaktif preview 3D model yang bisa diputar, galeri model berpaginasi (6 per halaman), pencarian nama instan, tombol 📂 Buka Folder Model (`.minecraft/maid_models/`), dan tombol 🔄 Reload Model seketika tanpa restart game.
+  - **Master Dashboard Card 9:** Integrasi tombol peluncur Maid Companion langsung di dalam menu master Takasha Dashboard (tekan tombol `K`).
+  - **Spawn Egg:** Pendaftaran item `takasha_maid_spawn_egg` di tab kreatif Sakura Arsenal.
+* **v2.3.0+26.2 (Minor Release):**
+  - Otomatisasi penegakan Semantic Versioning 2.0.0 via root file `VERSION` sebagai Single Source of Truth di Gradle.
+  - Pemangkasan 28 pose warisan menjadi 4 pose fundamental kanonis (0: Berdiri Biasa, 1: Duduk, 2: Tidur, 3: Jongkok).
+  - Integrasi anti-duplikasi list emote multi-kunci dan pemuatan icon logo resmi Emotecraft di GUI.
+  - Standarisasi texture set loader ala ItemsAdder 4.0.18 otonom di mode Singleworld (eliminasi guard pemblokiran CMD).
+  - Penyelarasan seluruh Armor Set master `Bahan Set/` (restorasi layer Valentine pink `#F7A2D5` dan Pink Legacy, sinkronisasi Dragon Mecha Overlord, materi modern `SakuraArmorMaterials`).
 * **v2.2.0 (Dual-Version Support):**
   - Standardisasi arsitektur multi-version Fabric Gradle (Minecraft 26.2 & 1.21.11).
   - Integrasi penuh ReplayMod Studio & Flashback Replay panel.
