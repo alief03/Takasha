@@ -45,6 +45,8 @@ public class ModItemGroups {
                 output.accept(ModItems.SAKURA_HAT);
                 output.accept(ModItems.SAKURA_KEY);
                 output.accept(ModItems.SAKURA_WING);
+                output.accept(ModItems.TAKASHA_NPC_SPAWN_EGG);
+                output.accept(ModItems.NPC_SPAWNER_WAND);
 
                 // Pink Legacy Set
                 output.accept(ModItems.PINK_LEGACY_SWORD);

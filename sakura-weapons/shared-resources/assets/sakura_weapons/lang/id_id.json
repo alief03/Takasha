@@ -72,7 +72,13 @@
   "message.sakura_weapons.npc.protected_view": "Mode proteksi: Hanya pemilik yang dapat mengubah peralatan!",
   "message.sakura_weapons.npc.dismantled": "Mannequin berhasil dibongkar.",
   "key.category.sakura_weapons.takasha": "Takasha",
-  "key.sakura_weapons.toggle_player_nametags": "Toggle Nametag Pemain",
+  "key.sakura_weapons.master_dashboard": "Dashboard Utama (Takasha)",
+  "key.sakura_weapons.auto_farm": "Aktifkan/Nonaktifkan Auto Farm",
+  "key.sakura_weapons.auto_fish": "Aktifkan/Nonaktifkan Auto Fish",
+  "key.sakura_weapons.mob_kill": "Aktifkan/Nonaktifkan Auto Kill",
+  "key.sakura_weapons.auto_bow": "Aktifkan/Nonaktifkan Auto Bow",
+  "key.sakura_weapons.toggle_nametag": "Tampilkan/Sembunyikan Nametag Pemain",
+  "key.sakura_weapons.toggle_player_nametags": "Tampilkan/Sembunyikan Nametag Pemain",
   "key.sakura_weapons.replay_studio": "Buka Sakura Replay Studio",
   "message.sakura_weapons.nametag.disabled": "§c[Takasha] Nametag Seluruh Pemain: DINONAKTIFKAN",
   "message.sakura_weapons.nametag.enabled": "§a[Takasha] Nametag Seluruh Pemain: DIAKTIFKAN",
@@ -103,7 +109,5 @@
   "item.sakura_weapons.dragon_mecha_overlord_leggings": "Celana Zirah Dragon Mecha Overlord",
   "item.sakura_weapons.dragon_mecha_overlord_boots": "Sepatu Dragon Mecha Overlord",
   "entity.sakura_weapons.takasha_npc": "NPC Takasha",
-  "item.sakura_weapons.takasha_npc_spawn_egg": "Telur Spawn NPC Takasha",
-  "entity.sakura_weapons.takasha_maid": "Pendamping Maid Takasha",
-  "item.sakura_weapons.takasha_maid_spawn_egg": "Telur Spawn Maid Takasha"
+  "item.sakura_weapons.takasha_npc_spawn_egg": "Telur Spawn NPC Takasha"
 }

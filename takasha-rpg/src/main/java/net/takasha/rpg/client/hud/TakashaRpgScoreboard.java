@@ -1,11 +1,13 @@
 package net.takasha.rpg.client.hud;
 
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.hud.VanillaHudElements;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+import net.minecraft.sounds.SoundEvents;
 import net.takasha.rpg.TakashaRpgMod;
 import net.takasha.rpg.network.RpgClientSyncPayload;
 
@@ -19,6 +21,8 @@ public class TakashaRpgScoreboard {
     private static int usedHomes = 0;
     private static int maxHomes = 1;
     private static boolean visible = true;
+    private static double currentMana = 20.0;
+    private static double maxMana = 20.0;
 
     public static void update(RpgClientSyncPayload payload) {
         worldName = payload.worldName();
@@ -29,63 +33,142 @@ public class TakashaRpgScoreboard {
         usedHomes = payload.usedHomes();
         maxHomes = payload.maxHomes();
         visible = payload.showScoreboard();
+        currentMana = payload.currentMana();
+        maxMana = payload.maxMana();
+    }
+
+    public static void reset() {
+        worldName = "Singleplayer";
+        playerName = "Player";
+        balance = 100.0;
+        gems = 0;
+        totalSkillLevel = 11;
+        usedHomes = 0;
+        maxHomes = 1;
+        visible = true;
+        currentMana = 20.0;
+        maxMana = 20.0;
     }
 
     public static void toggle() {
+        Minecraft mc = Minecraft.getInstance();
+        if (!mc.hasSingleplayerServer()) return;
         visible = !visible;
+        try {
+            net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking.send(new net.takasha.rpg.network.ToggleScoreboardC2SPayload());
+        } catch (Throwable ignored) {}
+        if (mc.player != null) {
+            mc.player.sendSystemMessage(Component.literal("§6§l[Takasha-RPG] §fScoreboard HUD: " +
+                    (visible ? "§a§lDITAMPILKAN" : "§c§lDISEMBUNYIKAN")));
+            mc.player.playSound(SoundEvents.UI_BUTTON_CLICK.value(), 1.0f, visible ? 1.2f : 0.8f);
+        }
+    }
+
+    public static double getCurrentMana() {
+        return currentMana;
+    }
+
+    public static double getMaxMana() {
+        return maxMana;
+    }
+
+    public static double getBalance() {
+        return balance;
+    }
+
+    public static int getGems() {
+        return gems;
+    }
+
+    public static int getTotalSkillLevel() {
+        return totalSkillLevel;
+    }
+
+    public static int getUsedHomes() {
+        return usedHomes;
+    }
+
+    public static int getMaxHomes() {
+        return maxHomes;
+    }
+
+    public static String getWorldName() {
+        return worldName;
     }
 
     public static boolean isVisible() {
         return visible;
     }
 
+    public static void setVisible(boolean val) {
+        visible = val;
+    }
+
     public static void register() {
-        Identifier hudId = Identifier.fromNamespaceAndPath(TakashaRpgMod.MOD_ID, "scoreboard");
+        HudElementRegistry.attachElementAfter(
+            VanillaHudElements.CHAT,
+            Identifier.fromNamespaceAndPath(TakashaRpgMod.MOD_ID, "takasha_rpg_scoreboard"),
+            TakashaRpgScoreboard::render
+        );
+    }
 
-        HudElementRegistry.addLast(hudId, (extractor, deltaTracker) -> {
-            if (!visible) return;
+    private static void render(GuiGraphicsExtractor extractor, DeltaTracker deltaTracker) {
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.player == null) return;
+        if (!mc.hasSingleplayerServer()) return;
+        if (!visible) return;
 
-            Minecraft mc = Minecraft.getInstance();
-            if (mc.player == null) return;
+        int screenWidth = mc.getWindow().getGuiScaledWidth();
+        int screenHeight = mc.getWindow().getGuiScaledHeight();
 
-            int screenWidth = mc.getWindow().getGuiScaledWidth();
-            int screenHeight = mc.getWindow().getGuiScaledHeight();
+        // Sisi kanan layar HUD scoreboard
+        int boxWidth = 148;
+        int boxHeight = 90;
+        int startX = screenWidth - boxWidth - 6;
+        int startY = Math.max(20, screenHeight / 3);
 
-            // Right sidebar scoreboard positioning
-            int boxWidth = 144;
-            int boxHeight = 88;
-            int startX = screenWidth - boxWidth - 6;
-            int startY = screenHeight / 3;
+        // Semi-transparent dark background
+        extractor.fill(startX, startY, startX + boxWidth, startY + boxHeight, 0x88000000);
+        // Border accents (Golden Orange)
+        extractor.fill(startX, startY, startX + boxWidth, startY + 1, 0xFFE5A65E);
+        extractor.fill(startX, startY + boxHeight - 1, startX + boxWidth, startY + boxHeight, 0xFFE5A65E);
+        extractor.fill(startX, startY, startX + 1, startY + boxHeight, 0xFFE5A65E);
+        extractor.fill(startX + boxWidth - 1, startY, startX + boxWidth, startY + boxHeight, 0xFFE5A65E);
 
-            // Semi-transparent dark background
-            extractor.fill(startX, startY, startX + boxWidth, startY + boxHeight, 0x88000000);
-            // Border accents
-            extractor.fill(startX, startY, startX + boxWidth, startY + 1, 0xFFE5A65E);
-            extractor.fill(startX, startY + boxHeight - 1, startX + boxWidth, startY + boxHeight, 0xFFE5A65E);
+        // Header Title
+        int currY = startY + 4;
+        extractor.textRenderer().accept(startX + 18, currY, Component.literal("§6§l✦ TAKASHA RPG ✦"));
+        currY += 10;
+        extractor.fill(startX + 4, currY, startX + boxWidth - 4, currY + 1, 0x55E5A65E);
+        currY += 4;
 
-            // Title
-            extractor.text(mc.font, Component.literal("§6§l★ TAKASHA RPG ★"), startX + 16, startY + 5, 0xFFFFFF, true);
+        // Player Name fallback
+        String displayName = (playerName != null && !playerName.isEmpty()) ? playerName : mc.player.getName().getString();
+        extractor.textRenderer().accept(startX + 6, currY, Component.literal("§7Pemain: §e" + displayName));
+        currY += 9;
 
-            // 6 Explicitly Approved Lines
-            int lineY = startY + 18;
-            int lineSpacing = 11;
+        // AuraSkills Total
+        extractor.textRenderer().accept(startX + 6, currY, Component.literal("§7Skill Level: §a" + totalSkillLevel));
+        currY += 9;
 
-            extractor.text(mc.font, Component.literal("§7Dunia: §f" + worldName), startX + 6, lineY, 0xFFFFFF, true);
-            lineY += lineSpacing;
+        // Economy Coins
+        extractor.textRenderer().accept(startX + 6, currY, Component.literal("§7Coins: §6" + String.format("%,.1f", balance)));
+        currY += 9;
 
-            extractor.text(mc.font, Component.literal("§7Nama: §e" + playerName), startX + 6, lineY, 0xFFFFFF, true);
-            lineY += lineSpacing;
+        // Economy Gems
+        extractor.textRenderer().accept(startX + 6, currY, Component.literal("§7Gems: §b" + gems + " ♦"));
+        currY += 9;
 
-            extractor.text(mc.font, Component.literal("§7Balance: §a$" + String.format("%.2f", balance)), startX + 6, lineY, 0xFFFFFF, true);
-            lineY += lineSpacing;
+        // Homes info
+        extractor.textRenderer().accept(startX + 6, currY, Component.literal("§7Homes: §f" + usedHomes + "/" + maxHomes));
+        currY += 9;
 
-            extractor.text(mc.font, Component.literal("§7Koin: §b" + gems + " Gems"), startX + 6, lineY, 0xFFFFFF, true);
-            lineY += lineSpacing;
+        // World / Server
+        String displayWorld = (worldName != null && !worldName.isEmpty()) ? worldName : "World";
+        extractor.textRenderer().accept(startX + 6, currY, Component.literal("§7Realm: §d" + displayWorld));
+        currY += 8;
 
-            extractor.text(mc.font, Component.literal("§7Level AuraSkill: §d" + totalSkillLevel), startX + 6, lineY, 0xFFFFFF, true);
-            lineY += lineSpacing;
-
-            extractor.text(mc.font, Component.literal("§7Sethome: §b" + usedHomes + "§7/§b" + maxHomes), startX + 6, lineY, 0xFFFFFF, true);
-        });
+        // Footer hint
+        extractor.textRenderer().accept(startX + 10, currY, Component.literal("§8[Tekan O untuk sembunyikan]"));
     }
 }

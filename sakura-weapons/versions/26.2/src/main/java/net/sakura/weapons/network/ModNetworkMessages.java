@@ -137,7 +137,6 @@ public class ModNetworkMessages {
                 }
             });
         });
-
         SakuraWeaponsMod.LOGGER.info("Registered Takasha NPC network payloads for Minecraft 26.2");
     }
 }

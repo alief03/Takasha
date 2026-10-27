@@ -2,13 +2,20 @@
   "required": true,
   "minVersion": "0.8",
   "package": "net.sakura.weapons.mixin",
+  "plugin": "net.sakura.weapons.mixin.SakuraMixinPlugin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "AnvilMenuMixin",
     "ItemFrameInvisibilityMixin"
   ],
   "client": [
-    "EquipmentLayerRendererMixin"
+    "AbstractClientPlayerMixin",
+    "AvatarRendererMixin",
+    "EquipmentLayerRendererMixin",
+    "ItemFrameRenderStateMixin",
+    "ItemFrameRendererMixin",
+    "TakashaNpcEntityClientMixin",
+    "client.TakashaClientPacketListenerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

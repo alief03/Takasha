@@ -14,6 +14,8 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Creeper;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerInput;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -27,10 +29,9 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * Anti-Aura Auto Kill engine for mobs.
- * Strict frontal cone (FOV <= 35 degrees) prevents 360-degree KillAura bans.
- * Compatible with half-slab grinder LOS and synchronizes with weapon attack cooldown (>= 95%).
- * 100% Free Player Movement: Movement keys are never locked, allowing the player to walk/run freely.
+ * High-performance Auto Kill engine with KAIZEN vs VANILLA specialization.
+ * - KAIZEN: Anti-AFK micro oscillation, strict half-slab grinder LOS, weapon cooldown sync, anti-aura cone.
+ * - VANILLA: Pure stationary attack, hyper-spam or turbo rates, custom reach up to 6.0m, up to 360° FOV.
  */
 public class TakashaMobKillHandler {
 
@@ -70,10 +71,14 @@ public class TakashaMobKillHandler {
             return;
         }
 
-        // Anti-AFK tick (yields instantly if player presses movement keys)
-        antiAfk.tick(client, player);
+        // Anti-AFK behavior: Active only in KAIZEN mode if enabled
+        if (config.mobKillMode == TakashaMasterConfig.MobKillMode.KAIZEN && config.antiAfkEnabled) {
+            antiAfk.tick(client, player);
+        } else {
+            antiAfk.reset(client);
+        }
 
-        // Pause if container screen is open
+        // Pause if container or GUI screen is open
         if (client.gui.screen() != null) {
             return;
         }
@@ -115,49 +120,77 @@ public class TakashaMobKillHandler {
             }
         }
 
-        // ANTI-AURA CHECK: Strict frontal cone (FOV <= 35 deg)
-        if (!isInFrontalCone(player, currentTarget, config.maxFovAngle)) {
-            // Target is not in front: do not attack (strictly no 360-degree aura)
+        // FOV cone check (Anti-Aura)
+        if (config.maxFovAngle < 360.0 && !isInFrontalCone(player, currentTarget, config.maxFovAngle)) {
             return;
         }
 
-        // Distance check
+        // Reach distance check
         if (player.distanceTo(currentTarget) > reach) {
             return;
         }
 
-        // LOS check (supports half-slab grinder openings)
-        if (!hasLineOfSight(player, currentTarget)) {
-            return;
+        // Line-Of-Sight (LOS) check
+        if (config.mobKillMode == TakashaMasterConfig.MobKillMode.KAIZEN) {
+            // Kaizen mode: strict raycast through half-slab grinder openings
+            if (!hasLineOfSight(player, currentTarget)) {
+                return;
+            }
+        } else {
+            // Vanilla mode: fast line-of-sight check
+            if (!player.hasLineOfSight(currentTarget) && !hasLineOfSight(player, currentTarget)) {
+                return;
+            }
         }
 
-        // Weapon attack cooldown sync (wait for >= 95% full weapon strength)
-        if (config.syncAttackCooldown && player.getAttackStrengthScale(0.5f) < 0.95f) {
-            return;
+        // Smart Critical check (ensures 150% critical damage by striking during fall)
+        if (config.smartCritical) {
+            boolean isFalling = player.fallDistance > 0.0F && !player.onGround() && !player.isInWater() && !player.isPassenger();
+            if (!isFalling) {
+                return;
+            }
         }
 
-        // Execute attack!
+        // Attack Rate Mode enforcement
+        long minIntervalMs = 250L;
+        if (config.attackRateMode == TakashaMasterConfig.AttackRateMode.COOLDOWN_SYNC) {
+            if (player.getAttackStrengthScale(0.5f) < 0.95f) {
+                return;
+            }
+            minIntervalMs = 250L;
+        } else if (config.attackRateMode == TakashaMasterConfig.AttackRateMode.TURBO) {
+            if (player.getAttackStrengthScale(0.5f) < 0.70f) {
+                return;
+            }
+            minIntervalMs = 100L;
+        } else if (config.attackRateMode == TakashaMasterConfig.AttackRateMode.HYPER_SPAM) {
+            // 0ms delay, attack as fast as every tick
+            minIntervalMs = 0L;
+        }
+
         long now = Util.getMillis();
-        if (now - lastAttackTime < 250L) {
+        if (minIntervalMs > 0L && now - lastAttackTime < minIntervalMs) {
             return;
         }
         lastAttackTime = now;
 
+        // Execute Attack
         if (client.gameMode != null) {
             client.gameMode.attack(player, currentTarget);
             player.swing(InteractionHand.MAIN_HAND);
         }
     }
 
-    /**
-     * Checks if target is within the player's frontal view cone (dot product test).
-     */
-    public boolean isInFrontalCone(LocalPlayer player, Entity target, double maxFovDeg) {
+    public double getViewDotProduct(LocalPlayer player, Entity target) {
         Vec3 lookVec = player.getViewVector(1.0f);
         Vec3 targetCenter = target.position().add(0, target.getEyeHeight() * 0.5, 0);
         Vec3 toTarget = targetCenter.subtract(player.getEyePosition()).normalize();
+        return lookVec.dot(toTarget);
+    }
 
-        double dot = lookVec.dot(toTarget);
+    public boolean isInFrontalCone(LocalPlayer player, Entity target, double maxFovDeg) {
+        if (maxFovDeg >= 360.0) return true;
+        double dot = getViewDotProduct(player, target);
         double minDot = Math.cos(Math.toRadians(maxFovDeg));
         return dot >= minDot;
     }
@@ -186,27 +219,52 @@ public class TakashaMobKillHandler {
     }
 
     private boolean isValidTarget(LivingEntity entity, TakashaMasterConfig config) {
-        Identifier id = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType());
-        String idStr = id.toString();
-        String path = id.getPath();
-        return config.killMobWhitelist.contains(idStr) || config.killMobWhitelist.contains(path);
+        if (entity instanceof Player) {
+            if (!config.attackPlayers) return false;
+        } else if (config.attackHostileOnly) {
+            if (!(entity instanceof Monster)) {
+                // If not monster, check if specifically whitelisted
+                Identifier id = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType());
+                if (!config.killMobWhitelist.contains(id.toString()) && !config.killMobWhitelist.contains(id.getPath())) {
+                    return false;
+                }
+            }
+        }
+
+        if (!config.killMobWhitelist.isEmpty()) {
+            Identifier id = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType());
+            String idStr = id.toString();
+            String path = id.getPath();
+            return config.killMobWhitelist.contains(idStr) || config.killMobWhitelist.contains(path);
+        }
+        return true;
     }
 
     private LivingEntity selectBestTarget(LocalPlayer player, List<LivingEntity> list, TakashaMasterConfig config) {
         // Prioritize dangerous igniting creepers first
         for (LivingEntity entity : list) {
             if (entity instanceof Creeper creeper && creeper.isIgnited()) {
-                if (isInFrontalCone(player, creeper, config.maxFovAngle)) {
+                if (config.maxFovAngle >= 360.0 || isInFrontalCone(player, creeper, config.maxFovAngle)) {
                     return creeper;
                 }
             }
         }
 
-        // Closest target inside frontal cone
-        return list.stream()
-                .filter(e -> isInFrontalCone(player, e, config.maxFovAngle))
-                .min(Comparator.comparingDouble(player::distanceTo))
-                .orElse(null);
+        var stream = list.stream();
+        if (config.maxFovAngle < 360.0) {
+            stream = stream.filter(e -> isInFrontalCone(player, e, config.maxFovAngle));
+        }
+
+        Comparator<LivingEntity> comparator;
+        switch (config.killTargetPriority) {
+            case LOWEST_HEALTH -> comparator = Comparator.comparingDouble(LivingEntity::getHealth);
+            case HIGHEST_HEALTH -> comparator = Comparator.comparingDouble(LivingEntity::getHealth).reversed();
+            case FOV_CENTER -> comparator = Comparator.comparingDouble(e -> -getViewDotProduct(player, e));
+            case NEAREST -> comparator = Comparator.comparingDouble(player::distanceTo);
+            default -> comparator = Comparator.comparingDouble(player::distanceTo);
+        }
+
+        return stream.min(comparator).orElse(null);
     }
 
     public boolean isWeaponValid(ItemStack stack, TakashaMasterConfig config) {

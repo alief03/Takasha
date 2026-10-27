@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "GAG",
+    "AKA",
+    "GAG"
+  ],
+  "key": {
+    "K": "takasha_rpg:dungeon_keystone_nightmare",
+    "G": "takasha_rpg:takasha_gem",
+    "A": "minecraft:nether_star"
+  },
+  "result": {
+    "id": "takasha_rpg:dungeon_keystone_sakura",
+    "count": 1
+  }
+}

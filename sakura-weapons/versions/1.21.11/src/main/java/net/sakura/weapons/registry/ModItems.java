@@ -156,8 +156,16 @@ public class ModItems {
     public static final Item PINK_LEGACY_KEY = register("pink_legacy_key", Item::new,
         new Item.Properties().stacksTo(64));
 
+    public static final Item TAKASHA_NPC_SPAWN_EGG = register("takasha_npc_spawn_egg",
+        props -> new net.minecraft.world.item.SpawnEggItem(props.spawnEgg(ModEntities.TAKASHA_NPC)),
+        new Item.Properties());
+
+    public static final Item NPC_SPAWNER_WAND = register("npc_spawner_wand",
+        net.sakura.weapons.item.custom.NpcSpawnerWandItem::new,
+        new Item.Properties().stacksTo(1).rarity(net.minecraft.world.item.Rarity.EPIC));
+
     public static void registerModItems() {
-        SakuraWeaponsMod.LOGGER.info("Registered 20 Sakura Weapons and 19 Pink Legacy Items for Minecraft 1.21.11");
+        SakuraWeaponsMod.LOGGER.info("Registered 20 Sakura Weapons, 19 Pink Legacy Items, Takasha NPC, and NPC Spawner Wand for Minecraft 1.21.11");
     }
 
     public static void initialize() {

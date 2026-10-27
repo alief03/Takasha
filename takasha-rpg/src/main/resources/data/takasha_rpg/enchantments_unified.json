@@ -1,0 +1,2690 @@
+﻿[
+    {
+        "id":  "abrasion",
+        "name":  "Abrasion",
+        "appliesTo":  "Senjata Tempur",
+        "description":  "Merusak dan mengikis ketahanan (durability) armor lawan saat diserang.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "adrenaline",
+        "name":  "Adrenaline",
+        "appliesTo":  "Semua Armor",
+        "description":  "Memberikan dorongan Strength (Kekuatan) saat bertahan dari serangan monster.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "alacrity",
+        "name":  "Alacrity",
+        "appliesTo":  "Alat Perkakas",
+        "description":  "Meningkatkan kecepatan ayunan saat menggunakan alat perkakas.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "allurement",
+        "name":  "Allurement",
+        "appliesTo":  "Alat Pancing",
+        "description":  "Peluang mendapatkan tangkapan loot ganda saat memancing.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "aquatic",
+        "name":  "Aquatic",
+        "appliesTo":  "Helm Zirah",
+        "description":  "Memungkinkan pengguna bernapas di dalam air tanpa batas.",
+        "tier":  "SIMPLE",
+        "maxLevel":  1
+    },
+    {
+        "id":  "arcticfreeze",
+        "name":  "Arctic freeze",
+        "appliesTo":  "Pedang",
+        "description":  "Peluang memberikan efek Slowness dan pendarahan pada musuh.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "ascend",
+        "name":  "Ascend",
+        "appliesTo":  "Pedang",
+        "description":  "Melayang ke udara (Levitasi). Klik-Kanan untuk mengaktifkan.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "aura",
+        "name":  "Aura",
+        "appliesTo":  "Semua Armor",
+        "description":  "Mengurangi damage yang diterima oleh pemain sekutu di sekitar.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "autosmelt",
+        "name":  "Auto Smelt",
+        "appliesTo":  "Beliung (Pickaxe)",
+        "description":  "Melebur bijih logam secara otomatis saat ditambang.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "blackout",
+        "name":  "Blackout",
+        "appliesTo":  "Pedang",
+        "description":  "Memberikan efek kebutaan (Blindness) pada lawan saat diserang.",
+        "tier":  "SIMPLE",
+        "maxLevel":  5
+    },
+    {
+        "id":  "blast_mining",
+        "name":  "Blast Mining",
+        "appliesTo":  "Beliung (Pickaxe)",
+        "description":  "Menghancurkan blok dalam area 3x3 secara bersamaan.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "blazereaper",
+        "name":  "Blaze Reaper",
+        "appliesTo":  "Senjata Tempur",
+        "description":  "Meningkatkan damage serangan terhadap makhluk dimensi Nether.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "bonecrusher",
+        "name":  "Bone Crusher",
+        "appliesTo":  "Pedang \u0026 Kapak",
+        "description":  "Meningkatkan damage serangan terhadap monster Skeleton.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "brightness",
+        "name":  "Brightness",
+        "appliesTo":  "Pedang",
+        "description":  "Peluang memberikan damage lebih besar pada Warden di tempat gelap.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "caffeinated",
+        "name":  "Caffeinated",
+        "appliesTo":  "Pedang",
+        "description":  "Peluang meningkatkan kecepatan serang saat sedang berlari cepat (sprint).",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "carve",
+        "name":  "Carve",
+        "appliesTo":  "Pedang",
+        "description":  "Tebasan menyapu yang melukai beberapa musuh di sekitar target.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "charge",
+        "name":  "Charge",
+        "appliesTo":  "Pedang",
+        "description":  "Melesat kencang ke depan untuk menerjang lawan.",
+        "tier":  "SIMPLE",
+        "maxLevel":  2
+    },
+    {
+        "id":  "confusion",
+        "name":  "Confusion",
+        "appliesTo":  "Kapak Tempur",
+        "description":  "Peluang memberikan efek Mual (Nausea) pada musuh.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "contagion",
+        "name":  "Contagion",
+        "appliesTo":  "Busur Panah",
+        "description":  "Menyebarkan efek racun ke seluruh musuh di sekitar target.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "cubism",
+        "name":  "Cubism",
+        "appliesTo":  "Senjata \u0026 Busur",
+        "description":  "Memberikan damage tambahan terhadap Slime dan Magma Cube.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "breaklessness",
+        "name":  "Curse of Breaklessness",
+        "appliesTo":  "Alat Tambang (Beliung, Sekop, Kapak)",
+        "description":  "Kutukan: Memberikan 30% peluang gagal saat menambang blok.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "harmlessness",
+        "name":  "Curse of Harmlessness",
+        "appliesTo":  "Pedang",
+        "description":  "Kutukan: Mengurangi efektivitas damage serangan senjata.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "deathpunch",
+        "name":  "Death Punch",
+        "appliesTo":  "Pedang \u0026 Kapak",
+        "description":  "Meningkatkan damage serangan terhadap Zombie.",
+        "tier":  "SIMPLE",
+        "maxLevel":  5
+    },
+    {
+        "id":  "decapitation",
+        "name":  "Decapitation",
+        "appliesTo":  "Pedang \u0026 Kapak",
+        "description":  "Peluang memenggal kepala musuh saat berhasil dikalahkan.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "blow",
+        "name":  "Double Blow",
+        "appliesTo":  "Trisula",
+        "description":  "Peluang melancarkan pukulan berkekuatan damage ganda.",
+        "tier":  "SIMPLE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "drain",
+        "name":  "Drain",
+        "appliesTo":  "Pedang",
+        "description":  "Menguras stamina dan regenerasi darah lawan saat diserang.",
+        "tier":  "SIMPLE",
+        "maxLevel":  7
+    },
+    {
+        "id":  "end_affinity",
+        "name":  "End Affinity",
+        "appliesTo":  "Semua Armor",
+        "description":  "Mengurangi kerusakan yang diterima saat berada di dimensi The End.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "enderbane",
+        "name":  "Enderbane",
+        "appliesTo":  "Senjata Tempur",
+        "description":  "Meningkatkan damage serangan terhadap Enderman dan Ender Dragon.",
+        "tier":  "SIMPLE",
+        "maxLevel":  5
+    },
+    {
+        "id":  "epicness",
+        "name":  "Epicness",
+        "appliesTo":  "Pedang",
+        "description":  "Menghasilkan partikel mistis dan efek suara megah saat menyerang.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "escape",
+        "name":  "Escape",
+        "appliesTo":  "Sepatu Zirah",
+        "description":  "Mendapatkan lonjakan kecepatan lari sesaat setelah menerima damage.",
+        "tier":  "SIMPLE",
+        "maxLevel":  2
+    },
+    {
+        "id":  "etheral",
+        "name":  "Etheral",
+        "appliesTo":  "Pedang",
+        "description":  "Mendapatkan efek Haste setelah mengalahkan monster.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "experience",
+        "name":  "Experience",
+        "appliesTo":  "Alat Perkakas",
+        "description":  "Peluang melipatgandakan perolehan Exp Orb dari bijih tambang.",
+        "tier":  "SIMPLE",
+        "maxLevel":  5
+    },
+    {
+        "id":  "feather_step",
+        "name":  "Feather Step",
+        "appliesTo":  "Sepatu Zirah",
+        "description":  "Meniadakan kerusakan akibat jatuh dan meringankan langkah kaki.",
+        "tier":  "SIMPLE",
+        "maxLevel":  5
+    },
+    {
+        "id":  "finishing",
+        "name":  "Finishing",
+        "appliesTo":  "Senjata Tempur",
+        "description":  "Meningkatkan damage pada musuh yang memiliki sisa HP rendah.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "first_strike",
+        "name":  "First Strike",
+        "appliesTo":  "Senjata Tempur",
+        "description":  "Memberikan damage ekstra pada musuh yang darahnya masih penuh.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "flashbang",
+        "name":  "Flashbang",
+        "appliesTo":  "Busur Panah",
+        "description":  "Menyilaukan dan membutakan lawan saat terkena tembakan panah.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "foraging",
+        "name":  "Foraging",
+        "appliesTo":  "Alat Perkakas",
+        "description":  "Peluang melipatgandakan hasil tebangan kayu dan daun.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "forcefield",
+        "name":  "Forcefield",
+        "appliesTo":  "Pedang",
+        "description":  "Menciptakan medan pelindung yang mementalkan musuh di dekatmu.",
+        "tier":  "SIMPLE",
+        "maxLevel":  5
+    },
+    {
+        "id":  "frost",
+        "name":  "Frost",
+        "appliesTo":  "Busur Panah",
+        "description":  "Peluang membekukan lawan di tempat dengan tembakan panah.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "getaway",
+        "name":  "Getaway",
+        "appliesTo":  "Semua Armor",
+        "description":  "Peluang meningkatkan kecepatan lari drastis saat HP di bawah 20%.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "glowing",
+        "name":  "Glowing",
+        "appliesTo":  "Helm Zirah",
+        "description":  "Memberikan penglihatan malam (Night Vision) permanen.",
+        "tier":  "SIMPLE",
+        "maxLevel":  1
+    },
+    {
+        "id":  "hasten",
+        "name":  "Hasten",
+        "appliesTo":  "Alat Perkakas",
+        "description":  "Peluang mendapatkan buff Haste setelah memecahkan blok tambang.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "headless",
+        "name":  "Headless",
+        "appliesTo":  "Pedang",
+        "description":  "Peluang mengklaim kepala lawan setelah memenangkan duel.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "incinerate",
+        "name":  "Incinerate",
+        "appliesTo":  "Pedang \u0026 Kapak",
+        "description":  "Meningkatkan damage serangan terhadap monster Laba-laba.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "infernaltouch",
+        "name":  "Infernal Touch",
+        "appliesTo":  "Beliung \u0026 Sekop",
+        "description":  "Peluang melebur blok secara otomatis saat ditambang.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "insomnia",
+        "name":  "Insomnia",
+        "appliesTo":  "Pedang",
+        "description":  "Memberikan efek Mining Fatigue dan pusing pada musuh.",
+        "tier":  "SIMPLE",
+        "maxLevel":  7
+    },
+    {
+        "id":  "lightning",
+        "name":  "Lightning",
+        "appliesTo":  "Busur Panah",
+        "description":  "Menyambar target dengan kilatan petir saat terkena serangan.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "multishot",
+        "name":  "Multi-Shot",
+        "appliesTo":  "Busur Panah",
+        "description":  "Menghujani lawan dengan beberapa anak panah sekaligus.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "nether_affinity",
+        "name":  "Nether Affinity",
+        "appliesTo":  "Semua Armor",
+        "description":  "Mengurangi damage yang diterima saat berada di dimensi Nether.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "nether_prospector",
+        "name":  "Nether Prospector",
+        "appliesTo":  "Beliung (Pickaxe)",
+        "description":  "Peluang melipatgandakan hasil tambang Ancient Debris.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "ninja",
+        "name":  "Ninja",
+        "appliesTo":  "Pedang",
+        "description":  "Meningkatkan kelincahan dan peluang menghindar dalam kegelapan.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "obliterate",
+        "name":  "Obliterate",
+        "appliesTo":  "Pedang",
+        "description":  "Memberikan efek knockback ekstrem yang mementalkan musuh jauh.",
+        "tier":  "SIMPLE",
+        "maxLevel":  5
+    },
+    {
+        "id":  "oxygenate",
+        "name":  "Oxygenate",
+        "appliesTo":  "Beliung (Pickaxe)",
+        "description":  "Mengisi ulang suplai oksigen saat menambang di dalam air.",
+        "tier":  "SIMPLE",
+        "maxLevel":  1
+    },
+    {
+        "id":  "postpone",
+        "name":  "Postpone",
+        "appliesTo":  "Pedang",
+        "description":  "Meniadakan knockback pada monster agar mudah diserang berturut-turut.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "rebounding",
+        "name":  "Rebounding",
+        "appliesTo":  "Semua Armor",
+        "description":  "Memantulkan sebagian damage yang diterima kembali ke penyerang.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "rebreather",
+        "name":  "Rebreather",
+        "appliesTo":  "Beliung (Pickaxe)",
+        "description":  "Menghemat oksigen dan memperjelas pandangan saat menyelam.",
+        "tier":  "SIMPLE",
+        "maxLevel":  2
+    },
+    {
+        "id":  "repel",
+        "name":  "Repel",
+        "appliesTo":  "Pedang",
+        "description":  "Peluang mendorong lawan mundur ke belakang saat bertarung.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "resonate",
+        "name":  "Resonate",
+        "appliesTo":  "Semua Armor",
+        "description":  "Menyerap serangan musuh dan melepaskan gelombang gema balasan.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "rumble",
+        "name":  "Rumble",
+        "appliesTo":  "Semua Armor",
+        "description":  "Peluang merusak seluruh musuh di sekitar dalam radius 5 blok.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "scorching",
+        "name":  "Scorching",
+        "appliesTo":  "Semua Armor",
+        "description":  "Peluang membakar penyerang dalam kobaran api.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "shuffle",
+        "name":  "Shuffle",
+        "appliesTo":  "Semua Armor",
+        "description":  "Mengacak susunan hotbar lawan saat pertempuran berlangsung.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "shura",
+        "name":  "Shura",
+        "appliesTo":  "Pedang",
+        "description":  "Meningkatkan damage serangan kritikal saat HP di bawah 50%.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "skullcrusher",
+        "name":  "Skullcrusher",
+        "appliesTo":  "Pedang \u0026 Kapak",
+        "description":  "Meningkatkan damage tebasan terhadap Skeleton dan Wither Skeleton.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "smelting",
+        "name":  "Smelting",
+        "appliesTo":  "Beliung (Pickaxe)",
+        "description":  "Peluang melebur material mentah langsung menjadi batangan logam.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "starvation",
+        "name":  "Starvation",
+        "appliesTo":  "Senjata Tempur",
+        "description":  "Peluang memberikan efek Kelaparan (Hunger) parah pada musuh.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "strike",
+        "name":  "Strike",
+        "appliesTo":  "Senjata Jarak Jauh (Busur, Crossbow, Trisula)",
+        "description":  "Menyambar musuh dengan sambaran petir saat terkena serangan.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "thor",
+        "name":  "Thor",
+        "appliesTo":  "Senjata Jarak Jauh (Busur, Crossbow, Trisula)",
+        "description":  "Peluang memanggil petir dewa petir Thor yang membakar pijakan musuh.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "thunderingblow",
+        "name":  "Thundering Blow",
+        "appliesTo":  "Pedang",
+        "description":  "Pukulan bergemuruh yang memberikan efek Smite pada musuh.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "vanish",
+        "name":  "Vanish",
+        "appliesTo":  "Semua Armor",
+        "description":  "Menghilang sesaat (Invisibility) saat darah kritis untuk kabur.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "waterborne",
+        "name":  "Waterborne",
+        "appliesTo":  "Helm Zirah",
+        "description":  "Memudahkan pernapasan dan kelincahan di dalam air.",
+        "tier":  "SIMPLE",
+        "maxLevel":  1
+    },
+    {
+        "id":  "zombiecrusher",
+        "name":  "Zombie Crusher",
+        "appliesTo":  "Pedang \u0026 Kapak",
+        "description":  "Meningkatkan damage tebasan terhadap segala varian Zombie.",
+        "tier":  "SIMPLE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "berserk",
+        "name":  "Berserk",
+        "appliesTo":  "Pedang \u0026 Kapak",
+        "description":  "Meningkatkan kekuatan serangan fisik saat kesehatan pengguna menipis.",
+        "tier":  "UNIQUE",
+        "maxLevel":  5
+    },
+    {
+        "id":  "commander",
+        "name":  "Commander",
+        "appliesTo":  "Semua Armor",
+        "description":  "Memberikan buff Haste kepada seluruh rekan tim dan sekutu di sekitar.",
+        "tier":  "UNIQUE",
+        "maxLevel":  5
+    },
+    {
+        "id":  "devour",
+        "name":  "Devour",
+        "appliesTo":  "Senjata Tempur",
+        "description":  "Peluang memulihkan barisan rasa lapar saat mengalahkan musuh.",
+        "tier":  "UNIQUE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "endershift",
+        "name":  "EnderShift",
+        "appliesTo":  "Helm \u0026 Sepatu Zirah",
+        "description":  "Memberikan lonjakan Speed dan Health Boost saat darah kritis.",
+        "tier":  "UNIQUE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "explosive",
+        "name":  "Explosive",
+        "appliesTo":  "Busur Panah",
+        "description":  "Peluang tembakan panah meledak saat mengenai target.",
+        "tier":  "UNIQUE",
+        "maxLevel":  5
+    },
+    {
+        "id":  "explosivedemise",
+        "name":  "Explosive Demise",
+        "appliesTo":  "Celana Zirah",
+        "description":  "Memicu ledakan balasan saat pengguna gugur dalam duel.",
+        "tier":  "UNIQUE",
+        "maxLevel":  8
+    },
+    {
+        "id":  "famine",
+        "name":  "Famine",
+        "appliesTo":  "Senjata Tempur",
+        "description":  "Peluang membuat musuh kelaparan hebat sehingga tidak dapat sprint.",
+        "tier":  "UNIQUE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "featherweight",
+        "name":  "Featherweight",
+        "appliesTo":  "Pedang \u0026 Kapak",
+        "description":  "Peluang mendapatkan lonjakan kecepatan ayunan senjata (Haste).",
+        "tier":  "UNIQUE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "frenzy",
+        "name":  "Frenzy",
+        "appliesTo":  "Crossbow",
+        "description":  "Peluang tembakan panah crossbow meledak secara beruntun.",
+        "tier":  "UNIQUE",
+        "maxLevel":  5
+    },
+    {
+        "id":  "hunter",
+        "name":  "Hunter",
+        "appliesTo":  "Senjata Jarak Jauh (Busur, Crossbow, Trisula)",
+        "description":  "Meningkatkan damage serangan terhadap hewan dan monster pasif.",
+        "tier":  "UNIQUE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "lifebloom",
+        "name":  "Lifebloom",
+        "appliesTo":  "Celana Zirah",
+        "description":  "Memulihkan kesehatan rekan tim di sekitar saat berhasil membunuh lawan.",
+        "tier":  "UNIQUE",
+        "maxLevel":  5
+    },
+    {
+        "id":  "molten",
+        "name":  "Molten",
+        "appliesTo":  "Semua Armor",
+        "description":  "Peluang membakar penyerang saat menerima pukulan jarak dekat.",
+        "tier":  "UNIQUE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "obsidiandestroyer",
+        "name":  "Obsidian Destroyer",
+        "appliesTo":  "Beliung (Pickaxe)",
+        "description":  "Peluang menghancurkan blok Obsidian secara instan dalam satu pukulan.",
+        "tier":  "UNIQUE",
+        "maxLevel":  5
+    },
+    {
+        "id":  "perish",
+        "name":  "Perish",
+        "appliesTo":  "Senjata Jarak Jauh (Busur, Crossbow, Trisula)",
+        "description":  "Peluang memberikan efek pembusukan Wither pada lawan.",
+        "tier":  "UNIQUE",
+        "maxLevel":  5
+    },
+    {
+        "id":  "plaguecarrier",
+        "name":  "Plague Carrier",
+        "appliesTo":  "Celana Zirah",
+        "description":  "Peluang memanggil kawanan lebah berbisa saat pengguna diserang.",
+        "tier":  "UNIQUE",
+        "maxLevel":  8
+    },
+    {
+        "id":  "ravenous",
+        "name":  "Ravenous",
+        "appliesTo":  "Pedang \u0026 Kapak",
+        "description":  "Menghisap cadangan makanan musuh untuk memulihkan rasa lapar pengguna.",
+        "tier":  "UNIQUE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "reflect",
+        "name":  "Reflect",
+        "appliesTo":  "Semua Armor",
+        "description":  "Memantulkan sebagian damage fisik musuh kembali ke penyerang.",
+        "tier":  "UNIQUE",
+        "maxLevel":  5
+    },
+    {
+        "id":  "replanter",
+        "name":  "Replanter",
+        "appliesTo":  "Cangkul",
+        "description":  "Menanam kembali benih tanaman secara otomatis saat panen.",
+        "tier":  "UNIQUE",
+        "maxLevel":  1
+    },
+    {
+        "id":  "selfdestruct",
+        "name":  "Self Destruct",
+        "appliesTo":  "Semua Armor",
+        "description":  "Memicu ledakan dahsyat saat darah pengguna habis.",
+        "tier":  "UNIQUE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "skillswipe",
+        "name":  "Skill Swipe",
+        "appliesTo":  "Pedang",
+        "description":  "Mencuri Exp Orb langsung dari lawan setiap serangan mendarat.",
+        "tier":  "UNIQUE",
+        "maxLevel":  5
+    },
+    {
+        "id":  "slayer",
+        "name":  "Slayer",
+        "appliesTo":  "Pedang \u0026 Kapak",
+        "description":  "Meningkatkan damage serangan terhadap makhluk pasif.",
+        "tier":  "UNIQUE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "soulless",
+        "name":  "Soulless",
+        "appliesTo":  "Senjata Jarak Jauh (Busur, Crossbow, Trisula)",
+        "description":  "Meningkatkan damage tembakan terhadap seluruh monster agresif.",
+        "tier":  "UNIQUE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "sustain",
+        "name":  "Sustain",
+        "appliesTo":  "Semua Armor",
+        "description":  "Peluang memulihkan rasa lapar saat menerima serangan musuh.",
+        "tier":  "UNIQUE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "telepathy",
+        "name":  "Telepathy",
+        "appliesTo":  "Alat Perkakas",
+        "description":  "Mengirimkan seluruh blok hasil tambang langsung ke inventaris.",
+        "tier":  "UNIQUE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "virus",
+        "name":  "Virus",
+        "appliesTo":  "Senjata Jarak Jauh (Busur, Crossbow, Trisula)",
+        "description":  "Peluang menularkan efek racun mematikan pada musuh.",
+        "tier":  "UNIQUE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "ward",
+        "name":  "Ward",
+        "appliesTo":  "Semua Armor",
+        "description":  "Peluang menyerap damage serangan musuh dan meniadakannya.",
+        "tier":  "UNIQUE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "allure",
+        "name":  "Allure",
+        "appliesTo":  "Pedang",
+        "description":  "Menarik mob yang terkena serangan mendekat ke arah pengguna.",
+        "tier":  "ELITE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "antigravity",
+        "name":  "Anti Gravity",
+        "appliesTo":  "Sepatu Zirah",
+        "description":  "Memberikan lompatan super tinggi layaknya tanpa gravitasi.",
+        "tier":  "ELITE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "blind",
+        "name":  "Blind",
+        "appliesTo":  "Pedang",
+        "description":  "Membutakan pandangan musuh selama beberapa detik saat diserang.",
+        "tier":  "ELITE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "bluntforce",
+        "name":  "Blunt Force",
+        "appliesTo":  "Kapak Tempur",
+        "description":  "Peluang melancarkan pukulan kapak bertenaga raksasa.",
+        "tier":  "ELITE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "bowmaster",
+        "name":  "Bowmaster",
+        "appliesTo":  "Senjata Jarak Jauh (Busur, Crossbow, Trisula)",
+        "description":  "Meningkatkan damage tembakan panah jarak jauh secara signifikan.",
+        "tier":  "ELITE",
+        "maxLevel":  5
+    },
+    {
+        "id":  "cactus",
+        "name":  "Cactus",
+        "appliesTo":  "Semua Armor",
+        "description":  "Membalas serangan musuh dengan duri tajam yang menusuk penyerang.",
+        "tier":  "ELITE",
+        "maxLevel":  2
+    },
+    {
+        "id":  "critical",
+        "name":  "Critical",
+        "appliesTo":  "Pedang",
+        "description":  "Meningkatkan kerusakan pukulan kritikal secara signifikan.",
+        "tier":  "ELITE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "curse",
+        "name":  "Curse",
+        "appliesTo":  "Semua Armor",
+        "description":  "Peluang memberikan efek Mining Fatigue berat pada penyerang.",
+        "tier":  "ELITE",
+        "maxLevel":  5
+    },
+    {
+        "id":  "demonforged",
+        "name":  "Demonforged",
+        "appliesTo":  "Pedang",
+        "description":  "Memperlambat ausnya durability perlengkapan secara drastis.",
+        "tier":  "ELITE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "enderslayer",
+        "name":  "Ender Slayer",
+        "appliesTo":  "Senjata Tempur",
+        "description":  "Meningkatkan damage masif terhadap Enderman dan Ender Dragon.",
+        "tier":  "ELITE",
+        "maxLevel":  5
+    },
+    {
+        "id":  "execute",
+        "name":  "Execute",
+        "appliesTo":  "Pedang",
+        "description":  "Memberikan damage berlipat ganda pada musuh yang HP-nya sekarat.",
+        "tier":  "ELITE",
+        "maxLevel":  7
+    },
+    {
+        "id":  "extinguish",
+        "name":  "Extinguish",
+        "appliesTo":  "Celana Zirah",
+        "description":  "Memadamkan api di tubuh pengguna secara instan saat terbakar.",
+        "tier":  "ELITE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "farcast",
+        "name":  "Farcast",
+        "appliesTo":  "Busur Panah",
+        "description":  "Meningkatkan kecepatan proyektil dan jangkauan tembakan busur.",
+        "tier":  "ELITE",
+        "maxLevel":  5
+    },
+    {
+        "id":  "firehook",
+        "name":  "Fire Hook",
+        "appliesTo":  "Alat Pancing",
+        "description":  "Kail pancing diselimuti api dan membakar target yang terkena.",
+        "tier":  "ELITE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "frozen",
+        "name":  "Frozen",
+        "appliesTo":  "Semua Armor",
+        "description":  "Membekukan penyerang dan memberikan efek Slowness tingkat tinggi.",
+        "tier":  "ELITE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "greatsword",
+        "name":  "Greatsword",
+        "appliesTo":  "Pedang",
+        "description":  "Memperlebar jangkauan tebasan dan melumpuhkan perisai lawan.",
+        "tier":  "ELITE",
+        "maxLevel":  5
+    },
+    {
+        "id":  "hijack",
+        "name":  "Hijack",
+        "appliesTo":  "Busur Panah",
+        "description":  "Membingungkan mob agresif dan memaksanya menyerang musuh terdekat.",
+        "tier":  "ELITE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "hook",
+        "name":  "Hook",
+        "appliesTo":  "Alat Pancing",
+        "description":  "Meningkatkan perolehan Exp Orb dari kegiatan memancing.",
+        "tier":  "ELITE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "immolate",
+        "name":  "Immolate",
+        "appliesTo":  "Pedang \u0026 Kapak",
+        "description":  "Meningkatkan damage serangan secara masif terhadap Laba-laba.",
+        "tier":  "ELITE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "impact",
+        "name":  "Impact",
+        "appliesTo":  "Trisula",
+        "description":  "Peluang melipatgandakan damage lemparan atau tusukan Trisula.",
+        "tier":  "ELITE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "infernal",
+        "name":  "Infernal",
+        "appliesTo":  "Pedang \u0026 Kapak",
+        "description":  "Memicu ledakan api yang membakar musuh saat terkena serangan.",
+        "tier":  "ELITE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "magnet",
+        "name":  "Magnet",
+        "appliesTo":  "Pedang",
+        "description":  "Menarik pemain lawan yang diserang mendekat ke posisimu.",
+        "tier":  "ELITE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "marksman",
+        "name":  "Marksman",
+        "appliesTo":  "Crossbow",
+        "description":  "Meningkatkan damage tembakan yang dilancarkan dengan Crossbow.",
+        "tier":  "ELITE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "missile",
+        "name":  "Missile",
+        "appliesTo":  "Crossbow",
+        "description":  "Mengubah anak panah Crossbow menjadi bola api peledak.",
+        "tier":  "ELITE",
+        "maxLevel":  5
+    },
+    {
+        "id":  "momentum",
+        "name":  "Momentum",
+        "appliesTo":  "Sayap Elytra",
+        "description":  "Memberikan akselerasi dorongan kecepatan saat melayang dengan Elytra.",
+        "tier":  "ELITE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "netherslayer",
+        "name":  "Nether Slayer",
+        "appliesTo":  "Senjata Tempur",
+        "description":  "Meningkatkan damage serangan terhadap seluruh monster di Nether.",
+        "tier":  "ELITE",
+        "maxLevel":  5
+    },
+    {
+        "id":  "nightwalker",
+        "name":  "Nightwalker",
+        "appliesTo":  "Pedang",
+        "description":  "Membekukan monster di tempat saat bertarung di malam hari.",
+        "tier":  "ELITE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "paralyze",
+        "name":  "Paralyze",
+        "appliesTo":  "Pedang \u0026 Kapak",
+        "description":  "Melumpuhkan lawan sesaat sehingga tidak dapat bergerak atau memukul.",
+        "tier":  "ELITE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "poison",
+        "name":  "Poison",
+        "appliesTo":  "Pedang \u0026 Kapak",
+        "description":  "Peluang meracuni musuh saat melancarkan serangan.",
+        "tier":  "ELITE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "poisoned",
+        "name":  "Poisoned",
+        "appliesTo":  "Semua Armor",
+        "description":  "Peluang meracuni penyerang saat pengguna menerima pukulan.",
+        "tier":  "ELITE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "poisonedhook",
+        "name":  "Poisoned Hook",
+        "appliesTo":  "Alat Pancing",
+        "description":  "Melumuri kail pancing dengan racun yang melumpuhkan target.",
+        "tier":  "ELITE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "poseidon",
+        "name":  "Poseidon",
+        "appliesTo":  "Trisula",
+        "description":  "Meningkatkan damage serangan saat menggunakan Trisula.",
+        "tier":  "ELITE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "pummel",
+        "name":  "Pummel",
+        "appliesTo":  "Kapak Tempur",
+        "description":  "Hantaman kapak berat yang mendorong mundur dan memusingkan musuh.",
+        "tier":  "ELITE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "reaper",
+        "name":  "Reaper",
+        "appliesTo":  "Kapak Tempur",
+        "description":  "Memberikan efek Wither dan menyerap sebagian kesehatan lawan.",
+        "tier":  "ELITE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "reforged",
+        "name":  "Reforged",
+        "appliesTo":  "Senjata \u0026 Perkakas",
+        "description":  "Memperbaiki ketahanan durability perlengkapan secara otomatis perlahan.",
+        "tier":  "ELITE",
+        "maxLevel":  10
+    },
+    {
+        "id":  "replenish",
+        "name":  "Replenish",
+        "appliesTo":  "Beliung (Pickaxe)",
+        "description":  "Peluang memulihkan barisan rasa lapar saat menambang blok.",
+        "tier":  "ELITE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "rocketescape",
+        "name":  "Rocket Escape",
+        "appliesTo":  "Sepatu Zirah",
+        "description":  "Meluncurkan pengguna terbang tinggi ke udara saat darah kritis.",
+        "tier":  "ELITE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "shackle",
+        "name":  "Shackle",
+        "appliesTo":  "Pedang",
+        "description":  "Menjerat dan menarik target yang terkena pukulan ke arahmu.",
+        "tier":  "ELITE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "shockwave",
+        "name":  "Shockwave",
+        "appliesTo":  "Zirah Dada",
+        "description":  "Memicu gelombang kejut yang mementalkan semua lawan di sekitar.",
+        "tier":  "ELITE",
+        "maxLevel":  5
+    },
+    {
+        "id":  "smokebomb",
+        "name":  "Smoke Bomb",
+        "appliesTo":  "Helm Zirah",
+        "description":  "Melepaskan asap tebal yang membutakan penyerang saat pengguna diserang.",
+        "tier":  "ELITE",
+        "maxLevel":  8
+    },
+    {
+        "id":  "snap",
+        "name":  "Snap",
+        "appliesTo":  "Alat Pancing",
+        "description":  "Menarik entitas yang terkena kail pancing langsung ke hadapanmu.",
+        "tier":  "ELITE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "snare",
+        "name":  "Snare",
+        "appliesTo":  "Busur Panah",
+        "description":  "Menjerat kaki musuh dengan efek Slowness tinggi agar tak bisa melarikan diri.",
+        "tier":  "ELITE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "spark",
+        "name":  "Spark",
+        "appliesTo":  "Trisula",
+        "description":  "Membakar lawan dalam kobaran api saat terkena tusukan Trisula.",
+        "tier":  "ELITE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "springs",
+        "name":  "Springs",
+        "appliesTo":  "Sepatu Zirah",
+        "description":  "Memberikan peningkatan tinggi lompatan (Jump Boost).",
+        "tier":  "ELITE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "stormcaller",
+        "name":  "Stormcaller",
+        "appliesTo":  "Semua Armor",
+        "description":  "Memanggil sambaran petir badai ke pemain yang menyerangmu.",
+        "tier":  "ELITE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "suspend",
+        "name":  "Suspend",
+        "appliesTo":  "Pedang",
+        "description":  "Meniadakan knockback pada monster agar dapat dihajar bertubi-tubi.",
+        "tier":  "ELITE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "trap",
+        "name":  "Trap",
+        "appliesTo":  "Pedang",
+        "description":  "Peluang memberikan efek kelumpuhan Slowness ekstrem pada musuh.",
+        "tier":  "ELITE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "trickster",
+        "name":  "Trickster",
+        "appliesTo":  "Semua Armor",
+        "description":  "Peluang berteleportasi ke belakang lawan secara tak terduga saat diserang.",
+        "tier":  "ELITE",
+        "maxLevel":  8
+    },
+    {
+        "id":  "undeadruse",
+        "name":  "Undead Ruse",
+        "appliesTo":  "Sepatu Zirah",
+        "description":  "Peluang memunculkan prajurit zombie sekutu untuk melindungimu.",
+        "tier":  "ELITE",
+        "maxLevel":  10
+    },
+    {
+        "id":  "vampire",
+        "name":  "Vampire",
+        "appliesTo":  "Pedang",
+        "description":  "Menghisap darah musuh untuk menyembuhkan luka pengguna (Lifesteal).",
+        "tier":  "ELITE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "veinminer",
+        "name":  "Vein Miner",
+        "appliesTo":  "Beliung (Pickaxe)",
+        "description":  "Menambang seluruh urat bijih tambang yang tersambung sekaligus.",
+        "tier":  "ELITE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "venom",
+        "name":  "Venom",
+        "appliesTo":  "Busur Panah",
+        "description":  "Peluang memberikan racun berbisa mematikan pada tembakan panah.",
+        "tier":  "ELITE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "voodoo",
+        "name":  "Voodoo",
+        "appliesTo":  "Semua Armor",
+        "description":  "Peluang memberikan efek Weakness (Kelemahan) pada penyerang.",
+        "tier":  "ELITE",
+        "maxLevel":  6
+    },
+    {
+        "id":  "wither",
+        "name":  "Wither",
+        "appliesTo":  "Semua Armor",
+        "description":  "Peluang memberikan efek pembusukan Wither pada penyerang.",
+        "tier":  "ELITE",
+        "maxLevel":  5
+    },
+    {
+        "id":  "aegis",
+        "name":  "Aegis",
+        "appliesTo":  "Sepatu Zirah",
+        "description":  "Peluang mendapatkan lonjakan kecepatan lari saat terkena fall damage.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "ambit",
+        "name":  "Ambit",
+        "appliesTo":  "Pedang \u0026 Kapak",
+        "description":  "Memberikan damage area menyapu yang meluas seiring naiknya level.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  7
+    },
+    {
+        "id":  "angelic",
+        "name":  "Angelic",
+        "appliesTo":  "Semua Armor",
+        "description":  "Memulihkan kesehatan pengguna saat menerima serangan musuh.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  5
+    },
+    {
+        "id":  "annihilate",
+        "name":  "Annihilate",
+        "appliesTo":  "Kapak Tempur",
+        "description":  "Meremukkan dan menghancurkan armor lawan dua kali lebih cepat.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  6
+    },
+    {
+        "id":  "archer",
+        "name":  "Archer",
+        "appliesTo":  "Busur Panah",
+        "description":  "Meningkatkan kerusakan tembakan busur panah secara menyeluruh.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "arrowbreak",
+        "name":  "Arrow Break",
+        "appliesTo":  "Kapak Tempur",
+        "description":  "Peluang menangkis dan memantulkan panah lawan saat memegang senjata ini.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  6
+    },
+    {
+        "id":  "arrowdeflect",
+        "name":  "Arrow Deflect",
+        "appliesTo":  "Semua Armor",
+        "description":  "Peluang menangkis tembakan panah musuh agar tidak menimbulkan damage.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "arrowlifesteal",
+        "name":  "Arrow Lifesteal",
+        "appliesTo":  "Busur Panah",
+        "description":  "Peluang menghisap darah musuh melalui tembakan anak panah.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  5
+    },
+    {
+        "id":  "arsonist",
+        "name":  "Arsonist",
+        "appliesTo":  "Pedang",
+        "description":  "Membakar musuh dan area pijakannya dalam api neraka membara.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "assassin",
+        "name":  "Assassin",
+        "appliesTo":  "Pedang",
+        "description":  "Memberikan damage serangan kejutan mematikan dari belakang lawan.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  5
+    },
+    {
+        "id":  "autoreel",
+        "name":  "Auto Reel",
+        "appliesTo":  "Alat Pancing",
+        "description":  "Menarik kail pancing secara otomatis begitu ada ikan yang menyambar.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "bleed",
+        "name":  "Bleed",
+        "appliesTo":  "Kapak Tempur",
+        "description":  "Menyebabkan luka sayatan berdarah berkelanjutan pada musuh.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  6
+    },
+    {
+        "id":  "blessed",
+        "name":  "Blessed",
+        "appliesTo":  "Kapak Tempur",
+        "description":  "Peluang menghapus dan menyucikan seluruh efek debuff pada pengguna.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "block",
+        "name":  "Block",
+        "appliesTo":  "Pedang",
+        "description":  "Peluang menepis dan menahan serangan fisik musuh secara otomatis.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "callallies",
+        "name":  "Call to Allies",
+        "appliesTo":  "Tanduk Kambing",
+        "description":  "Meniup tanduk perang untuk memanggil sekutu bayangan pembantu.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "carrotplanter",
+        "name":  "Carrot Planter",
+        "appliesTo":  "Cangkul",
+        "description":  "Menanam kembali wortel secara otomatis dalam area luas saat panen.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "cleave",
+        "name":  "Cleave",
+        "appliesTo":  "Kapak Tempur",
+        "description":  "Tebasan kapak menyapu yang meremukkan musuh di hadapan.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  7
+    },
+    {
+        "id":  "confuse",
+        "name":  "Confuse",
+        "appliesTo":  "Pedang",
+        "description":  "Peluang memberikan efek Mual (Nausea) berat pada musuh.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "corrupt",
+        "name":  "Corrupt",
+        "appliesTo":  "Kapak Tempur",
+        "description":  "Memberikan kerusakan kutukan bertahap (Damage Over Time) pada lawan.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "creeperarmor",
+        "name":  "Creeper Armor",
+        "appliesTo":  "Semua Armor",
+        "description":  "Memberikan kekebalan mutlak terhadap kerusakan ledakan Creeper.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "demonic",
+        "name":  "Demonic",
+        "appliesTo":  "Semua Armor",
+        "description":  "Peluang melenyapkan efek Fire Resistance musuh saat pertempuran.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "detonate",
+        "name":  "Detonate",
+        "appliesTo":  "Beliung \u0026 Sekop",
+        "description":  "Menghancurkan formasi batuan dalam area 3x3 seketika.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  9
+    },
+    {
+        "id":  "diminish",
+        "name":  "Diminish",
+        "appliesTo":  "Kapak Tempur",
+        "description":  "Peluang memberikan efek Mining Fatigue dan melemahkan musuh.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  6
+    },
+    {
+        "id":  "disappear",
+        "name":  "Disappear",
+        "appliesTo":  "Semua Armor",
+        "description":  "Menghilang secara misterius saat diserang untuk membingungkan lawan.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "disintegrate",
+        "name":  "Disintegrate",
+        "appliesTo":  "Pedang",
+        "description":  "Mengikis ketahanan zirah musuh secara masif dalam setiap tebasan.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "distance",
+        "name":  "Distance",
+        "appliesTo":  "Senjata Tempur",
+        "description":  "Mendorong musuh mundur jauh saat mereka mencoba mendekat.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "dodge",
+        "name":  "Dodge",
+        "appliesTo":  "Semua Armor",
+        "description":  "Peluang tinggi untuk menghindari serangan jarak dekat atau panah sepenuhnya.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  5
+    },
+    {
+        "id":  "dominate",
+        "name":  "Dominate",
+        "appliesTo":  "Pedang",
+        "description":  "Melemahkan ritme pukulan musuh dan memperlambat serangannya.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "eagleeye",
+        "name":  "Eagle Eye",
+        "appliesTo":  "Busur Panah",
+        "description":  "Meningkatkan presisi dan memperbesar damage tembakan panah jarak jauh.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  5
+    },
+    {
+        "id":  "enderwalker",
+        "name":  "Ender Walker",
+        "appliesTo":  "Sepatu Zirah",
+        "description":  "Mengurangi damage Ender Pearl dan kebal efek Wither saat teleportasi.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  5
+    },
+    {
+        "id":  "endmaster",
+        "name":  "Endmaster",
+        "appliesTo":  "Pedang",
+        "description":  "Melipatgandakan damage serangan terhadap monster di dimensi The End.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "enrage",
+        "name":  "Enrage",
+        "appliesTo":  "Pedang",
+        "description":  "Meningkatkan kekuatan serangan saat kesehatan pengguna berada di titik rendah.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "exalted",
+        "name":  "Exalted",
+        "appliesTo":  "Pedang",
+        "description":  "Memancarkan aura suci yang meregenerasi darah pengguna secara bertahap.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "fuddle",
+        "name":  "Fuddle",
+        "appliesTo":  "Pedang",
+        "description":  "Mengacaukan dan menukar posisi item di hotbar lawan.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "guardians",
+        "name":  "Guardians",
+        "appliesTo":  "Semua Armor",
+        "description":  "Peluang memanggil golem pelindung mistis saat pengguna diserang.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  10
+    },
+    {
+        "id":  "harvest",
+        "name":  "Harvest",
+        "appliesTo":  "Cangkul",
+        "description":  "Peluang memanen dan menanam kembali hasil tani dalam area 3x3.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  9
+    },
+    {
+        "id":  "heavy",
+        "name":  "Heavy",
+        "appliesTo":  "Semua Armor",
+        "description":  "Mengurangi efek knockback yang diterima tubuh secara signifikan.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  5
+    },
+    {
+        "id":  "hellfire",
+        "name":  "Hellfire",
+        "appliesTo":  "Busur Panah",
+        "description":  "Mengubah anak panah menjadi proyektil bola api neraka membakar.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  5
+    },
+    {
+        "id":  "iceaspect",
+        "name":  "Ice Aspect",
+        "appliesTo":  "Pedang",
+        "description":  "Membekukan musuh dalam es dan menimbulkan damage beku bertahap.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "immolation",
+        "name":  "Immolation",
+        "appliesTo":  "Pedang",
+        "description":  "Membakar seluruh monster di sekitar pengguna dalam lingkaran api.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "implants",
+        "name":  "Implants",
+        "appliesTo":  "Helm Zirah",
+        "description":  "Peluang memulihkan barisan rasa lapar secara berkala setiap detik.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "interrupt",
+        "name":  "Interrupt",
+        "appliesTo":  "Pedang",
+        "description":  "Peluang menghentikan ritme serangan lawan dengan Mining Fatigue.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  2
+    },
+    {
+        "id":  "jellylegs",
+        "name":  "Jelly Legs",
+        "appliesTo":  "Sepatu Zirah",
+        "description":  "Peluang meniadakan seluruh kerusakan jatuh (Fall Damage).",
+        "tier":  "ULTIMATE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "longbow",
+        "name":  "Longbow",
+        "appliesTo":  "Busur Panah",
+        "description":  "Menembakkan anak panah dengan lintasan super lurus dan jangkauan jauh.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "lucky",
+        "name":  "Lucky",
+        "appliesTo":  "Alat Pancing",
+        "description":  "Meningkatkan keberuntungan (Luck) untuk memperoleh harta karun pancingan.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "metaphysical",
+        "name":  "Metaphysical",
+        "appliesTo":  "Sepatu Zirah",
+        "description":  "Memberikan kekebalan terhadap efek Slowness, Nausea, dan kelumpuhan.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "netherling",
+        "name":  "Netherling",
+        "appliesTo":  "Pedang",
+        "description":  "Melipatgandakan damage serangan terhadap makhluk di dimensi Nether.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "nightowl",
+        "name":  "Night Owl",
+        "appliesTo":  "Pedang",
+        "description":  "Memberikan bonus damage ekstra saat bertarung di malam hari.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "obsidianshield",
+        "name":  "Obsidianshield",
+        "appliesTo":  "Semua Armor",
+        "description":  "Memberikan ketahanan api (Fire Resistance) secara permanen.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  1
+    },
+    {
+        "id":  "pacify",
+        "name":  "Pacify",
+        "appliesTo":  "Busur Panah",
+        "description":  "Menghilangkan amarah musuh atau melucuti senjata mereka sesaat.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "permafrost",
+        "name":  "Permafrost",
+        "appliesTo":  "Pedang",
+        "description":  "Peluang membekukan lawan dan memicu luka sayatan pendarahan.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  5
+    },
+    {
+        "id":  "pickpocket",
+        "name":  "Pickpocket",
+        "appliesTo":  "Senjata Tempur",
+        "description":  "Peluang mencuri sejumlah koin uang dari lawan saat bertarung.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "piercing",
+        "name":  "Piercing",
+        "appliesTo":  "Busur Panah",
+        "description":  "Menembus sebagian pertahanan armor lawan dengan damage ekstra.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  5
+    },
+    {
+        "id":  "planter",
+        "name":  "Planter",
+        "appliesTo":  "Cangkul",
+        "description":  "Menanam kembali bibit pertanian secara instan dalam area 3x3.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "plummet",
+        "name":  "Plummet",
+        "appliesTo":  "Sepatu Zirah",
+        "description":  "Memicu gelombang gempa di tanah saat mendarat dari lompatan tinggi.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "potatoplanter",
+        "name":  "Potato Planter",
+        "appliesTo":  "Cangkul",
+        "description":  "Menanam kembali kentang secara otomatis di area luas saat panen.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "ragdoll",
+        "name":  "Ragdoll",
+        "appliesTo":  "Semua Armor",
+        "description":  "Mementalkan musuh tinggi ke angkasa saat terkena serangan kritikal.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "reinforced",
+        "name":  "Reinforced",
+        "appliesTo":  "Sayap Elytra",
+        "description":  "Memperkuat sayap Elytra dan mengurangi kerusakan yang diterima pengguna.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "safeguard",
+        "name":  "Safeguard",
+        "appliesTo":  "Semua Armor",
+        "description":  "Menciptakan perisai pelindung yang menyerap damage serangan mematikan.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  2
+    },
+    {
+        "id":  "sharpnesshook",
+        "name":  "Sharpness Hook",
+        "appliesTo":  "Alat Pancing",
+        "description":  "Ujung kail pancing sangat tajam dan memberikan damage saat ditarik.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  9
+    },
+    {
+        "id":  "shatter",
+        "name":  "Shatter",
+        "appliesTo":  "Kapak Tempur",
+        "description":  "Meremukkan perisai lawan dan merusak ketahanan armor musuh.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "sniper",
+        "name":  "Sniper",
+        "appliesTo":  "Busur Panah",
+        "description":  "Memberikan damage mematikan berlipat ganda pada tembakan jarak jauh.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  5
+    },
+    {
+        "id":  "spirits",
+        "name":  "Spirits",
+        "appliesTo":  "Semua Armor",
+        "description":  "Peluang memunculkan makhluk Blaze pelindung saat pengguna diserang.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  10
+    },
+    {
+        "id":  "striker",
+        "name":  "Striker",
+        "appliesTo":  "Busur Panah",
+        "description":  "Menghujani target dengan serbuan panah dari langit.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "swordsman",
+        "name":  "Swordsman",
+        "appliesTo":  "Semua Armor",
+        "description":  "Meningkatkan daya tebas pedang dan memperkuat pertahanan zirah.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  5
+    },
+    {
+        "id":  "tank",
+        "name":  "Tank",
+        "appliesTo":  "Semua Armor",
+        "description":  "Meningkatkan ketahanan zirah dan kapasitas darah maksimal (Health Boost).",
+        "tier":  "ULTIMATE",
+        "maxLevel":  4
+    },
+    {
+        "id":  "timber",
+        "name":  "Timber",
+        "appliesTo":  "Kapak Tempur",
+        "description":  "Peluang menebang seluruh pohon hingga ke pucuk dalam satu tebasan.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  3
+    },
+    {
+        "id":  "trench",
+        "name":  "Trench",
+        "appliesTo":  "Beliung \u0026 Sekop",
+        "description":  "Peluang menggali area batuan tambang 3x3 secara serentak.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  9
+    },
+    {
+        "id":  "tunnel",
+        "name":  "Tunnel",
+        "appliesTo":  "Beliung \u0026 Sekop",
+        "description":  "Menggali terowongan tambang 3x3 ke depan dalam satu hantaman.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  9
+    },
+    {
+        "id":  "unfocus",
+        "name":  "Unfocus",
+        "appliesTo":  "Busur Panah",
+        "description":  "Mengurangi akurasi tembakan panah lawan sehingga meleset.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  5
+    },
+    {
+        "id":  "valor",
+        "name":  "Valor",
+        "appliesTo":  "Semua Armor",
+        "description":  "Mengurangi damage yang diterima pengguna saat sedang melancarkan serangan.",
+        "tier":  "ULTIMATE",
+        "maxLevel":  5
+    },
+    {
+        "id":  "abiding",
+        "name":  "Abiding",
+        "appliesTo":  "Senjata Tempur",
+        "description":  "Menjadikan senjata tidak dapat hancur (Unbreakable).",
+        "tier":  "LEGENDARY",
+        "maxLevel":  1
+    },
+    {
+        "id":  "aqua",
+        "name":  "Aqua",
+        "appliesTo":  "Sepatu Zirah",
+        "description":  "Melipatgandakan damage serangan saat bertarung di dalam air.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  4
+    },
+    {
+        "id":  "armored",
+        "name":  "Armored",
+        "appliesTo":  "Semua Armor",
+        "description":  "Mengurangi damage yang diterima dari serangan pedang musuh sebesar 2% per level.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  4
+    },
+    {
+        "id":  "bait",
+        "name":  "Bait",
+        "appliesTo":  "Alat Pancing",
+        "description":  "Peluang mendapatkan tangkapan ganda dari aktivitas memancing.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  3
+    },
+    {
+        "id":  "barbarian",
+        "name":  "Barbarian",
+        "appliesTo":  "Kapak Tempur",
+        "description":  "Peluang melipatgandakan damage hantaman kapak secara dahsyat.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  4
+    },
+    {
+        "id":  "beastslayer",
+        "name":  "Beastslayer",
+        "appliesTo":  "Pedang \u0026 Kapak",
+        "description":  "Meningkatkan damage serangan terhadap seluruh monster agresif.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  4
+    },
+    {
+        "id":  "blacksmith",
+        "name":  "Blacksmith",
+        "appliesTo":  "Kapak Tempur",
+        "description":  "Memperbaiki ketahanan durability perlengkapan saat berhasil menyerang.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  5
+    },
+    {
+        "id":  "chaos",
+        "name":  "Chaos",
+        "appliesTo":  "Trisula",
+        "description":  "Memberikan efek Weakness dan Wither secara bersamaan pada target.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  5
+    },
+    {
+        "id":  "chunky",
+        "name":  "Chunky",
+        "appliesTo":  "Zirah Dada",
+        "description":  "Peluang mengurangi sebagian besar damage serangan yang diterima zirah dada.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  6
+    },
+    {
+        "id":  "clarity",
+        "name":  "Clarity",
+        "appliesTo":  "Semua Armor",
+        "description":  "Menyembuhkan dan meniadakan efek kebutaan (Blindness) saat diserang.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  3
+    },
+    {
+        "id":  "convulse",
+        "name":  "Convulse",
+        "appliesTo":  "Sepatu Zirah",
+        "description":  "Membuat lawan gemetar hebat dan mengguncang arah pandangannya.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  6
+    },
+    {
+        "id":  "deadshot",
+        "name":  "Deadshot",
+        "appliesTo":  "Trisula",
+        "description":  "Menembus armor lawan secara mutlak melalui tembakan Trisula.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  5
+    },
+    {
+        "id":  "deathgod",
+        "name":  "Death God",
+        "appliesTo":  "Helm Zirah",
+        "description":  "Kebal dari satu kali serangan fatal dan memulihkan sebagian darah pengguna.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  3
+    },
+    {
+        "id":  "deathbringer",
+        "name":  "Deathbringer",
+        "appliesTo":  "Semua Armor",
+        "description":  "Peluang melancarkan serangan penghancur berkekuatan damage ganda.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  3
+    },
+    {
+        "id":  "deranged",
+        "name":  "Deranged",
+        "appliesTo":  "Pedang",
+        "description":  "Menyambar petir petaka ke seluruh pemain lawan di sekitar pengguna.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  3
+    },
+    {
+        "id":  "destruction",
+        "name":  "Destruction",
+        "appliesTo":  "Helm Zirah",
+        "description":  "Membakar dan menghancurkan pertahanan musuh di area sekitar.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  5
+    },
+    {
+        "id":  "disarmor",
+        "name":  "Disarmor",
+        "appliesTo":  "Pedang",
+        "description":  "Peluang mencopot salah satu bagian armor musuh saat pertempuran.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  8
+    },
+    {
+        "id":  "divert",
+        "name":  "Divert",
+        "appliesTo":  "Semua Armor",
+        "description":  "Mengalihkan sebagian damage yang diterima menjadi regenerasi energi/stamina.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  5
+    },
+    {
+        "id":  "doublestrike",
+        "name":  "Double Strike",
+        "appliesTo":  "Pedang",
+        "description":  "Peluang melancarkan dua tebasan beruntun dalam satu kali ayunan.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  3
+    },
+    {
+        "id":  "drunk",
+        "name":  "Drunk",
+        "appliesTo":  "Helm Zirah",
+        "description":  "Memberikan buff Strength besar namun disertai kelambatan gerak Slowness.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  4
+    },
+    {
+        "id":  "enlighted",
+        "name":  "Enlighted",
+        "appliesTo":  "Semua Armor",
+        "description":  "Peluang memulihkan sejumlah hati kesehatan saat menerima damage.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  3
+    },
+    {
+        "id":  "exterminator",
+        "name":  "Exterminator",
+        "appliesTo":  "Celana Zirah",
+        "description":  "Memberikan damage masif terhadap semua jenis arthropoda dan monster.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  3
+    },
+    {
+        "id":  "fat",
+        "name":  "Fat",
+        "appliesTo":  "Zirah Dada",
+        "description":  "Memberikan barisan hati ekstra (Extra Hearts) permanen saat dikenakan.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  6
+    },
+    {
+        "id":  "fumble",
+        "name":  "Fumble",
+        "appliesTo":  "Zirah Dada",
+        "description":  "Peluang menjatuhkan barang yang sedang dipegang oleh lawan dari tangannya.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  3
+    },
+    {
+        "id":  "gears",
+        "name":  "Gears",
+        "appliesTo":  "Sepatu Zirah",
+        "description":  "Meningkatkan kecepatan gerak langkah kaki secara permanen saat dipakai.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  3
+    },
+    {
+        "id":  "hardened",
+        "name":  "Hardened",
+        "appliesTo":  "Semua Armor",
+        "description":  "Peluang memulihkan durability zirah saat diserang oleh pemain lain.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  3
+    },
+    {
+        "id":  "hex",
+        "name":  "Hex",
+        "appliesTo":  "Kapak Tempur",
+        "description":  "Mengutuk musuh sehingga serangan mereka berbalik melukai diri sendiri.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  4
+    },
+    {
+        "id":  "impale",
+        "name":  "Impale",
+        "appliesTo":  "Busur Panah",
+        "description":  "Menusuk tembus pertahanan musuh dengan damage penetrasi tinggi.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  4
+    },
+    {
+        "id":  "inflame",
+        "name":  "Inflame",
+        "appliesTo":  "Kapak Tempur",
+        "description":  "Membakar seluruh musuh dalam radius area menjadi lautan api.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  3
+    },
+    {
+        "id":  "inquisitive",
+        "name":  "Inquisitive",
+        "appliesTo":  "Pedang",
+        "description":  "Peluang melipatgandakan perolehan Exp Orb dari monster hingga berlipat.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  4
+    },
+    {
+        "id":  "insanity",
+        "name":  "Insanity",
+        "appliesTo":  "Kapak Tempur",
+        "description":  "Meningkatkan damage kapak semakin banyak musuh yang mengerubungi.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  8
+    },
+    {
+        "id":  "inversion",
+        "name":  "Inversion",
+        "appliesTo":  "Pedang",
+        "description":  "Membalikkan efek negatif yang diterima menjadi buff kekuatan positif.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  4
+    },
+    {
+        "id":  "judgement",
+        "name":  "Judgement",
+        "appliesTo":  "Sayap Elytra",
+        "description":  "Menghujani lawan dengan sambaran cahaya suci yang membakar jiwa.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  5
+    },
+    {
+        "id":  "killaura",
+        "name":  "Kill Aura",
+        "appliesTo":  "Pedang",
+        "description":  "Menyerang seluruh musuh di sekeliling pengguna secara otomatis.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  5
+    },
+    {
+        "id":  "launch",
+        "name":  "Launch",
+        "appliesTo":  "Pedang",
+        "description":  "Melesat kencang ke depan dengan melakukan Klik-Kanan pada senjata.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  3
+    },
+    {
+        "id":  "lavawalker",
+        "name":  "Lava Walker",
+        "appliesTo":  "Sepatu Zirah",
+        "description":  "Memungkinkan pengguna berjalan di atas permukaan lava tanpa terbakar.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  1
+    },
+    {
+        "id":  "lifesteal",
+        "name":  "Lifesteal",
+        "appliesTo":  "Pedang",
+        "description":  "Menghisap darah musuh dalam jumlah besar untuk menyembuhkan diri.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  5
+    },
+    {
+        "id":  "lucid",
+        "name":  "Lucid",
+        "appliesTo":  "Semua Armor",
+        "description":  "Kebal terhadap efek kebutaan, kegelapan (Darkness), dan racun.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  3
+    },
+    {
+        "id":  "overload",
+        "name":  "Overload",
+        "appliesTo":  "Semua Armor",
+        "description":  "Membuka barisan hati kesehatan tambahan secara permanen.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  3
+    },
+    {
+        "id":  "patch",
+        "name":  "Patch",
+        "appliesTo":  "Semua Armor",
+        "description":  "Peluang memulihkan durability zirah saat menerima serangan monster.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  3
+    },
+    {
+        "id":  "protection",
+        "name":  "Protection",
+        "appliesTo":  "Semua Armor",
+        "description":  "Memberikan mitigasi pengurangan damage menyeluruh dari segala jenis serangan.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  5
+    },
+    {
+        "id":  "quiver",
+        "name":  "Quiver",
+        "appliesTo":  "Sepatu Zirah",
+        "description":  "Peluang mementalkan penyerang tinggi ke udara saat pengguna diserang.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  6
+    },
+    {
+        "id":  "rage",
+        "name":  "Rage",
+        "appliesTo":  "Senjata Tempur",
+        "description":  "Meningkatkan damage serangan untuk setiap pukulan beruntun yang mengenai target.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  6
+    },
+    {
+        "id":  "rebound",
+        "name":  "Rebound",
+        "appliesTo":  "Senjata Tempur",
+        "description":  "Memulihkan sejumlah besar kesehatan setiap kali berhasil membunuh lawan.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  3
+    },
+    {
+        "id":  "silence",
+        "name":  "Silence",
+        "appliesTo":  "Pedang",
+        "description":  "Peluang menonaktifkan aktivasi custom enchant pada armor lawan.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  4
+    },
+    {
+        "id":  "slingshot",
+        "name":  "Slingshot",
+        "appliesTo":  "Sayap Elytra",
+        "description":  "Meluncurkan pengguna terbang ke angkasa dengan melakukan Klik-Kanan.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  3
+    },
+    {
+        "id":  "strife",
+        "name":  "Strife",
+        "appliesTo":  "Trisula",
+        "description":  "Meningkatkan damage serangan jarak dekat saat menggunakan Trisula.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  3
+    },
+    {
+        "id":  "stun",
+        "name":  "Stun",
+        "appliesTo":  "Senjata Tempur",
+        "description":  "Melumpuhkan dan membekukan musuh sepenuhnya dalam kondisi pingsan sesaat.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  3
+    },
+    {
+        "id":  "surprise",
+        "name":  "Surprise",
+        "appliesTo":  "Semua Armor",
+        "description":  "Berteleportasi langsung ke belakang musuh dan mendaratkan serangan kejutan.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  4
+    },
+    {
+        "id":  "takeoff",
+        "name":  "Take Off",
+        "appliesTo":  "Sepatu Zirah",
+        "description":  "Memungkinkan pengguna melayang dan terbang di udara saat dikenakan.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  1
+    },
+    {
+        "id":  "thunderlord",
+        "name":  "Thunderlord",
+        "appliesTo":  "Senjata Tempur",
+        "description":  "Memanggil sambaran petir dahsyat setiap pukulan ketiga mendarat.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  3
+    },
+    {
+        "id":  "torrent",
+        "name":  "Torrent",
+        "appliesTo":  "Sepatu Zirah",
+        "description":  "Meningkatkan damage serangan secara dahsyat saat berada di air atau hujan.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  4
+    },
+    {
+        "id":  "turmoil",
+        "name":  "Turmoil",
+        "appliesTo":  "Semua Armor",
+        "description":  "Mengacaukan pergerakan musuh dan memicu pusaran badai di sekitar target.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  3
+    },
+    {
+        "id":  "twinge",
+        "name":  "Twinge",
+        "appliesTo":  "Trisula",
+        "description":  "Memberikan rasa sakit menyengat yang menghentikan regenerasi HP lawan.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  4
+    },
+    {
+        "id":  "unholy",
+        "name":  "Unholy",
+        "appliesTo":  "Semua Armor",
+        "description":  "Membalas serangan musuh dengan efek kutukan Weakness dan Wither.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  5
+    },
+    {
+        "id":  "waterwalker",
+        "name":  "Water Walker",
+        "appliesTo":  "Sepatu Zirah",
+        "description":  "Memungkinkan pengguna berjalan di atas permukaan air layaknya daratan.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  1
+    },
+    {
+        "id":  "wings",
+        "name":  "Wings",
+        "appliesTo":  "Sepatu Zirah",
+        "description":  "Memberikan kemampuan terbang bebas di udara layaknya memiliki sayap.",
+        "tier":  "LEGENDARY",
+        "maxLevel":  1
+    },
+    {
+        "id":  "axeofspirits",
+        "name":  "Axe of Spirits",
+        "appliesTo":  "Kapak Tempur",
+        "description":  "Memanggil arwah perang kuno untuk melipatgandakan daya hancur kapak.",
+        "tier":  "FABLED",
+        "maxLevel":  3
+    },
+    {
+        "id":  "diploid",
+        "name":  "Diploid",
+        "appliesTo":  "Pedang",
+        "description":  "Peluang menggandakan seluruh loot drop dari monster yang dikalahkan.",
+        "tier":  "FABLED",
+        "maxLevel":  5
+    },
+    {
+        "id":  "disarm",
+        "name":  "Disarm",
+        "appliesTo":  "Pedang",
+        "description":  "Peluang melucuti dan melepaskan senjata utama dari genggaman lawan.",
+        "tier":  "FABLED",
+        "maxLevel":  3
+    },
+    {
+        "id":  "gemify",
+        "name":  "Gemify",
+        "appliesTo":  "Beliung (Pickaxe)",
+        "description":  "Peluang mengubah blok bijih tambang langsung menjadi blok mineral padat.",
+        "tier":  "FABLED",
+        "maxLevel":  1
+    },
+    {
+        "id":  "haste",
+        "name":  "Haste",
+        "appliesTo":  "Alat Perkakas",
+        "description":  "Mempercepat kecepatan ayunan alat tambang secara luar biasa.",
+        "tier":  "FABLED",
+        "maxLevel":  3
+    },
+    {
+        "id":  "multiplication",
+        "name":  "Multiplication",
+        "appliesTo":  "Beliung (Pickaxe)",
+        "description":  "Peluang menggandakan perolehan exp dan sumber daya tambang berkali lipat.",
+        "tier":  "FABLED",
+        "maxLevel":  5
+    },
+    {
+        "id":  "nulify",
+        "name":  "Nulify",
+        "appliesTo":  "Senjata Tempur",
+        "description":  "Menetralisir dan membatalkan aktivasi seluruh efek sihir lawan saat diserang.",
+        "tier":  "FABLED",
+        "maxLevel":  4
+    },
+    {
+        "id":  "restore",
+        "name":  "Restore",
+        "appliesTo":  "Alat Perkakas",
+        "description":  "Memulihkan ketahanan durability perlengkapan secara penuh saat kritis.",
+        "tier":  "FABLED",
+        "maxLevel":  4
+    },
+    {
+        "id":  "rush",
+        "name":  "Rush",
+        "appliesTo":  "Sayap Elytra",
+        "description":  "Memberikan dorongan akselerasi terbang super kencang pada sayap Elytra.",
+        "tier":  "FABLED",
+        "maxLevel":  3
+    },
+    {
+        "id":  "scare",
+        "name":  "Scare",
+        "appliesTo":  "Senjata Tempur",
+        "description":  "Menakut-nakuti musuh di sekitar sehingga mereka lari kocar-kacir panik.",
+        "tier":  "FABLED",
+        "maxLevel":  5
+    },
+    {
+        "id":  "soulminer",
+        "name":  "Soulminer",
+        "appliesTo":  "Beliung (Pickaxe)",
+        "description":  "Peluang mengekstrak esensi jiwa mistis saat melakukan aktivitas tambang.",
+        "tier":  "FABLED",
+        "maxLevel":  3
+    },
+    {
+        "id":  "spiritmaster",
+        "name":  "Spiritmaster",
+        "appliesTo":  "Pedang",
+        "description":  "Memanggil roh pelindung mistis yang menyerang setiap musuh yang mendekat.",
+        "tier":  "FABLED",
+        "maxLevel":  3
+    },
+    {
+        "id":  "unbreakable",
+        "name":  "Unbreakable",
+        "appliesTo":  "Alat Perkakas",
+        "description":  "Menjadikan alat perkakas tambang abadi dan tidak dapat hancur.",
+        "tier":  "FABLED",
+        "maxLevel":  1
+    },
+    {
+        "id":  "alienimplants",
+        "name":  "Alien Implants",
+        "appliesTo":  "Helm Zirah",
+        "description":  "Regenerasi kesehatan super cepat yang didukung teknologi biokimia alien.",
+        "tier":  "HEROIC",
+        "maxLevel":  3
+    },
+    {
+        "id":  "atomicdetonate",
+        "name":  "Atomic Detonate",
+        "appliesTo":  "Alat Perkakas",
+        "description":  "Memicu ledakan atom berkekuatan raksasa saat musuh tereliminasi.",
+        "tier":  "HEROIC",
+        "maxLevel":  9
+    },
+    {
+        "id":  "bewitchedhex",
+        "name":  "Bewitched Hex",
+        "appliesTo":  "Kapak Tempur",
+        "description":  "Mengutuk lawan dalam radius luas dengan siksaan kutukan beruntun.",
+        "tier":  "HEROIC",
+        "maxLevel":  4
+    },
+    {
+        "id":  "bidirectionalteleportation",
+        "name":  "Bidirectional Teleportation",
+        "appliesTo":  "Busur Panah",
+        "description":  "Peluang menarik musuh mendekat ke posisimu dengan tembakan panah mistis.",
+        "tier":  "HEROIC",
+        "maxLevel":  4
+    },
+    {
+        "id":  "deepbleed",
+        "name":  "Deep Bleed",
+        "appliesTo":  "Kapak Tempur",
+        "description":  "Menyebabkan luka pendarahan dalam yang tak dapat disembuhkan selama durasi aktif.",
+        "tier":  "HEROIC",
+        "maxLevel":  6
+    },
+    {
+        "id":  "demoniclifesteal",
+        "name":  "Demonic Lifesteal",
+        "appliesTo":  "Pedang",
+        "description":  "Menghisap esensi kehidupan musuh secara ganas untuk memulihkan HP pengguna.",
+        "tier":  "HEROIC",
+        "maxLevel":  5
+    },
+    {
+        "id":  "divineenlighted",
+        "name":  "Divine Enlighted",
+        "appliesTo":  "Semua Armor",
+        "description":  "Memberikan pencerahan ilahi yang melipatgandakan regenerasi HP dan mana.",
+        "tier":  "HEROIC",
+        "maxLevel":  3
+    },
+    {
+        "id":  "epidemiccarrier",
+        "name":  "Epidemic Carrier",
+        "appliesTo":  "Celana Zirah",
+        "description":  "Menyebarkan wabah penyakit mematikan yang menular antar musuh di area.",
+        "tier":  "HEROIC",
+        "maxLevel":  8
+    },
+    {
+        "id":  "etherealdodge",
+        "name":  "Ethereal Dodge",
+        "appliesTo":  "Semua Armor",
+        "description":  "Menembus dimensi sesaat untuk menghindari seluruh serangan yang datang.",
+        "tier":  "HEROIC",
+        "maxLevel":  1
+    },
+    {
+        "id":  "godlyoverload",
+        "name":  "Godly Overload",
+        "appliesTo":  "Semua Armor",
+        "description":  "Melipatgandakan jumlah maksimal HP dan perisai energi secara permanen.",
+        "tier":  "HEROIC",
+        "maxLevel":  3
+    },
+    {
+        "id":  "guidedrocketescape",
+        "name":  "Guided Rocket Escape",
+        "appliesTo":  "Sepatu Zirah",
+        "description":  "Meluncurkan pengguna ke udara layaknya roket kendali saat darah sekarat.",
+        "tier":  "HEROIC",
+        "maxLevel":  3
+    },
+    {
+        "id":  "extremeinsanity",
+        "name":  "Insanity",
+        "appliesTo":  "Kapak Tempur",
+        "description":  "Kemurkaan mutlak yang menggandakan damage saat dikepung banyak monster.",
+        "tier":  "HEROIC",
+        "maxLevel":  8
+    },
+    {
+        "id":  "lethalsniper",
+        "name":  "Lethal Sniper",
+        "appliesTo":  "Busur Panah",
+        "description":  "Tembakan panah mematikan berkepala peledak dengan damage penetrasi mutlak.",
+        "tier":  "HEROIC",
+        "maxLevel":  5
+    },
+    {
+        "id":  "masterblacksmith",
+        "name":  "Master Blacksmith",
+        "appliesTo":  "Kapak Tempur",
+        "description":  "Menempa ulang dan memulihkan durability gear secara instan di medan perang.",
+        "tier":  "HEROIC",
+        "maxLevel":  5
+    },
+    {
+        "id":  "masterinquisitive",
+        "name":  "Master Inquisitive",
+        "appliesTo":  "Pedang",
+        "description":  "Melipatgandakan perolehan Exp Orb hingga ratusan persen dari setiap mob.",
+        "tier":  "HEROIC",
+        "maxLevel":  4
+    },
+    {
+        "id":  "megaheavy",
+        "name":  "Mega Heavy",
+        "appliesTo":  "Semua Armor",
+        "description":  "Daya tahan mutlak dari knockback dan serangan hentakan gempa.",
+        "tier":  "HEROIC",
+        "maxLevel":  5
+    },
+    {
+        "id":  "mightycactus",
+        "name":  "Mighty Cactus",
+        "appliesTo":  "Semua Armor",
+        "description":  "Memantulkan duri berduri tajam berkekuatan dewa ke penyerang.",
+        "tier":  "HEROIC",
+        "maxLevel":  2
+    },
+    {
+        "id":  "mightycleave",
+        "name":  "Mighty Cleave",
+        "appliesTo":  "Kapak Tempur",
+        "description":  "Tebasan badai putar raksasa yang meremukkan seluruh musuh di hadapan.",
+        "tier":  "HEROIC",
+        "maxLevel":  5
+    },
+    {
+        "id":  "paladinarmored",
+        "name":  "Paladin Armored",
+        "appliesTo":  "Semua Armor",
+        "description":  "Armor suci Paladin yang memitigasi sebagian besar damage fisik dan sihir.",
+        "tier":  "HEROIC",
+        "maxLevel":  4
+    },
+    {
+        "id":  "planetarydeathbringer",
+        "name":  "Planetary Deathbringer",
+        "appliesTo":  "Semua Armor",
+        "description":  "Memanggil meteor kehancuran planet yang menghanguskan target dan sekitarnya.",
+        "tier":  "HEROIC",
+        "maxLevel":  3
+    },
+    {
+        "id":  "polymorphicmetaphysical",
+        "name":  "Polymorphic Metaphysical",
+        "appliesTo":  "Sepatu Zirah",
+        "description":  "Kekebalan mutlak dari segala jenis debuff, stun, slowness, dan kutukan.",
+        "tier":  "HEROIC",
+        "maxLevel":  4
+    },
+    {
+        "id":  "reflectiveblock",
+        "name":  "Reflective Block",
+        "appliesTo":  "Pedang",
+        "description":  "Menangkis 100% serangan dan memantulkan seluruh damagenya ke musuh.",
+        "tier":  "HEROIC",
+        "maxLevel":  3
+    },
+    {
+        "id":  "reinforcedtank",
+        "name":  "Reinforced Tank",
+        "appliesTo":  "Semua Armor",
+        "description":  "Zirah baja diperkuat yang membuat pengguna hampir tak tertembus senjata biasa.",
+        "tier":  "HEROIC",
+        "maxLevel":  4
+    },
+    {
+        "id":  "shadowassassin",
+        "name":  "Shadow Assassin",
+        "appliesTo":  "Pedang",
+        "description":  "Bersembunyi dalam bayangan dimensi dan membunuh musuh dengan satu tebasan fatal.",
+        "tier":  "HEROIC",
+        "maxLevel":  5
+    },
+    {
+        "id":  "soulhardened",
+        "name":  "Soul Hardened",
+        "appliesTo":  "Semua Armor",
+        "description":  "Mengeraskan jiwa untuk menahan true damage dan serangan penetrasi.",
+        "tier":  "HEROIC",
+        "maxLevel":  3
+    },
+    {
+        "id":  "soulbound",
+        "name":  "Soulbound",
+        "appliesTo":  "Senjata, Perkakas \u0026 Busur",
+        "description":  "Peralatan terikat pada jiwa pengguna dan tidak akan pernah hilang saat mati.",
+        "tier":  "HEROIC",
+        "maxLevel":  3
+    },
+    {
+        "id":  "titantrap",
+        "name":  "Titan Trap",
+        "appliesTo":  "Pedang",
+        "description":  "Mengurung musuh dalam sangkar gravitasi titan yang menghentikan pelarian mereka.",
+        "tier":  "HEROIC",
+        "maxLevel":  3
+    },
+    {
+        "id":  "vengefuldiminish",
+        "name":  "Vengeful Diminish",
+        "appliesTo":  "Zirah Dada",
+        "description":  "Mengurangi kekuatan serang lawan secara permanen selama pertempuran berlangsung.",
+        "tier":  "HEROIC",
+        "maxLevel":  6
+    },
+    {
+        "id":  "divineimmolation",
+        "name":  "Divine Immolation",
+        "appliesTo":  "Pedang",
+        "description":  "Membakar musuh dalam api suci ilahi yang mengabaikan ketahanan api (Fire Resistance).",
+        "tier":  "SOUL",
+        "maxLevel":  4
+    },
+    {
+        "id":  "immortal",
+        "name":  "Immortal",
+        "appliesTo":  "Semua Armor",
+        "description":  "Kebal dari kematian sesaat saat menerima serangan mematikan (Efek Totem of Undying).",
+        "tier":  "SOUL",
+        "maxLevel":  4
+    },
+    {
+        "id":  "natureswrath",
+        "name":  "Natures Wrath",
+        "appliesTo":  "Semua Armor",
+        "description":  "Melepaskan kemurkaan alam yang membekukan dan mementalkan seluruh musuh di area.",
+        "tier":  "SOUL",
+        "maxLevel":  4
+    },
+    {
+        "id":  "paradox",
+        "name":  "Paradox",
+        "appliesTo":  "Pedang",
+        "description":  "Mengubah rasa sakit menjadi kesembuhan; menyembuhkan rekan tim saat menerima damage.",
+        "tier":  "SOUL",
+        "maxLevel":  5
+    },
+    {
+        "id":  "phoenix",
+        "name":  "Phoenix",
+        "appliesTo":  "Zirah Dada",
+        "description":  "Peluang bangkit kembali dari kematian dengan kobaran api burung Phoenix.",
+        "tier":  "SOUL",
+        "maxLevel":  3
+    },
+    {
+        "id":  "rogue",
+        "name":  "Rogue",
+        "appliesTo":  "Kapak Tempur",
+        "description":  "Memberikan hingga 2.0x lipat damage mematikan saat menyerang musuh dari belakang.",
+        "tier":  "SOUL",
+        "maxLevel":  3
+    },
+    {
+        "id":  "sabotage",
+        "name":  "Sabotage",
+        "appliesTo":  "Pedang",
+        "description":  "Melumpuhkan mekanisme roket pelarian dan teleportasi mutiara milik musuh.",
+        "tier":  "SOUL",
+        "maxLevel":  5
+    },
+    {
+        "id":  "soultrap",
+        "name":  "Soul Trap",
+        "appliesTo":  "Senjata Tempur",
+        "description":  "Mengunci dan menonaktifkan seluruh enchant sihir jiwa (Soul) lawan saat diserang.",
+        "tier":  "SOUL",
+        "maxLevel":  3
+    },
+    {
+        "id":  "teleblock",
+        "name":  "Teleblock",
+        "appliesTo":  "Busur Panah",
+        "description":  "Mencegah musuh menggunakan Ender Pearl atau teleportasi untuk melarikan diri.",
+        "tier":  "SOUL",
+        "maxLevel":  5
+    },
+    {
+        "id":  "chainlifesteal",
+        "name":  "Chain Lifesteal",
+        "appliesTo":  "Zirah Dada",
+        "description":  "Menghisap darah berantai dari target utama ke seluruh musuh di sekitarnya.",
+        "tier":  "MASTERY",
+        "maxLevel":  2
+    },
+    {
+        "id":  "halloweenify",
+        "name":  "Halloweenify",
+        "appliesTo":  "Senjata Tempur",
+        "description":  "Mengubah helm musuh menjadi labu berukir yang menghalangi pandangan mereka.",
+        "tier":  "MASTERY",
+        "maxLevel":  5
+    },
+    {
+        "id":  "horrify",
+        "name":  "Horrify",
+        "appliesTo":  "Semua Armor",
+        "description":  "Menyebarkan teror kengerian dalam radius 32x32 blok yang membingungkan seluruh lawan.",
+        "tier":  "MASTERY",
+        "maxLevel":  4
+    },
+    {
+        "id":  "markofthebeast",
+        "name":  "Mark of the Beast",
+        "appliesTo":  "Semua Armor",
+        "description":  "Menandai musuh dengan segel iblis purba; musuh yang ditandai menerima damage 2x lipat.",
+        "tier":  "MASTERY",
+        "maxLevel":  6
+    },
+    {
+        "id":  "neutralize",
+        "name":  "Neutralize",
+        "appliesTo":  "Busur \u0026 Crossbow",
+        "description":  "Peluang melucuti dan membatalkan serangan musuh seketika.",
+        "tier":  "MASTERY",
+        "maxLevel":  5
+    },
+    {
+        "id":  "soulsiphone",
+        "name":  "Soul Siphone",
+        "appliesTo":  "Sepatu Zirah",
+        "description":  "Menyerap jiwa dan durability perlengkapan musuh secara langsung ke gear pengguna.",
+        "tier":  "MASTERY",
+        "maxLevel":  4
+    },
+    {
+        "id":  "soulgrind",
+        "name":  "Soulgrind",
+        "appliesTo":  "Pedang",
+        "description":  "Peluang memanen esensi jiwa mistis murni setiap kali membunuh monster liar.",
+        "tier":  "MASTERY",
+        "maxLevel":  3
+    }
+]

@@ -1,0 +1,32 @@
+{
+  "type": "touhou_little_maid:altar_recipe_serializers",
+  "category": "misc",
+  "entity": "minecraft:item",
+  "group": "altar_recipe",
+  "ingredients": [
+    {
+      "item": "minecraft:beacon"
+    },
+    {
+      "item": "minecraft:ender_chest"
+    },
+    {
+      "item": "minecraft:end_crystal"
+    },
+    {
+      "item": "minecraft:gold_block"
+    },
+    {
+      "item": "minecraft:diamond_block"
+    },
+    {
+      "item": "minecraft:netherite_block"
+    }
+  ],
+  "lang": "jei.touhou_little_maid.altar_craft.item_craft.result",
+  "power": 5.0,
+  "result": {
+    "count": 1,
+    "id": "maidbeacon:mobile_beacon"
+  }
+}

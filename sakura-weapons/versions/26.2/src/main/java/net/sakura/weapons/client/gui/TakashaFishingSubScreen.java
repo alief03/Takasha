@@ -23,9 +23,14 @@ public class TakashaFishingSubScreen extends Screen {
 
     private Button toggleBtn;
     private Button modeBtn;
+    private Button reelDelayBtn;
+    private Button recastDelayBtn;
+    private Button sensitivityBtn;
+    private Button rodSwapBtn;
+    private Button soundAlertBtn;
+    private Button filterCatchBtn;
     private Button capcayBtn;
     private Button rodSlipBtn;
-    private Button filterCatchBtn;
     private TakashaKeybindWidget keybindWidget;
     private Button backBtn;
 
@@ -52,12 +57,12 @@ public class TakashaFishingSubScreen extends Screen {
     protected void init() {
         super.init();
 
-        int panelW = 400;
-        int panelH = 260;
+        int panelW = 420;
+        int panelH = 300;
         int left = (this.width - panelW) / 2;
         int top = (this.height - panelH) / 2;
 
-        // Row 1: Status & Mode
+        // Row 1: Status & Mode (KAIZEN vs VANILLA)
         this.toggleBtn = Button.builder(
             Component.literal("Status: " + (config.autoFishEnabled ? "§aAKTIF" : "§cNONAKTIF")),
             btn -> {
@@ -65,7 +70,7 @@ public class TakashaFishingSubScreen extends Screen {
                 config.save();
                 btn.setMessage(Component.literal("Status: " + (config.autoFishEnabled ? "§aAKTIF" : "§cNONAKTIF")));
             }
-        ).bounds(left + 14, top + 32, 180, 20).build();
+        ).bounds(left + 14, top + 28, 190, 20).build();
         this.addRenderableWidget(this.toggleBtn);
 
         this.modeBtn = Button.builder(
@@ -77,35 +82,90 @@ public class TakashaFishingSubScreen extends Screen {
                 config.save();
                 btn.setMessage(Component.literal("Mode: §b" + config.fishingMode.name()));
             }
-        ).bounds(left + 206, top + 32, 180, 20)
-        .tooltip(Tooltip.create(Component.literal("KAIZEN: Motion Bobber + Auto-Capcay 1.0\nVANILLA: Sound Splash Detection")))
+        ).bounds(left + 214, top + 28, 190, 20)
+        .tooltip(Tooltip.create(Component.literal("KAIZEN: Motion Bobber Spike (-0.1 Y) + Auto-Capcay 1.0 + Rod Slip Recovery\nVANILLA: Sound Splash Packet Detection (0% CPU, no Capcay overhead)")))
         .build();
         this.addRenderableWidget(this.modeBtn);
 
-        // Row 2: Capcay & Rod Slip & Filter Catch
-        this.capcayBtn = Button.builder(
-            Component.literal("Auto-Capcay 1.0: " + (config.autoCapcayEnabled ? "§aON" : "§cOFF")),
+        // Row 2: Reel Delay, Recast Delay, Sensitivitas Gigitan
+        int[] reelDelays = {0, 50, 80, 150, 300};
+        this.reelDelayBtn = Button.builder(
+            Component.literal("Reel: §e" + config.reelInDelayMs + "ms"),
             btn -> {
-                config.autoCapcayEnabled = !config.autoCapcayEnabled;
+                int idx = 0;
+                for (int i = 0; i < reelDelays.length; i++) {
+                    if (config.reelInDelayMs == reelDelays[i]) {
+                        idx = (i + 1) % reelDelays.length;
+                        break;
+                    }
+                }
+                config.reelInDelayMs = reelDelays[idx];
                 config.save();
-                btn.setMessage(Component.literal("Auto-Capcay 1.0: " + (config.autoCapcayEnabled ? "§aON" : "§cOFF")));
+                btn.setMessage(Component.literal("Reel: §e" + config.reelInDelayMs + "ms"));
             }
-        ).bounds(left + 14, top + 56, 116, 20)
-        .tooltip(Tooltip.create(Component.literal("Penyelesai tantangan CAPCAY minoritas Kaizen otomatis")))
+        ).bounds(left + 14, top + 52, 126, 20)
+        .tooltip(Tooltip.create(Component.literal("Jeda waktu sebelum menarik kail saat umpan digigit (0ms = instan)")))
         .build();
-        this.addRenderableWidget(this.capcayBtn);
+        this.addRenderableWidget(this.reelDelayBtn);
 
-        this.rodSlipBtn = Button.builder(
-            Component.literal("Rod Recovery: " + (config.rodSlipRecovery ? "§aON" : "§cOFF")),
+        int[] recastDelays = {250, 500, 1000, 1500};
+        this.recastDelayBtn = Button.builder(
+            Component.literal("Recast: §e" + config.recastDelayMs + "ms"),
             btn -> {
-                config.rodSlipRecovery = !config.rodSlipRecovery;
+                int idx = 0;
+                for (int i = 0; i < recastDelays.length; i++) {
+                    if (config.recastDelayMs == recastDelays[i]) {
+                        idx = (i + 1) % recastDelays.length;
+                        break;
+                    }
+                }
+                config.recastDelayMs = recastDelays[idx];
                 config.save();
-                btn.setMessage(Component.literal("Rod Recovery: " + (config.rodSlipRecovery ? "§aON" : "§cOFF")));
+                btn.setMessage(Component.literal("Recast: §e" + config.recastDelayMs + "ms"));
             }
-        ).bounds(left + 134, top + 56, 126, 20)
-        .tooltip(Tooltip.create(Component.literal("Pulihkan joran saat slot terlempar / server slot disarm")))
+        ).bounds(left + 144, top + 52, 130, 20)
+        .tooltip(Tooltip.create(Component.literal("Jeda waktu sebelum melempar kembali joran pancing")))
         .build();
-        this.addRenderableWidget(this.rodSlipBtn);
+        this.addRenderableWidget(this.recastDelayBtn);
+
+        this.sensitivityBtn = Button.builder(
+            Component.literal("Sens: §e" + getSensitivityLabel(config.biteSensitivity)),
+            btn -> {
+                TakashaMasterConfig.BiteSensitivity[] sensitivities = TakashaMasterConfig.BiteSensitivity.values();
+                int next = (config.biteSensitivity.ordinal() + 1) % sensitivities.length;
+                config.biteSensitivity = sensitivities[next];
+                config.save();
+                btn.setMessage(Component.literal("Sens: §e" + getSensitivityLabel(config.biteSensitivity)));
+            }
+        ).bounds(left + 278, top + 52, 126, 20)
+        .tooltip(Tooltip.create(Component.literal("Ambang deteksi lonjakan pelampung (Ultra: -0.03, High: -0.06, Normal: -0.10)")))
+        .build();
+        this.addRenderableWidget(this.sensitivityBtn);
+
+        // Row 3: Auto Rod Swap, Sound Alert, Filter Catch
+        this.rodSwapBtn = Button.builder(
+            Component.literal("Auto Rod Swap: " + (config.autoSwitchRodOnLowDurability ? "§aON" : "§cOFF")),
+            btn -> {
+                config.autoSwitchRodOnLowDurability = !config.autoSwitchRodOnLowDurability;
+                config.save();
+                btn.setMessage(Component.literal("Auto Rod Swap: " + (config.autoSwitchRodOnLowDurability ? "§aON" : "§cOFF")));
+            }
+        ).bounds(left + 14, top + 76, 126, 20)
+        .tooltip(Tooltip.create(Component.literal("Otomatis ganti ke joran baru jika sisa durability ≤ 3")))
+        .build();
+        this.addRenderableWidget(this.rodSwapBtn);
+
+        this.soundAlertBtn = Button.builder(
+            Component.literal("Sound Alert: " + (config.soundAlertOnCatch ? "§aON" : "§cOFF")),
+            btn -> {
+                config.soundAlertOnCatch = !config.soundAlertOnCatch;
+                config.save();
+                btn.setMessage(Component.literal("Sound Alert: " + (config.soundAlertOnCatch ? "§aON" : "§cOFF")));
+            }
+        ).bounds(left + 144, top + 76, 130, 20)
+        .tooltip(Tooltip.create(Component.literal("Memutar nada lonceng notifikasi setiap kali berhasil menarik tangkapan")))
+        .build();
+        this.addRenderableWidget(this.soundAlertBtn);
 
         this.filterCatchBtn = Button.builder(
             Component.literal("Filter Catch: " + (config.filterCatchEnabled ? "§aON" : "§cOFF")),
@@ -114,18 +174,43 @@ public class TakashaFishingSubScreen extends Screen {
                 config.save();
                 btn.setMessage(Component.literal("Filter Catch: " + (config.filterCatchEnabled ? "§aON" : "§cOFF")));
             }
-        ).bounds(left + 264, top + 56, 122, 20)
+        ).bounds(left + 278, top + 76, 126, 20)
         .tooltip(Tooltip.create(Component.literal("Hanya simpan item yang dicentang di bawah. Item lain langsung dibuang!")))
         .build();
         this.addRenderableWidget(this.filterCatchBtn);
 
-        // Row 3+: Catch Whitelist Checklist (2 cols x 4 rows)
-        int startY = top + 98;
+        // Row 4: Kaizen features: Auto-Capcay 1.0 & Rod Slip Recovery
+        this.capcayBtn = Button.builder(
+            Component.literal("Auto-Capcay 1.0: " + (config.autoCapcayEnabled ? "§aON" : "§cOFF")),
+            btn -> {
+                config.autoCapcayEnabled = !config.autoCapcayEnabled;
+                config.save();
+                btn.setMessage(Component.literal("Auto-Capcay 1.0: " + (config.autoCapcayEnabled ? "§aON" : "§cOFF")));
+            }
+        ).bounds(left + 14, top + 100, 190, 20)
+        .tooltip(Tooltip.create(Component.literal("Penyelesai CAPCAY otomatis berbasis frekuensi minoritas item (Mode KAIZEN)")))
+        .build();
+        this.addRenderableWidget(this.capcayBtn);
+
+        this.rodSlipBtn = Button.builder(
+            Component.literal("Rod Slip Recovery: " + (config.rodSlipRecovery ? "§aON" : "§cOFF")),
+            btn -> {
+                config.rodSlipRecovery = !config.rodSlipRecovery;
+                config.save();
+                btn.setMessage(Component.literal("Rod Slip Recovery: " + (config.rodSlipRecovery ? "§aON" : "§cOFF")));
+            }
+        ).bounds(left + 214, top + 100, 190, 20)
+        .tooltip(Tooltip.create(Component.literal("Otomatis ambil dan pasang kembali joran jika terkena disarm server (Mode KAIZEN)")))
+        .build();
+        this.addRenderableWidget(this.rodSlipBtn);
+
+        // Row 5+: Catch Whitelist Checklist (2 cols x 4 rows)
+        int startY = top + 142;
         for (int i = 0; i < CATCH_OPTIONS.size(); i++) {
             CatchItemOption item = CATCH_OPTIONS.get(i);
             int col = i % 2;
             int row = i / 2;
-            int bx = left + 14 + (col * 190);
+            int bx = left + 14 + (col * 196);
             int by = startY + (row * 24);
 
             Button itemBtn = Button.builder(
@@ -139,12 +224,12 @@ public class TakashaFishingSubScreen extends Screen {
                     config.save();
                     btn.setMessage(getCatchButtonLabel(item));
                 }
-            ).bounds(bx, by, 182, 20).build();
+            ).bounds(bx, by, 192, 20).build();
             this.addRenderableWidget(itemBtn);
         }
 
         // Bottom Controls
-        int bottomY = top + panelH - 24;
+        int bottomY = top + panelH - 26;
         this.keybindWidget = new TakashaKeybindWidget(
             left + 14,
             bottomY,
@@ -162,17 +247,25 @@ public class TakashaFishingSubScreen extends Screen {
         this.addRenderableWidget(this.backBtn);
     }
 
+    private String getSensitivityLabel(TakashaMasterConfig.BiteSensitivity s) {
+        return switch (s) {
+            case ULTRA -> "Ultra (-0.03)";
+            case HIGH -> "High (-0.06)";
+            case NORMAL -> "Normal (-0.10)";
+        };
+    }
+
     private Component getCatchButtonLabel(CatchItemOption item) {
-        boolean keep = config.keepCatchWhitelist.contains(item.id());
-        return Component.literal((keep ? "§a✔ [SIMPAN] " : "§c✕ [BUANG] ") + item.label());
+        boolean active = config.keepCatchWhitelist.contains(item.id());
+        return Component.literal((active ? "§a✔ " : "§7✕ ") + item.label());
     }
 
     @Override
     public void extractRenderState(GuiGraphicsExtractor extractor, int mouseX, int mouseY, float partialTick) {
         extractor.fill(0, 0, this.width, this.height, 0x88000000);
 
-        int panelW = 400;
-        int panelH = 260;
+        int panelW = 420;
+        int panelH = 300;
         int left = (this.width - panelW) / 2;
         int top = (this.height - panelH) / 2;
 
@@ -180,11 +273,13 @@ public class TakashaFishingSubScreen extends Screen {
         extractor.outline(left, top, panelW, panelH, 0xFFE082A8);
 
         // Header
-        extractor.fill(left, top, left + panelW, top + 26, 0xFF241528);
-        extractor.text(this.font, "🎣 Pengaturan Auto Fishing & Filter Tangkapan", left + 10, top + 8, 0xFFFFB6C1, false);
+        extractor.fill(left, top, left + panelW, top + 24, 0xFF241528);
+        extractor.text(this.font, "🎣 Auto Fishing (Kaizen vs Vanilla Engine)", left + 10, top + 7, 0xFFFFB6C1, false);
 
         // Section labels
-        extractor.text(this.font, "Item yang DISIMPAN di Inventory (Sisanya dibuang otomatis):", left + 14, top + 86, 0xFFAAAAAA, false);
+        extractor.text(this.font, "Item yang Disimpan di Inventory (Keep Whitelist):", left + 14, top + 128, 0xFFAAAAAA, false);
+
+        super.extractRenderState(extractor, mouseX, mouseY, partialTick);
     }
 
     @Override

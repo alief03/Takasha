@@ -41,13 +41,32 @@ public class TakashaKeybindWidget extends AbstractButton {
     }
 
     public void updateLabel() {
-        String keyName = keyMapping != null ? keyMapping.getTranslatedKeyMessage().getString() : "None";
-        this.setMessage(Component.literal(labelPrefix + ": §b[ " + keyName + " ]"));
+        if (keyMapping == null || keyMapping.isUnbound()) {
+            this.setMessage(Component.literal(labelPrefix + ": §7[ Tidak Terikat ]"));
+        } else {
+            String keyName = keyMapping.getTranslatedKeyMessage().getString();
+            this.setMessage(Component.literal(labelPrefix + ": §b[ " + keyName + " ]"));
+        }
     }
 
     @Override
     public void onPress(InputWithModifiers input) {
         startListening();
+    }
+
+    @Override
+    public boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent event, boolean isFocused) {
+        if (this.visible && this.isHovered() && event.button() == GLFW.GLFW_MOUSE_BUTTON_RIGHT) {
+            if (keyMapping != null) {
+                keyMapping.setKey(InputConstants.UNKNOWN);
+                KeyMapping.resetMapping();
+                Minecraft.getInstance().options.save();
+                this.listening = false;
+                updateLabel();
+                return true;
+            }
+        }
+        return super.mouseClicked(event, isFocused);
     }
 
     @Override
@@ -66,8 +85,11 @@ public class TakashaKeybindWidget extends AbstractButton {
     public boolean keyPressed(KeyEvent event) {
         if (listening && keyMapping != null) {
             int key = event.key();
-            if (key == GLFW.GLFW_KEY_ESCAPE) {
-                // Cancel rebinding on ESC
+            if (key == GLFW.GLFW_KEY_ESCAPE || key == GLFW.GLFW_KEY_BACKSPACE || key == GLFW.GLFW_KEY_DELETE) {
+                // Unbind on ESC, Backspace, or Delete
+                keyMapping.setKey(InputConstants.UNKNOWN);
+                KeyMapping.resetMapping();
+                Minecraft.getInstance().options.save();
                 this.listening = false;
                 updateLabel();
                 return true;

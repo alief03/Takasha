@@ -1,0 +1,4601 @@
+==========================================================================================
+       DAFTAR LENGKAP 336 CUSTOM ENCHANTMENT TAKASHA-RPG (MINECRAFT 26.2)
+   DILENGKAPI DAFTAR PRIORITAS RESMI PER KATEGORI (PVP, MOB, DAN MIX)
+==========================================================================================
+File panduan katalog lengkap seluruh custom enchantment Takasha-RPG. Dokumen ini memuat
+daftar prioritas LENGKAP TANPA BATAS untuk kondisi PvP (Duel antar pemain), Mob (PVE/Farming),
+dan Mix (Hybrid Survival), serta rincian lengkap 336 sihir per kategori perlengkapan.
+
+PETUNJUK PERINTAH DALAM GAME:
+  - Memasang langsung ke item yang dipegang:  /ae enchant <id_enchant> <level>
+  - Memberikan buku sihir ke pemain:         /ae give <nama_pemain> <id_enchant> <level> [sukses%] [hancur%]
+  - Membuka menu belanja buku misteri:       /enchanter
+  - Daur ulang buku tak terpakai:            /tinkerer
+  - Cek info enchantment tertentu:           /ae info <id_enchant>
+
+9 TINGKAT KELANGKAAN (TIER):
+  [1] Simple     - Abu-abu (§7)   | Biaya dasar: 150 koin
+  [2] Unique     - Hijau (§a)     | Biaya dasar: 450 koin
+  [3] Elite      - Biru Muda (§b) | Biaya dasar: 1.200 koin
+  [4] Ultimate   - Kuning (§e)    | Biaya dasar: 3.500 koin
+  [5] Legendary  - Oranye (§6)    | Biaya dasar: 8.500 koin
+  [6] Fabled     - Magenta (§d)   | Biaya dasar: 18.000 koin
+  [7] Heroic     - Merah (§c)     | Biaya dasar: 35.000 koin
+  [8] Soul       - Cyan Jiwa (§3) | Biaya dasar: 50.000 koin (Memakai dedicated Soul Slot)
+  [9] Mastery    - Emas Murni (§e)| Biaya dasar: 100.000 koin
+
+ATURAN SLOT PENEMPAAN:
+  - Default Bawaan: 10 Slot enchantment aktif langsung pada setiap perlengkapan polos.
+  - Slot Increaser Reguler (+1): Menambah kuota hingga 15 slot.
+  - Slot Increaser Master (+1):  Menambah kuota dari 15 hingga batas maksimal 20 slot.
+  - Slot Increaser Soul (+1):    Menambah batas slot Soul dari 2 hingga maksimal 5 slot.
+==========================================================================================
+##########################################################################################
+###                  PANDUAN PRIORITAS ENCHANTMENT PER ITEM (PVP, MOB, MIX)            ###
+###            (Format Sesuai Permintaan: Berada di atas berarti PALING PRIORITAS)     ###
+###        *LENGKAP SEMUA ENCHANT: Memuat seluruh sihir yang cocok untuk gear*         ###
+##########################################################################################
+
+PVP
+sword
+- Lifesteal (LEGENDARY)
+- Disarm (FABLED)
+- Silence (LEGENDARY)
+- Critical (ELITE)
+- Execute (ELITE)
+- Paralyze (ELITE)
+- Rage (LEGENDARY)
+- Enrage (ULTIMATE)
+- Blind (ELITE)
+- Abrasion (SIMPLE)
+- Arctic freeze (SIMPLE)
+- Soulbound (HEROIC)
+- Immolation (ULTIMATE)
+- Vampire (ELITE)
+- Poison (ELITE)
+- Blackout (SIMPLE)
+- Berserk (UNIQUE)
+- Insomnia (SIMPLE)
+- Sabotage (SOUL)
+- Titan Trap (HEROIC)
+- Scare (FABLED)
+- Infernal (ELITE)
+- Halloweenify (MASTERY)
+- Repel (SIMPLE)
+- Soul Trap (SOUL)
+- Paradox (SOUL)
+- Divine Immolation (SOUL)
+- Shadow Assassin (HEROIC)
+- Reflective Block (HEROIC)
+- Demonic Lifesteal (HEROIC)
+- Caffeinated (SIMPLE)
+- Spiritmaster (FABLED)
+- Nulify (FABLED)
+- Stun (LEGENDARY)
+- Kill Aura (LEGENDARY)
+- Disarmor (LEGENDARY)
+- Permafrost (ULTIMATE)
+- Night Owl (ULTIMATE)
+- Netherling (ULTIMATE)
+- Interrupt (ULTIMATE)
+- Ice Aspect (ULTIMATE)
+- Exalted (ULTIMATE)
+- Endmaster (ULTIMATE)
+- Dominate (ULTIMATE)
+- Distance (ULTIMATE)
+- Disintegrate (ULTIMATE)
+- Confuse (ULTIMATE)
+- Block (ULTIMATE)
+- Assassin (ULTIMATE)
+- Arsonist (ULTIMATE)
+- Ambit (ULTIMATE)
+- Trap (ELITE)
+- Nether Slayer (ELITE)
+- Magnet (ELITE)
+- Immolate (ELITE)
+- Allure (ELITE)
+- Slayer (UNIQUE)
+- Skill Swipe (UNIQUE)
+- Ravenous (UNIQUE)
+- Famine (UNIQUE)
+- Devour (UNIQUE)
+- Soulgrind (MASTERY)
+- Zombie Crusher (SIMPLE)
+- Thundering Blow (SIMPLE)
+- Starvation (SIMPLE)
+- Skullcrusher (SIMPLE)
+- Shura (SIMPLE)
+- Postpone (SIMPLE)
+- Obliterate (SIMPLE)
+- Incinerate (SIMPLE)
+- Forcefield (SIMPLE)
+- First Strike (SIMPLE)
+- Finishing (SIMPLE)
+- Enderbane (SIMPLE)
+- Drain (SIMPLE)
+- Curse of Harmlessness (SIMPLE)
+- Carve (SIMPLE)
+- Featherweight (UNIQUE)
+- Master Inquisitive (HEROIC)
+- Diploid (FABLED)
+- Thunderlord (LEGENDARY)
+- Rebound (LEGENDARY)
+- Launch (LEGENDARY)
+- Inversion (LEGENDARY)
+- Double Strike (LEGENDARY)
+- Deranged (LEGENDARY)
+- Abiding (LEGENDARY)
+- Pickpocket (ULTIMATE)
+- Fuddle (ULTIMATE)
+- Suspend (ELITE)
+- Shackle (ELITE)
+- Reforged (ELITE)
+- Nightwalker (ELITE)
+- Greatsword (ELITE)
+- Demonforged (ELITE)
+- Ninja (SIMPLE)
+- Headless (SIMPLE)
+- Etheral (SIMPLE)
+- Epicness (SIMPLE)
+- Charge (SIMPLE)
+- Ascend (SIMPLE)
+- Inquisitive (LEGENDARY)
+- Beastslayer (LEGENDARY)
+- Ender Slayer (ELITE)
+- Decapitation (SIMPLE)
+- Death Punch (SIMPLE)
+- Cubism (SIMPLE)
+- Brightness (SIMPLE)
+- Bone Crusher (SIMPLE)
+- Blaze Reaper (SIMPLE)
+
+axe
+- Bleed (ULTIMATE)
+- Paralyze (ELITE)
+- Annihilate (ULTIMATE)
+- Blunt Force (ELITE)
+- Arrow Break (ULTIMATE)
+- Pummel (ELITE)
+- Cleave (ULTIMATE)
+- Diminish (ULTIMATE)
+- Blessed (ULTIMATE)
+- Corrupt (ULTIMATE)
+- Reaper (ELITE)
+- Confusion (SIMPLE)
+- Poison (ELITE)
+- Berserk (UNIQUE)
+- Infernal (ELITE)
+- Rogue (SOUL)
+- Mighty Cleave (HEROIC)
+- Insanity (HEROIC)
+- Deep Bleed (HEROIC)
+- Insanity (LEGENDARY)
+- Inflame (LEGENDARY)
+- Hex (LEGENDARY)
+- Barbarian (LEGENDARY)
+- Shatter (ULTIMATE)
+- Ambit (ULTIMATE)
+- Immolate (ELITE)
+- Slayer (UNIQUE)
+- Ravenous (UNIQUE)
+- Zombie Crusher (SIMPLE)
+- Skullcrusher (SIMPLE)
+- Incinerate (SIMPLE)
+- Featherweight (UNIQUE)
+- Master Blacksmith (HEROIC)
+- Bewitched Hex (HEROIC)
+- Axe of Spirits (FABLED)
+- Blacksmith (LEGENDARY)
+- Timber (ULTIMATE)
+- Curse of Breaklessness (SIMPLE)
+- Beastslayer (LEGENDARY)
+- Decapitation (SIMPLE)
+- Death Punch (SIMPLE)
+- Bone Crusher (SIMPLE)
+
+bow
+- Neutralize (MASTERY)
+- Sniper (ULTIMATE)
+- Piercing (ULTIMATE)
+- Soulbound (HEROIC)
+- Frost (SIMPLE)
+- Venom (ELITE)
+- Explosive (UNIQUE)
+- Marksman (ELITE)
+- Perish (UNIQUE)
+- Missile (ELITE)
+- Frenzy (UNIQUE)
+- Flashbang (SIMPLE)
+- Teleblock (SOUL)
+- Lightning (SIMPLE)
+- Hellfire (ULTIMATE)
+- Snare (ELITE)
+- Lethal Sniper (HEROIC)
+- Bidirectional Teleportation (HEROIC)
+- Impale (LEGENDARY)
+- Pacify (ULTIMATE)
+- Eagle Eye (ULTIMATE)
+- Arrow Lifesteal (ULTIMATE)
+- Hijack (ELITE)
+- Bowmaster (ELITE)
+- Virus (UNIQUE)
+- Hunter (UNIQUE)
+- Farcast (ELITE)
+- Thor (SIMPLE)
+- Strike (SIMPLE)
+- Contagion (SIMPLE)
+- Unfocus (ULTIMATE)
+- Striker (ULTIMATE)
+- Longbow (ULTIMATE)
+- Archer (ULTIMATE)
+- Multi-Shot (SIMPLE)
+- Soulless (UNIQUE)
+- Cubism (SIMPLE)
+
+helmet
+- Dodge (ULTIMATE)
+- Creeper Armor (ULTIMATE)
+- Safeguard (ULTIMATE)
+- Overload (LEGENDARY)
+- Reflect (UNIQUE)
+- Tank (ULTIMATE)
+- Smoke Bomb (ELITE)
+- Cactus (ELITE)
+- Rebounding (SIMPLE)
+- Getaway (SIMPLE)
+- Voodoo (ELITE)
+- Curse (ELITE)
+- Wither (ELITE)
+- Heavy (ULTIMATE)
+- Armored (LEGENDARY)
+- Stormcaller (ELITE)
+- Turmoil (LEGENDARY)
+- Drunk (LEGENDARY)
+- Mark of the Beast (MASTERY)
+- Natures Wrath (SOUL)
+- Immortal (SOUL)
+- Soul Hardened (HEROIC)
+- Paladin Armored (HEROIC)
+- Mega Heavy (HEROIC)
+- Ethereal Dodge (HEROIC)
+- Unholy (LEGENDARY)
+- Surprise (LEGENDARY)
+- Protection (LEGENDARY)
+- Patch (LEGENDARY)
+- Lucid (LEGENDARY)
+- Hardened (LEGENDARY)
+- Enlighted (LEGENDARY)
+- Divert (LEGENDARY)
+- Destruction (LEGENDARY)
+- Deathbringer (LEGENDARY)
+- Death God (LEGENDARY)
+- Clarity (LEGENDARY)
+- Valor (ULTIMATE)
+- Spirits (ULTIMATE)
+- Ragdoll (ULTIMATE)
+- Guardians (ULTIMATE)
+- Disappear (ULTIMATE)
+- Demonic (ULTIMATE)
+- Arrow Deflect (ULTIMATE)
+- Angelic (ULTIMATE)
+- Trickster (ELITE)
+- Poisoned (ELITE)
+- Frozen (ELITE)
+- Ward (UNIQUE)
+- Sustain (UNIQUE)
+- Self Destruct (UNIQUE)
+- EnderShift (UNIQUE)
+- Horrify (MASTERY)
+- Vanish (SIMPLE)
+- Rumble (SIMPLE)
+- Resonate (SIMPLE)
+- Nether Affinity (SIMPLE)
+- Aura (SIMPLE)
+- Adrenaline (SIMPLE)
+- Reinforced Tank (HEROIC)
+- Planetary Deathbringer (HEROIC)
+- Mighty Cactus (HEROIC)
+- Godly Overload (HEROIC)
+- Divine Enlighted (HEROIC)
+- Alien Implants (HEROIC)
+- Swordsman (ULTIMATE)
+- Obsidianshield (ULTIMATE)
+- Implants (ULTIMATE)
+- Molten (UNIQUE)
+- Commander (UNIQUE)
+- Waterborne (SIMPLE)
+- Shuffle (SIMPLE)
+- Scorching (SIMPLE)
+- Glowing (SIMPLE)
+- End Affinity (SIMPLE)
+- Aquatic (SIMPLE)
+
+chestplate
+- Dodge (ULTIMATE)
+- Creeper Armor (ULTIMATE)
+- Safeguard (ULTIMATE)
+- Overload (LEGENDARY)
+- Reflect (UNIQUE)
+- Tank (ULTIMATE)
+- Cactus (ELITE)
+- Rebounding (SIMPLE)
+- Getaway (SIMPLE)
+- Shockwave (ELITE)
+- Voodoo (ELITE)
+- Curse (ELITE)
+- Wither (ELITE)
+- Heavy (ULTIMATE)
+- Armored (LEGENDARY)
+- Stormcaller (ELITE)
+- Turmoil (LEGENDARY)
+- Mark of the Beast (MASTERY)
+- Chain Lifesteal (MASTERY)
+- Natures Wrath (SOUL)
+- Immortal (SOUL)
+- Vengeful Diminish (HEROIC)
+- Soul Hardened (HEROIC)
+- Paladin Armored (HEROIC)
+- Mega Heavy (HEROIC)
+- Ethereal Dodge (HEROIC)
+- Unholy (LEGENDARY)
+- Surprise (LEGENDARY)
+- Protection (LEGENDARY)
+- Patch (LEGENDARY)
+- Lucid (LEGENDARY)
+- Hardened (LEGENDARY)
+- Enlighted (LEGENDARY)
+- Divert (LEGENDARY)
+- Deathbringer (LEGENDARY)
+- Clarity (LEGENDARY)
+- Chunky (LEGENDARY)
+- Valor (ULTIMATE)
+- Spirits (ULTIMATE)
+- Ragdoll (ULTIMATE)
+- Guardians (ULTIMATE)
+- Disappear (ULTIMATE)
+- Demonic (ULTIMATE)
+- Arrow Deflect (ULTIMATE)
+- Angelic (ULTIMATE)
+- Trickster (ELITE)
+- Poisoned (ELITE)
+- Frozen (ELITE)
+- Ward (UNIQUE)
+- Sustain (UNIQUE)
+- Self Destruct (UNIQUE)
+- Horrify (MASTERY)
+- Vanish (SIMPLE)
+- Rumble (SIMPLE)
+- Resonate (SIMPLE)
+- Nether Affinity (SIMPLE)
+- Aura (SIMPLE)
+- Adrenaline (SIMPLE)
+- Phoenix (SOUL)
+- Reinforced Tank (HEROIC)
+- Planetary Deathbringer (HEROIC)
+- Mighty Cactus (HEROIC)
+- Godly Overload (HEROIC)
+- Divine Enlighted (HEROIC)
+- Fumble (LEGENDARY)
+- Fat (LEGENDARY)
+- Swordsman (ULTIMATE)
+- Obsidianshield (ULTIMATE)
+- Molten (UNIQUE)
+- Commander (UNIQUE)
+- Shuffle (SIMPLE)
+- Scorching (SIMPLE)
+- End Affinity (SIMPLE)
+
+leggings
+- Dodge (ULTIMATE)
+- Creeper Armor (ULTIMATE)
+- Safeguard (ULTIMATE)
+- Overload (LEGENDARY)
+- Reflect (UNIQUE)
+- Tank (ULTIMATE)
+- Cactus (ELITE)
+- Rebounding (SIMPLE)
+- Getaway (SIMPLE)
+- Voodoo (ELITE)
+- Curse (ELITE)
+- Wither (ELITE)
+- Heavy (ULTIMATE)
+- Armored (LEGENDARY)
+- Stormcaller (ELITE)
+- Turmoil (LEGENDARY)
+- Mark of the Beast (MASTERY)
+- Natures Wrath (SOUL)
+- Immortal (SOUL)
+- Soul Hardened (HEROIC)
+- Paladin Armored (HEROIC)
+- Mega Heavy (HEROIC)
+- Ethereal Dodge (HEROIC)
+- Epidemic Carrier (HEROIC)
+- Unholy (LEGENDARY)
+- Surprise (LEGENDARY)
+- Protection (LEGENDARY)
+- Patch (LEGENDARY)
+- Lucid (LEGENDARY)
+- Hardened (LEGENDARY)
+- Exterminator (LEGENDARY)
+- Enlighted (LEGENDARY)
+- Divert (LEGENDARY)
+- Deathbringer (LEGENDARY)
+- Clarity (LEGENDARY)
+- Valor (ULTIMATE)
+- Spirits (ULTIMATE)
+- Ragdoll (ULTIMATE)
+- Guardians (ULTIMATE)
+- Disappear (ULTIMATE)
+- Demonic (ULTIMATE)
+- Arrow Deflect (ULTIMATE)
+- Angelic (ULTIMATE)
+- Trickster (ELITE)
+- Poisoned (ELITE)
+- Frozen (ELITE)
+- Ward (UNIQUE)
+- Sustain (UNIQUE)
+- Self Destruct (UNIQUE)
+- Plague Carrier (UNIQUE)
+- Explosive Demise (UNIQUE)
+- Horrify (MASTERY)
+- Vanish (SIMPLE)
+- Rumble (SIMPLE)
+- Resonate (SIMPLE)
+- Nether Affinity (SIMPLE)
+- Aura (SIMPLE)
+- Adrenaline (SIMPLE)
+- Reinforced Tank (HEROIC)
+- Planetary Deathbringer (HEROIC)
+- Mighty Cactus (HEROIC)
+- Godly Overload (HEROIC)
+- Divine Enlighted (HEROIC)
+- Swordsman (ULTIMATE)
+- Obsidianshield (ULTIMATE)
+- Extinguish (ELITE)
+- Molten (UNIQUE)
+- Lifebloom (UNIQUE)
+- Commander (UNIQUE)
+- Shuffle (SIMPLE)
+- Scorching (SIMPLE)
+- End Affinity (SIMPLE)
+
+boots
+- Dodge (ULTIMATE)
+- Creeper Armor (ULTIMATE)
+- Safeguard (ULTIMATE)
+- Overload (LEGENDARY)
+- Reflect (UNIQUE)
+- Tank (ULTIMATE)
+- Metaphysical (ULTIMATE)
+- Cactus (ELITE)
+- Gears (LEGENDARY)
+- Rebounding (SIMPLE)
+- Springs (ELITE)
+- Jelly Legs (ULTIMATE)
+- Plummet (ULTIMATE)
+- Getaway (SIMPLE)
+- Escape (SIMPLE)
+- Voodoo (ELITE)
+- Curse (ELITE)
+- Wither (ELITE)
+- Heavy (ULTIMATE)
+- Armored (LEGENDARY)
+- Stormcaller (ELITE)
+- Turmoil (LEGENDARY)
+- Aegis (ULTIMATE)
+- Soul Siphone (MASTERY)
+- Mark of the Beast (MASTERY)
+- Natures Wrath (SOUL)
+- Immortal (SOUL)
+- Soul Hardened (HEROIC)
+- Polymorphic Metaphysical (HEROIC)
+- Paladin Armored (HEROIC)
+- Mega Heavy (HEROIC)
+- Guided Rocket Escape (HEROIC)
+- Ethereal Dodge (HEROIC)
+- Unholy (LEGENDARY)
+- Torrent (LEGENDARY)
+- Surprise (LEGENDARY)
+- Quiver (LEGENDARY)
+- Protection (LEGENDARY)
+- Patch (LEGENDARY)
+- Lucid (LEGENDARY)
+- Hardened (LEGENDARY)
+- Enlighted (LEGENDARY)
+- Divert (LEGENDARY)
+- Deathbringer (LEGENDARY)
+- Clarity (LEGENDARY)
+- Aqua (LEGENDARY)
+- Valor (ULTIMATE)
+- Spirits (ULTIMATE)
+- Ragdoll (ULTIMATE)
+- Guardians (ULTIMATE)
+- Ender Walker (ULTIMATE)
+- Disappear (ULTIMATE)
+- Demonic (ULTIMATE)
+- Arrow Deflect (ULTIMATE)
+- Angelic (ULTIMATE)
+- Trickster (ELITE)
+- Rocket Escape (ELITE)
+- Poisoned (ELITE)
+- Frozen (ELITE)
+- Ward (UNIQUE)
+- Sustain (UNIQUE)
+- Self Destruct (UNIQUE)
+- EnderShift (UNIQUE)
+- Horrify (MASTERY)
+- Anti Gravity (ELITE)
+- Vanish (SIMPLE)
+- Rumble (SIMPLE)
+- Resonate (SIMPLE)
+- Nether Affinity (SIMPLE)
+- Aura (SIMPLE)
+- Adrenaline (SIMPLE)
+- Reinforced Tank (HEROIC)
+- Planetary Deathbringer (HEROIC)
+- Mighty Cactus (HEROIC)
+- Godly Overload (HEROIC)
+- Divine Enlighted (HEROIC)
+- Wings (LEGENDARY)
+- Water Walker (LEGENDARY)
+- Take Off (LEGENDARY)
+- Lava Walker (LEGENDARY)
+- Convulse (LEGENDARY)
+- Swordsman (ULTIMATE)
+- Obsidianshield (ULTIMATE)
+- Undead Ruse (ELITE)
+- Molten (UNIQUE)
+- Commander (UNIQUE)
+- Shuffle (SIMPLE)
+- Scorching (SIMPLE)
+- Feather Step (SIMPLE)
+- End Affinity (SIMPLE)
+
+pickaxe
+- Soulbound (HEROIC)
+- Atomic Detonate (HEROIC)
+- Haste (FABLED)
+- Alacrity (SIMPLE)
+- Unbreakable (FABLED)
+- Soulminer (FABLED)
+- Restore (FABLED)
+- Replenish (ELITE)
+- Reforged (ELITE)
+- Telepathy (UNIQUE)
+- Obsidian Destroyer (UNIQUE)
+- Smelting (SIMPLE)
+- Rebreather (SIMPLE)
+- Oxygenate (SIMPLE)
+- Nether Prospector (SIMPLE)
+- Infernal Touch (SIMPLE)
+- Hasten (SIMPLE)
+- Foraging (SIMPLE)
+- Experience (SIMPLE)
+- Curse of Breaklessness (SIMPLE)
+- Blast Mining (SIMPLE)
+- Multiplication (FABLED)
+- Gemify (FABLED)
+- Tunnel (ULTIMATE)
+- Trench (ULTIMATE)
+- Detonate (ULTIMATE)
+- Vein Miner (ELITE)
+- Auto Smelt (SIMPLE)
+
+tools
+- Atomic Detonate (HEROIC)
+- Haste (FABLED)
+- Sharpness Hook (ULTIMATE)
+- Poisoned Hook (ELITE)
+- Momentum (ELITE)
+- Alacrity (SIMPLE)
+- Unbreakable (FABLED)
+- Rush (FABLED)
+- Restore (FABLED)
+- Slingshot (LEGENDARY)
+- Judgement (LEGENDARY)
+- Reinforced (ULTIMATE)
+- Potato Planter (ULTIMATE)
+- Planter (ULTIMATE)
+- Lucky (ULTIMATE)
+- Carrot Planter (ULTIMATE)
+- Call to Allies (ULTIMATE)
+- Snap (ELITE)
+- Hook (ELITE)
+- Fire Hook (ELITE)
+- Telepathy (UNIQUE)
+- Infernal Touch (SIMPLE)
+- Hasten (SIMPLE)
+- Foraging (SIMPLE)
+- Experience (SIMPLE)
+- Bait (LEGENDARY)
+- Tunnel (ULTIMATE)
+- Trench (ULTIMATE)
+- Harvest (ULTIMATE)
+- Detonate (ULTIMATE)
+- Auto Reel (ULTIMATE)
+- Replanter (UNIQUE)
+- Allurement (SIMPLE)
+
+trident
+- Perish (UNIQUE)
+- Strife (LEGENDARY)
+- Poseidon (ELITE)
+- Impact (ELITE)
+- Bowmaster (ELITE)
+- Virus (UNIQUE)
+- Hunter (UNIQUE)
+- Thor (SIMPLE)
+- Strike (SIMPLE)
+- Double Blow (SIMPLE)
+- Twinge (LEGENDARY)
+- Deadshot (LEGENDARY)
+- Chaos (LEGENDARY)
+- Spark (ELITE)
+- Soulless (UNIQUE)
+
+
+MOB
+sword
+- Immolation (ULTIMATE)
+- Kill Aura (LEGENDARY)
+- Inquisitive (LEGENDARY)
+- Lifesteal (LEGENDARY)
+- Deranged (LEGENDARY)
+- Carve (SIMPLE)
+- Devour (UNIQUE)
+- Decapitation (SIMPLE)
+- Critical (ELITE)
+- Execute (ELITE)
+- Ambit (ULTIMATE)
+- Infernal (ELITE)
+- Immolate (ELITE)
+- Beastslayer (LEGENDARY)
+- Ender Slayer (ELITE)
+- Bone Crusher (SIMPLE)
+- Death Punch (SIMPLE)
+- Blaze Reaper (SIMPLE)
+- Cubism (SIMPLE)
+- Brightness (SIMPLE)
+- Vampire (ELITE)
+- Rage (LEGENDARY)
+- Enrage (ULTIMATE)
+- Berserk (UNIQUE)
+- Divine Immolation (SOUL)
+- Arsonist (ULTIMATE)
+- Skill Swipe (UNIQUE)
+- Master Inquisitive (HEROIC)
+- Halloweenify (MASTERY)
+- Diploid (FABLED)
+- Soul Trap (SOUL)
+- Sabotage (SOUL)
+- Paradox (SOUL)
+- Titan Trap (HEROIC)
+- Shadow Assassin (HEROIC)
+- Reflective Block (HEROIC)
+- Demonic Lifesteal (HEROIC)
+- Spiritmaster (FABLED)
+- Scare (FABLED)
+- Nulify (FABLED)
+- Stun (LEGENDARY)
+- Disarmor (LEGENDARY)
+- Permafrost (ULTIMATE)
+- Night Owl (ULTIMATE)
+- Netherling (ULTIMATE)
+- Interrupt (ULTIMATE)
+- Ice Aspect (ULTIMATE)
+- Exalted (ULTIMATE)
+- Endmaster (ULTIMATE)
+- Dominate (ULTIMATE)
+- Distance (ULTIMATE)
+- Disintegrate (ULTIMATE)
+- Confuse (ULTIMATE)
+- Block (ULTIMATE)
+- Assassin (ULTIMATE)
+- Trap (ELITE)
+- Soulgrind (MASTERY)
+- Poison (ELITE)
+- Nether Slayer (ELITE)
+- Magnet (ELITE)
+- Blind (ELITE)
+- Allure (ELITE)
+- Slayer (UNIQUE)
+- Ravenous (UNIQUE)
+- Famine (UNIQUE)
+- Zombie Crusher (SIMPLE)
+- Thundering Blow (SIMPLE)
+- Starvation (SIMPLE)
+- Soulbound (HEROIC)
+- Skullcrusher (SIMPLE)
+- Shura (SIMPLE)
+- Postpone (SIMPLE)
+- Obliterate (SIMPLE)
+- Insomnia (SIMPLE)
+- Incinerate (SIMPLE)
+- Forcefield (SIMPLE)
+- First Strike (SIMPLE)
+- Finishing (SIMPLE)
+- Enderbane (SIMPLE)
+- Drain (SIMPLE)
+- Curse of Harmlessness (SIMPLE)
+- Caffeinated (SIMPLE)
+- Blackout (SIMPLE)
+- Arctic freeze (SIMPLE)
+- Thunderlord (LEGENDARY)
+- Rebound (LEGENDARY)
+- Launch (LEGENDARY)
+- Inversion (LEGENDARY)
+- Double Strike (LEGENDARY)
+- Abiding (LEGENDARY)
+- Pickpocket (ULTIMATE)
+- Fuddle (ULTIMATE)
+- Suspend (ELITE)
+- Shackle (ELITE)
+- Reforged (ELITE)
+- Paralyze (ELITE)
+- Nightwalker (ELITE)
+- Greatsword (ELITE)
+- Demonforged (ELITE)
+- Featherweight (UNIQUE)
+- Repel (SIMPLE)
+- Ninja (SIMPLE)
+- Headless (SIMPLE)
+- Etheral (SIMPLE)
+- Epicness (SIMPLE)
+- Charge (SIMPLE)
+- Ascend (SIMPLE)
+- Disarm (FABLED)
+- Silence (LEGENDARY)
+- Abrasion (SIMPLE)
+
+axe
+- Mighty Cleave (HEROIC)
+- Cleave (ULTIMATE)
+- Decapitation (SIMPLE)
+- Ambit (ULTIMATE)
+- Corrupt (ULTIMATE)
+- Reaper (ELITE)
+- Infernal (ELITE)
+- Immolate (ELITE)
+- Beastslayer (LEGENDARY)
+- Bone Crusher (SIMPLE)
+- Death Punch (SIMPLE)
+- Blessed (ULTIMATE)
+- Bleed (ULTIMATE)
+- Berserk (UNIQUE)
+- Inflame (LEGENDARY)
+- Rogue (SOUL)
+- Insanity (HEROIC)
+- Deep Bleed (HEROIC)
+- Insanity (LEGENDARY)
+- Hex (LEGENDARY)
+- Barbarian (LEGENDARY)
+- Shatter (ULTIMATE)
+- Diminish (ULTIMATE)
+- Pummel (ELITE)
+- Poison (ELITE)
+- Slayer (UNIQUE)
+- Ravenous (UNIQUE)
+- Zombie Crusher (SIMPLE)
+- Skullcrusher (SIMPLE)
+- Master Blacksmith (HEROIC)
+- Incinerate (SIMPLE)
+- Confusion (SIMPLE)
+- Bewitched Hex (HEROIC)
+- Axe of Spirits (FABLED)
+- Blacksmith (LEGENDARY)
+- Timber (ULTIMATE)
+- Paralyze (ELITE)
+- Blunt Force (ELITE)
+- Featherweight (UNIQUE)
+- Curse of Breaklessness (SIMPLE)
+- Arrow Break (ULTIMATE)
+- Annihilate (ULTIMATE)
+
+bow
+- Soulless (UNIQUE)
+- Explosive (UNIQUE)
+- Bowmaster (ELITE)
+- Multi-Shot (SIMPLE)
+- Lightning (SIMPLE)
+- Contagion (SIMPLE)
+- Cubism (SIMPLE)
+- Frenzy (UNIQUE)
+- Venom (ELITE)
+- Lethal Sniper (HEROIC)
+- Sniper (ULTIMATE)
+- Marksman (ELITE)
+- Perish (UNIQUE)
+- Missile (ELITE)
+- Thor (SIMPLE)
+- Neutralize (MASTERY)
+- Teleblock (SOUL)
+- Hellfire (ULTIMATE)
+- Bidirectional Teleportation (HEROIC)
+- Impale (LEGENDARY)
+- Piercing (ULTIMATE)
+- Pacify (ULTIMATE)
+- Eagle Eye (ULTIMATE)
+- Arrow Lifesteal (ULTIMATE)
+- Snare (ELITE)
+- Hijack (ELITE)
+- Virus (UNIQUE)
+- Hunter (UNIQUE)
+- Strike (SIMPLE)
+- Soulbound (HEROIC)
+- Unfocus (ULTIMATE)
+- Striker (ULTIMATE)
+- Longbow (ULTIMATE)
+- Archer (ULTIMATE)
+- Farcast (ELITE)
+- Frost (SIMPLE)
+- Flashbang (SIMPLE)
+
+helmet
+- Creeper Armor (ULTIMATE)
+- Safeguard (ULTIMATE)
+- Overload (LEGENDARY)
+- Tank (ULTIMATE)
+- Frozen (ELITE)
+- Molten (UNIQUE)
+- Aquatic (SIMPLE)
+- Voodoo (ELITE)
+- Natures Wrath (SOUL)
+- Destruction (LEGENDARY)
+- Self Destruct (UNIQUE)
+- Mark of the Beast (MASTERY)
+- Immortal (SOUL)
+- Soul Hardened (HEROIC)
+- Paladin Armored (HEROIC)
+- Obsidianshield (ULTIMATE)
+- Mega Heavy (HEROIC)
+- Ethereal Dodge (HEROIC)
+- Unholy (LEGENDARY)
+- Turmoil (LEGENDARY)
+- Surprise (LEGENDARY)
+- Protection (LEGENDARY)
+- Patch (LEGENDARY)
+- Hardened (LEGENDARY)
+- Enlighted (LEGENDARY)
+- Divert (LEGENDARY)
+- Deathbringer (LEGENDARY)
+- Death God (LEGENDARY)
+- Clarity (LEGENDARY)
+- Armored (LEGENDARY)
+- Valor (ULTIMATE)
+- Spirits (ULTIMATE)
+- Scorching (SIMPLE)
+- Ragdoll (ULTIMATE)
+- Guardians (ULTIMATE)
+- Dodge (ULTIMATE)
+- Disappear (ULTIMATE)
+- Demonic (ULTIMATE)
+- Arrow Deflect (ULTIMATE)
+- Angelic (ULTIMATE)
+- Trickster (ELITE)
+- Horrify (MASTERY)
+- Cactus (ELITE)
+- Ward (UNIQUE)
+- Sustain (UNIQUE)
+- Reflect (UNIQUE)
+- EnderShift (UNIQUE)
+- Vanish (SIMPLE)
+- Rumble (SIMPLE)
+- Resonate (SIMPLE)
+- Reinforced Tank (HEROIC)
+- Rebounding (SIMPLE)
+- Planetary Deathbringer (HEROIC)
+- Nether Affinity (SIMPLE)
+- Mighty Cactus (HEROIC)
+- Godly Overload (HEROIC)
+- Divine Enlighted (HEROIC)
+- Aura (SIMPLE)
+- Alien Implants (HEROIC)
+- Adrenaline (SIMPLE)
+- Lucid (LEGENDARY)
+- Drunk (LEGENDARY)
+- Swordsman (ULTIMATE)
+- Implants (ULTIMATE)
+- Heavy (ULTIMATE)
+- Wither (ELITE)
+- Stormcaller (ELITE)
+- Poisoned (ELITE)
+- Curse (ELITE)
+- Commander (UNIQUE)
+- Waterborne (SIMPLE)
+- Shuffle (SIMPLE)
+- Glowing (SIMPLE)
+- Getaway (SIMPLE)
+- End Affinity (SIMPLE)
+- Smoke Bomb (ELITE)
+
+chestplate
+- Creeper Armor (ULTIMATE)
+- Shockwave (ELITE)
+- Safeguard (ULTIMATE)
+- Overload (LEGENDARY)
+- Tank (ULTIMATE)
+- Frozen (ELITE)
+- Molten (UNIQUE)
+- Voodoo (ELITE)
+- Natures Wrath (SOUL)
+- Self Destruct (UNIQUE)
+- Phoenix (SOUL)
+- Mark of the Beast (MASTERY)
+- Chain Lifesteal (MASTERY)
+- Immortal (SOUL)
+- Vengeful Diminish (HEROIC)
+- Soul Hardened (HEROIC)
+- Paladin Armored (HEROIC)
+- Obsidianshield (ULTIMATE)
+- Mega Heavy (HEROIC)
+- Ethereal Dodge (HEROIC)
+- Unholy (LEGENDARY)
+- Turmoil (LEGENDARY)
+- Surprise (LEGENDARY)
+- Protection (LEGENDARY)
+- Patch (LEGENDARY)
+- Hardened (LEGENDARY)
+- Enlighted (LEGENDARY)
+- Divert (LEGENDARY)
+- Deathbringer (LEGENDARY)
+- Clarity (LEGENDARY)
+- Chunky (LEGENDARY)
+- Armored (LEGENDARY)
+- Valor (ULTIMATE)
+- Spirits (ULTIMATE)
+- Scorching (SIMPLE)
+- Ragdoll (ULTIMATE)
+- Guardians (ULTIMATE)
+- Dodge (ULTIMATE)
+- Disappear (ULTIMATE)
+- Demonic (ULTIMATE)
+- Arrow Deflect (ULTIMATE)
+- Angelic (ULTIMATE)
+- Trickster (ELITE)
+- Horrify (MASTERY)
+- Cactus (ELITE)
+- Ward (UNIQUE)
+- Sustain (UNIQUE)
+- Reflect (UNIQUE)
+- Vanish (SIMPLE)
+- Rumble (SIMPLE)
+- Resonate (SIMPLE)
+- Reinforced Tank (HEROIC)
+- Rebounding (SIMPLE)
+- Planetary Deathbringer (HEROIC)
+- Nether Affinity (SIMPLE)
+- Mighty Cactus (HEROIC)
+- Godly Overload (HEROIC)
+- Divine Enlighted (HEROIC)
+- Aura (SIMPLE)
+- Adrenaline (SIMPLE)
+- Lucid (LEGENDARY)
+- Fumble (LEGENDARY)
+- Fat (LEGENDARY)
+- Swordsman (ULTIMATE)
+- Heavy (ULTIMATE)
+- Wither (ELITE)
+- Stormcaller (ELITE)
+- Poisoned (ELITE)
+- Curse (ELITE)
+- Commander (UNIQUE)
+- Shuffle (SIMPLE)
+- Getaway (SIMPLE)
+- End Affinity (SIMPLE)
+
+leggings
+- Creeper Armor (ULTIMATE)
+- Safeguard (ULTIMATE)
+- Overload (LEGENDARY)
+- Tank (ULTIMATE)
+- Frozen (ELITE)
+- Molten (UNIQUE)
+- Voodoo (ELITE)
+- Natures Wrath (SOUL)
+- Epidemic Carrier (HEROIC)
+- Self Destruct (UNIQUE)
+- Mark of the Beast (MASTERY)
+- Immortal (SOUL)
+- Soul Hardened (HEROIC)
+- Paladin Armored (HEROIC)
+- Obsidianshield (ULTIMATE)
+- Mega Heavy (HEROIC)
+- Ethereal Dodge (HEROIC)
+- Extinguish (ELITE)
+- Unholy (LEGENDARY)
+- Turmoil (LEGENDARY)
+- Surprise (LEGENDARY)
+- Protection (LEGENDARY)
+- Patch (LEGENDARY)
+- Hardened (LEGENDARY)
+- Exterminator (LEGENDARY)
+- Explosive Demise (UNIQUE)
+- Enlighted (LEGENDARY)
+- Divert (LEGENDARY)
+- Deathbringer (LEGENDARY)
+- Clarity (LEGENDARY)
+- Armored (LEGENDARY)
+- Valor (ULTIMATE)
+- Spirits (ULTIMATE)
+- Scorching (SIMPLE)
+- Ragdoll (ULTIMATE)
+- Guardians (ULTIMATE)
+- Dodge (ULTIMATE)
+- Disappear (ULTIMATE)
+- Demonic (ULTIMATE)
+- Arrow Deflect (ULTIMATE)
+- Angelic (ULTIMATE)
+- Trickster (ELITE)
+- Horrify (MASTERY)
+- Cactus (ELITE)
+- Ward (UNIQUE)
+- Sustain (UNIQUE)
+- Reflect (UNIQUE)
+- Plague Carrier (UNIQUE)
+- Vanish (SIMPLE)
+- Rumble (SIMPLE)
+- Resonate (SIMPLE)
+- Reinforced Tank (HEROIC)
+- Rebounding (SIMPLE)
+- Planetary Deathbringer (HEROIC)
+- Nether Affinity (SIMPLE)
+- Mighty Cactus (HEROIC)
+- Godly Overload (HEROIC)
+- Divine Enlighted (HEROIC)
+- Aura (SIMPLE)
+- Adrenaline (SIMPLE)
+- Lucid (LEGENDARY)
+- Swordsman (ULTIMATE)
+- Heavy (ULTIMATE)
+- Wither (ELITE)
+- Stormcaller (ELITE)
+- Poisoned (ELITE)
+- Curse (ELITE)
+- Lifebloom (UNIQUE)
+- Commander (UNIQUE)
+- Shuffle (SIMPLE)
+- Getaway (SIMPLE)
+- End Affinity (SIMPLE)
+
+boots
+- Creeper Armor (ULTIMATE)
+- Plummet (ULTIMATE)
+- Safeguard (ULTIMATE)
+- Overload (LEGENDARY)
+- Tank (ULTIMATE)
+- Frozen (ELITE)
+- Molten (UNIQUE)
+- Lava Walker (LEGENDARY)
+- Jelly Legs (ULTIMATE)
+- Voodoo (ELITE)
+- Natures Wrath (SOUL)
+- Self Destruct (UNIQUE)
+- Soul Siphone (MASTERY)
+- Mark of the Beast (MASTERY)
+- Immortal (SOUL)
+- Soul Hardened (HEROIC)
+- Paladin Armored (HEROIC)
+- Obsidianshield (ULTIMATE)
+- Mega Heavy (HEROIC)
+- Guided Rocket Escape (HEROIC)
+- Ethereal Dodge (HEROIC)
+- Unholy (LEGENDARY)
+- Turmoil (LEGENDARY)
+- Torrent (LEGENDARY)
+- Surprise (LEGENDARY)
+- Quiver (LEGENDARY)
+- Protection (LEGENDARY)
+- Patch (LEGENDARY)
+- Hardened (LEGENDARY)
+- Enlighted (LEGENDARY)
+- Divert (LEGENDARY)
+- Deathbringer (LEGENDARY)
+- Clarity (LEGENDARY)
+- Armored (LEGENDARY)
+- Aqua (LEGENDARY)
+- Valor (ULTIMATE)
+- Spirits (ULTIMATE)
+- Scorching (SIMPLE)
+- Ragdoll (ULTIMATE)
+- Guardians (ULTIMATE)
+- Ender Walker (ULTIMATE)
+- Dodge (ULTIMATE)
+- Disappear (ULTIMATE)
+- Demonic (ULTIMATE)
+- Arrow Deflect (ULTIMATE)
+- Angelic (ULTIMATE)
+- Aegis (ULTIMATE)
+- Trickster (ELITE)
+- Rocket Escape (ELITE)
+- Horrify (MASTERY)
+- Cactus (ELITE)
+- Ward (UNIQUE)
+- Sustain (UNIQUE)
+- Reflect (UNIQUE)
+- EnderShift (UNIQUE)
+- Vanish (SIMPLE)
+- Rumble (SIMPLE)
+- Resonate (SIMPLE)
+- Reinforced Tank (HEROIC)
+- Rebounding (SIMPLE)
+- Polymorphic Metaphysical (HEROIC)
+- Planetary Deathbringer (HEROIC)
+- Nether Affinity (SIMPLE)
+- Mighty Cactus (HEROIC)
+- Godly Overload (HEROIC)
+- Escape (SIMPLE)
+- Divine Enlighted (HEROIC)
+- Aura (SIMPLE)
+- Adrenaline (SIMPLE)
+- Wings (LEGENDARY)
+- Water Walker (LEGENDARY)
+- Take Off (LEGENDARY)
+- Lucid (LEGENDARY)
+- Gears (LEGENDARY)
+- Convulse (LEGENDARY)
+- Swordsman (ULTIMATE)
+- Metaphysical (ULTIMATE)
+- Heavy (ULTIMATE)
+- Wither (ELITE)
+- Undead Ruse (ELITE)
+- Stormcaller (ELITE)
+- Springs (ELITE)
+- Poisoned (ELITE)
+- Curse (ELITE)
+- Anti Gravity (ELITE)
+- Commander (UNIQUE)
+- Shuffle (SIMPLE)
+- Getaway (SIMPLE)
+- Feather Step (SIMPLE)
+- End Affinity (SIMPLE)
+
+pickaxe
+- Trench (ULTIMATE)
+- Vein Miner (ELITE)
+- Tunnel (ULTIMATE)
+- Multiplication (FABLED)
+- Gemify (FABLED)
+- Detonate (ULTIMATE)
+- Haste (FABLED)
+- Unbreakable (FABLED)
+- Telepathy (UNIQUE)
+- Auto Smelt (SIMPLE)
+- Replenish (ELITE)
+- Atomic Detonate (HEROIC)
+- Experience (SIMPLE)
+- Blast Mining (SIMPLE)
+- Soulbound (HEROIC)
+- Soulminer (FABLED)
+- Restore (FABLED)
+- Reforged (ELITE)
+- Obsidian Destroyer (UNIQUE)
+- Smelting (SIMPLE)
+- Rebreather (SIMPLE)
+- Oxygenate (SIMPLE)
+- Nether Prospector (SIMPLE)
+- Infernal Touch (SIMPLE)
+- Hasten (SIMPLE)
+- Foraging (SIMPLE)
+- Curse of Breaklessness (SIMPLE)
+- Alacrity (SIMPLE)
+
+tools
+- Harvest (ULTIMATE)
+- Bait (LEGENDARY)
+- Lucky (ULTIMATE)
+- Replanter (UNIQUE)
+- Auto Reel (ULTIMATE)
+- Allurement (SIMPLE)
+- Trench (ULTIMATE)
+- Tunnel (ULTIMATE)
+- Detonate (ULTIMATE)
+- Haste (FABLED)
+- Unbreakable (FABLED)
+- Telepathy (UNIQUE)
+- Slingshot (LEGENDARY)
+- Momentum (ELITE)
+- Atomic Detonate (HEROIC)
+- Judgement (LEGENDARY)
+- Potato Planter (ULTIMATE)
+- Planter (ULTIMATE)
+- Carrot Planter (ULTIMATE)
+- Hook (ELITE)
+- Fire Hook (ELITE)
+- Sharpness Hook (ULTIMATE)
+- Experience (SIMPLE)
+- Rush (FABLED)
+- Restore (FABLED)
+- Reinforced (ULTIMATE)
+- Call to Allies (ULTIMATE)
+- Snap (ELITE)
+- Poisoned Hook (ELITE)
+- Infernal Touch (SIMPLE)
+- Hasten (SIMPLE)
+- Foraging (SIMPLE)
+- Alacrity (SIMPLE)
+
+trident
+- Soulless (UNIQUE)
+- Bowmaster (ELITE)
+- Perish (UNIQUE)
+- Thor (SIMPLE)
+- Spark (ELITE)
+- Strife (LEGENDARY)
+- Poseidon (ELITE)
+- Impact (ELITE)
+- Virus (UNIQUE)
+- Hunter (UNIQUE)
+- Strike (SIMPLE)
+- Double Blow (SIMPLE)
+- Twinge (LEGENDARY)
+- Deadshot (LEGENDARY)
+- Chaos (LEGENDARY)
+
+
+MIX
+sword
+- Lifesteal (LEGENDARY)
+- Immolation (ULTIMATE)
+- Inquisitive (LEGENDARY)
+- Critical (ELITE)
+- Devour (UNIQUE)
+- Paralyze (ELITE)
+- Execute (ELITE)
+- Soulbound (HEROIC)
+- Rage (LEGENDARY)
+- Enrage (ULTIMATE)
+- Kill Aura (LEGENDARY)
+- Paradox (SOUL)
+- Reflective Block (HEROIC)
+- Master Inquisitive (HEROIC)
+- Diploid (FABLED)
+- Night Owl (ULTIMATE)
+- Netherling (ULTIMATE)
+- Ice Aspect (ULTIMATE)
+- Endmaster (ULTIMATE)
+- Assassin (ULTIMATE)
+- Arsonist (ULTIMATE)
+- Ambit (ULTIMATE)
+- Nether Slayer (ELITE)
+- Immolate (ELITE)
+- Soulgrind (MASTERY)
+- Slayer (UNIQUE)
+- Skill Swipe (UNIQUE)
+- Halloweenify (MASTERY)
+- Zombie Crusher (SIMPLE)
+- Soul Trap (SOUL)
+- Skullcrusher (SIMPLE)
+- Shura (SIMPLE)
+- Sabotage (SOUL)
+- Incinerate (SIMPLE)
+- First Strike (SIMPLE)
+- Finishing (SIMPLE)
+- Enderbane (SIMPLE)
+- Divine Immolation (SOUL)
+- Curse of Harmlessness (SIMPLE)
+- Brightness (SIMPLE)
+- Titan Trap (HEROIC)
+- Shadow Assassin (HEROIC)
+- Demonic Lifesteal (HEROIC)
+- Spiritmaster (FABLED)
+- Scare (FABLED)
+- Nulify (FABLED)
+- Disarm (FABLED)
+- Thunderlord (LEGENDARY)
+- Stun (LEGENDARY)
+- Silence (LEGENDARY)
+- Rebound (LEGENDARY)
+- Launch (LEGENDARY)
+- Inversion (LEGENDARY)
+- Double Strike (LEGENDARY)
+- Disarmor (LEGENDARY)
+- Deranged (LEGENDARY)
+- Abiding (LEGENDARY)
+- Pickpocket (ULTIMATE)
+- Permafrost (ULTIMATE)
+- Interrupt (ULTIMATE)
+- Fuddle (ULTIMATE)
+- Exalted (ULTIMATE)
+- Dominate (ULTIMATE)
+- Distance (ULTIMATE)
+- Disintegrate (ULTIMATE)
+- Confuse (ULTIMATE)
+- Block (ULTIMATE)
+- Vampire (ELITE)
+- Trap (ELITE)
+- Suspend (ELITE)
+- Shackle (ELITE)
+- Reforged (ELITE)
+- Poison (ELITE)
+- Nightwalker (ELITE)
+- Magnet (ELITE)
+- Infernal (ELITE)
+- Greatsword (ELITE)
+- Demonforged (ELITE)
+- Blind (ELITE)
+- Allure (ELITE)
+- Ravenous (UNIQUE)
+- Featherweight (UNIQUE)
+- Famine (UNIQUE)
+- Berserk (UNIQUE)
+- Thundering Blow (SIMPLE)
+- Starvation (SIMPLE)
+- Repel (SIMPLE)
+- Postpone (SIMPLE)
+- Obliterate (SIMPLE)
+- Ninja (SIMPLE)
+- Insomnia (SIMPLE)
+- Headless (SIMPLE)
+- Forcefield (SIMPLE)
+- Etheral (SIMPLE)
+- Epicness (SIMPLE)
+- Drain (SIMPLE)
+- Decapitation (SIMPLE)
+- Charge (SIMPLE)
+- Carve (SIMPLE)
+- Caffeinated (SIMPLE)
+- Blackout (SIMPLE)
+- Ascend (SIMPLE)
+- Arctic freeze (SIMPLE)
+- Abrasion (SIMPLE)
+- Beastslayer (LEGENDARY)
+- Ender Slayer (ELITE)
+- Death Punch (SIMPLE)
+- Cubism (SIMPLE)
+- Bone Crusher (SIMPLE)
+- Blaze Reaper (SIMPLE)
+
+axe
+- Cleave (ULTIMATE)
+- Bleed (ULTIMATE)
+- Paralyze (ELITE)
+- Annihilate (ULTIMATE)
+- Blunt Force (ELITE)
+- Arrow Break (ULTIMATE)
+- Mighty Cleave (HEROIC)
+- Pummel (ELITE)
+- Rogue (SOUL)
+- Insanity (HEROIC)
+- Insanity (LEGENDARY)
+- Inflame (LEGENDARY)
+- Barbarian (LEGENDARY)
+- Corrupt (ULTIMATE)
+- Ambit (ULTIMATE)
+- Immolate (ELITE)
+- Slayer (UNIQUE)
+- Zombie Crusher (SIMPLE)
+- Skullcrusher (SIMPLE)
+- Incinerate (SIMPLE)
+- Master Blacksmith (HEROIC)
+- Deep Bleed (HEROIC)
+- Bewitched Hex (HEROIC)
+- Axe of Spirits (FABLED)
+- Hex (LEGENDARY)
+- Blacksmith (LEGENDARY)
+- Timber (ULTIMATE)
+- Shatter (ULTIMATE)
+- Diminish (ULTIMATE)
+- Blessed (ULTIMATE)
+- Reaper (ELITE)
+- Poison (ELITE)
+- Infernal (ELITE)
+- Ravenous (UNIQUE)
+- Featherweight (UNIQUE)
+- Berserk (UNIQUE)
+- Decapitation (SIMPLE)
+- Curse of Breaklessness (SIMPLE)
+- Confusion (SIMPLE)
+- Beastslayer (LEGENDARY)
+- Death Punch (SIMPLE)
+- Bone Crusher (SIMPLE)
+
+bow
+- Sniper (ULTIMATE)
+- Piercing (ULTIMATE)
+- Explosive (UNIQUE)
+- Multi-Shot (SIMPLE)
+- Bowmaster (ELITE)
+- Soulless (UNIQUE)
+- Frost (SIMPLE)
+- Soulbound (HEROIC)
+- Lightning (SIMPLE)
+- Contagion (SIMPLE)
+- Lethal Sniper (HEROIC)
+- Impale (LEGENDARY)
+- Eagle Eye (ULTIMATE)
+- Marksman (ELITE)
+- Neutralize (MASTERY)
+- Hunter (UNIQUE)
+- Teleblock (SOUL)
+- Bidirectional Teleportation (HEROIC)
+- Unfocus (ULTIMATE)
+- Striker (ULTIMATE)
+- Pacify (ULTIMATE)
+- Longbow (ULTIMATE)
+- Hellfire (ULTIMATE)
+- Arrow Lifesteal (ULTIMATE)
+- Archer (ULTIMATE)
+- Venom (ELITE)
+- Snare (ELITE)
+- Missile (ELITE)
+- Hijack (ELITE)
+- Farcast (ELITE)
+- Virus (UNIQUE)
+- Perish (UNIQUE)
+- Frenzy (UNIQUE)
+- Thor (SIMPLE)
+- Strike (SIMPLE)
+- Flashbang (SIMPLE)
+- Cubism (SIMPLE)
+
+helmet
+- Creeper Armor (ULTIMATE)
+- Dodge (ULTIMATE)
+- Safeguard (ULTIMATE)
+- Overload (LEGENDARY)
+- Smoke Bomb (ELITE)
+- Reflect (UNIQUE)
+- Aquatic (SIMPLE)
+- Tank (ULTIMATE)
+- Molten (UNIQUE)
+- Mark of the Beast (MASTERY)
+- Natures Wrath (SOUL)
+- Immortal (SOUL)
+- Soul Hardened (HEROIC)
+- Paladin Armored (HEROIC)
+- Protection (LEGENDARY)
+- Lucid (LEGENDARY)
+- Enlighted (LEGENDARY)
+- Divert (LEGENDARY)
+- Destruction (LEGENDARY)
+- Deathbringer (LEGENDARY)
+- Death God (LEGENDARY)
+- Armored (LEGENDARY)
+- Valor (ULTIMATE)
+- Arrow Deflect (ULTIMATE)
+- Ward (UNIQUE)
+- Horrify (MASTERY)
+- EnderShift (UNIQUE)
+- Rebounding (SIMPLE)
+- Nether Affinity (SIMPLE)
+- Aura (SIMPLE)
+- Reinforced Tank (HEROIC)
+- Planetary Deathbringer (HEROIC)
+- Mighty Cactus (HEROIC)
+- Mega Heavy (HEROIC)
+- Godly Overload (HEROIC)
+- Ethereal Dodge (HEROIC)
+- Divine Enlighted (HEROIC)
+- Alien Implants (HEROIC)
+- Unholy (LEGENDARY)
+- Turmoil (LEGENDARY)
+- Surprise (LEGENDARY)
+- Patch (LEGENDARY)
+- Hardened (LEGENDARY)
+- Drunk (LEGENDARY)
+- Clarity (LEGENDARY)
+- Swordsman (ULTIMATE)
+- Spirits (ULTIMATE)
+- Ragdoll (ULTIMATE)
+- Obsidianshield (ULTIMATE)
+- Implants (ULTIMATE)
+- Heavy (ULTIMATE)
+- Guardians (ULTIMATE)
+- Disappear (ULTIMATE)
+- Demonic (ULTIMATE)
+- Angelic (ULTIMATE)
+- Wither (ELITE)
+- Voodoo (ELITE)
+- Trickster (ELITE)
+- Stormcaller (ELITE)
+- Poisoned (ELITE)
+- Frozen (ELITE)
+- Curse (ELITE)
+- Cactus (ELITE)
+- Sustain (UNIQUE)
+- Self Destruct (UNIQUE)
+- Commander (UNIQUE)
+- Waterborne (SIMPLE)
+- Vanish (SIMPLE)
+- Shuffle (SIMPLE)
+- Scorching (SIMPLE)
+- Rumble (SIMPLE)
+- Resonate (SIMPLE)
+- Glowing (SIMPLE)
+- Getaway (SIMPLE)
+- End Affinity (SIMPLE)
+- Adrenaline (SIMPLE)
+
+chestplate
+- Creeper Armor (ULTIMATE)
+- Dodge (ULTIMATE)
+- Safeguard (ULTIMATE)
+- Overload (LEGENDARY)
+- Reflect (UNIQUE)
+- Tank (ULTIMATE)
+- Shockwave (ELITE)
+- Molten (UNIQUE)
+- Mark of the Beast (MASTERY)
+- Natures Wrath (SOUL)
+- Immortal (SOUL)
+- Soul Hardened (HEROIC)
+- Paladin Armored (HEROIC)
+- Protection (LEGENDARY)
+- Lucid (LEGENDARY)
+- Enlighted (LEGENDARY)
+- Divert (LEGENDARY)
+- Deathbringer (LEGENDARY)
+- Chunky (LEGENDARY)
+- Armored (LEGENDARY)
+- Valor (ULTIMATE)
+- Arrow Deflect (ULTIMATE)
+- Ward (UNIQUE)
+- Horrify (MASTERY)
+- Chain Lifesteal (MASTERY)
+- Rebounding (SIMPLE)
+- Phoenix (SOUL)
+- Nether Affinity (SIMPLE)
+- Aura (SIMPLE)
+- Vengeful Diminish (HEROIC)
+- Reinforced Tank (HEROIC)
+- Planetary Deathbringer (HEROIC)
+- Mighty Cactus (HEROIC)
+- Mega Heavy (HEROIC)
+- Godly Overload (HEROIC)
+- Ethereal Dodge (HEROIC)
+- Divine Enlighted (HEROIC)
+- Unholy (LEGENDARY)
+- Turmoil (LEGENDARY)
+- Surprise (LEGENDARY)
+- Patch (LEGENDARY)
+- Hardened (LEGENDARY)
+- Fumble (LEGENDARY)
+- Fat (LEGENDARY)
+- Clarity (LEGENDARY)
+- Swordsman (ULTIMATE)
+- Spirits (ULTIMATE)
+- Ragdoll (ULTIMATE)
+- Obsidianshield (ULTIMATE)
+- Heavy (ULTIMATE)
+- Guardians (ULTIMATE)
+- Disappear (ULTIMATE)
+- Demonic (ULTIMATE)
+- Angelic (ULTIMATE)
+- Wither (ELITE)
+- Voodoo (ELITE)
+- Trickster (ELITE)
+- Stormcaller (ELITE)
+- Poisoned (ELITE)
+- Frozen (ELITE)
+- Curse (ELITE)
+- Cactus (ELITE)
+- Sustain (UNIQUE)
+- Self Destruct (UNIQUE)
+- Commander (UNIQUE)
+- Vanish (SIMPLE)
+- Shuffle (SIMPLE)
+- Scorching (SIMPLE)
+- Rumble (SIMPLE)
+- Resonate (SIMPLE)
+- Getaway (SIMPLE)
+- End Affinity (SIMPLE)
+- Adrenaline (SIMPLE)
+
+leggings
+- Creeper Armor (ULTIMATE)
+- Dodge (ULTIMATE)
+- Safeguard (ULTIMATE)
+- Overload (LEGENDARY)
+- Reflect (UNIQUE)
+- Tank (ULTIMATE)
+- Molten (UNIQUE)
+- Mark of the Beast (MASTERY)
+- Natures Wrath (SOUL)
+- Immortal (SOUL)
+- Soul Hardened (HEROIC)
+- Paladin Armored (HEROIC)
+- Epidemic Carrier (HEROIC)
+- Protection (LEGENDARY)
+- Lucid (LEGENDARY)
+- Exterminator (LEGENDARY)
+- Enlighted (LEGENDARY)
+- Divert (LEGENDARY)
+- Deathbringer (LEGENDARY)
+- Armored (LEGENDARY)
+- Valor (ULTIMATE)
+- Arrow Deflect (ULTIMATE)
+- Ward (UNIQUE)
+- Horrify (MASTERY)
+- Rebounding (SIMPLE)
+- Nether Affinity (SIMPLE)
+- Aura (SIMPLE)
+- Reinforced Tank (HEROIC)
+- Planetary Deathbringer (HEROIC)
+- Mighty Cactus (HEROIC)
+- Mega Heavy (HEROIC)
+- Godly Overload (HEROIC)
+- Ethereal Dodge (HEROIC)
+- Divine Enlighted (HEROIC)
+- Unholy (LEGENDARY)
+- Turmoil (LEGENDARY)
+- Surprise (LEGENDARY)
+- Patch (LEGENDARY)
+- Hardened (LEGENDARY)
+- Clarity (LEGENDARY)
+- Swordsman (ULTIMATE)
+- Spirits (ULTIMATE)
+- Ragdoll (ULTIMATE)
+- Obsidianshield (ULTIMATE)
+- Heavy (ULTIMATE)
+- Guardians (ULTIMATE)
+- Disappear (ULTIMATE)
+- Demonic (ULTIMATE)
+- Angelic (ULTIMATE)
+- Wither (ELITE)
+- Voodoo (ELITE)
+- Trickster (ELITE)
+- Stormcaller (ELITE)
+- Poisoned (ELITE)
+- Frozen (ELITE)
+- Extinguish (ELITE)
+- Curse (ELITE)
+- Cactus (ELITE)
+- Sustain (UNIQUE)
+- Self Destruct (UNIQUE)
+- Plague Carrier (UNIQUE)
+- Lifebloom (UNIQUE)
+- Explosive Demise (UNIQUE)
+- Commander (UNIQUE)
+- Vanish (SIMPLE)
+- Shuffle (SIMPLE)
+- Scorching (SIMPLE)
+- Rumble (SIMPLE)
+- Resonate (SIMPLE)
+- Getaway (SIMPLE)
+- End Affinity (SIMPLE)
+- Adrenaline (SIMPLE)
+
+boots
+- Creeper Armor (ULTIMATE)
+- Dodge (ULTIMATE)
+- Safeguard (ULTIMATE)
+- Overload (LEGENDARY)
+- Jelly Legs (ULTIMATE)
+- Gears (LEGENDARY)
+- Reflect (UNIQUE)
+- Springs (ELITE)
+- Tank (ULTIMATE)
+- Molten (UNIQUE)
+- Mark of the Beast (MASTERY)
+- Natures Wrath (SOUL)
+- Immortal (SOUL)
+- Soul Hardened (HEROIC)
+- Polymorphic Metaphysical (HEROIC)
+- Paladin Armored (HEROIC)
+- Torrent (LEGENDARY)
+- Protection (LEGENDARY)
+- Lucid (LEGENDARY)
+- Enlighted (LEGENDARY)
+- Divert (LEGENDARY)
+- Deathbringer (LEGENDARY)
+- Armored (LEGENDARY)
+- Aqua (LEGENDARY)
+- Valor (ULTIMATE)
+- Metaphysical (ULTIMATE)
+- Ender Walker (ULTIMATE)
+- Arrow Deflect (ULTIMATE)
+- Aegis (ULTIMATE)
+- Ward (UNIQUE)
+- Soul Siphone (MASTERY)
+- Horrify (MASTERY)
+- EnderShift (UNIQUE)
+- Rebounding (SIMPLE)
+- Nether Affinity (SIMPLE)
+- Escape (SIMPLE)
+- Aura (SIMPLE)
+- Reinforced Tank (HEROIC)
+- Planetary Deathbringer (HEROIC)
+- Mighty Cactus (HEROIC)
+- Mega Heavy (HEROIC)
+- Guided Rocket Escape (HEROIC)
+- Godly Overload (HEROIC)
+- Ethereal Dodge (HEROIC)
+- Divine Enlighted (HEROIC)
+- Wings (LEGENDARY)
+- Water Walker (LEGENDARY)
+- Unholy (LEGENDARY)
+- Turmoil (LEGENDARY)
+- Take Off (LEGENDARY)
+- Surprise (LEGENDARY)
+- Quiver (LEGENDARY)
+- Patch (LEGENDARY)
+- Lava Walker (LEGENDARY)
+- Hardened (LEGENDARY)
+- Convulse (LEGENDARY)
+- Clarity (LEGENDARY)
+- Swordsman (ULTIMATE)
+- Spirits (ULTIMATE)
+- Ragdoll (ULTIMATE)
+- Plummet (ULTIMATE)
+- Obsidianshield (ULTIMATE)
+- Heavy (ULTIMATE)
+- Guardians (ULTIMATE)
+- Disappear (ULTIMATE)
+- Demonic (ULTIMATE)
+- Angelic (ULTIMATE)
+- Wither (ELITE)
+- Voodoo (ELITE)
+- Undead Ruse (ELITE)
+- Trickster (ELITE)
+- Stormcaller (ELITE)
+- Rocket Escape (ELITE)
+- Poisoned (ELITE)
+- Frozen (ELITE)
+- Curse (ELITE)
+- Cactus (ELITE)
+- Anti Gravity (ELITE)
+- Sustain (UNIQUE)
+- Self Destruct (UNIQUE)
+- Commander (UNIQUE)
+- Vanish (SIMPLE)
+- Shuffle (SIMPLE)
+- Scorching (SIMPLE)
+- Rumble (SIMPLE)
+- Resonate (SIMPLE)
+- Getaway (SIMPLE)
+- Feather Step (SIMPLE)
+- End Affinity (SIMPLE)
+- Adrenaline (SIMPLE)
+
+pickaxe
+- Vein Miner (ELITE)
+- Trench (ULTIMATE)
+- Multiplication (FABLED)
+- Haste (FABLED)
+- Telepathy (UNIQUE)
+- Auto Smelt (SIMPLE)
+- Unbreakable (FABLED)
+- Soulbound (HEROIC)
+- Detonate (ULTIMATE)
+- Experience (SIMPLE)
+- Blast Mining (SIMPLE)
+- Atomic Detonate (HEROIC)
+- Soulminer (FABLED)
+- Restore (FABLED)
+- Gemify (FABLED)
+- Tunnel (ULTIMATE)
+- Replenish (ELITE)
+- Reforged (ELITE)
+- Obsidian Destroyer (UNIQUE)
+- Smelting (SIMPLE)
+- Rebreather (SIMPLE)
+- Oxygenate (SIMPLE)
+- Nether Prospector (SIMPLE)
+- Infernal Touch (SIMPLE)
+- Hasten (SIMPLE)
+- Foraging (SIMPLE)
+- Curse of Breaklessness (SIMPLE)
+- Alacrity (SIMPLE)
+
+tools
+- Trench (ULTIMATE)
+- Haste (FABLED)
+- Telepathy (UNIQUE)
+- Harvest (ULTIMATE)
+- Replanter (UNIQUE)
+- Lucky (ULTIMATE)
+- Bait (LEGENDARY)
+- Auto Reel (ULTIMATE)
+- Allurement (SIMPLE)
+- Unbreakable (FABLED)
+- Sharpness Hook (ULTIMATE)
+- Potato Planter (ULTIMATE)
+- Planter (ULTIMATE)
+- Detonate (ULTIMATE)
+- Carrot Planter (ULTIMATE)
+- Hook (ELITE)
+- Experience (SIMPLE)
+- Atomic Detonate (HEROIC)
+- Rush (FABLED)
+- Restore (FABLED)
+- Slingshot (LEGENDARY)
+- Judgement (LEGENDARY)
+- Tunnel (ULTIMATE)
+- Reinforced (ULTIMATE)
+- Call to Allies (ULTIMATE)
+- Snap (ELITE)
+- Poisoned Hook (ELITE)
+- Momentum (ELITE)
+- Fire Hook (ELITE)
+- Infernal Touch (SIMPLE)
+- Hasten (SIMPLE)
+- Foraging (SIMPLE)
+- Alacrity (SIMPLE)
+
+trident
+- Bowmaster (ELITE)
+- Soulless (UNIQUE)
+- Strife (LEGENDARY)
+- Poseidon (ELITE)
+- Impact (ELITE)
+- Hunter (UNIQUE)
+- Double Blow (SIMPLE)
+- Twinge (LEGENDARY)
+- Deadshot (LEGENDARY)
+- Chaos (LEGENDARY)
+- Spark (ELITE)
+- Virus (UNIQUE)
+- Perish (UNIQUE)
+- Thor (SIMPLE)
+- Strike (SIMPLE)
+
+
+==========================================================================================
+###           RINCIAN LENGKAP 336 ENCHANTMENT PER KATEGORI PERLENGKAPAN        ###
+==========================================================================================
+
+==========================================================================================
+ 1. PEDANG & SENJATA TEMPUR JARAK DEKAT (SWORDS, KATANA, SCYTHE, DAGGER) (Total: 110 Enchant)
+==========================================================================================
+Deskripsi: Enchantment khusus untuk pedang, katana Sakura, sabit maut, dan senjata melee.
+
+[01] ID: abrasion
+     Nama Tampilan : Abrasion
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Senjata Tempur
+     Efek Sihir    : Merusak dan mengikis ketahanan (durability) armor lawan saat diserang.
+     Contoh Command: /ae enchant abrasion 3
+     ---------------------------------------------------------------------------
+[02] ID: arcticfreeze
+     Nama Tampilan : Arctic freeze
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Peluang memberikan efek Slowness dan pendarahan pada musuh.
+     Contoh Command: /ae enchant arcticfreeze 3
+     ---------------------------------------------------------------------------
+[03] ID: ascend
+     Nama Tampilan : Ascend
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Melayang ke udara (Levitasi). Klik-Kanan untuk mengaktifkan.
+     Contoh Command: /ae enchant ascend 3
+     ---------------------------------------------------------------------------
+[04] ID: blackout
+     Nama Tampilan : Blackout
+     Tingkat Tier  : SIMPLE (Level Maks: 5)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Memberikan efek kebutaan (Blindness) pada lawan saat diserang.
+     Contoh Command: /ae enchant blackout 5
+     ---------------------------------------------------------------------------
+[05] ID: blazereaper
+     Nama Tampilan : Blaze Reaper
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Senjata Tempur
+     Efek Sihir    : Meningkatkan damage serangan terhadap makhluk dimensi Nether.
+     Contoh Command: /ae enchant blazereaper 3
+     ---------------------------------------------------------------------------
+[06] ID: bonecrusher
+     Nama Tampilan : Bone Crusher
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Pedang & Kapak
+     Efek Sihir    : Meningkatkan damage serangan terhadap monster Skeleton.
+     Contoh Command: /ae enchant bonecrusher 3
+     ---------------------------------------------------------------------------
+[07] ID: brightness
+     Nama Tampilan : Brightness
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Peluang memberikan damage lebih besar pada Warden di tempat gelap.
+     Contoh Command: /ae enchant brightness 3
+     ---------------------------------------------------------------------------
+[08] ID: caffeinated
+     Nama Tampilan : Caffeinated
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Peluang meningkatkan kecepatan serang saat sedang berlari cepat (sprint).
+     Contoh Command: /ae enchant caffeinated 3
+     ---------------------------------------------------------------------------
+[09] ID: carve
+     Nama Tampilan : Carve
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Tebasan menyapu yang melukai beberapa musuh di sekitar target.
+     Contoh Command: /ae enchant carve 3
+     ---------------------------------------------------------------------------
+[10] ID: charge
+     Nama Tampilan : Charge
+     Tingkat Tier  : SIMPLE (Level Maks: 2)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Melesat kencang ke depan untuk menerjang lawan.
+     Contoh Command: /ae enchant charge 2
+     ---------------------------------------------------------------------------
+[11] ID: cubism
+     Nama Tampilan : Cubism
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Senjata & Busur
+     Efek Sihir    : Memberikan damage tambahan terhadap Slime dan Magma Cube.
+     Contoh Command: /ae enchant cubism 3
+     ---------------------------------------------------------------------------
+[12] ID: harmlessness
+     Nama Tampilan : Curse of Harmlessness
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Kutukan: Mengurangi efektivitas damage serangan senjata.
+     Contoh Command: /ae enchant harmlessness 3
+     ---------------------------------------------------------------------------
+[13] ID: deathpunch
+     Nama Tampilan : Death Punch
+     Tingkat Tier  : SIMPLE (Level Maks: 5)
+     Cocok Untuk   : Pedang & Kapak
+     Efek Sihir    : Meningkatkan damage serangan terhadap Zombie.
+     Contoh Command: /ae enchant deathpunch 5
+     ---------------------------------------------------------------------------
+[14] ID: decapitation
+     Nama Tampilan : Decapitation
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Pedang & Kapak
+     Efek Sihir    : Peluang memenggal kepala musuh saat berhasil dikalahkan.
+     Contoh Command: /ae enchant decapitation 3
+     ---------------------------------------------------------------------------
+[15] ID: drain
+     Nama Tampilan : Drain
+     Tingkat Tier  : SIMPLE (Level Maks: 7)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Menguras stamina dan regenerasi darah lawan saat diserang.
+     Contoh Command: /ae enchant drain 7
+     ---------------------------------------------------------------------------
+[16] ID: enderbane
+     Nama Tampilan : Enderbane
+     Tingkat Tier  : SIMPLE (Level Maks: 5)
+     Cocok Untuk   : Senjata Tempur
+     Efek Sihir    : Meningkatkan damage serangan terhadap Enderman dan Ender Dragon.
+     Contoh Command: /ae enchant enderbane 5
+     ---------------------------------------------------------------------------
+[17] ID: epicness
+     Nama Tampilan : Epicness
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Menghasilkan partikel mistis dan efek suara megah saat menyerang.
+     Contoh Command: /ae enchant epicness 3
+     ---------------------------------------------------------------------------
+[18] ID: etheral
+     Nama Tampilan : Etheral
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Mendapatkan efek Haste setelah mengalahkan monster.
+     Contoh Command: /ae enchant etheral 3
+     ---------------------------------------------------------------------------
+[19] ID: finishing
+     Nama Tampilan : Finishing
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Senjata Tempur
+     Efek Sihir    : Meningkatkan damage pada musuh yang memiliki sisa HP rendah.
+     Contoh Command: /ae enchant finishing 3
+     ---------------------------------------------------------------------------
+[20] ID: first_strike
+     Nama Tampilan : First Strike
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Senjata Tempur
+     Efek Sihir    : Memberikan damage ekstra pada musuh yang darahnya masih penuh.
+     Contoh Command: /ae enchant first_strike 3
+     ---------------------------------------------------------------------------
+[21] ID: forcefield
+     Nama Tampilan : Forcefield
+     Tingkat Tier  : SIMPLE (Level Maks: 5)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Menciptakan medan pelindung yang mementalkan musuh di dekatmu.
+     Contoh Command: /ae enchant forcefield 5
+     ---------------------------------------------------------------------------
+[22] ID: headless
+     Nama Tampilan : Headless
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Peluang mengklaim kepala lawan setelah memenangkan duel.
+     Contoh Command: /ae enchant headless 3
+     ---------------------------------------------------------------------------
+[23] ID: incinerate
+     Nama Tampilan : Incinerate
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Pedang & Kapak
+     Efek Sihir    : Meningkatkan damage serangan terhadap monster Laba-laba.
+     Contoh Command: /ae enchant incinerate 3
+     ---------------------------------------------------------------------------
+[24] ID: insomnia
+     Nama Tampilan : Insomnia
+     Tingkat Tier  : SIMPLE (Level Maks: 7)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Memberikan efek Mining Fatigue dan pusing pada musuh.
+     Contoh Command: /ae enchant insomnia 7
+     ---------------------------------------------------------------------------
+[25] ID: ninja
+     Nama Tampilan : Ninja
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Meningkatkan kelincahan dan peluang menghindar dalam kegelapan.
+     Contoh Command: /ae enchant ninja 3
+     ---------------------------------------------------------------------------
+[26] ID: obliterate
+     Nama Tampilan : Obliterate
+     Tingkat Tier  : SIMPLE (Level Maks: 5)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Memberikan efek knockback ekstrem yang mementalkan musuh jauh.
+     Contoh Command: /ae enchant obliterate 5
+     ---------------------------------------------------------------------------
+[27] ID: postpone
+     Nama Tampilan : Postpone
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Meniadakan knockback pada monster agar mudah diserang berturut-turut.
+     Contoh Command: /ae enchant postpone 3
+     ---------------------------------------------------------------------------
+[28] ID: repel
+     Nama Tampilan : Repel
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Peluang mendorong lawan mundur ke belakang saat bertarung.
+     Contoh Command: /ae enchant repel 3
+     ---------------------------------------------------------------------------
+[29] ID: shura
+     Nama Tampilan : Shura
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Meningkatkan damage serangan kritikal saat HP di bawah 50%.
+     Contoh Command: /ae enchant shura 3
+     ---------------------------------------------------------------------------
+[30] ID: skullcrusher
+     Nama Tampilan : Skullcrusher
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Pedang & Kapak
+     Efek Sihir    : Meningkatkan damage tebasan terhadap Skeleton dan Wither Skeleton.
+     Contoh Command: /ae enchant skullcrusher 3
+     ---------------------------------------------------------------------------
+[31] ID: starvation
+     Nama Tampilan : Starvation
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Senjata Tempur
+     Efek Sihir    : Peluang memberikan efek Kelaparan (Hunger) parah pada musuh.
+     Contoh Command: /ae enchant starvation 3
+     ---------------------------------------------------------------------------
+[32] ID: thunderingblow
+     Nama Tampilan : Thundering Blow
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Pukulan bergemuruh yang memberikan efek Smite pada musuh.
+     Contoh Command: /ae enchant thunderingblow 3
+     ---------------------------------------------------------------------------
+[33] ID: zombiecrusher
+     Nama Tampilan : Zombie Crusher
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Pedang & Kapak
+     Efek Sihir    : Meningkatkan damage tebasan terhadap segala varian Zombie.
+     Contoh Command: /ae enchant zombiecrusher 3
+     ---------------------------------------------------------------------------
+[34] ID: berserk
+     Nama Tampilan : Berserk
+     Tingkat Tier  : UNIQUE (Level Maks: 5)
+     Cocok Untuk   : Pedang & Kapak
+     Efek Sihir    : Meningkatkan kekuatan serangan fisik saat kesehatan pengguna menipis.
+     Contoh Command: /ae enchant berserk 5
+     ---------------------------------------------------------------------------
+[35] ID: devour
+     Nama Tampilan : Devour
+     Tingkat Tier  : UNIQUE (Level Maks: 4)
+     Cocok Untuk   : Senjata Tempur
+     Efek Sihir    : Peluang memulihkan barisan rasa lapar saat mengalahkan musuh.
+     Contoh Command: /ae enchant devour 4
+     ---------------------------------------------------------------------------
+[36] ID: famine
+     Nama Tampilan : Famine
+     Tingkat Tier  : UNIQUE (Level Maks: 4)
+     Cocok Untuk   : Senjata Tempur
+     Efek Sihir    : Peluang membuat musuh kelaparan hebat sehingga tidak dapat sprint.
+     Contoh Command: /ae enchant famine 4
+     ---------------------------------------------------------------------------
+[37] ID: featherweight
+     Nama Tampilan : Featherweight
+     Tingkat Tier  : UNIQUE (Level Maks: 3)
+     Cocok Untuk   : Pedang & Kapak
+     Efek Sihir    : Peluang mendapatkan lonjakan kecepatan ayunan senjata (Haste).
+     Contoh Command: /ae enchant featherweight 3
+     ---------------------------------------------------------------------------
+[38] ID: ravenous
+     Nama Tampilan : Ravenous
+     Tingkat Tier  : UNIQUE (Level Maks: 4)
+     Cocok Untuk   : Pedang & Kapak
+     Efek Sihir    : Menghisap cadangan makanan musuh untuk memulihkan rasa lapar pengguna.
+     Contoh Command: /ae enchant ravenous 4
+     ---------------------------------------------------------------------------
+[39] ID: skillswipe
+     Nama Tampilan : Skill Swipe
+     Tingkat Tier  : UNIQUE (Level Maks: 5)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Mencuri Exp Orb langsung dari lawan setiap serangan mendarat.
+     Contoh Command: /ae enchant skillswipe 5
+     ---------------------------------------------------------------------------
+[40] ID: slayer
+     Nama Tampilan : Slayer
+     Tingkat Tier  : UNIQUE (Level Maks: 4)
+     Cocok Untuk   : Pedang & Kapak
+     Efek Sihir    : Meningkatkan damage serangan terhadap makhluk pasif.
+     Contoh Command: /ae enchant slayer 4
+     ---------------------------------------------------------------------------
+[41] ID: allure
+     Nama Tampilan : Allure
+     Tingkat Tier  : ELITE (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Menarik mob yang terkena serangan mendekat ke arah pengguna.
+     Contoh Command: /ae enchant allure 3
+     ---------------------------------------------------------------------------
+[42] ID: blind
+     Nama Tampilan : Blind
+     Tingkat Tier  : ELITE (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Membutakan pandangan musuh selama beberapa detik saat diserang.
+     Contoh Command: /ae enchant blind 3
+     ---------------------------------------------------------------------------
+[43] ID: critical
+     Nama Tampilan : Critical
+     Tingkat Tier  : ELITE (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Meningkatkan kerusakan pukulan kritikal secara signifikan.
+     Contoh Command: /ae enchant critical 3
+     ---------------------------------------------------------------------------
+[44] ID: demonforged
+     Nama Tampilan : Demonforged
+     Tingkat Tier  : ELITE (Level Maks: 4)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Memperlambat ausnya durability perlengkapan secara drastis.
+     Contoh Command: /ae enchant demonforged 4
+     ---------------------------------------------------------------------------
+[45] ID: enderslayer
+     Nama Tampilan : Ender Slayer
+     Tingkat Tier  : ELITE (Level Maks: 5)
+     Cocok Untuk   : Senjata Tempur
+     Efek Sihir    : Meningkatkan damage masif terhadap Enderman dan Ender Dragon.
+     Contoh Command: /ae enchant enderslayer 5
+     ---------------------------------------------------------------------------
+[46] ID: execute
+     Nama Tampilan : Execute
+     Tingkat Tier  : ELITE (Level Maks: 7)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Memberikan damage berlipat ganda pada musuh yang HP-nya sekarat.
+     Contoh Command: /ae enchant execute 7
+     ---------------------------------------------------------------------------
+[47] ID: greatsword
+     Nama Tampilan : Greatsword
+     Tingkat Tier  : ELITE (Level Maks: 5)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Memperlebar jangkauan tebasan dan melumpuhkan perisai lawan.
+     Contoh Command: /ae enchant greatsword 5
+     ---------------------------------------------------------------------------
+[48] ID: immolate
+     Nama Tampilan : Immolate
+     Tingkat Tier  : ELITE (Level Maks: 3)
+     Cocok Untuk   : Pedang & Kapak
+     Efek Sihir    : Meningkatkan damage serangan secara masif terhadap Laba-laba.
+     Contoh Command: /ae enchant immolate 3
+     ---------------------------------------------------------------------------
+[49] ID: infernal
+     Nama Tampilan : Infernal
+     Tingkat Tier  : ELITE (Level Maks: 3)
+     Cocok Untuk   : Pedang & Kapak
+     Efek Sihir    : Memicu ledakan api yang membakar musuh saat terkena serangan.
+     Contoh Command: /ae enchant infernal 3
+     ---------------------------------------------------------------------------
+[50] ID: magnet
+     Nama Tampilan : Magnet
+     Tingkat Tier  : ELITE (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Menarik pemain lawan yang diserang mendekat ke posisimu.
+     Contoh Command: /ae enchant magnet 3
+     ---------------------------------------------------------------------------
+[51] ID: netherslayer
+     Nama Tampilan : Nether Slayer
+     Tingkat Tier  : ELITE (Level Maks: 5)
+     Cocok Untuk   : Senjata Tempur
+     Efek Sihir    : Meningkatkan damage serangan terhadap seluruh monster di Nether.
+     Contoh Command: /ae enchant netherslayer 5
+     ---------------------------------------------------------------------------
+[52] ID: nightwalker
+     Nama Tampilan : Nightwalker
+     Tingkat Tier  : ELITE (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Membekukan monster di tempat saat bertarung di malam hari.
+     Contoh Command: /ae enchant nightwalker 3
+     ---------------------------------------------------------------------------
+[53] ID: paralyze
+     Nama Tampilan : Paralyze
+     Tingkat Tier  : ELITE (Level Maks: 4)
+     Cocok Untuk   : Pedang & Kapak
+     Efek Sihir    : Melumpuhkan lawan sesaat sehingga tidak dapat bergerak atau memukul.
+     Contoh Command: /ae enchant paralyze 4
+     ---------------------------------------------------------------------------
+[54] ID: poison
+     Nama Tampilan : Poison
+     Tingkat Tier  : ELITE (Level Maks: 3)
+     Cocok Untuk   : Pedang & Kapak
+     Efek Sihir    : Peluang meracuni musuh saat melancarkan serangan.
+     Contoh Command: /ae enchant poison 3
+     ---------------------------------------------------------------------------
+[55] ID: reforged
+     Nama Tampilan : Reforged
+     Tingkat Tier  : ELITE (Level Maks: 10)
+     Cocok Untuk   : Senjata & Perkakas
+     Efek Sihir    : Memperbaiki ketahanan durability perlengkapan secara otomatis perlahan.
+     Contoh Command: /ae enchant reforged 10
+     ---------------------------------------------------------------------------
+[56] ID: shackle
+     Nama Tampilan : Shackle
+     Tingkat Tier  : ELITE (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Menjerat dan menarik target yang terkena pukulan ke arahmu.
+     Contoh Command: /ae enchant shackle 3
+     ---------------------------------------------------------------------------
+[57] ID: suspend
+     Nama Tampilan : Suspend
+     Tingkat Tier  : ELITE (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Meniadakan knockback pada monster agar dapat dihajar bertubi-tubi.
+     Contoh Command: /ae enchant suspend 3
+     ---------------------------------------------------------------------------
+[58] ID: trap
+     Nama Tampilan : Trap
+     Tingkat Tier  : ELITE (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Peluang memberikan efek kelumpuhan Slowness ekstrem pada musuh.
+     Contoh Command: /ae enchant trap 3
+     ---------------------------------------------------------------------------
+[59] ID: vampire
+     Nama Tampilan : Vampire
+     Tingkat Tier  : ELITE (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Menghisap darah musuh untuk menyembuhkan luka pengguna (Lifesteal).
+     Contoh Command: /ae enchant vampire 3
+     ---------------------------------------------------------------------------
+[60] ID: ambit
+     Nama Tampilan : Ambit
+     Tingkat Tier  : ULTIMATE (Level Maks: 7)
+     Cocok Untuk   : Pedang & Kapak
+     Efek Sihir    : Memberikan damage area menyapu yang meluas seiring naiknya level.
+     Contoh Command: /ae enchant ambit 7
+     ---------------------------------------------------------------------------
+[61] ID: arsonist
+     Nama Tampilan : Arsonist
+     Tingkat Tier  : ULTIMATE (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Membakar musuh dan area pijakannya dalam api neraka membara.
+     Contoh Command: /ae enchant arsonist 3
+     ---------------------------------------------------------------------------
+[62] ID: assassin
+     Nama Tampilan : Assassin
+     Tingkat Tier  : ULTIMATE (Level Maks: 5)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Memberikan damage serangan kejutan mematikan dari belakang lawan.
+     Contoh Command: /ae enchant assassin 5
+     ---------------------------------------------------------------------------
+[63] ID: block
+     Nama Tampilan : Block
+     Tingkat Tier  : ULTIMATE (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Peluang menepis dan menahan serangan fisik musuh secara otomatis.
+     Contoh Command: /ae enchant block 3
+     ---------------------------------------------------------------------------
+[64] ID: confuse
+     Nama Tampilan : Confuse
+     Tingkat Tier  : ULTIMATE (Level Maks: 4)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Peluang memberikan efek Mual (Nausea) berat pada musuh.
+     Contoh Command: /ae enchant confuse 4
+     ---------------------------------------------------------------------------
+[65] ID: disintegrate
+     Nama Tampilan : Disintegrate
+     Tingkat Tier  : ULTIMATE (Level Maks: 4)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Mengikis ketahanan zirah musuh secara masif dalam setiap tebasan.
+     Contoh Command: /ae enchant disintegrate 4
+     ---------------------------------------------------------------------------
+[66] ID: distance
+     Nama Tampilan : Distance
+     Tingkat Tier  : ULTIMATE (Level Maks: 4)
+     Cocok Untuk   : Senjata Tempur
+     Efek Sihir    : Mendorong musuh mundur jauh saat mereka mencoba mendekat.
+     Contoh Command: /ae enchant distance 4
+     ---------------------------------------------------------------------------
+[67] ID: dominate
+     Nama Tampilan : Dominate
+     Tingkat Tier  : ULTIMATE (Level Maks: 4)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Melemahkan ritme pukulan musuh dan memperlambat serangannya.
+     Contoh Command: /ae enchant dominate 4
+     ---------------------------------------------------------------------------
+[68] ID: endmaster
+     Nama Tampilan : Endmaster
+     Tingkat Tier  : ULTIMATE (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Melipatgandakan damage serangan terhadap monster di dimensi The End.
+     Contoh Command: /ae enchant endmaster 3
+     ---------------------------------------------------------------------------
+[69] ID: enrage
+     Nama Tampilan : Enrage
+     Tingkat Tier  : ULTIMATE (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Meningkatkan kekuatan serangan saat kesehatan pengguna berada di titik rendah.
+     Contoh Command: /ae enchant enrage 3
+     ---------------------------------------------------------------------------
+[70] ID: exalted
+     Nama Tampilan : Exalted
+     Tingkat Tier  : ULTIMATE (Level Maks: 4)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Memancarkan aura suci yang meregenerasi darah pengguna secara bertahap.
+     Contoh Command: /ae enchant exalted 4
+     ---------------------------------------------------------------------------
+[71] ID: fuddle
+     Nama Tampilan : Fuddle
+     Tingkat Tier  : ULTIMATE (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Mengacaukan dan menukar posisi item di hotbar lawan.
+     Contoh Command: /ae enchant fuddle 3
+     ---------------------------------------------------------------------------
+[72] ID: iceaspect
+     Nama Tampilan : Ice Aspect
+     Tingkat Tier  : ULTIMATE (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Membekukan musuh dalam es dan menimbulkan damage beku bertahap.
+     Contoh Command: /ae enchant iceaspect 3
+     ---------------------------------------------------------------------------
+[73] ID: immolation
+     Nama Tampilan : Immolation
+     Tingkat Tier  : ULTIMATE (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Membakar seluruh monster di sekitar pengguna dalam lingkaran api.
+     Contoh Command: /ae enchant immolation 3
+     ---------------------------------------------------------------------------
+[74] ID: interrupt
+     Nama Tampilan : Interrupt
+     Tingkat Tier  : ULTIMATE (Level Maks: 2)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Peluang menghentikan ritme serangan lawan dengan Mining Fatigue.
+     Contoh Command: /ae enchant interrupt 2
+     ---------------------------------------------------------------------------
+[75] ID: netherling
+     Nama Tampilan : Netherling
+     Tingkat Tier  : ULTIMATE (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Melipatgandakan damage serangan terhadap makhluk di dimensi Nether.
+     Contoh Command: /ae enchant netherling 3
+     ---------------------------------------------------------------------------
+[76] ID: nightowl
+     Nama Tampilan : Night Owl
+     Tingkat Tier  : ULTIMATE (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Memberikan bonus damage ekstra saat bertarung di malam hari.
+     Contoh Command: /ae enchant nightowl 3
+     ---------------------------------------------------------------------------
+[77] ID: permafrost
+     Nama Tampilan : Permafrost
+     Tingkat Tier  : ULTIMATE (Level Maks: 5)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Peluang membekukan lawan dan memicu luka sayatan pendarahan.
+     Contoh Command: /ae enchant permafrost 5
+     ---------------------------------------------------------------------------
+[78] ID: pickpocket
+     Nama Tampilan : Pickpocket
+     Tingkat Tier  : ULTIMATE (Level Maks: 3)
+     Cocok Untuk   : Senjata Tempur
+     Efek Sihir    : Peluang mencuri sejumlah koin uang dari lawan saat bertarung.
+     Contoh Command: /ae enchant pickpocket 3
+     ---------------------------------------------------------------------------
+[79] ID: abiding
+     Nama Tampilan : Abiding
+     Tingkat Tier  : LEGENDARY (Level Maks: 1)
+     Cocok Untuk   : Senjata Tempur
+     Efek Sihir    : Menjadikan senjata tidak dapat hancur (Unbreakable).
+     Contoh Command: /ae enchant abiding 1
+     ---------------------------------------------------------------------------
+[80] ID: beastslayer
+     Nama Tampilan : Beastslayer
+     Tingkat Tier  : LEGENDARY (Level Maks: 4)
+     Cocok Untuk   : Pedang & Kapak
+     Efek Sihir    : Meningkatkan damage serangan terhadap seluruh monster agresif.
+     Contoh Command: /ae enchant beastslayer 4
+     ---------------------------------------------------------------------------
+[81] ID: deranged
+     Nama Tampilan : Deranged
+     Tingkat Tier  : LEGENDARY (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Menyambar petir petaka ke seluruh pemain lawan di sekitar pengguna.
+     Contoh Command: /ae enchant deranged 3
+     ---------------------------------------------------------------------------
+[82] ID: disarmor
+     Nama Tampilan : Disarmor
+     Tingkat Tier  : LEGENDARY (Level Maks: 8)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Peluang mencopot salah satu bagian armor musuh saat pertempuran.
+     Contoh Command: /ae enchant disarmor 8
+     ---------------------------------------------------------------------------
+[83] ID: doublestrike
+     Nama Tampilan : Double Strike
+     Tingkat Tier  : LEGENDARY (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Peluang melancarkan dua tebasan beruntun dalam satu kali ayunan.
+     Contoh Command: /ae enchant doublestrike 3
+     ---------------------------------------------------------------------------
+[84] ID: inquisitive
+     Nama Tampilan : Inquisitive
+     Tingkat Tier  : LEGENDARY (Level Maks: 4)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Peluang melipatgandakan perolehan Exp Orb dari monster hingga berlipat.
+     Contoh Command: /ae enchant inquisitive 4
+     ---------------------------------------------------------------------------
+[85] ID: inversion
+     Nama Tampilan : Inversion
+     Tingkat Tier  : LEGENDARY (Level Maks: 4)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Membalikkan efek negatif yang diterima menjadi buff kekuatan positif.
+     Contoh Command: /ae enchant inversion 4
+     ---------------------------------------------------------------------------
+[86] ID: killaura
+     Nama Tampilan : Kill Aura
+     Tingkat Tier  : LEGENDARY (Level Maks: 5)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Menyerang seluruh musuh di sekeliling pengguna secara otomatis.
+     Contoh Command: /ae enchant killaura 5
+     ---------------------------------------------------------------------------
+[87] ID: launch
+     Nama Tampilan : Launch
+     Tingkat Tier  : LEGENDARY (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Melesat kencang ke depan dengan melakukan Klik-Kanan pada senjata.
+     Contoh Command: /ae enchant launch 3
+     ---------------------------------------------------------------------------
+[88] ID: lifesteal
+     Nama Tampilan : Lifesteal
+     Tingkat Tier  : LEGENDARY (Level Maks: 5)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Menghisap darah musuh dalam jumlah besar untuk menyembuhkan diri.
+     Contoh Command: /ae enchant lifesteal 5
+     ---------------------------------------------------------------------------
+[89] ID: rage
+     Nama Tampilan : Rage
+     Tingkat Tier  : LEGENDARY (Level Maks: 6)
+     Cocok Untuk   : Senjata Tempur
+     Efek Sihir    : Meningkatkan damage serangan untuk setiap pukulan beruntun yang mengenai target.
+     Contoh Command: /ae enchant rage 6
+     ---------------------------------------------------------------------------
+[90] ID: rebound
+     Nama Tampilan : Rebound
+     Tingkat Tier  : LEGENDARY (Level Maks: 3)
+     Cocok Untuk   : Senjata Tempur
+     Efek Sihir    : Memulihkan sejumlah besar kesehatan setiap kali berhasil membunuh lawan.
+     Contoh Command: /ae enchant rebound 3
+     ---------------------------------------------------------------------------
+[91] ID: silence
+     Nama Tampilan : Silence
+     Tingkat Tier  : LEGENDARY (Level Maks: 4)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Peluang menonaktifkan aktivasi custom enchant pada armor lawan.
+     Contoh Command: /ae enchant silence 4
+     ---------------------------------------------------------------------------
+[92] ID: stun
+     Nama Tampilan : Stun
+     Tingkat Tier  : LEGENDARY (Level Maks: 3)
+     Cocok Untuk   : Senjata Tempur
+     Efek Sihir    : Melumpuhkan dan membekukan musuh sepenuhnya dalam kondisi pingsan sesaat.
+     Contoh Command: /ae enchant stun 3
+     ---------------------------------------------------------------------------
+[93] ID: thunderlord
+     Nama Tampilan : Thunderlord
+     Tingkat Tier  : LEGENDARY (Level Maks: 3)
+     Cocok Untuk   : Senjata Tempur
+     Efek Sihir    : Memanggil sambaran petir dahsyat setiap pukulan ketiga mendarat.
+     Contoh Command: /ae enchant thunderlord 3
+     ---------------------------------------------------------------------------
+[94] ID: diploid
+     Nama Tampilan : Diploid
+     Tingkat Tier  : FABLED (Level Maks: 5)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Peluang menggandakan seluruh loot drop dari monster yang dikalahkan.
+     Contoh Command: /ae enchant diploid 5
+     ---------------------------------------------------------------------------
+[95] ID: disarm
+     Nama Tampilan : Disarm
+     Tingkat Tier  : FABLED (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Peluang melucuti dan melepaskan senjata utama dari genggaman lawan.
+     Contoh Command: /ae enchant disarm 3
+     ---------------------------------------------------------------------------
+[96] ID: nulify
+     Nama Tampilan : Nulify
+     Tingkat Tier  : FABLED (Level Maks: 4)
+     Cocok Untuk   : Senjata Tempur
+     Efek Sihir    : Menetralisir dan membatalkan aktivasi seluruh efek sihir lawan saat diserang.
+     Contoh Command: /ae enchant nulify 4
+     ---------------------------------------------------------------------------
+[97] ID: scare
+     Nama Tampilan : Scare
+     Tingkat Tier  : FABLED (Level Maks: 5)
+     Cocok Untuk   : Senjata Tempur
+     Efek Sihir    : Menakut-nakuti musuh di sekitar sehingga mereka lari kocar-kacir panik.
+     Contoh Command: /ae enchant scare 5
+     ---------------------------------------------------------------------------
+[98] ID: spiritmaster
+     Nama Tampilan : Spiritmaster
+     Tingkat Tier  : FABLED (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Memanggil roh pelindung mistis yang menyerang setiap musuh yang mendekat.
+     Contoh Command: /ae enchant spiritmaster 3
+     ---------------------------------------------------------------------------
+[99] ID: demoniclifesteal
+     Nama Tampilan : Demonic Lifesteal
+     Tingkat Tier  : HEROIC (Level Maks: 5)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Menghisap esensi kehidupan musuh secara ganas untuk memulihkan HP pengguna.
+     Contoh Command: /ae enchant demoniclifesteal 5
+     ---------------------------------------------------------------------------
+[100] ID: masterinquisitive
+     Nama Tampilan : Master Inquisitive
+     Tingkat Tier  : HEROIC (Level Maks: 4)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Melipatgandakan perolehan Exp Orb hingga ratusan persen dari setiap mob.
+     Contoh Command: /ae enchant masterinquisitive 4
+     ---------------------------------------------------------------------------
+[101] ID: reflectiveblock
+     Nama Tampilan : Reflective Block
+     Tingkat Tier  : HEROIC (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Menangkis 100% serangan dan memantulkan seluruh damagenya ke musuh.
+     Contoh Command: /ae enchant reflectiveblock 3
+     ---------------------------------------------------------------------------
+[102] ID: shadowassassin
+     Nama Tampilan : Shadow Assassin
+     Tingkat Tier  : HEROIC (Level Maks: 5)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Bersembunyi dalam bayangan dimensi dan membunuh musuh dengan satu tebasan fatal.
+     Contoh Command: /ae enchant shadowassassin 5
+     ---------------------------------------------------------------------------
+[103] ID: soulbound
+     Nama Tampilan : Soulbound
+     Tingkat Tier  : HEROIC (Level Maks: 3)
+     Cocok Untuk   : Senjata, Perkakas & Busur
+     Efek Sihir    : Peralatan terikat pada jiwa pengguna dan tidak akan pernah hilang saat mati.
+     Contoh Command: /ae enchant soulbound 3
+     ---------------------------------------------------------------------------
+[104] ID: titantrap
+     Nama Tampilan : Titan Trap
+     Tingkat Tier  : HEROIC (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Mengurung musuh dalam sangkar gravitasi titan yang menghentikan pelarian mereka.
+     Contoh Command: /ae enchant titantrap 3
+     ---------------------------------------------------------------------------
+[105] ID: divineimmolation
+     Nama Tampilan : Divine Immolation
+     Tingkat Tier  : SOUL (Level Maks: 4)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Membakar musuh dalam api suci ilahi yang mengabaikan ketahanan api (Fire Resistance).
+     Contoh Command: /ae enchant divineimmolation 4
+     ---------------------------------------------------------------------------
+[106] ID: paradox
+     Nama Tampilan : Paradox
+     Tingkat Tier  : SOUL (Level Maks: 5)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Mengubah rasa sakit menjadi kesembuhan; menyembuhkan rekan tim saat menerima damage.
+     Contoh Command: /ae enchant paradox 5
+     ---------------------------------------------------------------------------
+[107] ID: sabotage
+     Nama Tampilan : Sabotage
+     Tingkat Tier  : SOUL (Level Maks: 5)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Melumpuhkan mekanisme roket pelarian dan teleportasi mutiara milik musuh.
+     Contoh Command: /ae enchant sabotage 5
+     ---------------------------------------------------------------------------
+[108] ID: soultrap
+     Nama Tampilan : Soul Trap
+     Tingkat Tier  : SOUL (Level Maks: 3)
+     Cocok Untuk   : Senjata Tempur
+     Efek Sihir    : Mengunci dan menonaktifkan seluruh enchant sihir jiwa (Soul) lawan saat diserang.
+     Contoh Command: /ae enchant soultrap 3
+     ---------------------------------------------------------------------------
+[109] ID: halloweenify
+     Nama Tampilan : Halloweenify
+     Tingkat Tier  : MASTERY (Level Maks: 5)
+     Cocok Untuk   : Senjata Tempur
+     Efek Sihir    : Mengubah helm musuh menjadi labu berukir yang menghalangi pandangan mereka.
+     Contoh Command: /ae enchant halloweenify 5
+     ---------------------------------------------------------------------------
+[110] ID: soulgrind
+     Nama Tampilan : Soulgrind
+     Tingkat Tier  : MASTERY (Level Maks: 3)
+     Cocok Untuk   : Pedang
+     Efek Sihir    : Peluang memanen esensi jiwa mistis murni setiap kali membunuh monster liar.
+     Contoh Command: /ae enchant soulgrind 3
+     ---------------------------------------------------------------------------
+
+
+==========================================================================================
+ 2. KAPAK & KAPAK TEMPUR (AXES & BATTLEAXES) (Total: 42 Enchant)
+==========================================================================================
+Deskripsi: Enchantment khusus untuk kapak penebang pohon dan kapak tempur.
+
+[01] ID: bonecrusher
+     Nama Tampilan : Bone Crusher
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Pedang & Kapak
+     Efek Sihir    : Meningkatkan damage serangan terhadap monster Skeleton.
+     Contoh Command: /ae enchant bonecrusher 3
+     ---------------------------------------------------------------------------
+[02] ID: confusion
+     Nama Tampilan : Confusion
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Kapak Tempur
+     Efek Sihir    : Peluang memberikan efek Mual (Nausea) pada musuh.
+     Contoh Command: /ae enchant confusion 3
+     ---------------------------------------------------------------------------
+[03] ID: breaklessness
+     Nama Tampilan : Curse of Breaklessness
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Alat Tambang (Beliung, Sekop, Kapak)
+     Efek Sihir    : Kutukan: Memberikan 30% peluang gagal saat menambang blok.
+     Contoh Command: /ae enchant breaklessness 3
+     ---------------------------------------------------------------------------
+[04] ID: deathpunch
+     Nama Tampilan : Death Punch
+     Tingkat Tier  : SIMPLE (Level Maks: 5)
+     Cocok Untuk   : Pedang & Kapak
+     Efek Sihir    : Meningkatkan damage serangan terhadap Zombie.
+     Contoh Command: /ae enchant deathpunch 5
+     ---------------------------------------------------------------------------
+[05] ID: decapitation
+     Nama Tampilan : Decapitation
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Pedang & Kapak
+     Efek Sihir    : Peluang memenggal kepala musuh saat berhasil dikalahkan.
+     Contoh Command: /ae enchant decapitation 3
+     ---------------------------------------------------------------------------
+[06] ID: incinerate
+     Nama Tampilan : Incinerate
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Pedang & Kapak
+     Efek Sihir    : Meningkatkan damage serangan terhadap monster Laba-laba.
+     Contoh Command: /ae enchant incinerate 3
+     ---------------------------------------------------------------------------
+[07] ID: skullcrusher
+     Nama Tampilan : Skullcrusher
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Pedang & Kapak
+     Efek Sihir    : Meningkatkan damage tebasan terhadap Skeleton dan Wither Skeleton.
+     Contoh Command: /ae enchant skullcrusher 3
+     ---------------------------------------------------------------------------
+[08] ID: zombiecrusher
+     Nama Tampilan : Zombie Crusher
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Pedang & Kapak
+     Efek Sihir    : Meningkatkan damage tebasan terhadap segala varian Zombie.
+     Contoh Command: /ae enchant zombiecrusher 3
+     ---------------------------------------------------------------------------
+[09] ID: berserk
+     Nama Tampilan : Berserk
+     Tingkat Tier  : UNIQUE (Level Maks: 5)
+     Cocok Untuk   : Pedang & Kapak
+     Efek Sihir    : Meningkatkan kekuatan serangan fisik saat kesehatan pengguna menipis.
+     Contoh Command: /ae enchant berserk 5
+     ---------------------------------------------------------------------------
+[10] ID: featherweight
+     Nama Tampilan : Featherweight
+     Tingkat Tier  : UNIQUE (Level Maks: 3)
+     Cocok Untuk   : Pedang & Kapak
+     Efek Sihir    : Peluang mendapatkan lonjakan kecepatan ayunan senjata (Haste).
+     Contoh Command: /ae enchant featherweight 3
+     ---------------------------------------------------------------------------
+[11] ID: ravenous
+     Nama Tampilan : Ravenous
+     Tingkat Tier  : UNIQUE (Level Maks: 4)
+     Cocok Untuk   : Pedang & Kapak
+     Efek Sihir    : Menghisap cadangan makanan musuh untuk memulihkan rasa lapar pengguna.
+     Contoh Command: /ae enchant ravenous 4
+     ---------------------------------------------------------------------------
+[12] ID: slayer
+     Nama Tampilan : Slayer
+     Tingkat Tier  : UNIQUE (Level Maks: 4)
+     Cocok Untuk   : Pedang & Kapak
+     Efek Sihir    : Meningkatkan damage serangan terhadap makhluk pasif.
+     Contoh Command: /ae enchant slayer 4
+     ---------------------------------------------------------------------------
+[13] ID: bluntforce
+     Nama Tampilan : Blunt Force
+     Tingkat Tier  : ELITE (Level Maks: 4)
+     Cocok Untuk   : Kapak Tempur
+     Efek Sihir    : Peluang melancarkan pukulan kapak bertenaga raksasa.
+     Contoh Command: /ae enchant bluntforce 4
+     ---------------------------------------------------------------------------
+[14] ID: immolate
+     Nama Tampilan : Immolate
+     Tingkat Tier  : ELITE (Level Maks: 3)
+     Cocok Untuk   : Pedang & Kapak
+     Efek Sihir    : Meningkatkan damage serangan secara masif terhadap Laba-laba.
+     Contoh Command: /ae enchant immolate 3
+     ---------------------------------------------------------------------------
+[15] ID: infernal
+     Nama Tampilan : Infernal
+     Tingkat Tier  : ELITE (Level Maks: 3)
+     Cocok Untuk   : Pedang & Kapak
+     Efek Sihir    : Memicu ledakan api yang membakar musuh saat terkena serangan.
+     Contoh Command: /ae enchant infernal 3
+     ---------------------------------------------------------------------------
+[16] ID: paralyze
+     Nama Tampilan : Paralyze
+     Tingkat Tier  : ELITE (Level Maks: 4)
+     Cocok Untuk   : Pedang & Kapak
+     Efek Sihir    : Melumpuhkan lawan sesaat sehingga tidak dapat bergerak atau memukul.
+     Contoh Command: /ae enchant paralyze 4
+     ---------------------------------------------------------------------------
+[17] ID: poison
+     Nama Tampilan : Poison
+     Tingkat Tier  : ELITE (Level Maks: 3)
+     Cocok Untuk   : Pedang & Kapak
+     Efek Sihir    : Peluang meracuni musuh saat melancarkan serangan.
+     Contoh Command: /ae enchant poison 3
+     ---------------------------------------------------------------------------
+[18] ID: pummel
+     Nama Tampilan : Pummel
+     Tingkat Tier  : ELITE (Level Maks: 3)
+     Cocok Untuk   : Kapak Tempur
+     Efek Sihir    : Hantaman kapak berat yang mendorong mundur dan memusingkan musuh.
+     Contoh Command: /ae enchant pummel 3
+     ---------------------------------------------------------------------------
+[19] ID: reaper
+     Nama Tampilan : Reaper
+     Tingkat Tier  : ELITE (Level Maks: 4)
+     Cocok Untuk   : Kapak Tempur
+     Efek Sihir    : Memberikan efek Wither dan menyerap sebagian kesehatan lawan.
+     Contoh Command: /ae enchant reaper 4
+     ---------------------------------------------------------------------------
+[20] ID: ambit
+     Nama Tampilan : Ambit
+     Tingkat Tier  : ULTIMATE (Level Maks: 7)
+     Cocok Untuk   : Pedang & Kapak
+     Efek Sihir    : Memberikan damage area menyapu yang meluas seiring naiknya level.
+     Contoh Command: /ae enchant ambit 7
+     ---------------------------------------------------------------------------
+[21] ID: annihilate
+     Nama Tampilan : Annihilate
+     Tingkat Tier  : ULTIMATE (Level Maks: 6)
+     Cocok Untuk   : Kapak Tempur
+     Efek Sihir    : Meremukkan dan menghancurkan armor lawan dua kali lebih cepat.
+     Contoh Command: /ae enchant annihilate 6
+     ---------------------------------------------------------------------------
+[22] ID: arrowbreak
+     Nama Tampilan : Arrow Break
+     Tingkat Tier  : ULTIMATE (Level Maks: 6)
+     Cocok Untuk   : Kapak Tempur
+     Efek Sihir    : Peluang menangkis dan memantulkan panah lawan saat memegang senjata ini.
+     Contoh Command: /ae enchant arrowbreak 6
+     ---------------------------------------------------------------------------
+[23] ID: bleed
+     Nama Tampilan : Bleed
+     Tingkat Tier  : ULTIMATE (Level Maks: 6)
+     Cocok Untuk   : Kapak Tempur
+     Efek Sihir    : Menyebabkan luka sayatan berdarah berkelanjutan pada musuh.
+     Contoh Command: /ae enchant bleed 6
+     ---------------------------------------------------------------------------
+[24] ID: blessed
+     Nama Tampilan : Blessed
+     Tingkat Tier  : ULTIMATE (Level Maks: 4)
+     Cocok Untuk   : Kapak Tempur
+     Efek Sihir    : Peluang menghapus dan menyucikan seluruh efek debuff pada pengguna.
+     Contoh Command: /ae enchant blessed 4
+     ---------------------------------------------------------------------------
+[25] ID: cleave
+     Nama Tampilan : Cleave
+     Tingkat Tier  : ULTIMATE (Level Maks: 7)
+     Cocok Untuk   : Kapak Tempur
+     Efek Sihir    : Tebasan kapak menyapu yang meremukkan musuh di hadapan.
+     Contoh Command: /ae enchant cleave 7
+     ---------------------------------------------------------------------------
+[26] ID: corrupt
+     Nama Tampilan : Corrupt
+     Tingkat Tier  : ULTIMATE (Level Maks: 4)
+     Cocok Untuk   : Kapak Tempur
+     Efek Sihir    : Memberikan kerusakan kutukan bertahap (Damage Over Time) pada lawan.
+     Contoh Command: /ae enchant corrupt 4
+     ---------------------------------------------------------------------------
+[27] ID: diminish
+     Nama Tampilan : Diminish
+     Tingkat Tier  : ULTIMATE (Level Maks: 6)
+     Cocok Untuk   : Kapak Tempur
+     Efek Sihir    : Peluang memberikan efek Mining Fatigue dan melemahkan musuh.
+     Contoh Command: /ae enchant diminish 6
+     ---------------------------------------------------------------------------
+[28] ID: shatter
+     Nama Tampilan : Shatter
+     Tingkat Tier  : ULTIMATE (Level Maks: 4)
+     Cocok Untuk   : Kapak Tempur
+     Efek Sihir    : Meremukkan perisai lawan dan merusak ketahanan armor musuh.
+     Contoh Command: /ae enchant shatter 4
+     ---------------------------------------------------------------------------
+[29] ID: timber
+     Nama Tampilan : Timber
+     Tingkat Tier  : ULTIMATE (Level Maks: 3)
+     Cocok Untuk   : Kapak Tempur
+     Efek Sihir    : Peluang menebang seluruh pohon hingga ke pucuk dalam satu tebasan.
+     Contoh Command: /ae enchant timber 3
+     ---------------------------------------------------------------------------
+[30] ID: barbarian
+     Nama Tampilan : Barbarian
+     Tingkat Tier  : LEGENDARY (Level Maks: 4)
+     Cocok Untuk   : Kapak Tempur
+     Efek Sihir    : Peluang melipatgandakan damage hantaman kapak secara dahsyat.
+     Contoh Command: /ae enchant barbarian 4
+     ---------------------------------------------------------------------------
+[31] ID: beastslayer
+     Nama Tampilan : Beastslayer
+     Tingkat Tier  : LEGENDARY (Level Maks: 4)
+     Cocok Untuk   : Pedang & Kapak
+     Efek Sihir    : Meningkatkan damage serangan terhadap seluruh monster agresif.
+     Contoh Command: /ae enchant beastslayer 4
+     ---------------------------------------------------------------------------
+[32] ID: blacksmith
+     Nama Tampilan : Blacksmith
+     Tingkat Tier  : LEGENDARY (Level Maks: 5)
+     Cocok Untuk   : Kapak Tempur
+     Efek Sihir    : Memperbaiki ketahanan durability perlengkapan saat berhasil menyerang.
+     Contoh Command: /ae enchant blacksmith 5
+     ---------------------------------------------------------------------------
+[33] ID: hex
+     Nama Tampilan : Hex
+     Tingkat Tier  : LEGENDARY (Level Maks: 4)
+     Cocok Untuk   : Kapak Tempur
+     Efek Sihir    : Mengutuk musuh sehingga serangan mereka berbalik melukai diri sendiri.
+     Contoh Command: /ae enchant hex 4
+     ---------------------------------------------------------------------------
+[34] ID: inflame
+     Nama Tampilan : Inflame
+     Tingkat Tier  : LEGENDARY (Level Maks: 3)
+     Cocok Untuk   : Kapak Tempur
+     Efek Sihir    : Membakar seluruh musuh dalam radius area menjadi lautan api.
+     Contoh Command: /ae enchant inflame 3
+     ---------------------------------------------------------------------------
+[35] ID: insanity
+     Nama Tampilan : Insanity
+     Tingkat Tier  : LEGENDARY (Level Maks: 8)
+     Cocok Untuk   : Kapak Tempur
+     Efek Sihir    : Meningkatkan damage kapak semakin banyak musuh yang mengerubungi.
+     Contoh Command: /ae enchant insanity 8
+     ---------------------------------------------------------------------------
+[36] ID: axeofspirits
+     Nama Tampilan : Axe of Spirits
+     Tingkat Tier  : FABLED (Level Maks: 3)
+     Cocok Untuk   : Kapak Tempur
+     Efek Sihir    : Memanggil arwah perang kuno untuk melipatgandakan daya hancur kapak.
+     Contoh Command: /ae enchant axeofspirits 3
+     ---------------------------------------------------------------------------
+[37] ID: bewitchedhex
+     Nama Tampilan : Bewitched Hex
+     Tingkat Tier  : HEROIC (Level Maks: 4)
+     Cocok Untuk   : Kapak Tempur
+     Efek Sihir    : Mengutuk lawan dalam radius luas dengan siksaan kutukan beruntun.
+     Contoh Command: /ae enchant bewitchedhex 4
+     ---------------------------------------------------------------------------
+[38] ID: deepbleed
+     Nama Tampilan : Deep Bleed
+     Tingkat Tier  : HEROIC (Level Maks: 6)
+     Cocok Untuk   : Kapak Tempur
+     Efek Sihir    : Menyebabkan luka pendarahan dalam yang tak dapat disembuhkan selama durasi aktif.
+     Contoh Command: /ae enchant deepbleed 6
+     ---------------------------------------------------------------------------
+[39] ID: extremeinsanity
+     Nama Tampilan : Insanity
+     Tingkat Tier  : HEROIC (Level Maks: 8)
+     Cocok Untuk   : Kapak Tempur
+     Efek Sihir    : Kemurkaan mutlak yang menggandakan damage saat dikepung banyak monster.
+     Contoh Command: /ae enchant extremeinsanity 8
+     ---------------------------------------------------------------------------
+[40] ID: masterblacksmith
+     Nama Tampilan : Master Blacksmith
+     Tingkat Tier  : HEROIC (Level Maks: 5)
+     Cocok Untuk   : Kapak Tempur
+     Efek Sihir    : Menempa ulang dan memulihkan durability gear secara instan di medan perang.
+     Contoh Command: /ae enchant masterblacksmith 5
+     ---------------------------------------------------------------------------
+[41] ID: mightycleave
+     Nama Tampilan : Mighty Cleave
+     Tingkat Tier  : HEROIC (Level Maks: 5)
+     Cocok Untuk   : Kapak Tempur
+     Efek Sihir    : Tebasan badai putar raksasa yang meremukkan seluruh musuh di hadapan.
+     Contoh Command: /ae enchant mightycleave 5
+     ---------------------------------------------------------------------------
+[42] ID: rogue
+     Nama Tampilan : Rogue
+     Tingkat Tier  : SOUL (Level Maks: 3)
+     Cocok Untuk   : Kapak Tempur
+     Efek Sihir    : Memberikan hingga 2.0x lipat damage mematikan saat menyerang musuh dari belakang.
+     Contoh Command: /ae enchant rogue 3
+     ---------------------------------------------------------------------------
+
+
+==========================================================================================
+ 3. BELIUNG & PENAMBANGAN (PICKAXES) (Total: 28 Enchant)
+==========================================================================================
+Deskripsi: Enchantment untuk beliung tambang, auto-smelt, vein mining, dan penggalian ore.
+
+[01] ID: alacrity
+     Nama Tampilan : Alacrity
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Alat Perkakas
+     Efek Sihir    : Meningkatkan kecepatan ayunan saat menggunakan alat perkakas.
+     Contoh Command: /ae enchant alacrity 3
+     ---------------------------------------------------------------------------
+[02] ID: autosmelt
+     Nama Tampilan : Auto Smelt
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Beliung (Pickaxe)
+     Efek Sihir    : Melebur bijih logam secara otomatis saat ditambang.
+     Contoh Command: /ae enchant autosmelt 3
+     ---------------------------------------------------------------------------
+[03] ID: blast_mining
+     Nama Tampilan : Blast Mining
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Beliung (Pickaxe)
+     Efek Sihir    : Menghancurkan blok dalam area 3x3 secara bersamaan.
+     Contoh Command: /ae enchant blast_mining 3
+     ---------------------------------------------------------------------------
+[04] ID: breaklessness
+     Nama Tampilan : Curse of Breaklessness
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Alat Tambang (Beliung, Sekop, Kapak)
+     Efek Sihir    : Kutukan: Memberikan 30% peluang gagal saat menambang blok.
+     Contoh Command: /ae enchant breaklessness 3
+     ---------------------------------------------------------------------------
+[05] ID: experience
+     Nama Tampilan : Experience
+     Tingkat Tier  : SIMPLE (Level Maks: 5)
+     Cocok Untuk   : Alat Perkakas
+     Efek Sihir    : Peluang melipatgandakan perolehan Exp Orb dari bijih tambang.
+     Contoh Command: /ae enchant experience 5
+     ---------------------------------------------------------------------------
+[06] ID: foraging
+     Nama Tampilan : Foraging
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Alat Perkakas
+     Efek Sihir    : Peluang melipatgandakan hasil tebangan kayu dan daun.
+     Contoh Command: /ae enchant foraging 3
+     ---------------------------------------------------------------------------
+[07] ID: hasten
+     Nama Tampilan : Hasten
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Alat Perkakas
+     Efek Sihir    : Peluang mendapatkan buff Haste setelah memecahkan blok tambang.
+     Contoh Command: /ae enchant hasten 3
+     ---------------------------------------------------------------------------
+[08] ID: infernaltouch
+     Nama Tampilan : Infernal Touch
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Beliung & Sekop
+     Efek Sihir    : Peluang melebur blok secara otomatis saat ditambang.
+     Contoh Command: /ae enchant infernaltouch 3
+     ---------------------------------------------------------------------------
+[09] ID: nether_prospector
+     Nama Tampilan : Nether Prospector
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Beliung (Pickaxe)
+     Efek Sihir    : Peluang melipatgandakan hasil tambang Ancient Debris.
+     Contoh Command: /ae enchant nether_prospector 3
+     ---------------------------------------------------------------------------
+[10] ID: oxygenate
+     Nama Tampilan : Oxygenate
+     Tingkat Tier  : SIMPLE (Level Maks: 1)
+     Cocok Untuk   : Beliung (Pickaxe)
+     Efek Sihir    : Mengisi ulang suplai oksigen saat menambang di dalam air.
+     Contoh Command: /ae enchant oxygenate 1
+     ---------------------------------------------------------------------------
+[11] ID: rebreather
+     Nama Tampilan : Rebreather
+     Tingkat Tier  : SIMPLE (Level Maks: 2)
+     Cocok Untuk   : Beliung (Pickaxe)
+     Efek Sihir    : Menghemat oksigen dan memperjelas pandangan saat menyelam.
+     Contoh Command: /ae enchant rebreather 2
+     ---------------------------------------------------------------------------
+[12] ID: smelting
+     Nama Tampilan : Smelting
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Beliung (Pickaxe)
+     Efek Sihir    : Peluang melebur material mentah langsung menjadi batangan logam.
+     Contoh Command: /ae enchant smelting 3
+     ---------------------------------------------------------------------------
+[13] ID: obsidiandestroyer
+     Nama Tampilan : Obsidian Destroyer
+     Tingkat Tier  : UNIQUE (Level Maks: 5)
+     Cocok Untuk   : Beliung (Pickaxe)
+     Efek Sihir    : Peluang menghancurkan blok Obsidian secara instan dalam satu pukulan.
+     Contoh Command: /ae enchant obsidiandestroyer 5
+     ---------------------------------------------------------------------------
+[14] ID: telepathy
+     Nama Tampilan : Telepathy
+     Tingkat Tier  : UNIQUE (Level Maks: 4)
+     Cocok Untuk   : Alat Perkakas
+     Efek Sihir    : Mengirimkan seluruh blok hasil tambang langsung ke inventaris.
+     Contoh Command: /ae enchant telepathy 4
+     ---------------------------------------------------------------------------
+[15] ID: reforged
+     Nama Tampilan : Reforged
+     Tingkat Tier  : ELITE (Level Maks: 10)
+     Cocok Untuk   : Senjata & Perkakas
+     Efek Sihir    : Memperbaiki ketahanan durability perlengkapan secara otomatis perlahan.
+     Contoh Command: /ae enchant reforged 10
+     ---------------------------------------------------------------------------
+[16] ID: replenish
+     Nama Tampilan : Replenish
+     Tingkat Tier  : ELITE (Level Maks: 3)
+     Cocok Untuk   : Beliung (Pickaxe)
+     Efek Sihir    : Peluang memulihkan barisan rasa lapar saat menambang blok.
+     Contoh Command: /ae enchant replenish 3
+     ---------------------------------------------------------------------------
+[17] ID: veinminer
+     Nama Tampilan : Vein Miner
+     Tingkat Tier  : ELITE (Level Maks: 3)
+     Cocok Untuk   : Beliung (Pickaxe)
+     Efek Sihir    : Menambang seluruh urat bijih tambang yang tersambung sekaligus.
+     Contoh Command: /ae enchant veinminer 3
+     ---------------------------------------------------------------------------
+[18] ID: detonate
+     Nama Tampilan : Detonate
+     Tingkat Tier  : ULTIMATE (Level Maks: 9)
+     Cocok Untuk   : Beliung & Sekop
+     Efek Sihir    : Menghancurkan formasi batuan dalam area 3x3 seketika.
+     Contoh Command: /ae enchant detonate 9
+     ---------------------------------------------------------------------------
+[19] ID: trench
+     Nama Tampilan : Trench
+     Tingkat Tier  : ULTIMATE (Level Maks: 9)
+     Cocok Untuk   : Beliung & Sekop
+     Efek Sihir    : Peluang menggali area batuan tambang 3x3 secara serentak.
+     Contoh Command: /ae enchant trench 9
+     ---------------------------------------------------------------------------
+[20] ID: tunnel
+     Nama Tampilan : Tunnel
+     Tingkat Tier  : ULTIMATE (Level Maks: 9)
+     Cocok Untuk   : Beliung & Sekop
+     Efek Sihir    : Menggali terowongan tambang 3x3 ke depan dalam satu hantaman.
+     Contoh Command: /ae enchant tunnel 9
+     ---------------------------------------------------------------------------
+[21] ID: gemify
+     Nama Tampilan : Gemify
+     Tingkat Tier  : FABLED (Level Maks: 1)
+     Cocok Untuk   : Beliung (Pickaxe)
+     Efek Sihir    : Peluang mengubah blok bijih tambang langsung menjadi blok mineral padat.
+     Contoh Command: /ae enchant gemify 1
+     ---------------------------------------------------------------------------
+[22] ID: haste
+     Nama Tampilan : Haste
+     Tingkat Tier  : FABLED (Level Maks: 3)
+     Cocok Untuk   : Alat Perkakas
+     Efek Sihir    : Mempercepat kecepatan ayunan alat tambang secara luar biasa.
+     Contoh Command: /ae enchant haste 3
+     ---------------------------------------------------------------------------
+[23] ID: multiplication
+     Nama Tampilan : Multiplication
+     Tingkat Tier  : FABLED (Level Maks: 5)
+     Cocok Untuk   : Beliung (Pickaxe)
+     Efek Sihir    : Peluang menggandakan perolehan exp dan sumber daya tambang berkali lipat.
+     Contoh Command: /ae enchant multiplication 5
+     ---------------------------------------------------------------------------
+[24] ID: restore
+     Nama Tampilan : Restore
+     Tingkat Tier  : FABLED (Level Maks: 4)
+     Cocok Untuk   : Alat Perkakas
+     Efek Sihir    : Memulihkan ketahanan durability perlengkapan secara penuh saat kritis.
+     Contoh Command: /ae enchant restore 4
+     ---------------------------------------------------------------------------
+[25] ID: soulminer
+     Nama Tampilan : Soulminer
+     Tingkat Tier  : FABLED (Level Maks: 3)
+     Cocok Untuk   : Beliung (Pickaxe)
+     Efek Sihir    : Peluang mengekstrak esensi jiwa mistis saat melakukan aktivitas tambang.
+     Contoh Command: /ae enchant soulminer 3
+     ---------------------------------------------------------------------------
+[26] ID: unbreakable
+     Nama Tampilan : Unbreakable
+     Tingkat Tier  : FABLED (Level Maks: 1)
+     Cocok Untuk   : Alat Perkakas
+     Efek Sihir    : Menjadikan alat perkakas tambang abadi dan tidak dapat hancur.
+     Contoh Command: /ae enchant unbreakable 1
+     ---------------------------------------------------------------------------
+[27] ID: atomicdetonate
+     Nama Tampilan : Atomic Detonate
+     Tingkat Tier  : HEROIC (Level Maks: 9)
+     Cocok Untuk   : Alat Perkakas
+     Efek Sihir    : Memicu ledakan atom berkekuatan raksasa saat musuh tereliminasi.
+     Contoh Command: /ae enchant atomicdetonate 9
+     ---------------------------------------------------------------------------
+[28] ID: soulbound
+     Nama Tampilan : Soulbound
+     Tingkat Tier  : HEROIC (Level Maks: 3)
+     Cocok Untuk   : Senjata, Perkakas & Busur
+     Efek Sihir    : Peralatan terikat pada jiwa pengguna dan tidak akan pernah hilang saat mati.
+     Contoh Command: /ae enchant soulbound 3
+     ---------------------------------------------------------------------------
+
+
+==========================================================================================
+ 4. SEKOP & PERKAKAS UMUM (SHOVELS & GENERAL TOOLS) (Total: 14 Enchant)
+==========================================================================================
+Deskripsi: Enchantment untuk sekop tanah/pasir dan perkakas penggalian.
+
+[01] ID: alacrity
+     Nama Tampilan : Alacrity
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Alat Perkakas
+     Efek Sihir    : Meningkatkan kecepatan ayunan saat menggunakan alat perkakas.
+     Contoh Command: /ae enchant alacrity 3
+     ---------------------------------------------------------------------------
+[02] ID: breaklessness
+     Nama Tampilan : Curse of Breaklessness
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Alat Tambang (Beliung, Sekop, Kapak)
+     Efek Sihir    : Kutukan: Memberikan 30% peluang gagal saat menambang blok.
+     Contoh Command: /ae enchant breaklessness 3
+     ---------------------------------------------------------------------------
+[03] ID: experience
+     Nama Tampilan : Experience
+     Tingkat Tier  : SIMPLE (Level Maks: 5)
+     Cocok Untuk   : Alat Perkakas
+     Efek Sihir    : Peluang melipatgandakan perolehan Exp Orb dari bijih tambang.
+     Contoh Command: /ae enchant experience 5
+     ---------------------------------------------------------------------------
+[04] ID: foraging
+     Nama Tampilan : Foraging
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Alat Perkakas
+     Efek Sihir    : Peluang melipatgandakan hasil tebangan kayu dan daun.
+     Contoh Command: /ae enchant foraging 3
+     ---------------------------------------------------------------------------
+[05] ID: hasten
+     Nama Tampilan : Hasten
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Alat Perkakas
+     Efek Sihir    : Peluang mendapatkan buff Haste setelah memecahkan blok tambang.
+     Contoh Command: /ae enchant hasten 3
+     ---------------------------------------------------------------------------
+[06] ID: infernaltouch
+     Nama Tampilan : Infernal Touch
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Beliung & Sekop
+     Efek Sihir    : Peluang melebur blok secara otomatis saat ditambang.
+     Contoh Command: /ae enchant infernaltouch 3
+     ---------------------------------------------------------------------------
+[07] ID: telepathy
+     Nama Tampilan : Telepathy
+     Tingkat Tier  : UNIQUE (Level Maks: 4)
+     Cocok Untuk   : Alat Perkakas
+     Efek Sihir    : Mengirimkan seluruh blok hasil tambang langsung ke inventaris.
+     Contoh Command: /ae enchant telepathy 4
+     ---------------------------------------------------------------------------
+[08] ID: detonate
+     Nama Tampilan : Detonate
+     Tingkat Tier  : ULTIMATE (Level Maks: 9)
+     Cocok Untuk   : Beliung & Sekop
+     Efek Sihir    : Menghancurkan formasi batuan dalam area 3x3 seketika.
+     Contoh Command: /ae enchant detonate 9
+     ---------------------------------------------------------------------------
+[09] ID: trench
+     Nama Tampilan : Trench
+     Tingkat Tier  : ULTIMATE (Level Maks: 9)
+     Cocok Untuk   : Beliung & Sekop
+     Efek Sihir    : Peluang menggali area batuan tambang 3x3 secara serentak.
+     Contoh Command: /ae enchant trench 9
+     ---------------------------------------------------------------------------
+[10] ID: tunnel
+     Nama Tampilan : Tunnel
+     Tingkat Tier  : ULTIMATE (Level Maks: 9)
+     Cocok Untuk   : Beliung & Sekop
+     Efek Sihir    : Menggali terowongan tambang 3x3 ke depan dalam satu hantaman.
+     Contoh Command: /ae enchant tunnel 9
+     ---------------------------------------------------------------------------
+[11] ID: haste
+     Nama Tampilan : Haste
+     Tingkat Tier  : FABLED (Level Maks: 3)
+     Cocok Untuk   : Alat Perkakas
+     Efek Sihir    : Mempercepat kecepatan ayunan alat tambang secara luar biasa.
+     Contoh Command: /ae enchant haste 3
+     ---------------------------------------------------------------------------
+[12] ID: restore
+     Nama Tampilan : Restore
+     Tingkat Tier  : FABLED (Level Maks: 4)
+     Cocok Untuk   : Alat Perkakas
+     Efek Sihir    : Memulihkan ketahanan durability perlengkapan secara penuh saat kritis.
+     Contoh Command: /ae enchant restore 4
+     ---------------------------------------------------------------------------
+[13] ID: unbreakable
+     Nama Tampilan : Unbreakable
+     Tingkat Tier  : FABLED (Level Maks: 1)
+     Cocok Untuk   : Alat Perkakas
+     Efek Sihir    : Menjadikan alat perkakas tambang abadi dan tidak dapat hancur.
+     Contoh Command: /ae enchant unbreakable 1
+     ---------------------------------------------------------------------------
+[14] ID: atomicdetonate
+     Nama Tampilan : Atomic Detonate
+     Tingkat Tier  : HEROIC (Level Maks: 9)
+     Cocok Untuk   : Alat Perkakas
+     Efek Sihir    : Memicu ledakan atom berkekuatan raksasa saat musuh tereliminasi.
+     Contoh Command: /ae enchant atomicdetonate 9
+     ---------------------------------------------------------------------------
+
+
+==========================================================================================
+ 5. CANGKUL & PERTANIAN (HOES / FARMING) (Total: 5 Enchant)
+==========================================================================================
+Deskripsi: Enchantment untuk cangkul tani, panen otomatis, replant, dan perkebunan.
+
+[01] ID: replanter
+     Nama Tampilan : Replanter
+     Tingkat Tier  : UNIQUE (Level Maks: 1)
+     Cocok Untuk   : Cangkul
+     Efek Sihir    : Menanam kembali benih tanaman secara otomatis saat panen.
+     Contoh Command: /ae enchant replanter 1
+     ---------------------------------------------------------------------------
+[02] ID: carrotplanter
+     Nama Tampilan : Carrot Planter
+     Tingkat Tier  : ULTIMATE (Level Maks: 3)
+     Cocok Untuk   : Cangkul
+     Efek Sihir    : Menanam kembali wortel secara otomatis dalam area luas saat panen.
+     Contoh Command: /ae enchant carrotplanter 3
+     ---------------------------------------------------------------------------
+[03] ID: harvest
+     Nama Tampilan : Harvest
+     Tingkat Tier  : ULTIMATE (Level Maks: 9)
+     Cocok Untuk   : Cangkul
+     Efek Sihir    : Peluang memanen dan menanam kembali hasil tani dalam area 3x3.
+     Contoh Command: /ae enchant harvest 9
+     ---------------------------------------------------------------------------
+[04] ID: planter
+     Nama Tampilan : Planter
+     Tingkat Tier  : ULTIMATE (Level Maks: 3)
+     Cocok Untuk   : Cangkul
+     Efek Sihir    : Menanam kembali bibit pertanian secara instan dalam area 3x3.
+     Contoh Command: /ae enchant planter 3
+     ---------------------------------------------------------------------------
+[05] ID: potatoplanter
+     Nama Tampilan : Potato Planter
+     Tingkat Tier  : ULTIMATE (Level Maks: 3)
+     Cocok Untuk   : Cangkul
+     Efek Sihir    : Menanam kembali kentang secara otomatis di area luas saat panen.
+     Contoh Command: /ae enchant potatoplanter 3
+     ---------------------------------------------------------------------------
+
+
+==========================================================================================
+ 6. ALAT PANCING (FISHING RODS) (Total: 9 Enchant)
+==========================================================================================
+Deskripsi: Enchantment untuk joran pancing, tangkapan harta karun, dan memancing kilat.
+
+[01] ID: allurement
+     Nama Tampilan : Allurement
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Alat Pancing
+     Efek Sihir    : Peluang mendapatkan tangkapan loot ganda saat memancing.
+     Contoh Command: /ae enchant allurement 3
+     ---------------------------------------------------------------------------
+[02] ID: firehook
+     Nama Tampilan : Fire Hook
+     Tingkat Tier  : ELITE (Level Maks: 3)
+     Cocok Untuk   : Alat Pancing
+     Efek Sihir    : Kail pancing diselimuti api dan membakar target yang terkena.
+     Contoh Command: /ae enchant firehook 3
+     ---------------------------------------------------------------------------
+[03] ID: hook
+     Nama Tampilan : Hook
+     Tingkat Tier  : ELITE (Level Maks: 3)
+     Cocok Untuk   : Alat Pancing
+     Efek Sihir    : Meningkatkan perolehan Exp Orb dari kegiatan memancing.
+     Contoh Command: /ae enchant hook 3
+     ---------------------------------------------------------------------------
+[04] ID: poisonedhook
+     Nama Tampilan : Poisoned Hook
+     Tingkat Tier  : ELITE (Level Maks: 3)
+     Cocok Untuk   : Alat Pancing
+     Efek Sihir    : Melumuri kail pancing dengan racun yang melumpuhkan target.
+     Contoh Command: /ae enchant poisonedhook 3
+     ---------------------------------------------------------------------------
+[05] ID: snap
+     Nama Tampilan : Snap
+     Tingkat Tier  : ELITE (Level Maks: 3)
+     Cocok Untuk   : Alat Pancing
+     Efek Sihir    : Menarik entitas yang terkena kail pancing langsung ke hadapanmu.
+     Contoh Command: /ae enchant snap 3
+     ---------------------------------------------------------------------------
+[06] ID: autoreel
+     Nama Tampilan : Auto Reel
+     Tingkat Tier  : ULTIMATE (Level Maks: 4)
+     Cocok Untuk   : Alat Pancing
+     Efek Sihir    : Menarik kail pancing secara otomatis begitu ada ikan yang menyambar.
+     Contoh Command: /ae enchant autoreel 4
+     ---------------------------------------------------------------------------
+[07] ID: lucky
+     Nama Tampilan : Lucky
+     Tingkat Tier  : ULTIMATE (Level Maks: 3)
+     Cocok Untuk   : Alat Pancing
+     Efek Sihir    : Meningkatkan keberuntungan (Luck) untuk memperoleh harta karun pancingan.
+     Contoh Command: /ae enchant lucky 3
+     ---------------------------------------------------------------------------
+[08] ID: sharpnesshook
+     Nama Tampilan : Sharpness Hook
+     Tingkat Tier  : ULTIMATE (Level Maks: 9)
+     Cocok Untuk   : Alat Pancing
+     Efek Sihir    : Ujung kail pancing sangat tajam dan memberikan damage saat ditarik.
+     Contoh Command: /ae enchant sharpnesshook 9
+     ---------------------------------------------------------------------------
+[09] ID: bait
+     Nama Tampilan : Bait
+     Tingkat Tier  : LEGENDARY (Level Maks: 3)
+     Cocok Untuk   : Alat Pancing
+     Efek Sihir    : Peluang mendapatkan tangkapan ganda dari aktivitas memancing.
+     Contoh Command: /ae enchant bait 3
+     ---------------------------------------------------------------------------
+
+
+==========================================================================================
+ 7. BUSUR & BUSUR SILANG (BOWS & CROSSBOWS) (Total: 37 Enchant)
+==========================================================================================
+Deskripsi: Enchantment untuk busur panah dan crossbow penembak jarak jauh.
+
+[01] ID: contagion
+     Nama Tampilan : Contagion
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Busur Panah
+     Efek Sihir    : Menyebarkan efek racun ke seluruh musuh di sekitar target.
+     Contoh Command: /ae enchant contagion 3
+     ---------------------------------------------------------------------------
+[02] ID: cubism
+     Nama Tampilan : Cubism
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Senjata & Busur
+     Efek Sihir    : Memberikan damage tambahan terhadap Slime dan Magma Cube.
+     Contoh Command: /ae enchant cubism 3
+     ---------------------------------------------------------------------------
+[03] ID: flashbang
+     Nama Tampilan : Flashbang
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Busur Panah
+     Efek Sihir    : Menyilaukan dan membutakan lawan saat terkena tembakan panah.
+     Contoh Command: /ae enchant flashbang 3
+     ---------------------------------------------------------------------------
+[04] ID: frost
+     Nama Tampilan : Frost
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Busur Panah
+     Efek Sihir    : Peluang membekukan lawan di tempat dengan tembakan panah.
+     Contoh Command: /ae enchant frost 3
+     ---------------------------------------------------------------------------
+[05] ID: lightning
+     Nama Tampilan : Lightning
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Busur Panah
+     Efek Sihir    : Menyambar target dengan kilatan petir saat terkena serangan.
+     Contoh Command: /ae enchant lightning 3
+     ---------------------------------------------------------------------------
+[06] ID: multishot
+     Nama Tampilan : Multi-Shot
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Busur Panah
+     Efek Sihir    : Menghujani lawan dengan beberapa anak panah sekaligus.
+     Contoh Command: /ae enchant multishot 3
+     ---------------------------------------------------------------------------
+[07] ID: strike
+     Nama Tampilan : Strike
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Senjata Jarak Jauh (Busur, Crossbow, Trisula)
+     Efek Sihir    : Menyambar musuh dengan sambaran petir saat terkena serangan.
+     Contoh Command: /ae enchant strike 3
+     ---------------------------------------------------------------------------
+[08] ID: thor
+     Nama Tampilan : Thor
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Senjata Jarak Jauh (Busur, Crossbow, Trisula)
+     Efek Sihir    : Peluang memanggil petir dewa petir Thor yang membakar pijakan musuh.
+     Contoh Command: /ae enchant thor 3
+     ---------------------------------------------------------------------------
+[09] ID: explosive
+     Nama Tampilan : Explosive
+     Tingkat Tier  : UNIQUE (Level Maks: 5)
+     Cocok Untuk   : Busur Panah
+     Efek Sihir    : Peluang tembakan panah meledak saat mengenai target.
+     Contoh Command: /ae enchant explosive 5
+     ---------------------------------------------------------------------------
+[10] ID: frenzy
+     Nama Tampilan : Frenzy
+     Tingkat Tier  : UNIQUE (Level Maks: 5)
+     Cocok Untuk   : Crossbow
+     Efek Sihir    : Peluang tembakan panah crossbow meledak secara beruntun.
+     Contoh Command: /ae enchant frenzy 5
+     ---------------------------------------------------------------------------
+[11] ID: hunter
+     Nama Tampilan : Hunter
+     Tingkat Tier  : UNIQUE (Level Maks: 4)
+     Cocok Untuk   : Senjata Jarak Jauh (Busur, Crossbow, Trisula)
+     Efek Sihir    : Meningkatkan damage serangan terhadap hewan dan monster pasif.
+     Contoh Command: /ae enchant hunter 4
+     ---------------------------------------------------------------------------
+[12] ID: perish
+     Nama Tampilan : Perish
+     Tingkat Tier  : UNIQUE (Level Maks: 5)
+     Cocok Untuk   : Senjata Jarak Jauh (Busur, Crossbow, Trisula)
+     Efek Sihir    : Peluang memberikan efek pembusukan Wither pada lawan.
+     Contoh Command: /ae enchant perish 5
+     ---------------------------------------------------------------------------
+[13] ID: soulless
+     Nama Tampilan : Soulless
+     Tingkat Tier  : UNIQUE (Level Maks: 4)
+     Cocok Untuk   : Senjata Jarak Jauh (Busur, Crossbow, Trisula)
+     Efek Sihir    : Meningkatkan damage tembakan terhadap seluruh monster agresif.
+     Contoh Command: /ae enchant soulless 4
+     ---------------------------------------------------------------------------
+[14] ID: virus
+     Nama Tampilan : Virus
+     Tingkat Tier  : UNIQUE (Level Maks: 4)
+     Cocok Untuk   : Senjata Jarak Jauh (Busur, Crossbow, Trisula)
+     Efek Sihir    : Peluang menularkan efek racun mematikan pada musuh.
+     Contoh Command: /ae enchant virus 4
+     ---------------------------------------------------------------------------
+[15] ID: bowmaster
+     Nama Tampilan : Bowmaster
+     Tingkat Tier  : ELITE (Level Maks: 5)
+     Cocok Untuk   : Senjata Jarak Jauh (Busur, Crossbow, Trisula)
+     Efek Sihir    : Meningkatkan damage tembakan panah jarak jauh secara signifikan.
+     Contoh Command: /ae enchant bowmaster 5
+     ---------------------------------------------------------------------------
+[16] ID: farcast
+     Nama Tampilan : Farcast
+     Tingkat Tier  : ELITE (Level Maks: 5)
+     Cocok Untuk   : Busur Panah
+     Efek Sihir    : Meningkatkan kecepatan proyektil dan jangkauan tembakan busur.
+     Contoh Command: /ae enchant farcast 5
+     ---------------------------------------------------------------------------
+[17] ID: hijack
+     Nama Tampilan : Hijack
+     Tingkat Tier  : ELITE (Level Maks: 4)
+     Cocok Untuk   : Busur Panah
+     Efek Sihir    : Membingungkan mob agresif dan memaksanya menyerang musuh terdekat.
+     Contoh Command: /ae enchant hijack 4
+     ---------------------------------------------------------------------------
+[18] ID: marksman
+     Nama Tampilan : Marksman
+     Tingkat Tier  : ELITE (Level Maks: 4)
+     Cocok Untuk   : Crossbow
+     Efek Sihir    : Meningkatkan damage tembakan yang dilancarkan dengan Crossbow.
+     Contoh Command: /ae enchant marksman 4
+     ---------------------------------------------------------------------------
+[19] ID: missile
+     Nama Tampilan : Missile
+     Tingkat Tier  : ELITE (Level Maks: 5)
+     Cocok Untuk   : Crossbow
+     Efek Sihir    : Mengubah anak panah Crossbow menjadi bola api peledak.
+     Contoh Command: /ae enchant missile 5
+     ---------------------------------------------------------------------------
+[20] ID: snare
+     Nama Tampilan : Snare
+     Tingkat Tier  : ELITE (Level Maks: 4)
+     Cocok Untuk   : Busur Panah
+     Efek Sihir    : Menjerat kaki musuh dengan efek Slowness tinggi agar tak bisa melarikan diri.
+     Contoh Command: /ae enchant snare 4
+     ---------------------------------------------------------------------------
+[21] ID: venom
+     Nama Tampilan : Venom
+     Tingkat Tier  : ELITE (Level Maks: 3)
+     Cocok Untuk   : Busur Panah
+     Efek Sihir    : Peluang memberikan racun berbisa mematikan pada tembakan panah.
+     Contoh Command: /ae enchant venom 3
+     ---------------------------------------------------------------------------
+[22] ID: archer
+     Nama Tampilan : Archer
+     Tingkat Tier  : ULTIMATE (Level Maks: 4)
+     Cocok Untuk   : Busur Panah
+     Efek Sihir    : Meningkatkan kerusakan tembakan busur panah secara menyeluruh.
+     Contoh Command: /ae enchant archer 4
+     ---------------------------------------------------------------------------
+[23] ID: arrowlifesteal
+     Nama Tampilan : Arrow Lifesteal
+     Tingkat Tier  : ULTIMATE (Level Maks: 5)
+     Cocok Untuk   : Busur Panah
+     Efek Sihir    : Peluang menghisap darah musuh melalui tembakan anak panah.
+     Contoh Command: /ae enchant arrowlifesteal 5
+     ---------------------------------------------------------------------------
+[24] ID: eagleeye
+     Nama Tampilan : Eagle Eye
+     Tingkat Tier  : ULTIMATE (Level Maks: 5)
+     Cocok Untuk   : Busur Panah
+     Efek Sihir    : Meningkatkan presisi dan memperbesar damage tembakan panah jarak jauh.
+     Contoh Command: /ae enchant eagleeye 5
+     ---------------------------------------------------------------------------
+[25] ID: hellfire
+     Nama Tampilan : Hellfire
+     Tingkat Tier  : ULTIMATE (Level Maks: 5)
+     Cocok Untuk   : Busur Panah
+     Efek Sihir    : Mengubah anak panah menjadi proyektil bola api neraka membakar.
+     Contoh Command: /ae enchant hellfire 5
+     ---------------------------------------------------------------------------
+[26] ID: longbow
+     Nama Tampilan : Longbow
+     Tingkat Tier  : ULTIMATE (Level Maks: 4)
+     Cocok Untuk   : Busur Panah
+     Efek Sihir    : Menembakkan anak panah dengan lintasan super lurus dan jangkauan jauh.
+     Contoh Command: /ae enchant longbow 4
+     ---------------------------------------------------------------------------
+[27] ID: pacify
+     Nama Tampilan : Pacify
+     Tingkat Tier  : ULTIMATE (Level Maks: 4)
+     Cocok Untuk   : Busur Panah
+     Efek Sihir    : Menghilangkan amarah musuh atau melucuti senjata mereka sesaat.
+     Contoh Command: /ae enchant pacify 4
+     ---------------------------------------------------------------------------
+[28] ID: piercing
+     Nama Tampilan : Piercing
+     Tingkat Tier  : ULTIMATE (Level Maks: 5)
+     Cocok Untuk   : Busur Panah
+     Efek Sihir    : Menembus sebagian pertahanan armor lawan dengan damage ekstra.
+     Contoh Command: /ae enchant piercing 5
+     ---------------------------------------------------------------------------
+[29] ID: sniper
+     Nama Tampilan : Sniper
+     Tingkat Tier  : ULTIMATE (Level Maks: 5)
+     Cocok Untuk   : Busur Panah
+     Efek Sihir    : Memberikan damage mematikan berlipat ganda pada tembakan jarak jauh.
+     Contoh Command: /ae enchant sniper 5
+     ---------------------------------------------------------------------------
+[30] ID: striker
+     Nama Tampilan : Striker
+     Tingkat Tier  : ULTIMATE (Level Maks: 3)
+     Cocok Untuk   : Busur Panah
+     Efek Sihir    : Menghujani target dengan serbuan panah dari langit.
+     Contoh Command: /ae enchant striker 3
+     ---------------------------------------------------------------------------
+[31] ID: unfocus
+     Nama Tampilan : Unfocus
+     Tingkat Tier  : ULTIMATE (Level Maks: 5)
+     Cocok Untuk   : Busur Panah
+     Efek Sihir    : Mengurangi akurasi tembakan panah lawan sehingga meleset.
+     Contoh Command: /ae enchant unfocus 5
+     ---------------------------------------------------------------------------
+[32] ID: impale
+     Nama Tampilan : Impale
+     Tingkat Tier  : LEGENDARY (Level Maks: 4)
+     Cocok Untuk   : Busur Panah
+     Efek Sihir    : Menusuk tembus pertahanan musuh dengan damage penetrasi tinggi.
+     Contoh Command: /ae enchant impale 4
+     ---------------------------------------------------------------------------
+[33] ID: bidirectionalteleportation
+     Nama Tampilan : Bidirectional Teleportation
+     Tingkat Tier  : HEROIC (Level Maks: 4)
+     Cocok Untuk   : Busur Panah
+     Efek Sihir    : Peluang menarik musuh mendekat ke posisimu dengan tembakan panah mistis.
+     Contoh Command: /ae enchant bidirectionalteleportation 4
+     ---------------------------------------------------------------------------
+[34] ID: lethalsniper
+     Nama Tampilan : Lethal Sniper
+     Tingkat Tier  : HEROIC (Level Maks: 5)
+     Cocok Untuk   : Busur Panah
+     Efek Sihir    : Tembakan panah mematikan berkepala peledak dengan damage penetrasi mutlak.
+     Contoh Command: /ae enchant lethalsniper 5
+     ---------------------------------------------------------------------------
+[35] ID: soulbound
+     Nama Tampilan : Soulbound
+     Tingkat Tier  : HEROIC (Level Maks: 3)
+     Cocok Untuk   : Senjata, Perkakas & Busur
+     Efek Sihir    : Peralatan terikat pada jiwa pengguna dan tidak akan pernah hilang saat mati.
+     Contoh Command: /ae enchant soulbound 3
+     ---------------------------------------------------------------------------
+[36] ID: teleblock
+     Nama Tampilan : Teleblock
+     Tingkat Tier  : SOUL (Level Maks: 5)
+     Cocok Untuk   : Busur Panah
+     Efek Sihir    : Mencegah musuh menggunakan Ender Pearl atau teleportasi untuk melarikan diri.
+     Contoh Command: /ae enchant teleblock 5
+     ---------------------------------------------------------------------------
+[37] ID: neutralize
+     Nama Tampilan : Neutralize
+     Tingkat Tier  : MASTERY (Level Maks: 5)
+     Cocok Untuk   : Busur & Crossbow
+     Efek Sihir    : Peluang melucuti dan membatalkan serangan musuh seketika.
+     Contoh Command: /ae enchant neutralize 5
+     ---------------------------------------------------------------------------
+
+
+==========================================================================================
+ 8. TRISULA (TRIDENTS) (Total: 15 Enchant)
+==========================================================================================
+Deskripsi: Enchantment khusus untuk tombak trisula tempur darat dan air.
+
+[01] ID: blow
+     Nama Tampilan : Double Blow
+     Tingkat Tier  : SIMPLE (Level Maks: 4)
+     Cocok Untuk   : Trisula
+     Efek Sihir    : Peluang melancarkan pukulan berkekuatan damage ganda.
+     Contoh Command: /ae enchant blow 4
+     ---------------------------------------------------------------------------
+[02] ID: strike
+     Nama Tampilan : Strike
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Senjata Jarak Jauh (Busur, Crossbow, Trisula)
+     Efek Sihir    : Menyambar musuh dengan sambaran petir saat terkena serangan.
+     Contoh Command: /ae enchant strike 3
+     ---------------------------------------------------------------------------
+[03] ID: thor
+     Nama Tampilan : Thor
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Senjata Jarak Jauh (Busur, Crossbow, Trisula)
+     Efek Sihir    : Peluang memanggil petir dewa petir Thor yang membakar pijakan musuh.
+     Contoh Command: /ae enchant thor 3
+     ---------------------------------------------------------------------------
+[04] ID: hunter
+     Nama Tampilan : Hunter
+     Tingkat Tier  : UNIQUE (Level Maks: 4)
+     Cocok Untuk   : Senjata Jarak Jauh (Busur, Crossbow, Trisula)
+     Efek Sihir    : Meningkatkan damage serangan terhadap hewan dan monster pasif.
+     Contoh Command: /ae enchant hunter 4
+     ---------------------------------------------------------------------------
+[05] ID: perish
+     Nama Tampilan : Perish
+     Tingkat Tier  : UNIQUE (Level Maks: 5)
+     Cocok Untuk   : Senjata Jarak Jauh (Busur, Crossbow, Trisula)
+     Efek Sihir    : Peluang memberikan efek pembusukan Wither pada lawan.
+     Contoh Command: /ae enchant perish 5
+     ---------------------------------------------------------------------------
+[06] ID: soulless
+     Nama Tampilan : Soulless
+     Tingkat Tier  : UNIQUE (Level Maks: 4)
+     Cocok Untuk   : Senjata Jarak Jauh (Busur, Crossbow, Trisula)
+     Efek Sihir    : Meningkatkan damage tembakan terhadap seluruh monster agresif.
+     Contoh Command: /ae enchant soulless 4
+     ---------------------------------------------------------------------------
+[07] ID: virus
+     Nama Tampilan : Virus
+     Tingkat Tier  : UNIQUE (Level Maks: 4)
+     Cocok Untuk   : Senjata Jarak Jauh (Busur, Crossbow, Trisula)
+     Efek Sihir    : Peluang menularkan efek racun mematikan pada musuh.
+     Contoh Command: /ae enchant virus 4
+     ---------------------------------------------------------------------------
+[08] ID: bowmaster
+     Nama Tampilan : Bowmaster
+     Tingkat Tier  : ELITE (Level Maks: 5)
+     Cocok Untuk   : Senjata Jarak Jauh (Busur, Crossbow, Trisula)
+     Efek Sihir    : Meningkatkan damage tembakan panah jarak jauh secara signifikan.
+     Contoh Command: /ae enchant bowmaster 5
+     ---------------------------------------------------------------------------
+[09] ID: impact
+     Nama Tampilan : Impact
+     Tingkat Tier  : ELITE (Level Maks: 4)
+     Cocok Untuk   : Trisula
+     Efek Sihir    : Peluang melipatgandakan damage lemparan atau tusukan Trisula.
+     Contoh Command: /ae enchant impact 4
+     ---------------------------------------------------------------------------
+[10] ID: poseidon
+     Nama Tampilan : Poseidon
+     Tingkat Tier  : ELITE (Level Maks: 4)
+     Cocok Untuk   : Trisula
+     Efek Sihir    : Meningkatkan damage serangan saat menggunakan Trisula.
+     Contoh Command: /ae enchant poseidon 4
+     ---------------------------------------------------------------------------
+[11] ID: spark
+     Nama Tampilan : Spark
+     Tingkat Tier  : ELITE (Level Maks: 3)
+     Cocok Untuk   : Trisula
+     Efek Sihir    : Membakar lawan dalam kobaran api saat terkena tusukan Trisula.
+     Contoh Command: /ae enchant spark 3
+     ---------------------------------------------------------------------------
+[12] ID: chaos
+     Nama Tampilan : Chaos
+     Tingkat Tier  : LEGENDARY (Level Maks: 5)
+     Cocok Untuk   : Trisula
+     Efek Sihir    : Memberikan efek Weakness dan Wither secara bersamaan pada target.
+     Contoh Command: /ae enchant chaos 5
+     ---------------------------------------------------------------------------
+[13] ID: deadshot
+     Nama Tampilan : Deadshot
+     Tingkat Tier  : LEGENDARY (Level Maks: 5)
+     Cocok Untuk   : Trisula
+     Efek Sihir    : Menembus armor lawan secara mutlak melalui tembakan Trisula.
+     Contoh Command: /ae enchant deadshot 5
+     ---------------------------------------------------------------------------
+[14] ID: strife
+     Nama Tampilan : Strife
+     Tingkat Tier  : LEGENDARY (Level Maks: 3)
+     Cocok Untuk   : Trisula
+     Efek Sihir    : Meningkatkan damage serangan jarak dekat saat menggunakan Trisula.
+     Contoh Command: /ae enchant strife 3
+     ---------------------------------------------------------------------------
+[15] ID: twinge
+     Nama Tampilan : Twinge
+     Tingkat Tier  : LEGENDARY (Level Maks: 4)
+     Cocok Untuk   : Trisula
+     Efek Sihir    : Memberikan rasa sakit menyengat yang menghentikan regenerasi HP lawan.
+     Contoh Command: /ae enchant twinge 4
+     ---------------------------------------------------------------------------
+
+
+==========================================================================================
+ 9. SEMUA ZIRAH (ALL ARMOR - HELMET, CHESTPLATE, LEGGINGS, BOOTS) (Total: 66 Enchant)
+==========================================================================================
+Deskripsi: Enchantment proteksi universal yang dapat ditempa pada keempat slot zirah.
+
+[01] ID: adrenaline
+     Nama Tampilan : Adrenaline
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Memberikan dorongan Strength (Kekuatan) saat bertahan dari serangan monster.
+     Contoh Command: /ae enchant adrenaline 3
+     ---------------------------------------------------------------------------
+[02] ID: aura
+     Nama Tampilan : Aura
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Mengurangi damage yang diterima oleh pemain sekutu di sekitar.
+     Contoh Command: /ae enchant aura 3
+     ---------------------------------------------------------------------------
+[03] ID: end_affinity
+     Nama Tampilan : End Affinity
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Mengurangi kerusakan yang diterima saat berada di dimensi The End.
+     Contoh Command: /ae enchant end_affinity 3
+     ---------------------------------------------------------------------------
+[04] ID: getaway
+     Nama Tampilan : Getaway
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Peluang meningkatkan kecepatan lari drastis saat HP di bawah 20%.
+     Contoh Command: /ae enchant getaway 3
+     ---------------------------------------------------------------------------
+[05] ID: nether_affinity
+     Nama Tampilan : Nether Affinity
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Mengurangi damage yang diterima saat berada di dimensi Nether.
+     Contoh Command: /ae enchant nether_affinity 3
+     ---------------------------------------------------------------------------
+[06] ID: rebounding
+     Nama Tampilan : Rebounding
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Memantulkan sebagian damage yang diterima kembali ke penyerang.
+     Contoh Command: /ae enchant rebounding 3
+     ---------------------------------------------------------------------------
+[07] ID: resonate
+     Nama Tampilan : Resonate
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Menyerap serangan musuh dan melepaskan gelombang gema balasan.
+     Contoh Command: /ae enchant resonate 3
+     ---------------------------------------------------------------------------
+[08] ID: rumble
+     Nama Tampilan : Rumble
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Peluang merusak seluruh musuh di sekitar dalam radius 5 blok.
+     Contoh Command: /ae enchant rumble 3
+     ---------------------------------------------------------------------------
+[09] ID: scorching
+     Nama Tampilan : Scorching
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Peluang membakar penyerang dalam kobaran api.
+     Contoh Command: /ae enchant scorching 3
+     ---------------------------------------------------------------------------
+[10] ID: shuffle
+     Nama Tampilan : Shuffle
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Mengacak susunan hotbar lawan saat pertempuran berlangsung.
+     Contoh Command: /ae enchant shuffle 3
+     ---------------------------------------------------------------------------
+[11] ID: vanish
+     Nama Tampilan : Vanish
+     Tingkat Tier  : SIMPLE (Level Maks: 3)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Menghilang sesaat (Invisibility) saat darah kritis untuk kabur.
+     Contoh Command: /ae enchant vanish 3
+     ---------------------------------------------------------------------------
+[12] ID: commander
+     Nama Tampilan : Commander
+     Tingkat Tier  : UNIQUE (Level Maks: 5)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Memberikan buff Haste kepada seluruh rekan tim dan sekutu di sekitar.
+     Contoh Command: /ae enchant commander 5
+     ---------------------------------------------------------------------------
+[13] ID: molten
+     Nama Tampilan : Molten
+     Tingkat Tier  : UNIQUE (Level Maks: 4)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Peluang membakar penyerang saat menerima pukulan jarak dekat.
+     Contoh Command: /ae enchant molten 4
+     ---------------------------------------------------------------------------
+[14] ID: reflect
+     Nama Tampilan : Reflect
+     Tingkat Tier  : UNIQUE (Level Maks: 5)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Memantulkan sebagian damage fisik musuh kembali ke penyerang.
+     Contoh Command: /ae enchant reflect 5
+     ---------------------------------------------------------------------------
+[15] ID: selfdestruct
+     Nama Tampilan : Self Destruct
+     Tingkat Tier  : UNIQUE (Level Maks: 3)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Memicu ledakan dahsyat saat darah pengguna habis.
+     Contoh Command: /ae enchant selfdestruct 3
+     ---------------------------------------------------------------------------
+[16] ID: sustain
+     Nama Tampilan : Sustain
+     Tingkat Tier  : UNIQUE (Level Maks: 4)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Peluang memulihkan rasa lapar saat menerima serangan musuh.
+     Contoh Command: /ae enchant sustain 4
+     ---------------------------------------------------------------------------
+[17] ID: ward
+     Nama Tampilan : Ward
+     Tingkat Tier  : UNIQUE (Level Maks: 4)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Peluang menyerap damage serangan musuh dan meniadakannya.
+     Contoh Command: /ae enchant ward 4
+     ---------------------------------------------------------------------------
+[18] ID: cactus
+     Nama Tampilan : Cactus
+     Tingkat Tier  : ELITE (Level Maks: 2)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Membalas serangan musuh dengan duri tajam yang menusuk penyerang.
+     Contoh Command: /ae enchant cactus 2
+     ---------------------------------------------------------------------------
+[19] ID: curse
+     Nama Tampilan : Curse
+     Tingkat Tier  : ELITE (Level Maks: 5)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Peluang memberikan efek Mining Fatigue berat pada penyerang.
+     Contoh Command: /ae enchant curse 5
+     ---------------------------------------------------------------------------
+[20] ID: frozen
+     Nama Tampilan : Frozen
+     Tingkat Tier  : ELITE (Level Maks: 3)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Membekukan penyerang dan memberikan efek Slowness tingkat tinggi.
+     Contoh Command: /ae enchant frozen 3
+     ---------------------------------------------------------------------------
+[21] ID: poisoned
+     Nama Tampilan : Poisoned
+     Tingkat Tier  : ELITE (Level Maks: 4)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Peluang meracuni penyerang saat pengguna menerima pukulan.
+     Contoh Command: /ae enchant poisoned 4
+     ---------------------------------------------------------------------------
+[22] ID: stormcaller
+     Nama Tampilan : Stormcaller
+     Tingkat Tier  : ELITE (Level Maks: 4)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Memanggil sambaran petir badai ke pemain yang menyerangmu.
+     Contoh Command: /ae enchant stormcaller 4
+     ---------------------------------------------------------------------------
+[23] ID: trickster
+     Nama Tampilan : Trickster
+     Tingkat Tier  : ELITE (Level Maks: 8)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Peluang berteleportasi ke belakang lawan secara tak terduga saat diserang.
+     Contoh Command: /ae enchant trickster 8
+     ---------------------------------------------------------------------------
+[24] ID: voodoo
+     Nama Tampilan : Voodoo
+     Tingkat Tier  : ELITE (Level Maks: 6)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Peluang memberikan efek Weakness (Kelemahan) pada penyerang.
+     Contoh Command: /ae enchant voodoo 6
+     ---------------------------------------------------------------------------
+[25] ID: wither
+     Nama Tampilan : Wither
+     Tingkat Tier  : ELITE (Level Maks: 5)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Peluang memberikan efek pembusukan Wither pada penyerang.
+     Contoh Command: /ae enchant wither 5
+     ---------------------------------------------------------------------------
+[26] ID: angelic
+     Nama Tampilan : Angelic
+     Tingkat Tier  : ULTIMATE (Level Maks: 5)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Memulihkan kesehatan pengguna saat menerima serangan musuh.
+     Contoh Command: /ae enchant angelic 5
+     ---------------------------------------------------------------------------
+[27] ID: arrowdeflect
+     Nama Tampilan : Arrow Deflect
+     Tingkat Tier  : ULTIMATE (Level Maks: 4)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Peluang menangkis tembakan panah musuh agar tidak menimbulkan damage.
+     Contoh Command: /ae enchant arrowdeflect 4
+     ---------------------------------------------------------------------------
+[28] ID: creeperarmor
+     Nama Tampilan : Creeper Armor
+     Tingkat Tier  : ULTIMATE (Level Maks: 3)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Memberikan kekebalan mutlak terhadap kerusakan ledakan Creeper.
+     Contoh Command: /ae enchant creeperarmor 3
+     ---------------------------------------------------------------------------
+[29] ID: demonic
+     Nama Tampilan : Demonic
+     Tingkat Tier  : ULTIMATE (Level Maks: 3)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Peluang melenyapkan efek Fire Resistance musuh saat pertempuran.
+     Contoh Command: /ae enchant demonic 3
+     ---------------------------------------------------------------------------
+[30] ID: disappear
+     Nama Tampilan : Disappear
+     Tingkat Tier  : ULTIMATE (Level Maks: 4)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Menghilang secara misterius saat diserang untuk membingungkan lawan.
+     Contoh Command: /ae enchant disappear 4
+     ---------------------------------------------------------------------------
+[31] ID: dodge
+     Nama Tampilan : Dodge
+     Tingkat Tier  : ULTIMATE (Level Maks: 5)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Peluang tinggi untuk menghindari serangan jarak dekat atau panah sepenuhnya.
+     Contoh Command: /ae enchant dodge 5
+     ---------------------------------------------------------------------------
+[32] ID: guardians
+     Nama Tampilan : Guardians
+     Tingkat Tier  : ULTIMATE (Level Maks: 10)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Peluang memanggil golem pelindung mistis saat pengguna diserang.
+     Contoh Command: /ae enchant guardians 10
+     ---------------------------------------------------------------------------
+[33] ID: heavy
+     Nama Tampilan : Heavy
+     Tingkat Tier  : ULTIMATE (Level Maks: 5)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Mengurangi efek knockback yang diterima tubuh secara signifikan.
+     Contoh Command: /ae enchant heavy 5
+     ---------------------------------------------------------------------------
+[34] ID: obsidianshield
+     Nama Tampilan : Obsidianshield
+     Tingkat Tier  : ULTIMATE (Level Maks: 1)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Memberikan ketahanan api (Fire Resistance) secara permanen.
+     Contoh Command: /ae enchant obsidianshield 1
+     ---------------------------------------------------------------------------
+[35] ID: ragdoll
+     Nama Tampilan : Ragdoll
+     Tingkat Tier  : ULTIMATE (Level Maks: 4)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Mementalkan musuh tinggi ke angkasa saat terkena serangan kritikal.
+     Contoh Command: /ae enchant ragdoll 4
+     ---------------------------------------------------------------------------
+[36] ID: safeguard
+     Nama Tampilan : Safeguard
+     Tingkat Tier  : ULTIMATE (Level Maks: 2)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Menciptakan perisai pelindung yang menyerap damage serangan mematikan.
+     Contoh Command: /ae enchant safeguard 2
+     ---------------------------------------------------------------------------
+[37] ID: spirits
+     Nama Tampilan : Spirits
+     Tingkat Tier  : ULTIMATE (Level Maks: 10)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Peluang memunculkan makhluk Blaze pelindung saat pengguna diserang.
+     Contoh Command: /ae enchant spirits 10
+     ---------------------------------------------------------------------------
+[38] ID: swordsman
+     Nama Tampilan : Swordsman
+     Tingkat Tier  : ULTIMATE (Level Maks: 5)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Meningkatkan daya tebas pedang dan memperkuat pertahanan zirah.
+     Contoh Command: /ae enchant swordsman 5
+     ---------------------------------------------------------------------------
+[39] ID: tank
+     Nama Tampilan : Tank
+     Tingkat Tier  : ULTIMATE (Level Maks: 4)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Meningkatkan ketahanan zirah dan kapasitas darah maksimal (Health Boost).
+     Contoh Command: /ae enchant tank 4
+     ---------------------------------------------------------------------------
+[40] ID: valor
+     Nama Tampilan : Valor
+     Tingkat Tier  : ULTIMATE (Level Maks: 5)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Mengurangi damage yang diterima pengguna saat sedang melancarkan serangan.
+     Contoh Command: /ae enchant valor 5
+     ---------------------------------------------------------------------------
+[41] ID: armored
+     Nama Tampilan : Armored
+     Tingkat Tier  : LEGENDARY (Level Maks: 4)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Mengurangi damage yang diterima dari serangan pedang musuh sebesar 2% per level.
+     Contoh Command: /ae enchant armored 4
+     ---------------------------------------------------------------------------
+[42] ID: clarity
+     Nama Tampilan : Clarity
+     Tingkat Tier  : LEGENDARY (Level Maks: 3)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Menyembuhkan dan meniadakan efek kebutaan (Blindness) saat diserang.
+     Contoh Command: /ae enchant clarity 3
+     ---------------------------------------------------------------------------
+[43] ID: deathbringer
+     Nama Tampilan : Deathbringer
+     Tingkat Tier  : LEGENDARY (Level Maks: 3)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Peluang melancarkan serangan penghancur berkekuatan damage ganda.
+     Contoh Command: /ae enchant deathbringer 3
+     ---------------------------------------------------------------------------
+[44] ID: divert
+     Nama Tampilan : Divert
+     Tingkat Tier  : LEGENDARY (Level Maks: 5)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Mengalihkan sebagian damage yang diterima menjadi regenerasi energi/stamina.
+     Contoh Command: /ae enchant divert 5
+     ---------------------------------------------------------------------------
+[45] ID: enlighted
+     Nama Tampilan : Enlighted
+     Tingkat Tier  : LEGENDARY (Level Maks: 3)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Peluang memulihkan sejumlah hati kesehatan saat menerima damage.
+     Contoh Command: /ae enchant enlighted 3
+     ---------------------------------------------------------------------------
+[46] ID: hardened
+     Nama Tampilan : Hardened
+     Tingkat Tier  : LEGENDARY (Level Maks: 3)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Peluang memulihkan durability zirah saat diserang oleh pemain lain.
+     Contoh Command: /ae enchant hardened 3
+     ---------------------------------------------------------------------------
+[47] ID: lucid
+     Nama Tampilan : Lucid
+     Tingkat Tier  : LEGENDARY (Level Maks: 3)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Kebal terhadap efek kebutaan, kegelapan (Darkness), dan racun.
+     Contoh Command: /ae enchant lucid 3
+     ---------------------------------------------------------------------------
+[48] ID: overload
+     Nama Tampilan : Overload
+     Tingkat Tier  : LEGENDARY (Level Maks: 3)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Membuka barisan hati kesehatan tambahan secara permanen.
+     Contoh Command: /ae enchant overload 3
+     ---------------------------------------------------------------------------
+[49] ID: patch
+     Nama Tampilan : Patch
+     Tingkat Tier  : LEGENDARY (Level Maks: 3)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Peluang memulihkan durability zirah saat menerima serangan monster.
+     Contoh Command: /ae enchant patch 3
+     ---------------------------------------------------------------------------
+[50] ID: protection
+     Nama Tampilan : Protection
+     Tingkat Tier  : LEGENDARY (Level Maks: 5)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Memberikan mitigasi pengurangan damage menyeluruh dari segala jenis serangan.
+     Contoh Command: /ae enchant protection 5
+     ---------------------------------------------------------------------------
+[51] ID: surprise
+     Nama Tampilan : Surprise
+     Tingkat Tier  : LEGENDARY (Level Maks: 4)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Berteleportasi langsung ke belakang musuh dan mendaratkan serangan kejutan.
+     Contoh Command: /ae enchant surprise 4
+     ---------------------------------------------------------------------------
+[52] ID: turmoil
+     Nama Tampilan : Turmoil
+     Tingkat Tier  : LEGENDARY (Level Maks: 3)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Mengacaukan pergerakan musuh dan memicu pusaran badai di sekitar target.
+     Contoh Command: /ae enchant turmoil 3
+     ---------------------------------------------------------------------------
+[53] ID: unholy
+     Nama Tampilan : Unholy
+     Tingkat Tier  : LEGENDARY (Level Maks: 5)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Membalas serangan musuh dengan efek kutukan Weakness dan Wither.
+     Contoh Command: /ae enchant unholy 5
+     ---------------------------------------------------------------------------
+[54] ID: divineenlighted
+     Nama Tampilan : Divine Enlighted
+     Tingkat Tier  : HEROIC (Level Maks: 3)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Memberikan pencerahan ilahi yang melipatgandakan regenerasi HP dan mana.
+     Contoh Command: /ae enchant divineenlighted 3
+     ---------------------------------------------------------------------------
+[55] ID: etherealdodge
+     Nama Tampilan : Ethereal Dodge
+     Tingkat Tier  : HEROIC (Level Maks: 1)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Menembus dimensi sesaat untuk menghindari seluruh serangan yang datang.
+     Contoh Command: /ae enchant etherealdodge 1
+     ---------------------------------------------------------------------------
+[56] ID: godlyoverload
+     Nama Tampilan : Godly Overload
+     Tingkat Tier  : HEROIC (Level Maks: 3)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Melipatgandakan jumlah maksimal HP dan perisai energi secara permanen.
+     Contoh Command: /ae enchant godlyoverload 3
+     ---------------------------------------------------------------------------
+[57] ID: megaheavy
+     Nama Tampilan : Mega Heavy
+     Tingkat Tier  : HEROIC (Level Maks: 5)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Daya tahan mutlak dari knockback dan serangan hentakan gempa.
+     Contoh Command: /ae enchant megaheavy 5
+     ---------------------------------------------------------------------------
+[58] ID: mightycactus
+     Nama Tampilan : Mighty Cactus
+     Tingkat Tier  : HEROIC (Level Maks: 2)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Memantulkan duri berduri tajam berkekuatan dewa ke penyerang.
+     Contoh Command: /ae enchant mightycactus 2
+     ---------------------------------------------------------------------------
+[59] ID: paladinarmored
+     Nama Tampilan : Paladin Armored
+     Tingkat Tier  : HEROIC (Level Maks: 4)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Armor suci Paladin yang memitigasi sebagian besar damage fisik dan sihir.
+     Contoh Command: /ae enchant paladinarmored 4
+     ---------------------------------------------------------------------------
+[60] ID: planetarydeathbringer
+     Nama Tampilan : Planetary Deathbringer
+     Tingkat Tier  : HEROIC (Level Maks: 3)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Memanggil meteor kehancuran planet yang menghanguskan target dan sekitarnya.
+     Contoh Command: /ae enchant planetarydeathbringer 3
+     ---------------------------------------------------------------------------
+[61] ID: reinforcedtank
+     Nama Tampilan : Reinforced Tank
+     Tingkat Tier  : HEROIC (Level Maks: 4)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Zirah baja diperkuat yang membuat pengguna hampir tak tertembus senjata biasa.
+     Contoh Command: /ae enchant reinforcedtank 4
+     ---------------------------------------------------------------------------
+[62] ID: soulhardened
+     Nama Tampilan : Soul Hardened
+     Tingkat Tier  : HEROIC (Level Maks: 3)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Mengeraskan jiwa untuk menahan true damage dan serangan penetrasi.
+     Contoh Command: /ae enchant soulhardened 3
+     ---------------------------------------------------------------------------
+[63] ID: immortal
+     Nama Tampilan : Immortal
+     Tingkat Tier  : SOUL (Level Maks: 4)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Kebal dari kematian sesaat saat menerima serangan mematikan (Efek Totem of Undying).
+     Contoh Command: /ae enchant immortal 4
+     ---------------------------------------------------------------------------
+[64] ID: natureswrath
+     Nama Tampilan : Natures Wrath
+     Tingkat Tier  : SOUL (Level Maks: 4)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Melepaskan kemurkaan alam yang membekukan dan mementalkan seluruh musuh di area.
+     Contoh Command: /ae enchant natureswrath 4
+     ---------------------------------------------------------------------------
+[65] ID: horrify
+     Nama Tampilan : Horrify
+     Tingkat Tier  : MASTERY (Level Maks: 4)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Menyebarkan teror kengerian dalam radius 32x32 blok yang membingungkan seluruh lawan.
+     Contoh Command: /ae enchant horrify 4
+     ---------------------------------------------------------------------------
+[66] ID: markofthebeast
+     Nama Tampilan : Mark of the Beast
+     Tingkat Tier  : MASTERY (Level Maks: 6)
+     Cocok Untuk   : Semua Armor
+     Efek Sihir    : Menandai musuh dengan segel iblis purba; musuh yang ditandai menerima damage 2x lipat.
+     Contoh Command: /ae enchant markofthebeast 6
+     ---------------------------------------------------------------------------
+
+
+==========================================================================================
+ 10. HELM ZIRAH (HELMETS) (Total: 10 Enchant)
+==========================================================================================
+Deskripsi: Enchantment khusus untuk helm dan pelindung kepala.
+
+[01] ID: aquatic
+     Nama Tampilan : Aquatic
+     Tingkat Tier  : SIMPLE (Level Maks: 1)
+     Cocok Untuk   : Helm Zirah
+     Efek Sihir    : Memungkinkan pengguna bernapas di dalam air tanpa batas.
+     Contoh Command: /ae enchant aquatic 1
+     ---------------------------------------------------------------------------
+[02] ID: glowing
+     Nama Tampilan : Glowing
+     Tingkat Tier  : SIMPLE (Level Maks: 1)
+     Cocok Untuk   : Helm Zirah
+     Efek Sihir    : Memberikan penglihatan malam (Night Vision) permanen.
+     Contoh Command: /ae enchant glowing 1
+     ---------------------------------------------------------------------------
+[03] ID: waterborne
+     Nama Tampilan : Waterborne
+     Tingkat Tier  : SIMPLE (Level Maks: 1)
+     Cocok Untuk   : Helm Zirah
+     Efek Sihir    : Memudahkan pernapasan dan kelincahan di dalam air.
+     Contoh Command: /ae enchant waterborne 1
+     ---------------------------------------------------------------------------
+[04] ID: endershift
+     Nama Tampilan : EnderShift
+     Tingkat Tier  : UNIQUE (Level Maks: 3)
+     Cocok Untuk   : Helm & Sepatu Zirah
+     Efek Sihir    : Memberikan lonjakan Speed dan Health Boost saat darah kritis.
+     Contoh Command: /ae enchant endershift 3
+     ---------------------------------------------------------------------------
+[05] ID: smokebomb
+     Nama Tampilan : Smoke Bomb
+     Tingkat Tier  : ELITE (Level Maks: 8)
+     Cocok Untuk   : Helm Zirah
+     Efek Sihir    : Melepaskan asap tebal yang membutakan penyerang saat pengguna diserang.
+     Contoh Command: /ae enchant smokebomb 8
+     ---------------------------------------------------------------------------
+[06] ID: implants
+     Nama Tampilan : Implants
+     Tingkat Tier  : ULTIMATE (Level Maks: 3)
+     Cocok Untuk   : Helm Zirah
+     Efek Sihir    : Peluang memulihkan barisan rasa lapar secara berkala setiap detik.
+     Contoh Command: /ae enchant implants 3
+     ---------------------------------------------------------------------------
+[07] ID: deathgod
+     Nama Tampilan : Death God
+     Tingkat Tier  : LEGENDARY (Level Maks: 3)
+     Cocok Untuk   : Helm Zirah
+     Efek Sihir    : Kebal dari satu kali serangan fatal dan memulihkan sebagian darah pengguna.
+     Contoh Command: /ae enchant deathgod 3
+     ---------------------------------------------------------------------------
+[08] ID: destruction
+     Nama Tampilan : Destruction
+     Tingkat Tier  : LEGENDARY (Level Maks: 5)
+     Cocok Untuk   : Helm Zirah
+     Efek Sihir    : Membakar dan menghancurkan pertahanan musuh di area sekitar.
+     Contoh Command: /ae enchant destruction 5
+     ---------------------------------------------------------------------------
+[09] ID: drunk
+     Nama Tampilan : Drunk
+     Tingkat Tier  : LEGENDARY (Level Maks: 4)
+     Cocok Untuk   : Helm Zirah
+     Efek Sihir    : Memberikan buff Strength besar namun disertai kelambatan gerak Slowness.
+     Contoh Command: /ae enchant drunk 4
+     ---------------------------------------------------------------------------
+[10] ID: alienimplants
+     Nama Tampilan : Alien Implants
+     Tingkat Tier  : HEROIC (Level Maks: 3)
+     Cocok Untuk   : Helm Zirah
+     Efek Sihir    : Regenerasi kesehatan super cepat yang didukung teknologi biokimia alien.
+     Contoh Command: /ae enchant alienimplants 3
+     ---------------------------------------------------------------------------
+
+
+==========================================================================================
+ 11. ZIRAH DADA (CHESTPLATES) (Total: 7 Enchant)
+==========================================================================================
+Deskripsi: Enchantment khusus untuk baju zirah pelindung dada.
+
+[01] ID: shockwave
+     Nama Tampilan : Shockwave
+     Tingkat Tier  : ELITE (Level Maks: 5)
+     Cocok Untuk   : Zirah Dada
+     Efek Sihir    : Memicu gelombang kejut yang mementalkan semua lawan di sekitar.
+     Contoh Command: /ae enchant shockwave 5
+     ---------------------------------------------------------------------------
+[02] ID: chunky
+     Nama Tampilan : Chunky
+     Tingkat Tier  : LEGENDARY (Level Maks: 6)
+     Cocok Untuk   : Zirah Dada
+     Efek Sihir    : Peluang mengurangi sebagian besar damage serangan yang diterima zirah dada.
+     Contoh Command: /ae enchant chunky 6
+     ---------------------------------------------------------------------------
+[03] ID: fat
+     Nama Tampilan : Fat
+     Tingkat Tier  : LEGENDARY (Level Maks: 6)
+     Cocok Untuk   : Zirah Dada
+     Efek Sihir    : Memberikan barisan hati ekstra (Extra Hearts) permanen saat dikenakan.
+     Contoh Command: /ae enchant fat 6
+     ---------------------------------------------------------------------------
+[04] ID: fumble
+     Nama Tampilan : Fumble
+     Tingkat Tier  : LEGENDARY (Level Maks: 3)
+     Cocok Untuk   : Zirah Dada
+     Efek Sihir    : Peluang menjatuhkan barang yang sedang dipegang oleh lawan dari tangannya.
+     Contoh Command: /ae enchant fumble 3
+     ---------------------------------------------------------------------------
+[05] ID: vengefuldiminish
+     Nama Tampilan : Vengeful Diminish
+     Tingkat Tier  : HEROIC (Level Maks: 6)
+     Cocok Untuk   : Zirah Dada
+     Efek Sihir    : Mengurangi kekuatan serang lawan secara permanen selama pertempuran berlangsung.
+     Contoh Command: /ae enchant vengefuldiminish 6
+     ---------------------------------------------------------------------------
+[06] ID: phoenix
+     Nama Tampilan : Phoenix
+     Tingkat Tier  : SOUL (Level Maks: 3)
+     Cocok Untuk   : Zirah Dada
+     Efek Sihir    : Peluang bangkit kembali dari kematian dengan kobaran api burung Phoenix.
+     Contoh Command: /ae enchant phoenix 3
+     ---------------------------------------------------------------------------
+[07] ID: chainlifesteal
+     Nama Tampilan : Chain Lifesteal
+     Tingkat Tier  : MASTERY (Level Maks: 2)
+     Cocok Untuk   : Zirah Dada
+     Efek Sihir    : Menghisap darah berantai dari target utama ke seluruh musuh di sekitarnya.
+     Contoh Command: /ae enchant chainlifesteal 2
+     ---------------------------------------------------------------------------
+
+
+==========================================================================================
+ 12. CELANA ZIRAH (LEGGINGS) (Total: 6 Enchant)
+==========================================================================================
+Deskripsi: Enchantment khusus untuk celana zirah tempur.
+
+[01] ID: explosivedemise
+     Nama Tampilan : Explosive Demise
+     Tingkat Tier  : UNIQUE (Level Maks: 8)
+     Cocok Untuk   : Celana Zirah
+     Efek Sihir    : Memicu ledakan balasan saat pengguna gugur dalam duel.
+     Contoh Command: /ae enchant explosivedemise 8
+     ---------------------------------------------------------------------------
+[02] ID: lifebloom
+     Nama Tampilan : Lifebloom
+     Tingkat Tier  : UNIQUE (Level Maks: 5)
+     Cocok Untuk   : Celana Zirah
+     Efek Sihir    : Memulihkan kesehatan rekan tim di sekitar saat berhasil membunuh lawan.
+     Contoh Command: /ae enchant lifebloom 5
+     ---------------------------------------------------------------------------
+[03] ID: plaguecarrier
+     Nama Tampilan : Plague Carrier
+     Tingkat Tier  : UNIQUE (Level Maks: 8)
+     Cocok Untuk   : Celana Zirah
+     Efek Sihir    : Peluang memanggil kawanan lebah berbisa saat pengguna diserang.
+     Contoh Command: /ae enchant plaguecarrier 8
+     ---------------------------------------------------------------------------
+[04] ID: extinguish
+     Nama Tampilan : Extinguish
+     Tingkat Tier  : ELITE (Level Maks: 3)
+     Cocok Untuk   : Celana Zirah
+     Efek Sihir    : Memadamkan api di tubuh pengguna secara instan saat terbakar.
+     Contoh Command: /ae enchant extinguish 3
+     ---------------------------------------------------------------------------
+[05] ID: exterminator
+     Nama Tampilan : Exterminator
+     Tingkat Tier  : LEGENDARY (Level Maks: 3)
+     Cocok Untuk   : Celana Zirah
+     Efek Sihir    : Memberikan damage masif terhadap semua jenis arthropoda dan monster.
+     Contoh Command: /ae enchant exterminator 3
+     ---------------------------------------------------------------------------
+[06] ID: epidemiccarrier
+     Nama Tampilan : Epidemic Carrier
+     Tingkat Tier  : HEROIC (Level Maks: 8)
+     Cocok Untuk   : Celana Zirah
+     Efek Sihir    : Menyebarkan wabah penyakit mematikan yang menular antar musuh di area.
+     Contoh Command: /ae enchant epidemiccarrier 8
+     ---------------------------------------------------------------------------
+
+
+==========================================================================================
+ 13. SEPATU ZIRAH (BOOTS) (Total: 24 Enchant)
+==========================================================================================
+Deskripsi: Enchantment khusus untuk sepatu pelindung kaki, anti-fall, kecepatan, dan langkah.
+
+[01] ID: escape
+     Nama Tampilan : Escape
+     Tingkat Tier  : SIMPLE (Level Maks: 2)
+     Cocok Untuk   : Sepatu Zirah
+     Efek Sihir    : Mendapatkan lonjakan kecepatan lari sesaat setelah menerima damage.
+     Contoh Command: /ae enchant escape 2
+     ---------------------------------------------------------------------------
+[02] ID: feather_step
+     Nama Tampilan : Feather Step
+     Tingkat Tier  : SIMPLE (Level Maks: 5)
+     Cocok Untuk   : Sepatu Zirah
+     Efek Sihir    : Meniadakan kerusakan akibat jatuh dan meringankan langkah kaki.
+     Contoh Command: /ae enchant feather_step 5
+     ---------------------------------------------------------------------------
+[03] ID: endershift
+     Nama Tampilan : EnderShift
+     Tingkat Tier  : UNIQUE (Level Maks: 3)
+     Cocok Untuk   : Helm & Sepatu Zirah
+     Efek Sihir    : Memberikan lonjakan Speed dan Health Boost saat darah kritis.
+     Contoh Command: /ae enchant endershift 3
+     ---------------------------------------------------------------------------
+[04] ID: antigravity
+     Nama Tampilan : Anti Gravity
+     Tingkat Tier  : ELITE (Level Maks: 3)
+     Cocok Untuk   : Sepatu Zirah
+     Efek Sihir    : Memberikan lompatan super tinggi layaknya tanpa gravitasi.
+     Contoh Command: /ae enchant antigravity 3
+     ---------------------------------------------------------------------------
+[05] ID: rocketescape
+     Nama Tampilan : Rocket Escape
+     Tingkat Tier  : ELITE (Level Maks: 3)
+     Cocok Untuk   : Sepatu Zirah
+     Efek Sihir    : Meluncurkan pengguna terbang tinggi ke udara saat darah kritis.
+     Contoh Command: /ae enchant rocketescape 3
+     ---------------------------------------------------------------------------
+[06] ID: springs
+     Nama Tampilan : Springs
+     Tingkat Tier  : ELITE (Level Maks: 3)
+     Cocok Untuk   : Sepatu Zirah
+     Efek Sihir    : Memberikan peningkatan tinggi lompatan (Jump Boost).
+     Contoh Command: /ae enchant springs 3
+     ---------------------------------------------------------------------------
+[07] ID: undeadruse
+     Nama Tampilan : Undead Ruse
+     Tingkat Tier  : ELITE (Level Maks: 10)
+     Cocok Untuk   : Sepatu Zirah
+     Efek Sihir    : Peluang memunculkan prajurit zombie sekutu untuk melindungimu.
+     Contoh Command: /ae enchant undeadruse 10
+     ---------------------------------------------------------------------------
+[08] ID: aegis
+     Nama Tampilan : Aegis
+     Tingkat Tier  : ULTIMATE (Level Maks: 3)
+     Cocok Untuk   : Sepatu Zirah
+     Efek Sihir    : Peluang mendapatkan lonjakan kecepatan lari saat terkena fall damage.
+     Contoh Command: /ae enchant aegis 3
+     ---------------------------------------------------------------------------
+[09] ID: enderwalker
+     Nama Tampilan : Ender Walker
+     Tingkat Tier  : ULTIMATE (Level Maks: 5)
+     Cocok Untuk   : Sepatu Zirah
+     Efek Sihir    : Mengurangi damage Ender Pearl dan kebal efek Wither saat teleportasi.
+     Contoh Command: /ae enchant enderwalker 5
+     ---------------------------------------------------------------------------
+[10] ID: jellylegs
+     Nama Tampilan : Jelly Legs
+     Tingkat Tier  : ULTIMATE (Level Maks: 3)
+     Cocok Untuk   : Sepatu Zirah
+     Efek Sihir    : Peluang meniadakan seluruh kerusakan jatuh (Fall Damage).
+     Contoh Command: /ae enchant jellylegs 3
+     ---------------------------------------------------------------------------
+[11] ID: metaphysical
+     Nama Tampilan : Metaphysical
+     Tingkat Tier  : ULTIMATE (Level Maks: 4)
+     Cocok Untuk   : Sepatu Zirah
+     Efek Sihir    : Memberikan kekebalan terhadap efek Slowness, Nausea, dan kelumpuhan.
+     Contoh Command: /ae enchant metaphysical 4
+     ---------------------------------------------------------------------------
+[12] ID: plummet
+     Nama Tampilan : Plummet
+     Tingkat Tier  : ULTIMATE (Level Maks: 3)
+     Cocok Untuk   : Sepatu Zirah
+     Efek Sihir    : Memicu gelombang gempa di tanah saat mendarat dari lompatan tinggi.
+     Contoh Command: /ae enchant plummet 3
+     ---------------------------------------------------------------------------
+[13] ID: aqua
+     Nama Tampilan : Aqua
+     Tingkat Tier  : LEGENDARY (Level Maks: 4)
+     Cocok Untuk   : Sepatu Zirah
+     Efek Sihir    : Melipatgandakan damage serangan saat bertarung di dalam air.
+     Contoh Command: /ae enchant aqua 4
+     ---------------------------------------------------------------------------
+[14] ID: convulse
+     Nama Tampilan : Convulse
+     Tingkat Tier  : LEGENDARY (Level Maks: 6)
+     Cocok Untuk   : Sepatu Zirah
+     Efek Sihir    : Membuat lawan gemetar hebat dan mengguncang arah pandangannya.
+     Contoh Command: /ae enchant convulse 6
+     ---------------------------------------------------------------------------
+[15] ID: gears
+     Nama Tampilan : Gears
+     Tingkat Tier  : LEGENDARY (Level Maks: 3)
+     Cocok Untuk   : Sepatu Zirah
+     Efek Sihir    : Meningkatkan kecepatan gerak langkah kaki secara permanen saat dipakai.
+     Contoh Command: /ae enchant gears 3
+     ---------------------------------------------------------------------------
+[16] ID: lavawalker
+     Nama Tampilan : Lava Walker
+     Tingkat Tier  : LEGENDARY (Level Maks: 1)
+     Cocok Untuk   : Sepatu Zirah
+     Efek Sihir    : Memungkinkan pengguna berjalan di atas permukaan lava tanpa terbakar.
+     Contoh Command: /ae enchant lavawalker 1
+     ---------------------------------------------------------------------------
+[17] ID: quiver
+     Nama Tampilan : Quiver
+     Tingkat Tier  : LEGENDARY (Level Maks: 6)
+     Cocok Untuk   : Sepatu Zirah
+     Efek Sihir    : Peluang mementalkan penyerang tinggi ke udara saat pengguna diserang.
+     Contoh Command: /ae enchant quiver 6
+     ---------------------------------------------------------------------------
+[18] ID: takeoff
+     Nama Tampilan : Take Off
+     Tingkat Tier  : LEGENDARY (Level Maks: 1)
+     Cocok Untuk   : Sepatu Zirah
+     Efek Sihir    : Memungkinkan pengguna melayang dan terbang di udara saat dikenakan.
+     Contoh Command: /ae enchant takeoff 1
+     ---------------------------------------------------------------------------
+[19] ID: torrent
+     Nama Tampilan : Torrent
+     Tingkat Tier  : LEGENDARY (Level Maks: 4)
+     Cocok Untuk   : Sepatu Zirah
+     Efek Sihir    : Meningkatkan damage serangan secara dahsyat saat berada di air atau hujan.
+     Contoh Command: /ae enchant torrent 4
+     ---------------------------------------------------------------------------
+[20] ID: waterwalker
+     Nama Tampilan : Water Walker
+     Tingkat Tier  : LEGENDARY (Level Maks: 1)
+     Cocok Untuk   : Sepatu Zirah
+     Efek Sihir    : Memungkinkan pengguna berjalan di atas permukaan air layaknya daratan.
+     Contoh Command: /ae enchant waterwalker 1
+     ---------------------------------------------------------------------------
+[21] ID: wings
+     Nama Tampilan : Wings
+     Tingkat Tier  : LEGENDARY (Level Maks: 1)
+     Cocok Untuk   : Sepatu Zirah
+     Efek Sihir    : Memberikan kemampuan terbang bebas di udara layaknya memiliki sayap.
+     Contoh Command: /ae enchant wings 1
+     ---------------------------------------------------------------------------
+[22] ID: guidedrocketescape
+     Nama Tampilan : Guided Rocket Escape
+     Tingkat Tier  : HEROIC (Level Maks: 3)
+     Cocok Untuk   : Sepatu Zirah
+     Efek Sihir    : Meluncurkan pengguna ke udara layaknya roket kendali saat darah sekarat.
+     Contoh Command: /ae enchant guidedrocketescape 3
+     ---------------------------------------------------------------------------
+[23] ID: polymorphicmetaphysical
+     Nama Tampilan : Polymorphic Metaphysical
+     Tingkat Tier  : HEROIC (Level Maks: 4)
+     Cocok Untuk   : Sepatu Zirah
+     Efek Sihir    : Kekebalan mutlak dari segala jenis debuff, stun, slowness, dan kutukan.
+     Contoh Command: /ae enchant polymorphicmetaphysical 4
+     ---------------------------------------------------------------------------
+[24] ID: soulsiphone
+     Nama Tampilan : Soul Siphone
+     Tingkat Tier  : MASTERY (Level Maks: 4)
+     Cocok Untuk   : Sepatu Zirah
+     Efek Sihir    : Menyerap jiwa dan durability perlengkapan musuh secara langsung ke gear pengguna.
+     Contoh Command: /ae enchant soulsiphone 4
+     ---------------------------------------------------------------------------
+
+
+==========================================================================================
+ 14. SAYAP ELYTRA (ELYTRA WINGS) (Total: 5 Enchant)
+==========================================================================================
+Deskripsi: Enchantment khusus untuk manuver sayap terbang Elytra.
+
+[01] ID: momentum
+     Nama Tampilan : Momentum
+     Tingkat Tier  : ELITE (Level Maks: 3)
+     Cocok Untuk   : Sayap Elytra
+     Efek Sihir    : Memberikan akselerasi dorongan kecepatan saat melayang dengan Elytra.
+     Contoh Command: /ae enchant momentum 3
+     ---------------------------------------------------------------------------
+[02] ID: reinforced
+     Nama Tampilan : Reinforced
+     Tingkat Tier  : ULTIMATE (Level Maks: 4)
+     Cocok Untuk   : Sayap Elytra
+     Efek Sihir    : Memperkuat sayap Elytra dan mengurangi kerusakan yang diterima pengguna.
+     Contoh Command: /ae enchant reinforced 4
+     ---------------------------------------------------------------------------
+[03] ID: judgement
+     Nama Tampilan : Judgement
+     Tingkat Tier  : LEGENDARY (Level Maks: 5)
+     Cocok Untuk   : Sayap Elytra
+     Efek Sihir    : Menghujani lawan dengan sambaran cahaya suci yang membakar jiwa.
+     Contoh Command: /ae enchant judgement 5
+     ---------------------------------------------------------------------------
+[04] ID: slingshot
+     Nama Tampilan : Slingshot
+     Tingkat Tier  : LEGENDARY (Level Maks: 3)
+     Cocok Untuk   : Sayap Elytra
+     Efek Sihir    : Meluncurkan pengguna terbang ke angkasa dengan melakukan Klik-Kanan.
+     Contoh Command: /ae enchant slingshot 3
+     ---------------------------------------------------------------------------
+[05] ID: rush
+     Nama Tampilan : Rush
+     Tingkat Tier  : FABLED (Level Maks: 3)
+     Cocok Untuk   : Sayap Elytra
+     Efek Sihir    : Memberikan dorongan akselerasi terbang super kencang pada sayap Elytra.
+     Contoh Command: /ae enchant rush 3
+     ---------------------------------------------------------------------------
+
+
+==========================================================================================
+ 15. ITEM KHUSUS LAINNYA (SPECIAL ITEMS) (Total: 1 Enchant)
+==========================================================================================
+Deskripsi: Enchantment untuk item unik seperti Tanduk Kambing.
+
+[01] ID: callallies
+     Nama Tampilan : Call to Allies
+     Tingkat Tier  : ULTIMATE (Level Maks: 3)
+     Cocok Untuk   : Tanduk Kambing
+     Efek Sihir    : Meniup tanduk perang untuk memanggil sekutu bayangan pembantu.
+     Contoh Command: /ae enchant callallies 3
+     ---------------------------------------------------------------------------
+
+
+==========================================================================================
+ RINGKASAN AUDIT SISTEM
+==========================================================================================
+Total Unique Enchantment Terdaftar di Database : 336
+Total Unique Enchantment Masuk Kategori       : 336
+Semua sihir terverifikasi 100% kompatibel dengan sistem penempaan Drag-and-Drop & Anvil.
+==========================================================================================

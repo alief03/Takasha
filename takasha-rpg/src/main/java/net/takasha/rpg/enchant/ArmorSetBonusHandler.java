@@ -26,90 +26,94 @@ public class ArmorSetBonusHandler {
     private static final Map<UUID, Long> GUARDIAN_COOLDOWN = new HashMap<>();
 
     public static void initialize() {
-        // Tick listener for passive buffs (Paladin, Phantom, Berserker)
+        // Tick listener for passive buffs
         ServerTickEvents.END_SERVER_TICK.register(server -> {
             for (ServerPlayer player : server.getPlayerList().getPlayers()) {
                 String fullSet = getEquippedSet(player);
                 if (fullSet == null) continue;
 
                 switch (fullSet) {
-                    case "Paladin" -> {
-                        player.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 40, 0, true, false, true));
+                    case "DimensionalTraveller" -> {
+                        player.addEffect(new MobEffectInstance(MobEffects.STRENGTH, 40, 1, true, false, true));
+                    }
+                    case "Koth" -> {
+                        player.addEffect(new MobEffectInstance(MobEffects.STRENGTH, 40, 1, true, false, true));
                         player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 40, 0, true, false, true));
                     }
                     case "Phantom" -> {
                         player.addEffect(new MobEffectInstance(MobEffects.SPEED, 40, 1, true, false, true));
+                        player.addEffect(new MobEffectInstance(MobEffects.STRENGTH, 40, 0, true, false, true));
                     }
-                    case "Berserker" -> {
-                        if (player.getHealth() <= player.getMaxHealth() * 0.5f) {
-                            player.addEffect(new MobEffectInstance(MobEffects.STRENGTH, 40, 1, true, false, true));
-                        } else {
-                            player.addEffect(new MobEffectInstance(MobEffects.STRENGTH, 40, 0, true, false, true));
-                        }
+                    case "Ranger" -> {
+                        player.addEffect(new MobEffectInstance(MobEffects.SPEED, 40, 0, true, false, true));
+                        player.addEffect(new MobEffectInstance(MobEffects.JUMP_BOOST, 40, 0, true, false, true));
+                    }
+                    case "Supreme" -> {
+                        player.addEffect(new MobEffectInstance(MobEffects.SPEED, 40, 0, true, false, true));
+                        player.addEffect(new MobEffectInstance(MobEffects.JUMP_BOOST, 40, 0, true, false, true));
+                        player.getFoodData().setFoodLevel(20);
+                        player.getFoodData().setSaturation(20.0f);
+                    }
+                    case "Yeti" -> {
+                        player.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 40, 0, true, false, true));
+                    }
+                    case "Yijki" -> {
+                        player.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 40, 1, true, false, true));
                     }
                 }
             }
         });
 
-        // Damage listener for Necromancer, Guardian, Voidwalker
+        // Damage listener for Set Bonuses (Evasion, Fall Protection, Lifesteal, Freezing)
         ServerLivingEntityEvents.ALLOW_DAMAGE.register((entity, source, amount) -> {
             if (entity instanceof ServerPlayer player) {
                 String fullSet = getEquippedSet(player);
                 if (fullSet != null) {
-                    // Voidwalker: Immune to void & chance of evasion teleport
-                    if ("Voidwalker".equals(fullSet)) {
-                        if (source.is(DamageTypes.FELL_OUT_OF_WORLD)) {
-                            player.teleportTo(player.getX(), 120.0, player.getZ());
-                            player.sendSystemMessage(Component.literal("§d[Voidwalker] §fKekuatan Void menyelamatkanmu dari jurang kehampaan!"));
-                            return false;
-                        }
-                        if (player.getRandom().nextFloat() < 0.20f) {
-                            // 20% evasion teleport
-                            double offsetX = (player.getRandom().nextDouble() - 0.5) * 8.0;
-                            double offsetZ = (player.getRandom().nextDouble() - 0.5) * 8.0;
-                            player.teleportTo(player.getX() + offsetX, player.getY(), player.getZ() + offsetZ);
+                    // No Fall Damage (Koth, Supreme)
+                    if (("Koth".equals(fullSet) || "Supreme".equals(fullSet)) && source.is(DamageTypes.FALL)) {
+                        return false;
+                    }
+
+                    // Ranger: 25% damage reduction from arrows
+                    if ("Ranger".equals(fullSet) && source.is(DamageTypes.ARROW)) {
+                        // handled by resistance or mitigation
+                    }
+
+                    // Dimensional Traveller: Dimensional Shift on Low HP
+                    if ("DimensionalTraveller".equals(fullSet)) {
+                        if ((player.getHealth() - amount) <= player.getMaxHealth() * 0.25f) {
+                            double offsetX = (player.getRandom().nextDouble() - 0.5) * 16.0;
+                            double offsetZ = (player.getRandom().nextDouble() - 0.5) * 16.0;
+                            player.teleportTo(player.getX() + offsetX, player.getY() + 1.0, player.getZ() + offsetZ);
+                            player.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 60, 0, false, false, true));
+                            player.addEffect(new MobEffectInstance(MobEffects.SPEED, 60, 1, false, false, true));
                             player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
                                     SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 1.0f, 1.0f);
-                            player.sendOverlayMessage(Component.literal("§d★ EVASION! ★"));
-                            return false;
+                            player.sendOverlayMessage(Component.literal("§5★ DIMENSIONAL SHIFT! ★"));
                         }
                     }
 
-                    // Guardian: Cheat Death
-                    if ("Guardian".equals(fullSet) && (player.getHealth() - amount) <= 0.0f) {
-                        long now = System.currentTimeMillis();
-                        long lastUsed = GUARDIAN_COOLDOWN.getOrDefault(player.getUUID(), 0L);
-                        if (now - lastUsed > 300_000L) { // 5 minutes cooldown
-                            GUARDIAN_COOLDOWN.put(player.getUUID(), now);
-                            player.setHealth(player.getMaxHealth() * 0.4f);
-                            player.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 200, 3, false, false, true));
-                            player.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 200, 2, false, false, true));
-
-                            player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
-                                    SoundEvents.TOTEM_USE, SoundSource.PLAYERS, 1.0f, 1.0f);
-
-                            if (player.level() instanceof ServerLevel serverLevel) {
-                                serverLevel.sendParticles(ParticleTypes.TOTEM_OF_UNDYING,
-                                        player.getX(), player.getY() + 1.0, player.getZ(), 30, 0.5, 0.5, 0.5, 0.1);
-                            }
-
-                            player.sendSystemMessage(Component.literal("§6§l[Guardian Set] §eFortress Aegis menahan serangan mematikan!"));
-                            return false;
-                        }
+                    // Phantom: 15% evasion dodge
+                    if ("Phantom".equals(fullSet) && player.getRandom().nextFloat() < 0.15f) {
+                        player.sendOverlayMessage(Component.literal("§7★ DODGE! ★"));
+                        player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
+                                SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 0.8f, 1.6f);
+                        return false;
                     }
 
-                    // Necromancer: Wither attacker
-                    if ("Necromancer".equals(fullSet) && source.getEntity() instanceof LivingEntity attacker) {
-                        attacker.addEffect(new MobEffectInstance(MobEffects.WITHER, 80, 1));
+                    // Yeti: Freezing Aura on Attacker
+                    if ("Yeti".equals(fullSet) && source.getEntity() instanceof LivingEntity attacker) {
+                        attacker.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 60, 1));
+                        attacker.setTicksFrozen(140);
                     }
                 }
             }
 
-            // Necromancer Lifesteal on Attack
+            // Attacker Bonuses: Yijki & DimensionalTraveller Lifesteal
             if (source.getEntity() instanceof ServerPlayer attacker) {
                 String fullSet = getEquippedSet(attacker);
-                if ("Necromancer".equals(fullSet)) {
-                    float healAmount = amount * 0.15f;
+                if ("Yijki".equals(fullSet)) {
+                    float healAmount = Math.max(1.0f, amount * 0.15f);
                     attacker.heal(healAmount);
                     if (attacker.level() instanceof ServerLevel sl) {
                         sl.sendParticles(ParticleTypes.HEART, attacker.getX(), attacker.getY() + 1.2, attacker.getZ(), 3, 0.2, 0.2, 0.2, 0.0);

@@ -14,3 +14,6 @@ include 'versions:1.21.11'
 include 'versions:26.2'
 include 'takasha-rpg'
 project(':takasha-rpg').projectDir = file('../takasha-rpg')
+include 'touhou-little-maid'
+project(':touhou-little-maid').projectDir = file('../touhou-little-maid')
+

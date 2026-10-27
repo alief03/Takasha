@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Takasha RPG — Unified Master Wiki & Interactive Simulator</title>
+  <meta name="description" content="Katalog interaktif 334 Custom Enchantments, LevelledMobs Lvl 1-1000 Simulator, 16 Gelar Kedaulatan, dan Pusat Optimasi Hardware Laptop Rendah Daya.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-crest">🌸⚔️</span>
+        <div class="brand-text">
+          <h1>TAKASHA RPG</h1>
+          <span class="brand-sub">Unified Master Compendium & Simulator</span>
+        </div>
+      </div>
+      <div class="header-badges">
+        <span class="badge-ver">Fabric 1.21.x / 26.2</span>
+        <span class="badge-slots">10 Default + 10 Increaser (Max 20 Slots)</span>
+        <span class="badge-opt">Ryzen 3 & Radeon 610M Optimized</span>
+      </div>
+    </div>
+
+    <!-- Tab Bar -->
+    <nav class="nav-tabs">
+      <button class="nav-btn active" data-tab="tab-enchants">
+        <span class="icon">🔮</span> 334 Custom Enchants
+      </button>
+      <button class="nav-btn" data-tab="tab-mobs">
+        <span class="icon">👹</span> LevelledMobs Lvl 1–1000
+      </button>
+      <button class="nav-btn" data-tab="tab-titles">
+        <span class="icon">👑</span> 16 Titles & Quests
+      </button>
+      <button class="nav-btn" data-tab="tab-economy">
+        <span class="icon">🛒</span> ShopGUI & Slots
+      </button>
+      <button class="nav-btn" data-tab="tab-laptop">
+        <span class="icon">⚡</span> Laptop Optimization
+      </button>
+    </nav>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="main-container">
+
+    <!-- TAB 1: 334 CUSTOM ENCHANTS EXPLORER -->
+    <section id="tab-enchants" class="tab-panel active">
+      <div class="section-banner">
+        <div class="banner-content">
+          <h2>Unified Master Enchantments Directory</h2>
+          <p>Seluruh <strong>334 Custom Enchantments</strong> resmi terintegrasi ke dalam satu direktori master petualangan. Setiap item memiliki <strong>10 slot bawaan gratis</strong> dan dapat ditingkatkan hingga <strong>20 slot maksimal</strong> via Slot Increaser.</p>
+        </div>
+        <div class="banner-stats">
+          <div class="stat-pill"><span class="stat-num" id="stat-total-enchants">334</span> Total Enchants</div>
+          <div class="stat-pill"><span class="stat-num">9</span> Official Tiers</div>
+          <div class="stat-pill"><span class="stat-num">10 + 10</span> Slots System</div>
+        </div>
+      </div>
+
+      <!-- Controls & Multi-Filter Bar -->
+      <div class="controls-panel">
+        <div class="search-wrap">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="enchant-search" placeholder="Cari enchantment berdasarkan nama, efek, atau kata kunci...">
+        </div>
+        <div class="filter-group">
+          <label>Filter Tier:</label>
+          <div class="tier-tags" id="tier-filters">
+            <button class="filter-tag active" data-tier="ALL">Semua Tier (334)</button>
+            <button class="filter-tag tier-simple" data-tier="Simple">Simple (40)</button>
+            <button class="filter-tag tier-unique" data-tier="Unique">Unique (38)</button>
+            <button class="filter-tag tier-elite" data-tier="Elite">Elite (65)</button>
+            <button class="filter-tag tier-ultimate" data-tier="Ultimate">Ultimate (72)</button>
+            <button class="filter-tag tier-legendary" data-tier="Legendary">Legendary (60)</button>
+            <button class="filter-tag tier-fabled" data-tier="Fabled">Fabled (17)</button>
+            <button class="filter-tag tier-heroic" data-tier="Heroic">Heroic (26)</button>
+            <button class="filter-tag tier-soul" data-tier="Soul">Soul (7)</button>
+            <button class="filter-tag tier-mastery" data-tier="Mastery">Mastery (9)</button>
+          </div>
+        </div>
+        <div class="filter-group">
+          <label>Target Perlengkapan:</label>
+          <div class="tier-tags" id="applies-filters">
+            <button class="filter-tag active" data-applies="ALL">Semua Target</button>
+            <button class="filter-tag" data-applies="Swords">Swords / Pedang</button>
+            <button class="filter-tag" data-applies="Axes">Axes / Kapak</button>
+            <button class="filter-tag" data-applies="Bows">Bows / Busur</button>
+            <button class="filter-tag" data-applies="Armor">Armor / Zirah</button>
+            <button class="filter-tag" data-applies="Boots">Boots / Sepatu</button>
+            <button class="filter-tag" data-applies="Tools">Tools / Alat Tambang</button>
+            <button class="filter-tag" data-applies="Fishing">Fishing Rod</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Enchants Results Counter -->
+      <div class="results-summary">
+        Menampilkan <span id="visible-count">334</span> dari 334 Enchantment Resmi Takasha RPG
+      </div>
+
+      <!-- Grid of Enchant Cards -->
+      <div class="enchants-grid" id="enchants-grid">
+        <!-- Rendered by app.js -->
+      </div>
+    </section>
+
+    <!-- TAB 2: LEVELLEDMOBS L1-1000 SIMULATOR -->
+    <section id="tab-mobs" class="tab-panel">
+      <div class="section-banner">
+        <div class="banner-content">
+          <h2>LevelledMobs Interactive Combat Simulator (Lvl 1–1000)</h2>
+          <p>Kalkulator kalkulasi level monster cerdas berdasarkan <strong>Nilai Rata-rata AuraSkills Pemain (1–1000)</strong> dan <strong>Jarak Eksplorasi dari Titik Spawn (0–10,000 Blok)</strong>. Dilengkapi formula kurva darah non-linear, perlindungan <strong>Anti-Melt Cap (15% Max HP/hit)</strong>, dan pratinjau nametag 3D live.</p>
+        </div>
+      </div>
+
+      <div class="simulator-layout">
+        <!-- Input Sliders Panel -->
+        <div class="sim-controls card-box">
+          <h3 class="box-title">⚙️ Parameter Petualangan</h3>
+
+          <div class="control-row">
+            <div class="label-val">
+              <label for="slider-skill">Rata-rata AuraSkills Pemain (SK Avg):</label>
+              <span class="val-badge" id="val-skill">100 SK</span>
+            </div>
+            <input type="range" id="slider-skill" min="1" max="1000" value="100" class="custom-slider">
+            <div class="slider-hint">Total 11 Cabang AuraSkills (Maksimal 11,000 Total SK).</div>
+          </div>
+
+          <div class="control-row">
+            <div class="label-val">
+              <label for="slider-distance">Jarak dari Spawn (Koordinat Blok):</label>
+              <span class="val-badge" id="val-distance">1,500 Blok</span>
+            </div>
+            <input type="range" id="slider-distance" min="0" max="10000" step="100" value="1500" class="custom-slider">
+            <div class="slider-hint">Eksplorasi semakin jauh membuka monster kuno berlevel tinggi.</div>
+          </div>
+
+          <div class="control-row">
+            <div class="label-val">
+              <label for="select-dimension">Dimensi Petualangan:</label>
+            </div>
+            <select id="select-dimension" class="custom-select">
+              <option value="1.0">Overworld (Pengali 1.0x)</option>
+              <option value="1.35">The Nether (Pengali 1.35x Level)</option>
+              <option value="1.75">The End (Pengali 1.75x Level)</option>
+              <option value="2.2">Monster Arena / Boss Dungeon (Pengali 2.2x Level)</option>
+            </select>
+          </div>
+
+          <div class="anti-melt-notice">
+            <div class="notice-icon">🛡️</div>
+            <div class="notice-text">
+              <strong>Anti-One-Shot / Anti-Melt Cap Aktif:</strong>
+              Monster Boss Level 750–1000 kebal terhadap 1-hit kill. Damage masuk dibatasi maksimal <strong>15% dari Max HP per serangan</strong> (butuh minimal 7 hit beruntun untuk menumbangkan boss).
+            </div>
+          </div>
+        </div>
+
+        <!-- Realtime Result Panel -->
+        <div class="sim-results card-box">
+          <h3 class="box-title">📊 Analisis Statistik Monster Terkalkulasi</h3>
+
+          <!-- Floating 3D Nametag Preview -->
+          <div class="nametag-preview-box">
+            <div class="preview-label">Live 3D Floating Nametag In-Game Preview:</div>
+            <div class="floating-nametag" id="nametag-preview">
+              <!-- Rendered by JS -->
+            </div>
+            <div class="culling-badge">⚡ Radeon 610M Protection: Distance Culling ≤ 20 blok</div>
+          </div>
+
+          <!-- Calculated Stats Grid -->
+          <div class="stats-table">
+            <div class="stat-card">
+              <span class="sc-label">Kalkulasi Level Mob</span>
+              <span class="sc-val" id="res-mob-level">Lvl 124</span>
+              <span class="sc-sub" id="res-mob-tier">Tier: Elite Veteran</span>
+            </div>
+            <div class="stat-card">
+              <span class="sc-label">Total Darah (HP)</span>
+              <span class="sc-val" id="res-mob-hp">480 HP</span>
+              <span class="sc-sub" id="res-mob-hp-hearts">240 Hearts</span>
+            </div>
+            <div class="stat-card">
+              <span class="sc-label">Attack Damage</span>
+              <span class="sc-val" id="res-mob-atk">26.8 DMG</span>
+              <span class="sc-sub" id="res-mob-armor-pierce">+0% True DMG</span>
+            </div>
+            <div class="stat-card">
+              <span class="sc-label">Anti-Melt Cap per Hit</span>
+              <span class="sc-val" id="res-mob-cap">None</span>
+              <span class="sc-sub">Batas Max Dmg Masuk</span>
+            </div>
+          </div>
+
+          <!-- Drops Matrix Preview -->
+          <div class="drop-matrix-box">
+            <h4>Peluang Drop & Ganjaran Eksklusif:</h4>
+            <ul id="res-drop-list" class="drop-list">
+              <!-- Rendered by JS -->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: 16 TITLES & QUESTS BOARD -->
+    <section id="tab-titles" class="tab-panel">
+      <div class="section-banner">
+        <div class="banner-content">
+          <h2>16 Gelar Kedaulatan Ber-Efek Unik & Papan Misi Legendaris</h2>
+          <p>Gelar kehormatan (*Titles*) di Takasha RPG bukan sekadar kosmetik teks. Masing-masing dari <strong>16 Gelar</strong> menganugerahkan <strong>Title Sovereignty Trait Engine</strong> — efek kekuatan aktif/pasif yang <strong>TIDAK ADA di enchantment manapun dan TIDAK ADA di efek potion</strong>.</p>
+        </div>
+      </div>
+
+      <!-- Sub Tabs for Titles vs Quests -->
+      <div class="sub-nav">
+        <button class="sub-nav-btn active" data-sub="sub-titles">👑 Galeri 16 Gelar Ber-Efek Unik</button>
+        <button class="sub-nav-btn" data-sub="sub-legendary">⚔️ 16 Legendary Quests Endgame</button>
+        <button class="sub-nav-btn" data-sub="sub-routine">📜 Daily & Weekly Quests</button>
+      </div>
+
+      <!-- 16 TITLES GALLERY -->
+      <div id="sub-titles" class="sub-panel active">
+        <div class="titles-grid" id="titles-grid">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <!-- 16 LEGENDARY QUESTS -->
+      <div id="sub-legendary" class="sub-panel">
+        <div class="quests-grid" id="legendary-quests-grid">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <!-- ROUTINE QUESTS -->
+      <div id="sub-routine" class="sub-panel">
+        <div class="routine-wrap">
+          <div class="routine-col">
+            <h3 class="col-title">🌅 Daily Quests (Reset Setiap 24 Jam)</h3>
+            <div id="daily-quests-list" class="routine-list"></div>
+          </div>
+          <div class="routine-col">
+            <h3 class="col-title">🗓️ Weekly Quests (Reset Setiap 7 Hari)</h3>
+            <div id="weekly-quests-list" class="routine-list"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: SHOPGUI & SLOTS SYSTEM -->
+    <section id="tab-economy" class="tab-panel">
+      <div class="section-banner">
+        <div class="banner-content">
+          <h2>ShopGUI Exclusives & Batas 20 Slot Enchantment</h2>
+          <p>Pusat ekonomi petualangan server. Atur perlengkapan Anda dengan <strong>10 Slot Default Bawaan</strong> dan tambahkan hingga <strong>+10 Slot Increaser</strong> untuk mencapai batas puncak <strong>Grand Hard Cap 20 Slot</strong> per perlengkapan.</p>
+        </div>
+      </div>
+
+      <div class="economy-layout">
+        <!-- Interactive Slot Visualizer -->
+        <div class="card-box">
+          <h3 class="box-title">🛡️ Simulator Slot Perlengkapan Sakura</h3>
+          <div class="slot-visualizer">
+            <div class="slot-tier-header">
+              <span class="slot-tag default-tag">10 Slot Default Bawaan (Gratis)</span>
+              <span class="slot-arrow">➔</span>
+              <span class="slot-tag regular-tag">+5 Regular Increaser (Slot 11–15)</span>
+              <span class="slot-arrow">➔</span>
+              <span class="slot-tag master-tag">+5 Master Increaser (Slot 16–20 Hard Cap)</span>
+            </div>
+
+            <div class="slots-container" id="slots-bar">
+              <!-- Rendered 20 slot icons by JS -->
+            </div>
+
+            <div class="slot-controls">
+              <label>Simulasikan Jumlah Slot Terbuka pada Senjata/Zirah:</label>
+              <div class="slot-stepper">
+                <button class="step-btn" id="btn-slot-minus">-</button>
+                <span class="step-val" id="sim-slot-count">10 Slots</span>
+                <button class="step-btn" id="btn-slot-plus">+</button>
+              </div>
+              <div class="slot-status-desc" id="sim-slot-desc">
+                Status: 10 Slot Bawaan Polos Aktif tanpa biaya tambahan.
+              </div>
+            </div>
+
+            <!-- Dedicated Soul Slots Info -->
+            <div class="soul-slots-box">
+              <div class="soul-title">🔮 Dedicated Soul Slots (Slot Khusus Sihir Jiwa):</div>
+              <div class="soul-bar">
+                <span class="soul-slot active">Soul Slot 1 (Bawaan)</span>
+                <span class="soul-slot active">Soul Slot 2 (Bawaan)</span>
+                <span class="soul-slot" id="soul-s3">Soul Slot 3 (Locked)</span>
+                <span class="soul-slot" id="soul-s4">Soul Slot 4 (Locked)</span>
+                <span class="soul-slot" id="soul-s5">Soul Slot 5 (Locked)</span>
+              </div>
+              <div class="soul-hint">Buka slot 3–5 menggunakan <em>Soul Slot Increaser</em> (15,000 Coins + 35 Gems).</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Currency Converter & Shop Table -->
+        <div class="card-box">
+          <h3 class="box-title">⚖️ Konverter Mata Uang Petualang</h3>
+          <div class="converter-box">
+            <div class="conv-col">
+              <label>Takasha Gold Coins:</label>
+              <input type="number" id="conv-coins" value="5000" step="500" min="0" class="custom-input">
+            </div>
+            <div class="conv-arrow">⇄</div>
+            <div class="conv-col">
+              <label>Arcane Gems (Rasio 500 : 1):</label>
+              <input type="number" id="conv-gems" value="10" step="1" min="0" class="custom-input">
+            </div>
+          </div>
+
+          <h3 class="box-title" style="margin-top: 24px;">💎 Katalog Item Eksklusif ShopGUI</h3>
+          <div class="shop-table-wrap">
+            <table class="shop-table">
+              <thead>
+                <tr>
+                  <th>Item Eksklusif</th>
+                  <th>Kategori</th>
+                  <th>Fungsi & Efek</th>
+                  <th>Harga Pasar</th>
+                </tr>
+              </thead>
+              <tbody id="shop-table-body">
+                <!-- Rendered by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: LAPTOP OPTIMIZATION CENTER -->
+    <section id="tab-laptop" class="tab-panel">
+      <div class="section-banner">
+        <div class="banner-content">
+          <h2>Laptop Hardware Optimization Architecture</h2>
+          <p>Laporan audit dan arsitektur rekayasa perangkat lunak untuk menjaga performa mod stabil pada <strong>60+ FPS</strong> di laptop <strong>AMD Ryzen 3 7320U</strong>, <strong>AMD Radeon 610M</strong>, dan <strong>8 GB RAM</strong>.</p>
+        </div>
+      </div>
+
+      <div class="laptop-grid">
+        <!-- Hardware Spec Summary Card -->
+        <div class="card-box spec-card">
+          <h3 class="box-title">💻 Spesifikasi Terdeteksi Laptop Ini</h3>
+          <div class="spec-list">
+            <div class="spec-item">
+              <span class="spec-label">Prosesor (CPU)</span>
+              <span class="spec-val">AMD Ryzen 3 7320U (4 Cores / 8 Threads, 15W TDP)</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">Kartu Grafis (iGPU)</span>
+              <span class="spec-val">AMD Radeon 610M (2 Compute Units, RDNA 2)</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">Memori Sistem (RAM)</span>
+              <span class="spec-val">8 GB LPDDR5 (Shared Memory dengan VRAM)</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">Alokasi Minecraft JVM</span>
+              <span class="spec-val highlight">3.5 GB – 4.0 GB (Rekomendasi Optimum)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5 Pillars Architecture Grid -->
+        <div class="card-box">
+          <h3 class="box-title">⚡ 5 Pilar Rekayasa Performa Mod Takasha</h3>
+          <div class="pillars-list">
+            <div class="pillar-item">
+              <div class="p-num">01</div>
+              <div class="p-info">
+                <h4>Zero-Allocation Equipment Cache</h4>
+                <p>Kalkulasi 100 enchantment aktif (20 di senjata + 80 di 4 zirah) HANYA dijalankan saat event pergantian senjata/zirah. Pasif aura regenerasi dibatch setiap 10–20 tick (0.5s–1s), menghemat 90% waktu CPU tick.</p>
+              </div>
+            </div>
+            <div class="pillar-item">
+              <div class="p-num">02</div>
+              <div class="p-info">
+                <h4>Smart Nametag Culling (Radeon 610M Protection)</h4>
+                <p>Teks floating nametag 3D font LevelledMobs dibatasi dalam radius maksimal ≤ 20 blok dari mata pemain. Monster di balik balok solid gua tidak dirender sama sekali (*Occlusion Culling*).</p>
+              </div>
+            </div>
+            <div class="pillar-item">
+              <div class="p-num">03</div>
+              <div class="p-info">
+                <h4>Particle Throttling & Limiter</h4>
+                <p>Efek tebasan senjata ber-enchant dan ledakan sihir dibatasi maksimal 15 partikel per hit effect, dan partikel di luar radius 16 blok dari kamera pemain otomatis diabaikan.</p>
+              </div>
+            </div>
+            <div class="pillar-item">
+              <div class="p-num">04</div>
+              <div class="p-info">
+                <h4>Async Multi-Thread Worker</h4>
+                <p>Perhitungan formula level monster, pembacaan database 334 enchant, dan I/O profil JSON dialihkan ke background thread pool (`CompletableFuture`) memanfaatkan 8 logical thread Ryzen 3.</p>
+              </div>
+            </div>
+            <div class="pillar-item">
+              <div class="p-num">05</div>
+              <div class="p-info">
+                <h4>The Ultimate Low-Spec Fabric Stack Compatibility</h4>
+                <p>Kompatibel 100% dan teroptimasi penuh bersama <strong>Sodium</strong> ($2\times\text{--}3\times$ FPS), <strong>Lithium</strong> (fisika entitas), <strong>FerriteCore</strong> (-40% beban RAM), dan <strong>ImmediatelyFast</strong> (font batching).</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>🌸 Takasha RPG v2.0-MASTER — Crafted for Fabric 1.21.x / 26.2</span>
+      <span>334 Enchants • Lvl 1–1000 LevelledMobs • 16 Sovereignty Titles • Low-Power Laptop Edition</span>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="data/enchants.js"></script>
+  <script src="data/rpg-content.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

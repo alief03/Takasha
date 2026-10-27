@@ -3,17 +3,17 @@ package net.takasha.rpg.skills;
 import net.minecraft.ChatFormatting;
 
 public enum AuraSkillType {
-    FARMING("Farming", "Bercocok tanam dan panen tanaman", ChatFormatting.GREEN, AuraStatType.HEALTH, AuraStatType.REGEN),
+    FARMING("Farming", "Bercocok tanam dan panen tanaman", ChatFormatting.GREEN, AuraStatType.HEALTH, AuraStatType.STRENGTH),
     FORAGING("Foraging", "Menebang pohon dan mengumpulkan kayu", ChatFormatting.DARK_GREEN, AuraStatType.STRENGTH, AuraStatType.TOUGHNESS),
     MINING("Mining", "Menambang bijih dan batu mineral", ChatFormatting.GRAY, AuraStatType.TOUGHNESS, AuraStatType.LUCK),
     FISHING("Fishing", "Memancing ikan dan harta karun air", ChatFormatting.BLUE, AuraStatType.LUCK, AuraStatType.HEALTH),
-    COMBAT("Combat", "Bertarung melawan monster dengan senjata jarak dekat", ChatFormatting.RED, AuraStatType.STRENGTH, AuraStatType.SPEED),
-    ARCHERY("Archery", "Menembak musuh menggunakan busur atau crossbow", ChatFormatting.GOLD, AuraStatType.SPEED, AuraStatType.STRENGTH),
-    DEFENSE("Defense", "Menahan dan memblokir serangan musuh", ChatFormatting.DARK_AQUA, AuraStatType.TOUGHNESS, AuraStatType.HEALTH),
-    AGILITY("Agility", "Berlari, melompat, dan menghindari marabahaya", ChatFormatting.AQUA, AuraStatType.SPEED, AuraStatType.REGEN),
-    ALCHEMY("Alchemy", "Meramu ramuan dan elixir berkhasiat", ChatFormatting.LIGHT_PURPLE, AuraStatType.MANA, AuraStatType.MANA_REGEN),
-    ENCHANTING("Enchanting", "Meningkatkan senjata dan armor dengan sihir", ChatFormatting.DARK_PURPLE, AuraStatType.WISDOM, AuraStatType.MANA),
-    HEALING("Healing", "Memulihkan luka diri dan sekutu", ChatFormatting.YELLOW, AuraStatType.REGEN, AuraStatType.WISDOM);
+    EXCAVATION("Excavation", "Menggali tanah, pasir, kerikil, dan lempung", ChatFormatting.GOLD, AuraStatType.REGENERATION, AuraStatType.STRENGTH),
+    ARCHERY("Archery", "Menembak musuh menggunakan busur atau crossbow", ChatFormatting.DARK_AQUA, AuraStatType.CRIT_CHANCE, AuraStatType.STRENGTH),
+    DEFENSE("Defense", "Menahan dan memblokir serangan musuh", ChatFormatting.BLUE, AuraStatType.TOUGHNESS, AuraStatType.HEALTH),
+    FIGHTING("Fighting", "Bertarung melawan monster dengan senjata jarak dekat", ChatFormatting.RED, AuraStatType.CRIT_DAMAGE, AuraStatType.REGENERATION),
+    AGILITY("Agility", "Berlari, melompat, dan menghindari marabahaya", ChatFormatting.AQUA, AuraStatType.REGENERATION, AuraStatType.WISDOM),
+    ALCHEMY("Alchemy", "Meramu ramuan dan elixir berkhasiat", ChatFormatting.LIGHT_PURPLE, AuraStatType.WISDOM, AuraStatType.HEALTH),
+    ENCHANTING("Enchanting", "Meningkatkan senjata dan armor dengan sihir", ChatFormatting.DARK_PURPLE, AuraStatType.WISDOM, AuraStatType.LUCK);
 
     private final String displayName;
     private final String description;
@@ -50,7 +50,24 @@ public enum AuraSkillType {
     }
 
     public double getXpForNextLevel(int currentLevel) {
-        // Formula based on AuraSkills standard scaling
-        return 100.0 * Math.pow(1.15, currentLevel - 1);
+        // Skala polinomial seimbang untuk Level 1 s/d 1,000 (menghindari double overflow)
+        return 100.0 + (currentLevel * 60.0) + (Math.pow(currentLevel, 1.85) * 8.0);
+    }
+
+    public static AuraSkillType fromString(String name) {
+        if (name == null || name.isBlank()) return null;
+        String clean = name.trim().toLowerCase();
+        if (clean.equals("combat") || clean.equals("fighting")) {
+            return FIGHTING;
+        }
+        if (clean.equals("healing") || clean.equals("alchemy")) {
+            return ALCHEMY;
+        }
+        for (AuraSkillType s : values()) {
+            if (s.name().equalsIgnoreCase(clean) || s.getDisplayName().equalsIgnoreCase(clean)) {
+                return s;
+            }
+        }
+        return null;
     }
 }

@@ -31,14 +31,30 @@ public class TakashaExecutableItem extends Item {
     private final RarityTier tier;
     private final ExecutableType executableType;
     private final String commandId;
+    private final String requiredPrerequisiteCommand;
+    private final String category;
     private final String description;
 
-    public TakashaExecutableItem(Properties properties, RarityTier tier, ExecutableType executableType, String commandId, String description) {
+    public TakashaExecutableItem(Properties properties, RarityTier tier, ExecutableType executableType, String commandId, String requiredPrerequisiteCommand, String category, String description) {
         super(properties);
         this.tier = tier;
         this.executableType = executableType;
         this.commandId = commandId;
+        this.requiredPrerequisiteCommand = requiredPrerequisiteCommand;
+        this.category = category;
         this.description = description;
+    }
+
+    public TakashaExecutableItem(Properties properties, RarityTier tier, ExecutableType executableType, String commandId, String category, String description) {
+        this(properties, tier, executableType, commandId, null, category, description);
+    }
+
+    public TakashaExecutableItem(Properties properties, RarityTier tier, ExecutableType executableType, String commandId, String description) {
+        this(properties, tier, executableType, commandId, null, "ANCIENT RELIC", description);
+    }
+
+    public String getCategory() {
+        return category;
     }
 
     public RarityTier getTier() {
@@ -51,6 +67,10 @@ public class TakashaExecutableItem extends Item {
 
     public String getCommandId() {
         return commandId;
+    }
+
+    public String getRequiredPrerequisiteCommand() {
+        return requiredPrerequisiteCommand;
     }
 
     @Override
@@ -83,6 +103,14 @@ public class TakashaExecutableItem extends Item {
             }
 
             if (executableType == ExecutableType.COMMAND_UNLOCK) {
+                if (requiredPrerequisiteCommand != null && !data.isCommandUnlocked(requiredPrerequisiteCommand)) {
+                    serverPlayer.sendSystemMessage(Component.literal("§c§l[Takasha-RPG] §cKamu harus mempelajari akses §e/" + requiredPrerequisiteCommand
+                            + " §cterlebih dahulu (Hammer of the Master Smith) sebelum dapat mempelajari kemampuan ini!"));
+                    serverPlayer.level().playSound(null, serverPlayer.getX(), serverPlayer.getY(), serverPlayer.getZ(),
+                            SoundEvents.VILLAGER_NO, SoundSource.PLAYERS, 0.8f, 1.0f);
+                    return InteractionResult.FAIL;
+                }
+
                 if (data.isCommandUnlocked(commandId)) {
                     serverPlayer.sendSystemMessage(Component.literal("§cKamu sudah membuka akses perintah /" + commandId + "!"));
                     return InteractionResult.FAIL;
@@ -119,15 +147,21 @@ public class TakashaExecutableItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> consumer, TooltipFlag flag) {
         super.appendHoverText(stack, context, display, consumer, flag);
-        consumer.accept(tier.getBadge());
-        consumer.accept(Component.literal(description).withStyle(ChatFormatting.GRAY));
+
+        net.takasha.rpg.util.RpgTooltipBuilder builder = net.takasha.rpg.util.RpgTooltipBuilder.create(getDescriptionId(), tier)
+                .category(category)
+                .description(description);
 
         if (executableType == ExecutableType.HOME_EXPANSION) {
-            consumer.accept(Component.literal("§bManfaat: §a+1 Kapasitas /sethome (Maks 10)"));
+            builder.stat("Manfaat", "+1 Kapasitas Slot Home", net.takasha.rpg.util.RpgTooltipBuilder.StatGlyph.LUCK);
         } else {
-            consumer.accept(Component.literal("§bMembuka Akses Perintah: §e/" + commandId));
+            if (requiredPrerequisiteCommand != null) {
+                builder.stat("Prasyarat", "Akses /" + requiredPrerequisiteCommand, net.takasha.rpg.util.RpgTooltipBuilder.StatGlyph.WARNING);
+            }
+            builder.stat("Membuka Akses", "/" + commandId, net.takasha.rpg.util.RpgTooltipBuilder.StatGlyph.MANA);
         }
 
-        consumer.accept(Component.literal("§8Klik Kanan untuk mempelajari tomes ini"));
+        builder.affordance("Klik Kanan", "Pelajari dan aktifkan akses permanen");
+        builder.build(consumer);
     }
 }

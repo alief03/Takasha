@@ -1,0 +1,257 @@
+// Takasha RPG - Content Database: Titles, Quests, Economy, LevelledMobs Rules
+const RPG_TITLES = [
+  {
+    id: "g-01",
+    code: "G-01",
+    name: "Sang Pemula Abadi",
+    roman: "Novice's Grace",
+    icon: "🌱",
+    color: "#a3e635",
+    rarity: "Common",
+    traitName: "Adrenaline Surge",
+    traitDesc: "Saat HP turun hingga ≤ 15%, memicu Adrenaline Surge (Speed II + Resistance I selama 6 detik). Efek eksklusif gelar non-enchant/non-potion.",
+    cooldown: "90 detik",
+    unlockCriteria: "Capai Level 5 di seluruh cabang AuraSkills dasar."
+  },
+  {
+    id: "g-02",
+    code: "G-02",
+    name: "Penjelajah Lima Dimensi",
+    roman: "Dimension Stride",
+    icon: "🌌",
+    color: "#38bdf8",
+    rarity: "Rare",
+    traitName: "Void Anchor & Chorus Agility",
+    traitDesc: "Kebal terhadap void pull, mengurangi debuff levitasi sebesar 50%, dan teleportasi Chorus Fruit instan tanpa delay animasi makan.",
+    cooldown: "Pasif Konstan",
+    unlockCriteria: "Selesaikan Legendary Quest LQ-06 (Jelajahi 20,000 blok di End)."
+  },
+  {
+    id: "g-03",
+    code: "G-03",
+    name: "Ksatria Penakluk Badai",
+    roman: "Tempest Ward",
+    icon: "⚡",
+    color: "#facc15",
+    rarity: "Epic",
+    traitName: "Lightning Galvanization",
+    traitDesc: "Mengubah setiap sambaran petir alami atau sihir menjadi penyembuhan 20 HP seketika + bonus Attack Speed +25% selama 8 detik.",
+    cooldown: "Pasif Konstan",
+    unlockCriteria: "Selesaikan Legendary Quest LQ-04 (Kalahkan 3 Wither beruntun)."
+  },
+  {
+    id: "g-04",
+    code: "G-04",
+    name: "Penebas Bayangan Malam",
+    roman: "Phantom Riposte",
+    icon: "🗡️",
+    color: "#818cf8",
+    rarity: "Epic",
+    traitName: "Shadow Knife Counter",
+    traitDesc: "Peluang 25% menghindari tembakan proyektil (panah/shulker) dan seketika membalas meluncurkan pisau bayangan berdaya 12 True Damage ke penembak.",
+    cooldown: "Peluang 25%",
+    unlockCriteria: "Capai Level 100 Agility dan Archery di AuraSkills."
+  },
+  {
+    id: "g-05",
+    code: "G-05",
+    name: "Penguasa Api Neraka",
+    roman: "Infernal Monarch",
+    icon: "🔥",
+    color: "#f97316",
+    rarity: "Legendary",
+    traitName: "Hellfire Burst",
+    traitDesc: "Monster berjarak ≤ 6 blok yang sedang terbakar meledak dalam Hellfire Burst setiap 3 detik, menimbulkan 10 area fire damage ke sekelilingnya.",
+    cooldown: "Interval 3s",
+    unlockCriteria: "Selesaikan Legendary Quest LQ-01 (Kalahkan 500 monster Nether Lvl 300+)."
+  },
+  {
+    id: "g-06",
+    code: "G-06",
+    name: "Penjaga Gerbang Jurang",
+    roman: "Abyssal Vortex",
+    icon: "🌀",
+    color: "#06b6d4",
+    rarity: "Legendary",
+    traitName: "Gravity Singularity",
+    traitDesc: "Membunuh 5 monster tanpa jeda >10s memanggil pusaran jurang mini yang menyerap mob sekitar dan memperlambat musuh sebesar 40% selama 4 detik.",
+    cooldown: "Setiap 5 Kill Streak",
+    unlockCriteria: "Selesaikan 15 gelombang Monster Arena di dimensi End."
+  },
+  {
+    id: "g-07",
+    code: "G-07",
+    name: "Pembalas Dendam Relik",
+    roman: "Vengeful Rebound",
+    icon: "🛡️",
+    color: "#e11d48",
+    rarity: "Legendary",
+    traitName: "True Damage Reflection",
+    traitDesc: "Saat menerima damage fatal (> 40% Max HP dalam 1 hit), memantulkan 40% dari total damage tersebut sebagai True Damage yang mengabaikan zirah dan buff musuh.",
+    cooldown: "Internal CD 12s",
+    unlockCriteria: "Selesaikan Legendary Quest LQ-07 (50 Mythic LevelledMobs)."
+  },
+  {
+    id: "g-08",
+    code: "G-08",
+    name: "Alkemis Jiwa Terkutuk",
+    roman: "Soul Transmutation",
+    icon: "⚗️",
+    color: "#c084fc",
+    rarity: "Legendary",
+    traitName: "Gem Shard Synthesis",
+    traitDesc: "Mengurangi konsumsi Soul Enchantment sebesar 30% dan mengubah setiap 50 Souls yang terpakai menjadi 1 Arcane Gem Shard (10 shards = 1 Arcane Gem gratis).",
+    cooldown: "Pasif Otomatis",
+    unlockCriteria: "Selesaikan Legendary Quest LQ-08 (100 Magic Dust success)."
+  },
+  {
+    id: "g-09",
+    code: "G-09",
+    name: "Algojo Tak Bersuara",
+    roman: "Executioner's Guillotine",
+    icon: "🪓",
+    color: "#fb7185",
+    rarity: "Mythic",
+    traitName: "Instant Decapitation",
+    traitDesc: "Monster biasa dengan sisa darah di bawah 12% Max HP otomatis terpenggal mati seketika, mengabaikan fase stunlock atau invulnerability frame.",
+    cooldown: "Tiap Serangan Fatal",
+    unlockCriteria: "Selesaikan Legendary Quest LQ-09 (250 Serangan Fatal Instan)."
+  },
+  {
+    id: "g-10",
+    code: "G-10",
+    name: "Panglima Seratus Arena",
+    roman: "Warlord's Domain",
+    icon: "🚩",
+    color: "#fbbf24",
+    rarity: "Mythic",
+    traitName: "Phalanx Ward Aura",
+    traitDesc: "Meningkatkan efektivitas perlindungan seluruh kawan satu tim/party sebesar +15% Armor Toughness dalam radius 12 blok di sekitar kaisar.",
+    cooldown: "Aura Pasif 12 Blok",
+    unlockCriteria: "Selesaikan Legendary Quest LQ-10 (10 Raid Desa Level V sempurna)."
+  },
+  {
+    id: "g-11",
+    code: "G-11",
+    name: "Pewaris Pedang Sakura",
+    roman: "Petal Dance Blade",
+    icon: "🌸",
+    color: "#f472b6",
+    rarity: "Mythic",
+    traitName: "Cherry Blossom Tempest",
+    traitDesc: "Combo 5 pukulan pedang berturut-turut memanggil badai kelopak sakura berputar yang membutakan musuh selama 3 detik dan menorehkan Bleed III.",
+    cooldown: "Tiap 5 Pukulan Beruntun",
+    unlockCriteria: "Selesaikan Legendary Quest LQ-11 (100 Kills Sakura Katana malam hari)."
+  },
+  {
+    id: "g-12",
+    code: "G-12",
+    name: "Dukun Pembawa Petaka",
+    roman: "Calamity Hex",
+    icon: "👁️",
+    color: "#a855f7",
+    rarity: "Mythic",
+    traitName: "Hex of Despair",
+    traitDesc: "Serangan kritikal menorehkan kutukan Calamity Hex yang memotong efek penyembuhan dan regenerasi darah lawan sebesar 75% selama 8 detik.",
+    cooldown: "Peluang 40% on Crit",
+    unlockCriteria: "Selesaikan Legendary Quest LQ-12 (Kutuk 100 Boss Monster)."
+  },
+  {
+    id: "g-13",
+    code: "G-13",
+    name: "Dewa Penempa Legendaris",
+    roman: "Master Forge Affinity",
+    icon: "⚒️",
+    color: "#34d399",
+    rarity: "Ascendant",
+    traitName: "Anvil Mastery & Dust Catalyst",
+    traitDesc: "Biaya EXP penggabungan di Anvil dan Enchanter berkurang 35%, serta peluang kegagalan Magic Dust berkurang 50% secara permanen.",
+    cooldown: "Pasif Permanen",
+    unlockCriteria: "Selesaikan Legendary Quest LQ-13 (Rakit 20 Enchant Slots + 5 Soul Slots)."
+  },
+  {
+    id: "g-14",
+    code: "G-14",
+    name: "Raja Naga Bintang",
+    roman: "Cosmic Singularity",
+    icon: "🐉",
+    color: "#60a5fa",
+    rarity: "Ascendant",
+    traitName: "Singularity Arrow Pull",
+    traitDesc: "Tembakan panah menghasilkan tarikan gravitasi lubang hitam mini di titik benturan selama 2 detik yang menyeret semua musuh ke pusat ledakan.",
+    cooldown: "15 detik",
+    unlockCriteria: "Selesaikan Legendary Quest LQ-14 (Kalahkan Ender Dragon Lvl 500+)."
+  },
+  {
+    id: "g-15",
+    code: "G-15",
+    name: "Penguasa Keabadian",
+    roman: "Aegis of the Immortal Sovereign",
+    icon: "👑",
+    color: "#eab308",
+    rarity: "Sovereign",
+    traitName: "Chrono-Stasis Ward",
+    traitDesc: "Saat menerima damage mematikan (fatal blow), membekukan waktu pemain selama 2.5 detik (kekebalan total tanpa bisa diserang) sembari memulihkan 50% HP.",
+    cooldown: "5 menit",
+    unlockCriteria: "Selesaikan Legendary Quest LQ-15 (Bertahan 15 menit di Cataclysm Lvl 900+)."
+  },
+  {
+    id: "g-16",
+    code: "G-16",
+    name: "Maharaja Takasha",
+    roman: "True Sovereignty Aura",
+    icon: "🌟",
+    color: "#ff007f",
+    rarity: "Godlike Sovereign",
+    traitName: "Emperor's Domain & Terror Feat",
+    traitDesc: "Memancarkan aura kedaulatan kaisar; seluruh monster di bawah Level 300 berjarak ≤ 10 blok melarikan diri ketakutan (Terror Feat) + bonus Koin & EXP +35%.",
+    cooldown: "Aura Pasif Absolut",
+    unlockCriteria: "Selesaikan Legendary Quest LQ-16 (AuraSkills Avg 800+ & World Boss Lvl 1000)."
+  }
+];
+
+const RPG_QUESTS = {
+  daily: [
+    { id: "dq-01", title: "Patroli Hutan Sakura", desc: "Kalahkan 25 monster nokturnal di sekitar pemukiman.", reward: "250 Coins + 2 Gems", icon: "🌙" },
+    { id: "dq-02", title: "Pembersihan Tambang Relik", desc: "Tambang 48 batuan bijih besi atau emas di kedalaman Y < 0.", reward: "300 Coins + 1 Magic Dust", icon: "⛏️" },
+    { id: "dq-03", title: "Bidikan Jarak Jauh", desc: "Tembak jatuh 15 Skeleton dari jarak minimal 20 blok.", reward: "200 Coins + 1 Mystery Dust", icon: "🏹" },
+    { id: "dq-04", title: "Panen Kemakmuran", desc: "Panen 64 gandum, wortel, atau kentang di ladang desa.", reward: "150 Coins + 1 Gem", icon: "🌾" }
+  ],
+  weekly: [
+    { id: "wq-01", title: "Pembersihan Lembah Nether", desc: "Musnahkan 150 Piglin dan Wither Skeleton di Nether Fortress.", reward: "2,500 Coins + 8 Gems + 1 White Scroll", icon: "🔥" },
+    { id: "wq-02", title: "Perburuan Boss Mini", desc: "Kalahkan 10 monster bertanda Tier Elite atau Fabled.", reward: "3,000 Coins + 10 Gems + 1 Slot Increaser Reguler", icon: "👹" },
+    { id: "wq-03", title: "Penempa Ksatria", desc: "Lakukan 20 kali enchant atau penggabungan buku di Anvil.", reward: "1,800 Coins + 6 Gems + 3 Magic Dust 80%", icon: "🔨" }
+  ],
+  legendary: [
+    { id: "lq-01", code: "LQ-01", title: "Beban Sang Titan", desc: "Kalahkan 500 monster ber-level ≥ 300 di dimensi Nether.", reward: "10,000 Coins + 25 Gems + Gelar G-05", icon: "🌋" },
+    { id: "lq-02", code: "LQ-02", title: "Pemburu Bintang Jatuh", desc: "Kumpulkan 64 Netherite Scrap murni dari hasil penambangan purba.", reward: "12,000 Coins + 30 Gems + 1 Master Slot Increaser", icon: "💎" },
+    { id: "lq-03", code: "LQ-03", title: "Pemberkatan Senjata Sempurna", desc: "Pasang minimal 15 custom enchantment pada satu senjata Sakura Katana.", reward: "15,000 Coins + 35 Gems + 2 White Scrolls", icon: "⚔️" },
+    { id: "lq-04", code: "LQ-04", title: "Mata Badai Abadi", desc: "Kalahkan 3 Wither Boss secara berturut-turut di Arena tanpa mati.", reward: "20,000 Coins + 50 Gems + Gelar G-03", icon: "⚡" },
+    { id: "lq-05", code: "LQ-05", title: "Penguasa Jiwa Kegelapan", desc: "Kumpulkan 5,000 Soul Energy dari membunuh monster berzirah relik.", reward: "18,000 Coins + 40 Gems + 1 Soul Slot Increaser", icon: "🔮" },
+    { id: "lq-06", code: "LQ-06", title: "Ekspedisi Ujung Semesta", desc: "Jelajahi 20,000 blok di dimensi The End dan buka 10 End City Ship.", reward: "22,000 Coins + 45 Gems + Gelar G-02", icon: "🛸" },
+    { id: "lq-07", code: "LQ-07", title: "Pembalasan Darah Relik", desc: "Bunuh 50 monster LevelledMobs bertanda Tier Mythic Cataclysm Boss.", reward: "25,000 Coins + 60 Gems + Gelar G-07", icon: "🩸" },
+    { id: "lq-08", code: "LQ-08", title: "Alkimia Sempurna", desc: "Gunakan 100 Magic Dust dengan tingkat keberhasilan ≥ 90%.", reward: "14,000 Coins + 30 Gems + Gelar G-08", icon: "✨" },
+    { id: "lq-09", code: "LQ-09", title: "Algojo Seratus Pertarungan", desc: "Mendaratkan 250 serangan fatal instan dengan senjata kapak/pedang.", reward: "16,000 Coins + 35 Gems + Gelar G-09", icon: "🪓" },
+    { id: "lq-10", code: "LQ-10", title: "Panglima Perang Tak Terkalahkan", desc: "Selesaikan 10 Raid Desa Level V berturut-turut tanpa kehilangan 1 Villager pun.", reward: "28,000 Coins + 65 Gems + Gelar G-10", icon: "🛡️" },
+    { id: "lq-11", code: "LQ-11", title: "Harmoni Bunga Sakura", desc: "Musnahkan 100 musuh nokturnal berturut-turut hanya dengan Sakura Katana.", reward: "15,000 Coins + 35 Gems + Gelar G-11", icon: "🌸" },
+    { id: "lq-12", code: "LQ-12", title: "Kutukan Sang Dukun", desc: "Terapkan efek Calamity Hex pada 100 monster boss dunia.", reward: "18,000 Coins + 40 Gems + Gelar G-12", icon: "👁️" },
+    { id: "lq-13", code: "LQ-13", title: "Penempa Kedaulatan Tertinggi", desc: "Rakit 1 set zirah lengkap dengan 20 Enchant Slots dan 5 Soul Slots penuh.", reward: "35,000 Coins + 80 Gems + Gelar G-13", icon: "⚒️" },
+    { id: "lq-14", code: "LQ-14", title: "Raja Langit Kosmik", desc: "Kalahkan Ender Dragon level 500+ menggunakan panah busur beraliran Cosmic.", reward: "30,000 Coins + 70 Gems + Gelar G-14", icon: "🐉" },
+    { id: "lq-15", code: "LQ-15", title: "Ujian Keabadian", desc: "Bertahan hidup selama 15 menit berturut-turut di dalam zona Cataclysm Level 900+.", reward: "40,000 Coins + 90 Gems + Gelar G-15", icon: "⏳" },
+    { id: "lq-16", code: "LQ-16", title: "Mahkota Sang Penguasa Takasha", desc: "Capai rata-rata AuraSkills Level 800+ dan taklukkan World Boss Level 1000.", reward: "100,000 Coins + 250 Gems + Gelar Puncak G-16", icon: "👑" }
+  ]
+};
+
+const RPG_SHOP = [
+  { category: "Slot Increasers", name: "Regular Slot Increaser (+1 Slot)", desc: "Menambah batas enchant dari default 10 hingga maksimal 15 slot.", price: "2,500 Coins + 4 Gems", badge: "Slots 11–15" },
+  { category: "Slot Increasers", name: "Master Slot Increaser (+1 Slot)", desc: "Menambah batas enchant dari 16 hingga grand hard cap 20 slot.", price: "6,000 Coins + 12 Gems + 1 Netherite", badge: "Slots 16–20" },
+  { category: "Slot Increasers", name: "Soul Slot Increaser (+1 Soul Slot)", desc: "Membuka slot soul enchant dari default 2 hingga maksimal 5 slot.", price: "15,000 Coins + 35 Gems", badge: "Soul Slots 3–5" },
+  { category: "Scrolls & Protection", name: "White Scroll (Anti-Destroy)", desc: "Mencegah senjata/zirah hancur jika pengaplikasian enchant gagal.", price: "1,500 Coins + 3 Gems", badge: "Protection" },
+  { category: "Scrolls & Protection", name: "Holy White Scroll (Keep on Death)", desc: "Menjaga 1 item berharga agar tidak hilang/jatuh saat pemain mati.", price: "8,000 Coins + 15 Gems", badge: "Soulbound" },
+  { category: "Scrolls & Protection", name: "Transmog Scroll", desc: "Menyusun lore buku sihir dan menata tampilan kelangkaan item.", price: "800 Coins + 1 Gem", badge: "Cosmetic" },
+  { category: "Dusts & Alkimia", name: "Magic Dust (Tier Simple s/d Fabled)", desc: "Meningkatkan persentase keberhasilan enchant sebesar +5% s/d +20%.", price: "350 – 1,200 Coins", badge: "Alchemical" },
+  { category: "Dusts & Alkimia", name: "Mystery Dust", desc: "Mengocok ulang atau memecah kristal debu untuk bahan alkimia.", price: "200 Coins", badge: "Catalyst" },
+  { category: "Tomes & Utilitas", name: "Tome of Pocket Workbench", desc: "Membuka antarmuka Crafting Table instan di mana saja via klik kanan.", price: "5,000 Coins + 10 Gems", badge: "Portable Crafting" },
+  { category: "Tomes & Utilitas", name: "Tome of Dimensional Anchor", desc: "Menambahkan +1 kuota sethome dimensi di Grimoire of Realms.", price: "12,000 Coins + 25 Gems", badge: "+1 Sethome" },
+  { category: "Tomes & Utilitas", name: "Codex of Void Ender", desc: "Menyerap pemain dari void jatuh dan menaruhnya kembali di daratan.", price: "20,000 Coins + 40 Gems", badge: "Void Ward" }
+];

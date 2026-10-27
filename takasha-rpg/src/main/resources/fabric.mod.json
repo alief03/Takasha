@@ -3,7 +3,7 @@
   "id": "takasha_rpg",
   "version": "${version}",
   "name": "Takasha-RPG",
-  "description": "Takasha-RPG: Singleplayer RPG Expansion with AuraSkills, AdvancedEnchantments, AdvancedDungeonArena, EconomyShopGUI, EssentialsX & Takasha Maid Companion.",
+  "description": "Takasha-RPG: Singleplayer RPG Expansion with AuraSkills, AdvancedEnchantments, AdvancedDungeonArena, EconomyShopGUI, and EssentialsX.",
   "authors": [
     "Boma Narakasura"
   ],

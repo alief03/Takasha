@@ -79,6 +79,17 @@ public class TakashaReplayOverrideScreen extends Screen {
     @Override
     protected void init() {
         super.init();
+
+        var config = net.sakura.weapons.client.config.TakashaMasterConfig.getInstance();
+        boolean isMultiplayer = this.minecraft != null && this.minecraft.getCurrentServer() != null && !this.minecraft.isLocalServer();
+        if (config.serverSafeMode && isMultiplayer) {
+            if (this.minecraft.player != null) {
+                this.minecraft.player.sendOverlayMessage(Component.literal("§c[Server Safe] Replay Studio dinonaktifkan di server multiplayer!"));
+            }
+            this.onClose();
+            return;
+        }
+
         scanNearbyNpcs();
 
         int cx = this.width / 2;
@@ -171,8 +182,8 @@ public class TakashaReplayOverrideScreen extends Screen {
         if (mc.level != null) {
             Entity cam = mc.getCameraEntity() != null ? mc.getCameraEntity() : mc.player;
             AABB searchBox = cam != null
-                ? cam.getBoundingBox().inflate(256.0)
-                : new AABB(-500, -64, -500, 500, 320, 500);
+                ? cam.getBoundingBox().inflate(32.0)
+                : new AABB(-32, -32, -32, 32, 32, 32);
 
             List<TakashaNpcEntity> list = mc.level.getEntitiesOfClass(TakashaNpcEntity.class, searchBox);
             if (cam != null) {

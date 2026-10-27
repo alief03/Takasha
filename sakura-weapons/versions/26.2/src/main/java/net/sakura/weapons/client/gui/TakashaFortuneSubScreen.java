@@ -149,6 +149,8 @@ public class TakashaFortuneSubScreen extends Screen {
         extractor.text(this.font, "• AdvancedEnchantments (Harvester, Lucky, dsb.)", left + 20, infoY + 34, 0xFFDDDDDD, false);
         extractor.text(this.font, "• Vanilla Fortune & Custom Multiplier Drop", left + 20, infoY + 48, 0xFFDDDDDD, false);
         extractor.text(this.font, "✔ Mengubah format laporan agar rapi atau senyap sesuai keinginan", left + 20, infoY + 64, 0xFF88FF88, false);
+
+        super.extractRenderState(extractor, mouseX, mouseY, partialTick);
     }
 
     @Override

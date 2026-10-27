@@ -3,7 +3,7 @@ plugins {
     id 'maven-publish'
 }
 
-def globalModVersion = '1.0.0'
+def globalModVersion = '1.8.0'
 def globalGroup = 'net.takasha.rpg'
 def globalBaseName = 'Takasha-RPG'
 

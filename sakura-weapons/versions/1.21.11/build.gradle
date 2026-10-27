@@ -3,7 +3,7 @@ plugins {
     id 'maven-publish'
 }
 
-def globalModVersion = project.findProperty('mod_version') ?: '2.2.0'
+def globalModVersion = project.findProperty('mod_version_1_21_11') ?: '2.4.0'
 def globalGroup = project.findProperty('maven_group') ?: 'net.sakura.weapons'
 def globalBaseName = project.findProperty('archives_base_name') ?: 'Takasha'
 

@@ -21,10 +21,24 @@ public class TakashaMasterConfig {
     private static final Path CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve("takasha_master_features.json");
     private static volatile TakashaMasterConfig INSTANCE;
 
+    // --- SERVER SAFE MODE ---
+    public boolean serverSafeMode = true;
+
     // --- AUTO FARM & SELLGUI ---
     public boolean autoFarmEnabled = false;
     public boolean autoSellGuiOnFull = true;
     public int autoSellDelayMs = 300;
+    public boolean farmOnlyInFront = false;
+    public int seedReserveCount = 32;
+    public int farmRadiusH = 6;
+    public int farmRadiusV = 2;
+    public int farmActionDelayMs = 0;
+    public int farmActionsPerTick = 12;
+    public int farmReplantDelayMs = 0;
+    public boolean autoPlantEmptyFarmland = true;
+    public boolean cropMemoryEnabled = true;
+    public boolean replantPacingEnabled = true;
+    public int maxReplantRetries = 25;
     public Set<String> targetCrops = new HashSet<>(Set.of(
         "minecraft:wheat",
         "minecraft:carrots",
@@ -33,7 +47,12 @@ public class TakashaMasterConfig {
         "minecraft:nether_wart",
         "minecraft:sugar_cane",
         "minecraft:melon",
-        "minecraft:pumpkin"
+        "minecraft:pumpkin",
+        "minecraft:cocoa",
+        "minecraft:sweet_berry_bush",
+        "minecraft:cactus",
+        "minecraft:bamboo",
+        "minecraft:kelp"
     ));
 
     // --- AUTO FISHING ---
@@ -41,8 +60,24 @@ public class TakashaMasterConfig {
         KAIZEN,
         VANILLA
     }
+    public enum BiteSensitivity {
+        ULTRA(-0.03),
+        HIGH(-0.06),
+        NORMAL(-0.10);
+
+        private final double threshold;
+
+        BiteSensitivity(double threshold) {
+            this.threshold = threshold;
+        }
+
+        public double getThreshold() {
+            return threshold;
+        }
+    }
     public boolean autoFishEnabled = false;
     public FishingMode fishingMode = FishingMode.KAIZEN;
+    public BiteSensitivity biteSensitivity = BiteSensitivity.ULTRA;
     public boolean autoCapcayEnabled = true;
     public int capcayDelayMs = 1200;
     public int capcayCommandDelayMs = 800;
@@ -52,11 +87,13 @@ public class TakashaMasterConfig {
     public String capcayTriggerRegex = "(?i)(/capcay|verifikasi|klik\\s+item)";
     public String capcayTitleRegex = "(?i)(capcay|captcha|verifikasi)";
     public boolean rodSlipRecovery = true;
-    public int reelInDelayMs = 150;
-    public int recastDelayMs = 1200;
+    public int reelInDelayMs = 0;
+    public int recastDelayMs = 250;
     public boolean tripleClick = false;
     public boolean rodBreakProtection = true;
     public int rodBreakThreshold = 3;
+    public boolean autoSwitchRodOnLowDurability = true;
+    public boolean soundAlertOnCatch = true;
     public boolean filterCatchEnabled = true;
     // Whitelist of items to KEEP in inventory. Items caught not in this whitelist will be dropped!
     public Set<String> keepCatchWhitelist = new HashSet<>(Set.of(
@@ -73,11 +110,27 @@ public class TakashaMasterConfig {
         KAIZEN,
         VANILLA
     }
+    public enum KillTargetPriority {
+        NEAREST,
+        LOWEST_HEALTH,
+        HIGHEST_HEALTH,
+        FOV_CENTER
+    }
+    public enum AttackRateMode {
+        COOLDOWN_SYNC,
+        TURBO,
+        HYPER_SPAM
+    }
     public boolean autoKillEnabled = false;
     public MobKillMode mobKillMode = MobKillMode.KAIZEN;
-    public double killReach = 3.5; // Max 3.5 blocks reach
-    public double maxFovAngle = 35.0; // Strict frontal cone (FOV <= 35 deg, Anti-Aura)
+    public KillTargetPriority killTargetPriority = KillTargetPriority.NEAREST;
+    public AttackRateMode attackRateMode = AttackRateMode.COOLDOWN_SYNC;
+    public double killReach = 4.5; // Default 4.5m reach
+    public double maxFovAngle = 60.0; // Frontal view cone
     public boolean syncAttackCooldown = true; // Wait for >= 95% weapon charge
+    public boolean smartCritical = false;
+    public boolean attackPlayers = false;
+    public boolean attackHostileOnly = true;
     public boolean autoSwitchWeapon = true;
     public boolean weaponBreakProtection = true;
     public int weaponBreakThreshold = 5;
@@ -166,17 +219,31 @@ public class TakashaMasterConfig {
         return fallback;
     }
 
+    private static final java.util.concurrent.ExecutorService CONFIG_EXECUTOR = java.util.concurrent.Executors.newSingleThreadExecutor(r -> {
+        Thread t = new Thread(r, "Takasha-MasterConfig-Writer");
+        t.setDaemon(true);
+        t.setPriority(Thread.MIN_PRIORITY);
+        return t;
+    });
+
     public synchronized void save() {
         try {
-            File file = CONFIG_PATH.toFile();
-            if (file.getParentFile() != null) {
-                file.getParentFile().mkdirs();
-            }
-            try (FileWriter writer = new FileWriter(file)) {
-                GSON.toJson(this, writer);
-            }
+            String json = GSON.toJson(this);
+            CONFIG_EXECUTOR.submit(() -> {
+                try {
+                    File file = CONFIG_PATH.toFile();
+                    if (file.getParentFile() != null) {
+                        file.getParentFile().mkdirs();
+                    }
+                    try (FileWriter writer = new FileWriter(file)) {
+                        writer.write(json);
+                    }
+                } catch (Throwable e) {
+                    SakuraWeaponsMod.LOGGER.warn("Failed to write Takasha master config: {}", e.getMessage());
+                }
+            });
         } catch (Throwable e) {
-            SakuraWeaponsMod.LOGGER.warn("Failed to save Takasha master config: {}", e.getMessage());
+            SakuraWeaponsMod.LOGGER.warn("Failed to serialize Takasha master config: {}", e.getMessage());
         }
     }
 
@@ -185,5 +252,10 @@ public class TakashaMasterConfig {
         if (keepCatchWhitelist == null) keepCatchWhitelist = new HashSet<>();
         if (killMobWhitelist == null) killMobWhitelist = new HashSet<>();
         if (bowTargetWhitelist == null) bowTargetWhitelist = new HashSet<>();
+        if (fishingMode == null) fishingMode = FishingMode.KAIZEN;
+        if (biteSensitivity == null) biteSensitivity = BiteSensitivity.ULTRA;
+        if (mobKillMode == null) mobKillMode = MobKillMode.KAIZEN;
+        if (killTargetPriority == null) killTargetPriority = KillTargetPriority.NEAREST;
+        if (attackRateMode == null) attackRateMode = AttackRateMode.COOLDOWN_SYNC;
     }
 }

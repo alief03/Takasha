@@ -1,0 +1,6 @@
+﻿{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "takasha_rpg:item/enchant/weapon_dimensional"
+  }
+}

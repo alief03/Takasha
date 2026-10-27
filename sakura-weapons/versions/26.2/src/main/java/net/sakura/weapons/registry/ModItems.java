@@ -158,10 +158,6 @@ public class ModItems {
         props -> new net.minecraft.world.item.SpawnEggItem(props.spawnEgg(ModEntities.TAKASHA_NPC)),
         new Item.Properties());
 
-    public static final Item TAKASHA_MAID_SPAWN_EGG = register("takasha_maid_spawn_egg",
-        props -> new net.minecraft.world.item.SpawnEggItem(props.spawnEgg(ModEntities.TAKASHA_MAID)),
-        new Item.Properties());
-
     public static final Item NPC_SPAWNER_WAND = register("npc_spawner_wand",
         net.sakura.weapons.item.custom.NpcSpawnerWandItem::new,
         new Item.Properties().stacksTo(1).rarity(net.minecraft.world.item.Rarity.EPIC));

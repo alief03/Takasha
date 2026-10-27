@@ -40,7 +40,7 @@ public abstract class ItemFrameInvisibilityMixin extends HangingEntity {
     }
 
     @Inject(method = "interact", at = @At("HEAD"), cancellable = true)
-    private void sakura$handleFrameInteraction(Player player, InteractionHand hand, Vec3 hitPos, CallbackInfoReturnable<InteractionResult> cir) {
+    private void sakura$handleFrameInteraction(Player player, InteractionHand hand, Vec3 location, CallbackInfoReturnable<InteractionResult> cir) {
         ItemStack held = player.getItemInHand(hand);
 
         // 1. Feature: Toggle Invisibility (Sneak + Empty Hand on frame with item)

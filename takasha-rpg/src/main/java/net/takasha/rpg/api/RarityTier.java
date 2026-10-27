@@ -36,6 +36,10 @@ public enum RarityTier {
         return formatting;
     }
 
+    public String getColorCode() {
+        return formatting.toString();
+    }
+
     public double getPriceMultiplier() {
         return priceMultiplier;
     }

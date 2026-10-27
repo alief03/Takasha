@@ -88,15 +88,18 @@ public class TakashaCurrencyItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> consumer, TooltipFlag flag) {
         super.appendHoverText(stack, context, display, consumer, flag);
-        consumer.accept(tier.getBadge());
+
+        net.takasha.rpg.util.RpgTooltipBuilder builder = net.takasha.rpg.util.RpgTooltipBuilder.create(getDescriptionId(), tier)
+                .category(currencyType == CurrencyType.MONEY ? "MATA UANG" : "PERMATA RPG");
 
         if (currencyType == CurrencyType.MONEY) {
-            consumer.accept(Component.literal("§7Nilai: §a$" + String.format("%.2f", valuePerUnit)));
+            builder.stat("Nilai Nominal", "$" + String.format("%.2f", valuePerUnit) + " Coins", net.takasha.rpg.util.RpgTooltipBuilder.StatGlyph.COIN);
         } else {
-            consumer.accept(Component.literal("§7Nilai: §b" + (int) valuePerUnit + " Takasha Gem"));
+            builder.stat("Nilai Permata", (int) valuePerUnit + " Gems", net.takasha.rpg.util.RpgTooltipBuilder.StatGlyph.SOUL);
         }
 
-        consumer.accept(Component.literal("§8Klik Kanan: Setor 1 unit ke dompet"));
-        consumer.accept(Component.literal("§8Shift + Klik Kanan: Setor seluruh tumpukan"));
+        builder.affordance("Klik Kanan", "Setor 1 unit ke rekening dompet");
+        builder.affordance("Shift + Klik", "Setor seluruh item di tangan");
+        builder.build(consumer);
     }
 }

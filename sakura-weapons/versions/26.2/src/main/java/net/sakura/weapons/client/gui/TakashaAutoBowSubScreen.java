@@ -164,6 +164,8 @@ public class TakashaAutoBowSubScreen extends Screen {
         // Free movement badge
         extractor.fill(left + 14, top + 56, left + panelW - 14, top + 68, 0x44204020);
         extractor.text(this.font, "✔ Karakter tetap 100% bebas digerakkan pemain (WASD, Sprint, Jump)", left + 20, top + 58, 0xFF88FF88, false);
+
+        super.extractRenderState(extractor, mouseX, mouseY, partialTick);
     }
 
     @Override

@@ -72,6 +72,12 @@
   "message.sakura_weapons.npc.protected_view": "Protected mode: Only the owner can swap equipment!",
   "message.sakura_weapons.npc.dismantled": "Mannequin was dismantled.",
   "key.category.sakura_weapons.takasha": "Takasha",
+  "key.sakura_weapons.master_dashboard": "Master Dashboard (Takasha)",
+  "key.sakura_weapons.auto_farm": "Toggle Auto Farm",
+  "key.sakura_weapons.auto_fish": "Toggle Auto Fish",
+  "key.sakura_weapons.mob_kill": "Toggle Auto Kill Mobs",
+  "key.sakura_weapons.auto_bow": "Toggle Auto Bow",
+  "key.sakura_weapons.toggle_nametag": "Toggle Player Nametags",
   "key.sakura_weapons.toggle_player_nametags": "Toggle Player Nametags",
   "key.sakura_weapons.replay_studio": "Open Sakura Replay Studio",
   "message.sakura_weapons.nametag.disabled": "§c[Takasha] Player Nametags: DISABLED (Hidden)",
@@ -103,7 +109,5 @@
   "item.sakura_weapons.dragon_mecha_overlord_leggings": "Dragon Mecha Overlord Leggings",
   "item.sakura_weapons.dragon_mecha_overlord_boots": "Dragon Mecha Overlord Boots",
   "entity.sakura_weapons.takasha_npc": "Takasha NPC",
-  "item.sakura_weapons.takasha_npc_spawn_egg": "Takasha NPC Spawn Egg",
-  "entity.sakura_weapons.takasha_maid": "Takasha Maid Companion",
-  "item.sakura_weapons.takasha_maid_spawn_egg": "Takasha Maid Spawn Egg"
+  "item.sakura_weapons.takasha_npc_spawn_egg": "Takasha NPC Spawn Egg"
 }

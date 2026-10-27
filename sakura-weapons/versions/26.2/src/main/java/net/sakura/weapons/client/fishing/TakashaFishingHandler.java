@@ -7,6 +7,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
 import net.minecraft.network.protocol.game.ClientboundSoundPacket;
+import net.minecraft.network.protocol.game.ServerboundSetCarriedItemPacket;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -31,14 +32,14 @@ import java.util.Random;
 /**
  * Core fishing automation engine supporting:
  * 1. Kaizen mode: bobber motion spike packet tracking (-0.1 Y velocity) + Capcay 1.0 + Rod Slip recovery.
- * 2. Vanilla mode: sound splash packet detection (distanceSq < 25).
+ * 2. Vanilla mode: sound splash packet detection (distanceSq < 25), 0% CPU overhead (skips Capcay/RodSlip).
  * 3. Catch Filter (Keep Whitelist): automatically ejects items not selected in keepCatchWhitelist.
+ * 4. Configurable bite sensitivity, reel-in delay, recast delay, sound alert, and auto rod switch.
  */
 public class TakashaFishingHandler {
 
     private static volatile TakashaFishingHandler INSTANCE;
 
-    private static final double MOTION_Y_THRESHOLD = -0.1;
     private static final int START_CATCHING_AFTER_THRESHOLD_MS = 900;
     private static final double HOOK_SOUND_DIST_SQ = 25.0;
 
@@ -47,6 +48,8 @@ public class TakashaFishingHandler {
     private long bobberRiseTimestamp = 0L;
     private long scheduledRecastTime = 0L;
     private boolean isRecastQueued = false;
+    private long scheduledReelInTime = 0L;
+    private boolean isReelInQueued = false;
     private long lastReelInTime = 0L;
 
     // Catch Filter Watcher state
@@ -79,16 +82,30 @@ public class TakashaFishingHandler {
             return;
         }
 
-        // Tick sub-components
-        CapcayManager.getInstance().tick(client);
-        RodSlipHandler.getInstance().tick(client);
+        // Tick sub-components only in KAIZEN mode
+        if (config.fishingMode == TakashaMasterConfig.FishingMode.KAIZEN) {
+            CapcayManager.getInstance().tick(client);
+            RodSlipHandler.getInstance().tick(client);
 
-        if (isCapcayPaused || CapcayManager.getInstance().isBusy()) {
-            return;
+            if (isCapcayPaused || CapcayManager.getInstance().isBusy()) {
+                return;
+            }
+        }
+
+        // Check and swap fishing rod if durability is critically low
+        if (config.autoSwitchRodOnLowDurability) {
+            checkAndSwapLowDurabilityRod(client, player);
+        }
+
+        long now = Util.getMillis();
+
+        // Process scheduled reel-in
+        if (isReelInQueued && now >= scheduledReelInTime) {
+            isReelInQueued = false;
+            executeReelIn(client, player, config);
         }
 
         // Process scheduled recast
-        long now = Util.getMillis();
         if (isRecastQueued && now >= scheduledRecastTime) {
             isRecastQueued = false;
             prepareAndCast(client, config);
@@ -112,6 +129,44 @@ public class TakashaFishingHandler {
                 inventorySnapshot.clear();
             } else {
                 tickCatchFilter(client, player, config);
+            }
+        }
+    }
+
+    private void checkAndSwapLowDurabilityRod(Minecraft client, LocalPlayer player) {
+        ItemStack mainHand = player.getMainHandItem();
+        if (!(mainHand.getItem() instanceof FishingRodItem) || !mainHand.isDamageableItem()) {
+            return;
+        }
+        int remaining = mainHand.getMaxDamage() - mainHand.getDamageValue();
+        if (remaining > 3) {
+            return;
+        }
+
+        var inventory = player.getInventory();
+        // 1. Check hotbar slots 0..8
+        for (int i = 0; i < 9; i++) {
+            ItemStack stack = inventory.getItem(i);
+            if (stack.getItem() instanceof FishingRodItem && (!stack.isDamageableItem() || (stack.getMaxDamage() - stack.getDamageValue() > 3))) {
+                inventory.setSelectedSlot(i);
+                if (client.getConnection() != null) {
+                    client.getConnection().send(new ServerboundSetCarriedItemPacket(i));
+                }
+                log("§e[Autofish] Berpindah ke pancingan baru di slot " + (i + 1));
+                return;
+            }
+        }
+
+        // 2. Check main inventory slots 9..35
+        if (client.gameMode != null) {
+            for (int i = 9; i < 36; i++) {
+                ItemStack stack = inventory.getItem(i);
+                if (stack.getItem() instanceof FishingRodItem && (!stack.isDamageableItem() || (stack.getMaxDamage() - stack.getDamageValue() > 3))) {
+                    int targetHotbar = inventory.getSelectedSlot();
+                    client.gameMode.handleContainerInput(0, i, targetHotbar, ContainerInput.SWAP, player);
+                    log("§e[Autofish] Mengambil pancingan cadangan dari inventory.");
+                    return;
+                }
             }
         }
     }
@@ -195,7 +250,8 @@ public class TakashaFishingHandler {
 
             long timeInWater = now - bobberRiseTimestamp;
             if (hasHitWater && bobberRiseTimestamp != 0L && timeInWater > START_CATCHING_AFTER_THRESHOLD_MS) {
-                if (packet.movement().x() == 0.0 && packet.movement().z() == 0.0 && packet.movement().y() < MOTION_Y_THRESHOLD) {
+                double threshold = config.biteSensitivity != null ? config.biteSensitivity.getThreshold() : -0.10;
+                if (packet.movement().x() == 0.0 && packet.movement().z() == 0.0 && packet.movement().y() < threshold) {
                     catchFish(client, config);
                     hasHitWater = false;
                     bobberRiseTimestamp = 0L;
@@ -209,7 +265,7 @@ public class TakashaFishingHandler {
         if (!config.autoFishEnabled || config.fishingMode != TakashaMasterConfig.FishingMode.VANILLA) {
             return;
         }
-        if (isCapcayPaused || CapcayManager.getInstance().isBusy()) {
+        if (isCapcayPaused || (config.fishingMode == TakashaMasterConfig.FishingMode.KAIZEN && CapcayManager.getInstance().isBusy())) {
             return;
         }
 
@@ -227,7 +283,7 @@ public class TakashaFishingHandler {
     }
 
     public void catchFish(Minecraft client, TakashaMasterConfig config) {
-        if (isRecastQueued) return;
+        if (isRecastQueued || isReelInQueued) return;
         LocalPlayer player = client.player;
         if (player == null || client.gameMode == null) return;
 
@@ -235,8 +291,23 @@ public class TakashaFishingHandler {
         if (now - lastReelInTime < 500L) return;
         lastReelInTime = now;
 
+        if (config.soundAlertOnCatch) {
+            player.playSound(SoundEvents.EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f);
+        }
+
+        if (config.reelInDelayMs <= 0) {
+            executeReelIn(client, player, config);
+        } else {
+            isReelInQueued = true;
+            scheduledReelInTime = now + config.reelInDelayMs;
+        }
+    }
+
+    private void executeReelIn(Minecraft client, LocalPlayer player, TakashaMasterConfig config) {
         // Reel in hook
         useRod(client, player);
+
+        long now = Util.getMillis();
 
         // Activate catch filter watcher for 2.5s to inspect and filter items received
         if (config.filterCatchEnabled) {
@@ -245,8 +316,11 @@ public class TakashaFishingHandler {
         }
 
         // Schedule recast
-        long recastDelay = config.recastDelayMs + (long) ((random.nextDouble() * 200.0) - 100.0);
-        queueRecast(Math.max(400L, recastDelay));
+        long recastDelay = config.recastDelayMs;
+        if (config.fishingMode == TakashaMasterConfig.FishingMode.KAIZEN) {
+            recastDelay += (long) ((random.nextDouble() * 200.0) - 100.0);
+        }
+        queueRecast(Math.max(100L, recastDelay));
     }
 
     public void queueRecast(long delayMs) {
@@ -258,7 +332,7 @@ public class TakashaFishingHandler {
         LocalPlayer player = client.player;
         if (player == null || client.gameMode == null) return;
 
-        if (config.rodSlipRecovery) {
+        if (config.rodSlipRecovery && config.fishingMode == TakashaMasterConfig.FishingMode.KAIZEN) {
             RodSlipHandler.getInstance().ensureRodEquipped(player, config);
         }
 
@@ -312,6 +386,7 @@ public class TakashaFishingHandler {
         hasHitWater = false;
         bobberRiseTimestamp = 0L;
         isRecastQueued = false;
+        isReelInQueued = false;
         isCatchWatcherActive = false;
     }
 

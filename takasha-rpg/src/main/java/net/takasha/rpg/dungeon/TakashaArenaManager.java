@@ -151,6 +151,11 @@ public class TakashaArenaManager {
             if (mob != null) {
                 mob.setPos(spawnPos.getX() + 0.5, spawnPos.getY(), spawnPos.getZ() + 0.5);
                 mob.setTarget(player);
+                mob.setPersistenceRequired();
+                String mobName = mob.getType().getDescription().getString();
+                mob.setCustomName(Component.literal("§c§l[Wave " + wave + "] §f" + mobName));
+                mob.setCustomNameVisible(true);
+
                 arenaLevel.addFreshEntity(mob);
                 activeMobUuids.add(mob.getUUID());
 
@@ -161,13 +166,14 @@ public class TakashaArenaManager {
 
     private static void renderSafeBubbleParticles() {
         if (arenaLevel == null || centerPos == null) return;
-        int points = 32;
+        int points = 36;
         for (int i = 0; i < points; i++) {
             double angle = (2 * Math.PI * i) / points;
             double px = centerPos.getX() + Math.cos(angle) * SAFE_BUBBLE_RADIUS;
             double pz = centerPos.getZ() + Math.sin(angle) * SAFE_BUBBLE_RADIUS;
-            double py = centerPos.getY() + 1.0;
-            arenaLevel.sendParticles(ParticleTypes.ENCHANTED_HIT, px, py, pz, 1, 0, 0.1, 0, 0.02);
+            for (double dy = 0.5; dy <= 8.0; dy += 1.5) {
+                arenaLevel.sendParticles(ParticleTypes.ENCHANTED_HIT, px, centerPos.getY() + dy, pz, 1, 0, 0, 0, 0.0);
+            }
         }
     }
 
@@ -211,5 +217,15 @@ public class TakashaArenaManager {
 
     public static boolean isArenaActive() {
         return arenaActive;
+    }
+
+    public static boolean isArenaMob(UUID uuid) {
+        return activeMobUuids.contains(uuid);
+    }
+
+    public static boolean isPlayerInArena(ServerPlayer player) {
+        if (!arenaActive || player == null || centerPos == null) return false;
+        if (challengerUuid != null && challengerUuid.equals(player.getUUID())) return true;
+        return player.distanceToSqr(centerPos.getX(), centerPos.getY(), centerPos.getZ()) <= (SAFE_BUBBLE_RADIUS * SAFE_BUBBLE_RADIUS * 4.0);
     }
 }

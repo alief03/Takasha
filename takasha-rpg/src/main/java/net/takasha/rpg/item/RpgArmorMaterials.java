@@ -20,15 +20,26 @@ public final class RpgArmorMaterials {
         );
     }
 
-    public static final ArmorMaterial PALADIN = new ArmorMaterial(
-        37,
+    public static final ArmorMaterial DIMENSIONAL_TRAVELLER = new ArmorMaterial(
+        38,
         makeDefense(3, 6, 8, 3, 20),
         15,
         SoundEvents.ARMOR_EQUIP_NETHERITE,
         3.0f,
         0.1f,
         ItemTags.REPAIRS_NETHERITE_ARMOR,
-        RpgEquipmentAssets.PALADIN
+        RpgEquipmentAssets.DIMENSIONAL_TRAVELLER
+    );
+
+    public static final ArmorMaterial KOTH = new ArmorMaterial(
+        37,
+        makeDefense(3, 6, 8, 3, 18),
+        15,
+        SoundEvents.ARMOR_EQUIP_DIAMOND,
+        2.5f,
+        0.1f,
+        ItemTags.REPAIRS_DIAMOND_ARMOR,
+        RpgEquipmentAssets.KOTH
     );
 
     public static final ArmorMaterial PHANTOM = new ArmorMaterial(
@@ -42,28 +53,6 @@ public final class RpgArmorMaterials {
         RpgEquipmentAssets.PHANTOM
     );
 
-    public static final ArmorMaterial NECROMANCER = new ArmorMaterial(
-        35,
-        makeDefense(3, 6, 8, 3, 16),
-        18,
-        SoundEvents.ARMOR_EQUIP_DIAMOND,
-        2.5f,
-        0.05f,
-        ItemTags.REPAIRS_DIAMOND_ARMOR,
-        RpgEquipmentAssets.NECROMANCER
-    );
-
-    public static final ArmorMaterial BERSERKER = new ArmorMaterial(
-        37,
-        makeDefense(3, 6, 8, 3, 18),
-        12,
-        SoundEvents.ARMOR_EQUIP_NETHERITE,
-        2.5f,
-        0.1f,
-        ItemTags.REPAIRS_NETHERITE_ARMOR,
-        RpgEquipmentAssets.BERSERKER
-    );
-
     public static final ArmorMaterial RANGER = new ArmorMaterial(
         33,
         makeDefense(3, 6, 8, 3, 13),
@@ -75,18 +64,29 @@ public final class RpgArmorMaterials {
         RpgEquipmentAssets.RANGER
     );
 
-    public static final ArmorMaterial GUARDIAN = new ArmorMaterial(
+    public static final ArmorMaterial SUPREME = new ArmorMaterial(
         40,
         makeDefense(4, 7, 9, 4, 24),
-        10,
+        18,
         SoundEvents.ARMOR_EQUIP_NETHERITE,
         4.0f,
         0.2f,
         ItemTags.REPAIRS_NETHERITE_ARMOR,
-        RpgEquipmentAssets.GUARDIAN
+        RpgEquipmentAssets.SUPREME
     );
 
-    public static final ArmorMaterial VOIDWALKER = new ArmorMaterial(
+    public static final ArmorMaterial YETI = new ArmorMaterial(
+        36,
+        makeDefense(3, 6, 8, 3, 16),
+        14,
+        SoundEvents.ARMOR_EQUIP_DIAMOND,
+        2.5f,
+        0.05f,
+        ItemTags.REPAIRS_DIAMOND_ARMOR,
+        RpgEquipmentAssets.YETI
+    );
+
+    public static final ArmorMaterial YIJKI = new ArmorMaterial(
         39,
         makeDefense(3, 6, 8, 3, 22),
         20,
@@ -94,6 +94,6 @@ public final class RpgArmorMaterials {
         3.5f,
         0.15f,
         ItemTags.REPAIRS_NETHERITE_ARMOR,
-        RpgEquipmentAssets.VOIDWALKER
+        RpgEquipmentAssets.YIJKI
     );
 }

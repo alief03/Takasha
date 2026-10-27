@@ -23,8 +23,14 @@ public class TakashaMobKillSubScreen extends Screen {
 
     private Button toggleBtn;
     private Button modeBtn;
+    private Button reachBtn;
+    private Button targetPriorityBtn;
+    private Button attackRateBtn;
     private Button fovConeBtn;
-    private Button syncCdBtn;
+    private Button smartCritBtn;
+    private Button pvpPlayerBtn;
+    private Button autoWeaponBtn;
+    private Button weaponBreakBtn;
     private Button antiAfkBtn;
     private TakashaKeybindWidget keybindWidget;
     private Button backBtn;
@@ -33,11 +39,11 @@ public class TakashaMobKillSubScreen extends Screen {
         new MobOption("minecraft:zombie", "Zombie"),
         new MobOption("minecraft:skeleton", "Skeleton"),
         new MobOption("minecraft:creeper", "Creeper"),
-        new MobOption("minecraft:spider", "Spider (Laba-laba)"),
+        new MobOption("minecraft:spider", "Spider"),
         new MobOption("minecraft:blaze", "Blaze"),
         new MobOption("minecraft:enderman", "Enderman"),
         new MobOption("minecraft:drowned", "Drowned"),
-        new MobOption("minecraft:witch", "Witch (Penyihir)"),
+        new MobOption("minecraft:witch", "Witch"),
         new MobOption("minecraft:cow", "Sapi (Cow)"),
         new MobOption("minecraft:sheep", "Domba (Sheep)"),
         new MobOption("minecraft:pig", "Babi (Pig)"),
@@ -57,11 +63,11 @@ public class TakashaMobKillSubScreen extends Screen {
         super.init();
 
         int panelW = 420;
-        int panelH = 260;
+        int panelH = 300;
         int left = (this.width - panelW) / 2;
         int top = (this.height - panelH) / 2;
 
-        // Row 1: Status & Mode
+        // Row 1: Status & Mode (KAIZEN vs VANILLA)
         this.toggleBtn = Button.builder(
             Component.literal("Status: " + (config.autoKillEnabled ? "§aAKTIF" : "§cNONAKTIF")),
             btn -> {
@@ -69,7 +75,7 @@ public class TakashaMobKillSubScreen extends Screen {
                 config.save();
                 btn.setMessage(Component.literal("Status: " + (config.autoKillEnabled ? "§aAKTIF" : "§cNONAKTIF")));
             }
-        ).bounds(left + 14, top + 32, 190, 20).build();
+        ).bounds(left + 14, top + 28, 190, 20).build();
         this.addRenderableWidget(this.toggleBtn);
 
         this.modeBtn = Button.builder(
@@ -81,16 +87,66 @@ public class TakashaMobKillSubScreen extends Screen {
                 config.save();
                 btn.setMessage(Component.literal("Mode: §b" + config.mobKillMode.name()));
             }
-        ).bounds(left + 214, top + 32, 190, 20)
-        .tooltip(Tooltip.create(Component.literal("KAIZEN: Anti-AFK osilasi + recovery\nVANILLA: Standard attack cooldown")))
+        ).bounds(left + 214, top + 28, 190, 20)
+        .tooltip(Tooltip.create(Component.literal("KAIZEN: Anti-AFK osilasi + Raycast Half-slab LOS + Cooldown\nVANILLA: Pure stationary attack + Jarak langsung + Turbo/Spam rate")))
         .build();
         this.addRenderableWidget(this.modeBtn);
 
-        // Row 2: FOV Cone, Sync CD, Anti-AFK
-        this.fovConeBtn = Button.builder(
-            Component.literal("Cone: §e≤ " + (int) config.maxFovAngle + "°"),
+        // Row 2: Reach, Prioritas Target, Attack Rate
+        double[] reaches = {2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 6.0};
+        this.reachBtn = Button.builder(
+            Component.literal("Reach: §e" + config.killReach + "m"),
             btn -> {
-                double[] angles = {20.0, 25.0, 35.0, 45.0};
+                int idx = 0;
+                for (int i = 0; i < reaches.length; i++) {
+                    if (Math.abs(config.killReach - reaches[i]) < 0.1) {
+                        idx = (i + 1) % reaches.length;
+                        break;
+                    }
+                }
+                config.killReach = reaches[idx];
+                config.save();
+                btn.setMessage(Component.literal("Reach: §e" + config.killReach + "m"));
+            }
+        ).bounds(left + 14, top + 52, 126, 20)
+        .tooltip(Tooltip.create(Component.literal("Jangkauan serangan terjauh (Maks 6.0 meter)")))
+        .build();
+        this.addRenderableWidget(this.reachBtn);
+
+        this.targetPriorityBtn = Button.builder(
+            Component.literal("Target: §e" + getPriorityLabel(config.killTargetPriority)),
+            btn -> {
+                TakashaMasterConfig.KillTargetPriority[] priorities = TakashaMasterConfig.KillTargetPriority.values();
+                int next = (config.killTargetPriority.ordinal() + 1) % priorities.length;
+                config.killTargetPriority = priorities[next];
+                config.save();
+                btn.setMessage(Component.literal("Target: §e" + getPriorityLabel(config.killTargetPriority)));
+            }
+        ).bounds(left + 144, top + 52, 130, 20)
+        .tooltip(Tooltip.create(Component.literal("Prioritas pemilihan sasaran mob")))
+        .build();
+        this.addRenderableWidget(this.targetPriorityBtn);
+
+        this.attackRateBtn = Button.builder(
+            Component.literal("Rate: §e" + getRateLabel(config.attackRateMode)),
+            btn -> {
+                TakashaMasterConfig.AttackRateMode[] rates = TakashaMasterConfig.AttackRateMode.values();
+                int next = (config.attackRateMode.ordinal() + 1) % rates.length;
+                config.attackRateMode = rates[next];
+                config.syncAttackCooldown = (config.attackRateMode == TakashaMasterConfig.AttackRateMode.COOLDOWN_SYNC);
+                config.save();
+                btn.setMessage(Component.literal("Rate: §e" + getRateLabel(config.attackRateMode)));
+            }
+        ).bounds(left + 278, top + 52, 126, 20)
+        .tooltip(Tooltip.create(Component.literal("Kecepatan ayunan senjata:\n- Cooldown Sync: ≥95% (Damage Maksimal)\n- Turbo: ≥70% (Lebih Cepat)\n- Hyper Spam: 0ms (Serang Tiap Tick)")))
+        .build();
+        this.addRenderableWidget(this.attackRateBtn);
+
+        // Row 3: FOV Cone, Smart Crit, PVP Player
+        this.fovConeBtn = Button.builder(
+            Component.literal("Cone: §e" + (config.maxFovAngle >= 360.0 ? "360°" : ("≤ " + (int) config.maxFovAngle + "°"))),
+            btn -> {
+                double[] angles = {20.0, 35.0, 60.0, 90.0, 180.0, 360.0};
                 int idx = 0;
                 for (int i = 0; i < angles.length; i++) {
                     if (Math.abs(config.maxFovAngle - angles[i]) < 1.0) {
@@ -100,24 +156,61 @@ public class TakashaMobKillSubScreen extends Screen {
                 }
                 config.maxFovAngle = angles[idx];
                 config.save();
-                btn.setMessage(Component.literal("Cone: §e≤ " + (int) config.maxFovAngle + "°"));
+                btn.setMessage(Component.literal("Cone: §e" + (config.maxFovAngle >= 360.0 ? "360°" : ("≤ " + (int) config.maxFovAngle + "°"))));
             }
-        ).bounds(left + 14, top + 56, 126, 20)
-        .tooltip(Tooltip.create(Component.literal("Anti-Aura: Hanya serang mob di depan sudut pandang (Maks 35°). Tidak ada 360° KillAura!")))
+        ).bounds(left + 14, top + 76, 126, 20)
+        .tooltip(Tooltip.create(Component.literal("Sudut pandang serangan (Anti-Aura ≤35°, atau 360° bebas)")))
         .build();
         this.addRenderableWidget(this.fovConeBtn);
 
-        this.syncCdBtn = Button.builder(
-            Component.literal("Cooldown: " + (config.syncAttackCooldown ? "§a≥95%" : "§cSpam")),
+        this.smartCritBtn = Button.builder(
+            Component.literal("Smart Crit: " + (config.smartCritical ? "§aON" : "§cOFF")),
             btn -> {
-                config.syncAttackCooldown = !config.syncAttackCooldown;
+                config.smartCritical = !config.smartCritical;
                 config.save();
-                btn.setMessage(Component.literal("Cooldown: " + (config.syncAttackCooldown ? "§a≥95%" : "§cSpam")));
+                btn.setMessage(Component.literal("Smart Crit: " + (config.smartCritical ? "§aON" : "§cOFF")));
             }
-        ).bounds(left + 144, top + 56, 130, 20)
-        .tooltip(Tooltip.create(Component.literal("Hanya serang ketika bilah kekuatan senjata terisi penuh (Damage maksimal)")))
+        ).bounds(left + 144, top + 76, 130, 20)
+        .tooltip(Tooltip.create(Component.literal("Hanya serang ketika jatuh dari lompatan untuk memicu 150% Critical Damage")))
         .build();
-        this.addRenderableWidget(this.syncCdBtn);
+        this.addRenderableWidget(this.smartCritBtn);
+
+        this.pvpPlayerBtn = Button.builder(
+            Component.literal("PVP Player: " + (config.attackPlayers ? "§aON" : "§cOFF")),
+            btn -> {
+                config.attackPlayers = !config.attackPlayers;
+                config.save();
+                btn.setMessage(Component.literal("PVP Player: " + (config.attackPlayers ? "§aON" : "§cOFF")));
+            }
+        ).bounds(left + 278, top + 76, 126, 20)
+        .tooltip(Tooltip.create(Component.literal("Izinkan menyerang pemain lain dalam zona PVP")))
+        .build();
+        this.addRenderableWidget(this.pvpPlayerBtn);
+
+        // Row 4: Auto Senjata, Proteksi Hancur, Anti-AFK
+        this.autoWeaponBtn = Button.builder(
+            Component.literal("Ganti Senjata: " + (config.autoSwitchWeapon ? "§aON" : "§cOFF")),
+            btn -> {
+                config.autoSwitchWeapon = !config.autoSwitchWeapon;
+                config.save();
+                btn.setMessage(Component.literal("Ganti Senjata: " + (config.autoSwitchWeapon ? "§aON" : "§cOFF")));
+            }
+        ).bounds(left + 14, top + 100, 126, 20)
+        .tooltip(Tooltip.create(Component.literal("Otomatis ambil pedang/kapak/mace terbaik dari inventory")))
+        .build();
+        this.addRenderableWidget(this.autoWeaponBtn);
+
+        this.weaponBreakBtn = Button.builder(
+            Component.literal("Proteksi: " + (config.weaponBreakProtection ? "§aON" : "§cOFF")),
+            btn -> {
+                config.weaponBreakProtection = !config.weaponBreakProtection;
+                config.save();
+                btn.setMessage(Component.literal("Proteksi: " + (config.weaponBreakProtection ? "§aON" : "§cOFF")));
+            }
+        ).bounds(left + 144, top + 100, 130, 20)
+        .tooltip(Tooltip.create(Component.literal("Otomatis jeda serangan jika durability senjata tersisa ≤ " + config.weaponBreakThreshold)))
+        .build();
+        this.addRenderableWidget(this.weaponBreakBtn);
 
         this.antiAfkBtn = Button.builder(
             Component.literal("Anti-AFK: " + (config.antiAfkEnabled ? "§aON" : "§cOFF")),
@@ -126,13 +219,13 @@ public class TakashaMobKillSubScreen extends Screen {
                 config.save();
                 btn.setMessage(Component.literal("Anti-AFK: " + (config.antiAfkEnabled ? "§aON" : "§cOFF")));
             }
-        ).bounds(left + 278, top + 56, 126, 20)
-        .tooltip(Tooltip.create(Component.literal("Gerak otomatis hanya saat diam. Jika pemain menekan tombol gerakan (WASD/Lompat), kendali 100% bebas!")))
+        ).bounds(left + 278, top + 100, 126, 20)
+        .tooltip(Tooltip.create(Component.literal("Micro-osilasi Anti-AFK (Aktif di mode KAIZEN)")))
         .build();
         this.addRenderableWidget(this.antiAfkBtn);
 
-        // Row 3+: Mob Whitelist Checklist (3 cols x 4 rows)
-        int startY = top + 98;
+        // Row 5+: Mob Whitelist Checklist (3 cols x 4 rows)
+        int startY = top + 142;
         for (int i = 0; i < MOB_OPTIONS.size(); i++) {
             MobOption mob = MOB_OPTIONS.get(i);
             int col = i % 3;
@@ -156,7 +249,7 @@ public class TakashaMobKillSubScreen extends Screen {
         }
 
         // Bottom Controls
-        int bottomY = top + panelH - 24;
+        int bottomY = top + panelH - 26;
         this.keybindWidget = new TakashaKeybindWidget(
             left + 14,
             bottomY,
@@ -174,6 +267,23 @@ public class TakashaMobKillSubScreen extends Screen {
         this.addRenderableWidget(this.backBtn);
     }
 
+    private String getPriorityLabel(TakashaMasterConfig.KillTargetPriority p) {
+        return switch (p) {
+            case NEAREST -> "Terdekat";
+            case LOWEST_HEALTH -> "HP Terendah";
+            case HIGHEST_HEALTH -> "HP Tertinggi";
+            case FOV_CENTER -> "Crosshair";
+        };
+    }
+
+    private String getRateLabel(TakashaMasterConfig.AttackRateMode r) {
+        return switch (r) {
+            case COOLDOWN_SYNC -> "Sync ≥95%";
+            case TURBO -> "Turbo ≥70%";
+            case HYPER_SPAM -> "Hyper 0ms";
+        };
+    }
+
     private Component getMobButtonLabel(MobOption mob) {
         boolean active = config.killMobWhitelist.contains(mob.id());
         return Component.literal((active ? "§a✔ " : "§7✕ ") + mob.label());
@@ -184,7 +294,7 @@ public class TakashaMobKillSubScreen extends Screen {
         extractor.fill(0, 0, this.width, this.height, 0x88000000);
 
         int panelW = 420;
-        int panelH = 260;
+        int panelH = 300;
         int left = (this.width - panelW) / 2;
         int top = (this.height - panelH) / 2;
 
@@ -192,11 +302,13 @@ public class TakashaMobKillSubScreen extends Screen {
         extractor.outline(left, top, panelW, panelH, 0xFFE082A8);
 
         // Header
-        extractor.fill(left, top, left + panelW, top + 26, 0xFF241528);
-        extractor.text(this.font, "⚔️ Auto Kill Mob (Strict Frontal Cone / Anti-Aura)", left + 10, top + 8, 0xFFFFB6C1, false);
+        extractor.fill(left, top, left + panelW, top + 24, 0xFF241528);
+        extractor.text(this.font, "⚔️ Auto Kill Mob (Kaizen vs Vanilla Engine)", left + 10, top + 7, 0xFFFFB6C1, false);
 
         // Section labels
-        extractor.text(this.font, "Pilih Mob Target (Anti-Aura: Hanya yang di depan pandangan):", left + 14, top + 86, 0xFFAAAAAA, false);
+        extractor.text(this.font, "Daftar Mob Target yang Diserang:", left + 14, top + 128, 0xFFAAAAAA, false);
+
+        super.extractRenderState(extractor, mouseX, mouseY, partialTick);
     }
 
     @Override

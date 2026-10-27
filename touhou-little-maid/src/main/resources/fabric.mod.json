@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "touhou_little_maid",
+  "version": "${version}",
+  "name": "Touhou Little Maid",
+  "description": "Touhou Little Maid 26.2 RPG Companion Port with Owner Stat Synchronization, AdvancedEnchantments and Low-Spec Anti-Crash Optimization.",
+  "authors": [
+    "Sh1roCu",
+    "TartaricAcid",
+    "Takasha Team"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net"
+  },
+  "license": "MIT / CC BY-NC-SA 4.0",
+  "icon": "assets/touhou_little_maid/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.sakura.touhou.TouhouLittleMaidMod"
+    ],
+    "client": [
+      "net.sakura.touhou.client.TouhouLittleMaidClient"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.19.3",
+    "minecraft": "~26.2",
+    "java": ">=25",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "takasha_rpg": "*"
+  }
+}

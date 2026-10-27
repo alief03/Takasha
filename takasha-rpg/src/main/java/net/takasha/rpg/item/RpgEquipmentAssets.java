@@ -9,24 +9,24 @@ import net.takasha.rpg.TakashaRpgMod;
 public final class RpgEquipmentAssets {
     private RpgEquipmentAssets() {}
 
-    public static final ResourceKey<EquipmentAsset> PALADIN =
-            ResourceKey.create(EquipmentAssets.ROOT_ID, Identifier.fromNamespaceAndPath(TakashaRpgMod.MOD_ID, "paladin"));
+    public static final ResourceKey<EquipmentAsset> DIMENSIONAL_TRAVELLER =
+            ResourceKey.create(EquipmentAssets.ROOT_ID, Identifier.fromNamespaceAndPath(TakashaRpgMod.MOD_ID, "dimensional_traveller"));
+
+    public static final ResourceKey<EquipmentAsset> KOTH =
+            ResourceKey.create(EquipmentAssets.ROOT_ID, Identifier.fromNamespaceAndPath(TakashaRpgMod.MOD_ID, "koth"));
 
     public static final ResourceKey<EquipmentAsset> PHANTOM =
             ResourceKey.create(EquipmentAssets.ROOT_ID, Identifier.fromNamespaceAndPath(TakashaRpgMod.MOD_ID, "phantom"));
 
-    public static final ResourceKey<EquipmentAsset> NECROMANCER =
-            ResourceKey.create(EquipmentAssets.ROOT_ID, Identifier.fromNamespaceAndPath(TakashaRpgMod.MOD_ID, "necromancer"));
-
-    public static final ResourceKey<EquipmentAsset> BERSERKER =
-            ResourceKey.create(EquipmentAssets.ROOT_ID, Identifier.fromNamespaceAndPath(TakashaRpgMod.MOD_ID, "berserker"));
-
     public static final ResourceKey<EquipmentAsset> RANGER =
             ResourceKey.create(EquipmentAssets.ROOT_ID, Identifier.fromNamespaceAndPath(TakashaRpgMod.MOD_ID, "ranger"));
 
-    public static final ResourceKey<EquipmentAsset> GUARDIAN =
-            ResourceKey.create(EquipmentAssets.ROOT_ID, Identifier.fromNamespaceAndPath(TakashaRpgMod.MOD_ID, "guardian"));
+    public static final ResourceKey<EquipmentAsset> SUPREME =
+            ResourceKey.create(EquipmentAssets.ROOT_ID, Identifier.fromNamespaceAndPath(TakashaRpgMod.MOD_ID, "supreme"));
 
-    public static final ResourceKey<EquipmentAsset> VOIDWALKER =
-            ResourceKey.create(EquipmentAssets.ROOT_ID, Identifier.fromNamespaceAndPath(TakashaRpgMod.MOD_ID, "voidwalker"));
+    public static final ResourceKey<EquipmentAsset> YETI =
+            ResourceKey.create(EquipmentAssets.ROOT_ID, Identifier.fromNamespaceAndPath(TakashaRpgMod.MOD_ID, "yeti"));
+
+    public static final ResourceKey<EquipmentAsset> YIJKI =
+            ResourceKey.create(EquipmentAssets.ROOT_ID, Identifier.fromNamespaceAndPath(TakashaRpgMod.MOD_ID, "yijki"));
 }

@@ -26,6 +26,9 @@ public final class TakashaStudioWindow {
     public static final ImBoolean isOpen = new ImBoolean(false);
     private static UUID selectedNpcUuid = null;
 
+    private static final List<TakashaNpcEntity> cachedNearbyNpcs = new ArrayList<>();
+    private static long lastNpcScanTime = 0L;
+
     private static final ImString npcFilterQuery = new ImString(64);
     private static final ImString emoteSearchQuery = new ImString(64);
     private static final String[] MODE_LABELS = {"Loop", "Tahan (Freeze)", "Sekali (Once)"};
@@ -51,26 +54,40 @@ public final class TakashaStudioWindow {
     public static void render() {
         if (!isOpen.get()) return;
 
+        Minecraft mc = Minecraft.getInstance();
+        var config = net.sakura.weapons.client.config.TakashaMasterConfig.getInstance();
+        if (config.serverSafeMode && mc.getCurrentServer() != null && !mc.isLocalServer()) {
+            isOpen.set(false);
+            return;
+        }
+
         try {
             ImGui.setNextWindowSize(560f, 440f);
             if (ImGui.begin("Sakura Replay Studio (Flashback 26.2)###TakashaStudio", isOpen)) {
-                Minecraft mc = Minecraft.getInstance();
                 if (mc.level == null) {
                     ImGui.textUnformatted("Dunia replay belum dimuat.");
                     ImGui.end();
                     return;
                 }
 
-                // Scan nearby NPCs
+                // Scan nearby NPCs with 1-second throttle and 32 block radius
                 Entity cam = mc.getCameraEntity() != null ? mc.getCameraEntity() : mc.player;
-                AABB box = cam != null
-                    ? cam.getBoundingBox().inflate(256.0)
-                    : new AABB(-500, -64, -500, 500, 320, 500);
+                long now = System.currentTimeMillis();
+                if (now - lastNpcScanTime >= 1000L || cachedNearbyNpcs.isEmpty()) {
+                    lastNpcScanTime = now;
+                    cachedNearbyNpcs.clear();
+                    AABB box = cam != null
+                        ? cam.getBoundingBox().inflate(32.0)
+                        : new AABB(-32, -32, -32, 32, 32, 32);
 
-                List<TakashaNpcEntity> npcs = mc.level.getEntitiesOfClass(TakashaNpcEntity.class, box);
-                if (cam != null) {
-                    npcs.sort(Comparator.comparingDouble(e -> e.distanceToSqr(cam)));
+                    List<TakashaNpcEntity> found = mc.level.getEntitiesOfClass(TakashaNpcEntity.class, box);
+                    if (cam != null) {
+                        found.sort(Comparator.comparingDouble(e -> e.distanceToSqr(cam)));
+                    }
+                    cachedNearbyNpcs.addAll(found);
                 }
+
+                List<TakashaNpcEntity> npcs = cachedNearbyNpcs;
 
                 // Ensure a valid selected NPC if available
                 TakashaNpcEntity currentNpc = null;

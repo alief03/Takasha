@@ -82,6 +82,12 @@ public class EmotecraftCompat {
 
     private static volatile List<EmoteEntry> cachedEmotes = null;
     private static final java.util.concurrent.atomic.AtomicBoolean IS_DISK_SCANNING = new java.util.concurrent.atomic.AtomicBoolean(false);
+    private static final java.util.concurrent.ExecutorService SCAN_EXECUTOR = java.util.concurrent.Executors.newSingleThreadExecutor(r -> {
+        Thread t = new Thread(r, "Takasha-EmoteScanner");
+        t.setDaemon(true);
+        t.setPriority(Thread.MIN_PRIORITY);
+        return t;
+    });
 
     static {
         boolean loaded = FabricLoader.getInstance().isModLoaded("emotecraft");
@@ -1208,6 +1214,28 @@ public class EmotecraftCompat {
      * Auto-detects all available emotes. Returns immediately (<0.1ms) using in-memory
      * and built-in emotes, while disk scanning runs asynchronously in the background.
      */
+    /**
+     * Fast non-allocating emote count getter for GUI rendering loops.
+     */
+    public static int getDetectedEmoteCount() {
+        List<EmoteEntry> existing = cachedEmotes;
+        if (existing != null) {
+            return existing.size();
+        }
+        return 14;
+    }
+
+    /**
+     * Pre-warms emote cache asynchronously on client startup.
+     */
+    public static void prewarm() {
+        if (cachedEmotes == null) {
+            SCAN_EXECUTOR.submit(() -> {
+                getDetectedEmotes();
+            });
+        }
+    }
+
     public static List<EmoteEntry> getDetectedEmotes() {
         List<EmoteEntry> existing = cachedEmotes;
         if (existing != null) {
@@ -1227,7 +1255,7 @@ public class EmotecraftCompat {
         fastList.sort(Comparator.comparing(EmoteEntry::displayName, String.CASE_INSENSITIVE_ORDER));
         cachedEmotes = Collections.unmodifiableList(fastList);
 
-        // 3. Trigger non-blocking async disk scan
+        // 3. Trigger low-priority single-threaded disk scan
         triggerAsyncDiskScan();
 
         return cachedEmotes;
@@ -1323,7 +1351,7 @@ public class EmotecraftCompat {
 
     private static void triggerAsyncDiskScan() {
         if (IS_DISK_SCANNING.compareAndSet(false, true)) {
-            java.util.concurrent.CompletableFuture.runAsync(() -> {
+            SCAN_EXECUTOR.submit(() -> {
                 try {
                     Map<String, EmoteEntry> diskMap = new LinkedHashMap<>();
                     Set<String> seenKeys = new HashSet<>();
@@ -1331,51 +1359,34 @@ public class EmotecraftCompat {
                     // 1. In-memory first
                     loadInMemoryEmotes(diskMap, seenKeys);
 
-                    // 2. Scan standard .minecraft/emotes/ and ModrinthApp profile emotes directories
-                    List<Path> scanDirs = new ArrayList<>();
-                    Path gameEmotesDir = Minecraft.getInstance().gameDirectory.toPath().resolve("emotes");
-                    if (Files.exists(gameEmotesDir) && Files.isDirectory(gameEmotesDir)) {
-                        scanDirs.add(gameEmotesDir);
-                    }
-
+                    // 2. Scan standard .minecraft/emotes/ directory
                     try {
-                        String userHome = System.getProperty("user.home");
-                        if (userHome != null) {
-                            Path modrinthProfiles = Path.of(userHome, "AppData", "Roaming", "ModrinthApp", "profiles");
-                            if (Files.exists(modrinthProfiles) && Files.isDirectory(modrinthProfiles)) {
-                                try (Stream<Path> profStream = Files.list(modrinthProfiles)) {
-                                    profStream.filter(Files::isDirectory).forEach(p -> {
-                                        Path pEmotes = p.resolve("emotes");
-                                        if (Files.exists(pEmotes) && Files.isDirectory(pEmotes)) {
-                                            scanDirs.add(pEmotes);
+                        Minecraft mc = Minecraft.getInstance();
+                        if (mc != null && mc.gameDirectory != null) {
+                            Path gameEmotesDir = mc.gameDirectory.toPath().resolve("emotes");
+                            if (Files.exists(gameEmotesDir) && Files.isDirectory(gameEmotesDir)) {
+                                try (Stream<Path> stream = Files.list(gameEmotesDir)) {
+                                    stream.filter(Files::isRegularFile).forEach(path -> {
+                                        String fileName = path.getFileName().toString();
+                                        if (fileName.endsWith(".json")) {
+                                            try {
+                                                String content = Files.readString(path);
+                                                JsonObject json = JsonParser.parseString(content).getAsJsonObject();
+                                                String name = json.has("name") ? json.get("name").getAsString() : fileName.replace(".json", "");
+                                                String author = json.has("author") ? json.get("author").getAsString() : "";
+                                                String id = json.has("uuid") ? json.get("uuid").getAsString() : fileName.replace(".json", "");
+
+                                                addEmoteDedup(diskMap, seenKeys, new EmoteEntry(id, name, author, EMOTECRAFT_LOGO));
+                                            } catch (Throwable ignored) {}
+                                        } else if (fileName.endsWith(".emotecraft")) {
+                                            String base = fileName.replace(".emotecraft", "");
+                                            addEmoteDedup(diskMap, seenKeys, new EmoteEntry(base, formatDisplayName(base), "Emotecraft", EMOTECRAFT_LOGO));
                                         }
                                     });
                                 }
                             }
                         }
                     } catch (Throwable ignored) {}
-
-                    for (Path dir : scanDirs) {
-                        try (Stream<Path> stream = Files.walk(dir, 2)) {
-                            stream.filter(Files::isRegularFile).forEach(path -> {
-                                String fileName = path.getFileName().toString();
-                                if (fileName.endsWith(".json")) {
-                                    try {
-                                        String content = Files.readString(path);
-                                        JsonObject json = JsonParser.parseString(content).getAsJsonObject();
-                                        String name = json.has("name") ? json.get("name").getAsString() : fileName.replace(".json", "");
-                                        String author = json.has("author") ? json.get("author").getAsString() : "";
-                                        String id = json.has("uuid") ? json.get("uuid").getAsString() : fileName.replace(".json", "");
-
-                                        addEmoteDedup(diskMap, seenKeys, new EmoteEntry(id, name, author, EMOTECRAFT_LOGO));
-                                    } catch (Throwable ignored) {}
-                                } else if (fileName.endsWith(".emotecraft")) {
-                                    String base = fileName.replace(".emotecraft", "");
-                                    addEmoteDedup(diskMap, seenKeys, new EmoteEntry(base, formatDisplayName(base), "Emotecraft", EMOTECRAFT_LOGO));
-                                }
-                            });
-                        } catch (Throwable ignored) {}
-                    }
 
                     // 3. Built-in presets last
                     addBuiltinEmotes(diskMap, seenKeys);

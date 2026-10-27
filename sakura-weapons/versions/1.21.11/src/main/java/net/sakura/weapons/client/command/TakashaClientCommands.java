@@ -1,0 +1,266 @@
+package net.sakura.weapons.client.command;
+
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
+import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal;
+import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
+import net.sakura.weapons.client.config.TakashaMasterConfig;
+import net.sakura.weapons.client.config.TakashaNametagConfig;
+import net.sakura.weapons.client.gui.TakashaDashboardScreen;
+
+@Environment(EnvType.CLIENT)
+public class TakashaClientCommands {
+
+    public static void initialize() {
+        ClientCommandRegistrationCallback.EVENT.register((dispatcher, buildContext) -> {
+            dispatcher.register(literal("takasha")
+                .executes(context -> {
+                    openDashboard();
+                    return 1;
+                })
+                .then(literal("menu").executes(context -> {
+                    openDashboard();
+                    return 1;
+                }))
+                .then(literal("autofarm")
+                    .executes(context -> {
+                        var cfg = TakashaMasterConfig.getInstance();
+                        cfg.autoFarmEnabled = !cfg.autoFarmEnabled;
+                        cfg.save();
+                        context.getSource().sendFeedback(Component.literal(
+                            cfg.autoFarmEnabled ? "§a[Takasha] Auto Farm: AKTIF" : "§c[Takasha] Auto Farm: NONAKTIF"
+                        ));
+                        return 1;
+                    })
+                    .then(literal("toggle").executes(context -> {
+                        var cfg = TakashaMasterConfig.getInstance();
+                        cfg.autoFarmEnabled = !cfg.autoFarmEnabled;
+                        cfg.save();
+                        context.getSource().sendFeedback(Component.literal(
+                            cfg.autoFarmEnabled ? "§a[Takasha] Auto Farm: AKTIF" : "§c[Takasha] Auto Farm: NONAKTIF"
+                        ));
+                        return 1;
+                    }))
+                    .then(literal("on").executes(context -> {
+                        var cfg = TakashaMasterConfig.getInstance();
+                        cfg.autoFarmEnabled = true;
+                        cfg.save();
+                        context.getSource().sendFeedback(Component.literal("§a[Takasha] Auto Farm: AKTIF"));
+                        return 1;
+                    }))
+                    .then(literal("off").executes(context -> {
+                        var cfg = TakashaMasterConfig.getInstance();
+                        cfg.autoFarmEnabled = false;
+                        cfg.save();
+                        context.getSource().sendFeedback(Component.literal("§c[Takasha] Auto Farm: NONAKTIF"));
+                        return 1;
+                    }))
+                    .then(literal("status").executes(context -> {
+                        var cfg = TakashaMasterConfig.getInstance();
+                        context.getSource().sendFeedback(Component.literal(
+                            cfg.autoFarmEnabled ? "§a[Takasha] Auto Farm saat ini: AKTIF" : "§c[Takasha] Auto Farm saat ini: NONAKTIF"
+                        ));
+                        return 1;
+                    }))
+                )
+                .then(literal("autosell")
+                    .executes(context -> {
+                        var cfg = TakashaMasterConfig.getInstance();
+                        cfg.autoSellGuiOnFull = !cfg.autoSellGuiOnFull;
+                        cfg.save();
+                        context.getSource().sendFeedback(Component.literal(
+                            cfg.autoSellGuiOnFull ? "§a[Takasha] Auto SellGUI: AKTIF" : "§c[Takasha] Auto SellGUI: NONAKTIF"
+                        ));
+                        return 1;
+                    })
+                    .then(literal("toggle").executes(context -> {
+                        var cfg = TakashaMasterConfig.getInstance();
+                        cfg.autoSellGuiOnFull = !cfg.autoSellGuiOnFull;
+                        cfg.save();
+                        context.getSource().sendFeedback(Component.literal(
+                            cfg.autoSellGuiOnFull ? "§a[Takasha] Auto SellGUI: AKTIF" : "§c[Takasha] Auto SellGUI: NONAKTIF"
+                        ));
+                        return 1;
+                    }))
+                    .then(literal("on").executes(context -> {
+                        var cfg = TakashaMasterConfig.getInstance();
+                        cfg.autoSellGuiOnFull = true;
+                        cfg.save();
+                        context.getSource().sendFeedback(Component.literal("§a[Takasha] Auto SellGUI: AKTIF"));
+                        return 1;
+                    }))
+                    .then(literal("off").executes(context -> {
+                        var cfg = TakashaMasterConfig.getInstance();
+                        cfg.autoSellGuiOnFull = false;
+                        cfg.save();
+                        context.getSource().sendFeedback(Component.literal("§c[Takasha] Auto SellGUI: NONAKTIF"));
+                        return 1;
+                    }))
+                    .then(literal("status").executes(context -> {
+                        var cfg = TakashaMasterConfig.getInstance();
+                        context.getSource().sendFeedback(Component.literal(
+                            cfg.autoSellGuiOnFull ? "§a[Takasha] Auto SellGUI saat ini: AKTIF" : "§c[Takasha] Auto SellGUI saat ini: NONAKTIF"
+                        ));
+                        return 1;
+                    }))
+                )
+                .then(literal("autofish")
+                    .executes(context -> {
+                        var cfg = TakashaMasterConfig.getInstance();
+                        cfg.autoFishEnabled = !cfg.autoFishEnabled;
+                        cfg.save();
+                        context.getSource().sendFeedback(Component.literal(
+                            cfg.autoFishEnabled ? "§a[Takasha] Auto Fish: AKTIF" : "§c[Takasha] Auto Fish: NONAKTIF"
+                        ));
+                        return 1;
+                    })
+                    .then(literal("toggle").executes(context -> {
+                        var cfg = TakashaMasterConfig.getInstance();
+                        cfg.autoFishEnabled = !cfg.autoFishEnabled;
+                        cfg.save();
+                        context.getSource().sendFeedback(Component.literal(
+                            cfg.autoFishEnabled ? "§a[Takasha] Auto Fish: AKTIF" : "§c[Takasha] Auto Fish: NONAKTIF"
+                        ));
+                        return 1;
+                    }))
+                    .then(literal("on").executes(context -> {
+                        var cfg = TakashaMasterConfig.getInstance();
+                        cfg.autoFishEnabled = true;
+                        cfg.save();
+                        context.getSource().sendFeedback(Component.literal("§a[Takasha] Auto Fish: AKTIF"));
+                        return 1;
+                    }))
+                    .then(literal("off").executes(context -> {
+                        var cfg = TakashaMasterConfig.getInstance();
+                        cfg.autoFishEnabled = false;
+                        cfg.save();
+                        context.getSource().sendFeedback(Component.literal("§c[Takasha] Auto Fish: NONAKTIF"));
+                        return 1;
+                    }))
+                    .then(literal("status").executes(context -> {
+                        var cfg = TakashaMasterConfig.getInstance();
+                        context.getSource().sendFeedback(Component.literal(
+                            cfg.autoFishEnabled ? "§a[Takasha] Auto Fish saat ini: AKTIF" : "§c[Takasha] Auto Fish saat ini: NONAKTIF"
+                        ));
+                        return 1;
+                    }))
+                )
+                .then(literal("autokill")
+                    .executes(context -> {
+                        var cfg = TakashaMasterConfig.getInstance();
+                        cfg.autoKillEnabled = !cfg.autoKillEnabled;
+                        cfg.save();
+                        context.getSource().sendFeedback(Component.literal(
+                            cfg.autoKillEnabled ? "§a[Takasha] Auto Kill: AKTIF" : "§c[Takasha] Auto Kill: NONAKTIF"
+                        ));
+                        return 1;
+                    })
+                    .then(literal("toggle").executes(context -> {
+                        var cfg = TakashaMasterConfig.getInstance();
+                        cfg.autoKillEnabled = !cfg.autoKillEnabled;
+                        cfg.save();
+                        context.getSource().sendFeedback(Component.literal(
+                            cfg.autoKillEnabled ? "§a[Takasha] Auto Kill: AKTIF" : "§c[Takasha] Auto Kill: NONAKTIF"
+                        ));
+                        return 1;
+                    }))
+                    .then(literal("on").executes(context -> {
+                        var cfg = TakashaMasterConfig.getInstance();
+                        cfg.autoKillEnabled = true;
+                        cfg.save();
+                        context.getSource().sendFeedback(Component.literal("§a[Takasha] Auto Kill: AKTIF"));
+                        return 1;
+                    }))
+                    .then(literal("off").executes(context -> {
+                        var cfg = TakashaMasterConfig.getInstance();
+                        cfg.autoKillEnabled = false;
+                        cfg.save();
+                        context.getSource().sendFeedback(Component.literal("§c[Takasha] Auto Kill: NONAKTIF"));
+                        return 1;
+                    }))
+                    .then(literal("status").executes(context -> {
+                        var cfg = TakashaMasterConfig.getInstance();
+                        context.getSource().sendFeedback(Component.literal(
+                            cfg.autoKillEnabled ? "§a[Takasha] Auto Kill saat ini: AKTIF" : "§c[Takasha] Auto Kill saat ini: NONAKTIF"
+                        ));
+                        return 1;
+                    }))
+                )
+                .then(literal("autobow")
+                    .executes(context -> {
+                        var cfg = TakashaMasterConfig.getInstance();
+                        cfg.autoBowEnabled = !cfg.autoBowEnabled;
+                        cfg.save();
+                        context.getSource().sendFeedback(Component.literal(
+                            cfg.autoBowEnabled ? "§a[Takasha] Auto Bow: AKTIF" : "§c[Takasha] Auto Bow: NONAKTIF"
+                        ));
+                        return 1;
+                    })
+                    .then(literal("toggle").executes(context -> {
+                        var cfg = TakashaMasterConfig.getInstance();
+                        cfg.autoBowEnabled = !cfg.autoBowEnabled;
+                        cfg.save();
+                        context.getSource().sendFeedback(Component.literal(
+                            cfg.autoBowEnabled ? "§a[Takasha] Auto Bow: AKTIF" : "§c[Takasha] Auto Bow: NONAKTIF"
+                        ));
+                        return 1;
+                    }))
+                    .then(literal("on").executes(context -> {
+                        var cfg = TakashaMasterConfig.getInstance();
+                        cfg.autoBowEnabled = true;
+                        cfg.save();
+                        context.getSource().sendFeedback(Component.literal("§a[Takasha] Auto Bow: AKTIF"));
+                        return 1;
+                    }))
+                    .then(literal("off").executes(context -> {
+                        var cfg = TakashaMasterConfig.getInstance();
+                        cfg.autoBowEnabled = false;
+                        cfg.save();
+                        context.getSource().sendFeedback(Component.literal("§c[Takasha] Auto Bow: NONAKTIF"));
+                        return 1;
+                    }))
+                    .then(literal("status").executes(context -> {
+                        var cfg = TakashaMasterConfig.getInstance();
+                        context.getSource().sendFeedback(Component.literal(
+                            cfg.autoBowEnabled ? "§a[Takasha] Auto Bow saat ini: AKTIF" : "§c[Takasha] Auto Bow saat ini: NONAKTIF"
+                        ));
+                        return 1;
+                    }))
+                )
+                .then(literal("nametag")
+                    .executes(context -> {
+                        TakashaNametagConfig.toggle(context.getSource().getPlayer());
+                        return 1;
+                    })
+                    .then(literal("toggle").executes(context -> {
+                        TakashaNametagConfig.toggle(context.getSource().getPlayer());
+                        return 1;
+                    }))
+                    .then(literal("on").executes(context -> {
+                        TakashaNametagConfig.setPlayerNametagDisabled(false, context.getSource().getPlayer());
+                        return 1;
+                    }))
+                    .then(literal("off").executes(context -> {
+                        TakashaNametagConfig.setPlayerNametagDisabled(true, context.getSource().getPlayer());
+                        return 1;
+                    }))
+                    .then(literal("status").executes(context -> {
+                        boolean disabled = TakashaNametagConfig.isPlayerNametagDisabled();
+                        Component msg = disabled
+                            ? Component.translatable("message.sakura_weapons.nametag.disabled")
+                            : Component.translatable("message.sakura_weapons.nametag.enabled");
+                        context.getSource().sendFeedback(msg);
+                        return 1;
+                    }))
+                )
+            );
+        });
+    }
+
+    private static void openDashboard() {
+        Minecraft client = Minecraft.getInstance();
+        client.execute(() -> client.setScreen(new TakashaDashboardScreen(null)));
+    }
+}

@@ -16,12 +16,12 @@ public class TakashaFortuneReshaper {
 
     private static volatile TakashaFortuneReshaper INSTANCE;
 
-    private static final Pattern FORTUNE_OR_SKILL_PATTERN = Pattern.compile(
-            "(?i)(auraskills|farming|double\\s*drop|triple\\s*drop|fortune\\s*proc|proc!|panen\\s*ganda|xp\\b|\\+\\d+\\s*(xp|exp))"
+    private static final Pattern FORTUNE_OR_HARVEST_PATTERN = Pattern.compile(
+            "(?i)(double\\s*drop|triple\\s*drop|fortune\\s*proc|\\bproc!|panen\\s*ganda)"
     );
 
-    private static final Pattern MULTIPLIER_PATTERN = Pattern.compile("(?i)(x[2-9]|\\+\\d+)");
-    private static final Pattern XP_PATTERN = Pattern.compile("(?i)(\\+\\d+\\s*(xp|exp))");
+    private static final Pattern MULTIPLIER_PATTERN = Pattern.compile("(?i)(x[2-9]|\\+[2-9]x|\\b[2-9]x\\b)");
+    private static final Pattern XP_PATTERN = Pattern.compile("(?i)(\\+\\d+(\\.\\d+)?\\s*(xp|exp))");
 
     public static TakashaFortuneReshaper getInstance() {
         if (INSTANCE == null) {
@@ -49,8 +49,15 @@ public class TakashaFortuneReshaper {
             return false;
         }
 
-        if (!FORTUNE_OR_SKILL_PATTERN.matcher(raw).find()) {
-            return false; // Not a fortune / skill harvest proc
+        // Never intercept pure AuraSkills / RPG skill notifications
+        if (raw.contains("AuraSkills") || raw.contains("Foraging") || raw.contains("Mining") ||
+            raw.contains("Farming") || raw.contains("Combat") || raw.contains("Archery") ||
+            raw.contains("Agility") || raw.contains("XP") || raw.contains("Exp")) {
+            return false;
+        }
+
+        if (!FORTUNE_OR_HARVEST_PATTERN.matcher(raw).find()) {
+            return false; // Not a fortune / harvest proc
         }
 
         Minecraft client = Minecraft.getInstance();

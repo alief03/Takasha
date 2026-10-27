@@ -13,7 +13,6 @@ import net.minecraft.world.entity.decoration.ItemFrame;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 import net.sakura.weapons.SakuraWeaponsMod;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -40,7 +39,7 @@ public abstract class ItemFrameInvisibilityMixin extends HangingEntity {
     }
 
     @Inject(method = "interact", at = @At("HEAD"), cancellable = true)
-    private void sakura$handleFrameInteraction(Player player, InteractionHand hand, Vec3 hitPos, CallbackInfoReturnable<InteractionResult> cir) {
+    private void sakura$handleFrameInteraction(Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
         ItemStack held = player.getItemInHand(hand);
 
         // 1. Feature: Toggle Invisibility (Sneak + Empty Hand on frame with item)

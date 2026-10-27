@@ -1,0 +1,348 @@
+========================================================================================
+   PANDUAN PENGUJIAN FITUR UPDATE TAKASHA-RPG (VERSI 1.2.0+26.2)
+   100% GUI PARITY ADVANCEDENCHANTMENTS, VILLAGER TRADES & WORLD LOOT
+========================================================================================
+
+File Build Siap Uji:
+- Mod File : Hasil mod/Takasha-RPG-1.2.0+26.2.jar
+- Minecraft: 1.21.4 / 26.2 (Fabric Loader)
+- Java     : 25
+
+Dokumentasi ini KHUSUS memuat prosedur pengujian untuk pembaruan versi v1.2.0:
+1. Pengujian Enchanter Menu 18-Slot & Dialog Konfirmasi EXP (/enchanter)
+2. Pengujian Tinkerer Menu 54-Slot Dual-Column & Daur Ulang (/tinkerer atau /tinker)
+3. Pengujian Alchemist Menu 27-Slot Fusi & Upgrade (/alchemist)
+4. Pengujian Perdagangan Penduduk Desa & Pedagang Kelana (Villager & Wandering Trader)
+5. Pengujian Injeksi Loot Peti Dungeon & Struktur Alam Liar (World Loot Modifier)
+
+----------------------------------------------------------------------------------------
+1. PENGUJIAN ENCHANTER MENU 18-SLOT & EXP CONFIRMATION DIALOG (/enchanter)
+----------------------------------------------------------------------------------------
+Tujuan:
+- Memastikan menu Enchanter memiliki layout 18-slot (2 baris x 9 kolom) identik dengan server sumber.
+- Memastikan 9 Tier Buku Misteri (Simple s.d. Mastery) hanya dapat dibeli dengan EXP Points murni.
+- Memastikan tombol pintas Tinkerer (slot 9) dan Alchemist (slot 17) berfungsi semestinya.
+- Memastikan Confirmation Inventory 9-slot terbuka saat buku diklik dan perhitungan EXP akurat.
+
+Langkah Pengujian:
+1. Masuk ke dunia Singleplayer dan berikan EXP ke diri sendiri untuk pengujian:
+   /experience add @s 50 levels
+2. Ketik perintah:
+   /enchanter
+3. Periksa tampilan GUI yang terbuka:
+   - Judul menu: "Server Enchanter"
+   - Ukuran menu: 18 slot (2 baris x 9 kolom).
+   - Seluruh slot kosong diisi pembatas abu-abu (Gray Stained Glass Pane).
+   - Terdapat 9 buku misteri dengan tier berjenjang:
+     * Simple Mystery Book    (Biaya: 50 EXP Points)
+     * Unique Mystery Book    (Biaya: 100 EXP Points)
+     * Elite Mystery Book     (Biaya: 250 EXP Points)
+     * Ultimate Mystery Book  (Biaya: 500 EXP Points)
+     * Legendary Mystery Book (Biaya: 1.000 EXP Points)
+     * Fabled Mystery Book    (Biaya: 1.750 EXP Points)
+     * Heroic Mystery Book    (Biaya: 2.500 EXP Points)
+     * Soul Mystery Book      (Biaya: 3.500 EXP Points)
+     * Mastery Mystery Book   (Biaya: 5.000 EXP Points)
+   - Slot 9 (kiri bawah): Landasan Anvil berlabel "Tinkerer" -> klik untuk langsung berpindah ke menu Tinkerer.
+   - Slot 17 (kanan bawah): End Portal Frame berlabel "Alchemist" -> klik untuk langsung berpindah ke menu Alchemist.
+4. Uji Pembelian & Dialog Konfirmasi:
+   - Klik salah satu buku (misal: "Simple Mystery Book").
+   - GUI beralih ke jendela konfirmasi 9-slot ("Confirmation Inventory"):
+     * Slot 0 s.d. 3: Kaca Hijau (Lime Stained Glass Pane) berlabel "Confirm Purchase".
+     * Slot 4 (tengah): Menampilkan preview buku misteri yang akan dibeli.
+     * Slot 5 s.d. 8: Kaca Merah (Red Stained Glass Pane) berlabel "Cancel Purchase".
+   - Klik salah satu slot kaca merah (Cancel):
+     * Dialog menutup dan pemain kembali ke menu utama Enchanter tanpa pengurangan EXP.
+   - Klik kembali buku misteri lalu klik salah satu slot kaca hijau (Confirm):
+     * EXP points pemain terpotong sebesar biaya buku (50 EXP).
+     * Buku misteri masuk ke inventori pemain.
+     * Terdengar efek suara level up ("entity.player.levelup").
+5. Uji Pembelian Saat EXP Tidak Cukup:
+   - Kosongkan EXP pemain: /experience set @s 0 points
+   - Buka /enchanter dan klik buku apa saja -> klik Confirm.
+   - Muncul peringatan chat merah: "EXP kamu tidak cukup untuk membeli buku ini!" dan terdengar efek suara gagal.
+
+----------------------------------------------------------------------------------------
+2. PENGUJIAN TINKERER MENU 54-SLOT DUAL-COLUMN RECYCLE (/tinkerer atau /tinker)
+----------------------------------------------------------------------------------------
+Tujuan:
+- Memastikan GUI Tinkerer berukuran 54 slot dengan pembagi kolom tengah (Splitter).
+- Memastikan deposit item di sisi kiri (23 slot) langsung menghasilkan penawaran di sisi kanan (23 slot).
+- Memastikan buku custom ditukar dengan Dust (Mystery/Magic/Secret) dan gear bertuah ditukar dengan Botol Pengalaman.
+- Memastikan auto-refund aman saat GUI ditutup sebelum transaksi diterima.
+
+Langkah Pengujian:
+1. Dapatkan buku custom dan perlengkapan untuk pengujian:
+   /ae give @s simple
+   /ae give @s legendary
+   /give @s diamond_sword
+2. Buka menu Tinkerer:
+   /tinkerer (atau /tinker)
+3. Periksa tampilan GUI yang terbuka:
+   - Judul menu: "You                   Tinkerer"
+   - Ukuran: 54 slot (6 baris x 9 kolom).
+   - Kolom tengah (slot 4, 13, 22, 31, 40, 49) dilapisi kaca abu-abu dan kaca merah sebagai pembatas.
+   - Sisi kiri (23 slot) adalah area deposit item pemain.
+   - Sisi kanan (23 slot) adalah area penawaran otomatis Tinkerer.
+   - Slot 0 (kiri atas): Tombol status awal berupa kaca merah berlabel "Trade Status: Deposit items to trade".
+   - Slot 8 (kanan atas): Ikon informasi Tinkerer.
+4. Uji Penukaran Buku Custom:
+   - Taruh buku custom di salah satu slot sisi kiri (misal slot 1).
+   - Perhatikan sisi kanan (slot 7) seketika terisi otomatis dengan penawaran Dust (Magic Dust atau Secret Dust).
+   - Tombol Slot 0 seketika berubah menjadi kaca hijau berlabel "Accept Trade".
+   - Klik tombol Slot 0 (Accept):
+     * Buku di sisi kiri lenyap.
+     * Item Dust di sisi kanan masuk ke inventori pemain.
+     * Terdengar suara landasan tempa ("block.anvil.use").
+5. Uji Daur Ulang Senjata/Armor:
+   - Pasang enchantment pada pedang diamond, lalu taruh di sisi kiri Tinkerer.
+   - Perhatikan sisi kanan terisi otomatis dengan Botol Pengalaman (Experience Bottle).
+   - Klik Accept di Slot 0 -> Botol Pengalaman masuk ke inventori pemain.
+6. Uji Auto-Refund (Anti-Item Hilang):
+   - Taruh buku atau senjata di sisi kiri Tinkerer.
+   - Jangan klik tombol Accept, langsung tekan tombol ESC untuk menutup menu.
+   - Periksa inventori pemain -> seluruh item deposit kembali utuh ke tas pemain tanpa hilang.
+
+----------------------------------------------------------------------------------------
+3. PENGUJIAN ALCHEMIST MENU 27-SLOT FUSION & UPGRADE (/alchemist)
+----------------------------------------------------------------------------------------
+Tujuan:
+- Memastikan GUI Alchemist berukuran 27-slot (3 baris x 9 kolom) berlatar kaca hitam.
+- Memastikan slot 3 (Input 1), slot 5 (Input 2), slot 13 (Output Preview), dan slot 22 (Tombol Fusi) berfungsi presisi.
+- Memastikan seluruh resep fusi autentik berjalan: fusi buku naik level, fusi Magic Dust, fusi Slot Increaser, dan fusi White Scroll menjadi Holy Scroll.
+- Memastikan auto-refund bekerja saat GUI ditutup.
+
+Langkah Pengujian:
+1. Dapatkan bahan-bahan pengujian:
+   /give @s takasha_rpg:magic_dust 4
+   /give @s takasha_rpg:white_scroll 2
+   /give @s takasha_rpg:slot_increaser_1 2
+   /ae book overload 1 100 0
+2. Buka menu Alchemist:
+   /alchemist (atau /alchem)
+3. Periksa tampilan GUI yang terbuka:
+   - Judul menu: "Alchemist"
+   - Ukuran: 27 slot (3 baris x 9 kolom) dengan bingkai kaca hitam.
+   - Slot 3: Slot Input 1 (ditandai kaca oranye saat kosong).
+   - Slot 5: Slot Input 2 (ditandai kaca oranye saat kosong).
+   - Slot 13 (tengah baris ke-2): Slot Output Preview (ditandai kaca merah saat belum ada resep valid).
+   - Slot 22 (tengah baris ke-3): Tombol Transaksi & Keterangan Biaya EXP.
+4. Uji Resep Fusi Buku (Naik Level):
+   - Dapatkan 2 buku sihir bertingkat sama (misal 2 buah buku Overload level 1).
+   - Letakkan satu buku di slot 3 dan satu buku di slot 5.
+   - Perhatikan slot 13 seketika menampilkan preview buku hasil fusi: Overload level 2!
+   - Slot 22 menampilkan biaya EXP yang dibutuhkan (misal: 10 EXP).
+   - Klik slot 22 (Exchange):
+     * Kedua buku di slot 3 dan 5 terpakai.
+     * Buku Overload level 2 masuk ke inventori pemain.
+     * EXP pemain terpotong.
+5. Uji Resep Fusi Magic Dust:
+   - Letakkan 2x Magic Dust di slot 3 dan slot 5.
+   - Slot 13 menampilkan Magic Dust dengan persentase sukses gabungan yang lebih tinggi.
+   - Klik slot 22 -> Magic Dust ter-upgrade berhasil diterima pemain.
+6. Uji Resep Fusi White Scroll -> Holy Scroll:
+   - Letakkan 2x White Scroll di slot 3 dan slot 5.
+   - Slot 13 menampilkan Holy Scroll!
+   - Klik slot 22 -> Holy Scroll (gulungan proteksi tertinggi) berhasil diciptakan.
+7. Uji Resep Fusi Slot Increaser:
+   - Letakkan 2x Slot Increaser I di slot 3 dan 5 -> menghasilkan Slot Increaser II.
+   - Letakkan 2x Slot Increaser II di slot 3 dan 5 -> menghasilkan Slot Increaser III.
+8. Uji Auto-Refund:
+   - Taruh item di slot 3 dan slot 5, lalu tekan ESC.
+   - Seluruh item input kembali utuh ke inventori pemain.
+
+----------------------------------------------------------------------------------------
+4. PENGUJIAN PERDAGANGAN PENDUDUK DESA & PEDAGANG KELANA (VILLAGER TRADES)
+----------------------------------------------------------------------------------------
+Tujuan:
+- Memastikan item AdvancedEnchantments dan RPG dapat diperoleh secara natural lewat trading dengan Villager dan Wandering Trader sesuai lootConfiguration.yml.
+
+Langkah Pengujian:
+1. Uji Pedagang Librarian (Pustakawan):
+   - Spawn Librarian level 1:
+     /summon villager ~ ~ ~ {VillagerData:{profession:"minecraft:librarian",level:1}}
+     * Klik kanan villager -> verifikasi ada penawaran Secret Dust (4 Emeralds) & Magic Dust (8 Emeralds).
+   - Spawn Librarian level 2:
+     /summon villager ~ ~ ~ {VillagerData:{profession:"minecraft:librarian",level:2}}
+     * Verifikasi ada penawaran Buku Custom Simple & Unique (Emeralds + Book).
+   - Spawn Librarian level 3:
+     /summon villager ~ ~ ~ {VillagerData:{profession:"minecraft:librarian",level:3}}
+     * Verifikasi ada penawaran Buku Custom Elite & Ultimate, serta White Scroll (20 Emeralds).
+   - Spawn Librarian level 4:
+     /summon villager ~ ~ ~ {VillagerData:{profession:"minecraft:librarian",level:4}}
+     * Verifikasi ada penawaran Buku Legendary & Fabled, Transmute Scroll (28 Emeralds), dan Black Scroll (32 Emeralds).
+   - Spawn Librarian level 5 (Master):
+     /summon villager ~ ~ ~ {VillagerData:{profession:"minecraft:librarian",level:5}}
+     * Verifikasi ada penawaran Buku Heroic & Mastery, Randomization Scroll (40 Emeralds), Holy Scroll (48 Emeralds), dan Slot Increaser I (36 Emeralds).
+2. Uji Pedagang Cleric (Klerus):
+   - Spawn Cleric level 3:
+     /summon villager ~ ~ ~ {VillagerData:{profession:"minecraft:cleric",level:3}}
+     * Verifikasi ada penawaran Soul Gem (28 Emeralds).
+   - Spawn Cleric level 4 & 5:
+     /summon villager ~ ~ ~ {VillagerData:{profession:"minecraft:cleric",level:4}} -> Holy Scroll (45 Emeralds).
+     /summon villager ~ ~ ~ {VillagerData:{profession:"minecraft:cleric",level:5}} -> Slot Increaser II (64 Emeralds).
+3. Uji Pedagang Armorer, Weaponsmith, dan Toolsmith (Level 5):
+   - Armorer Level 5:
+     /summon villager ~ ~ ~ {VillagerData:{profession:"minecraft:armorer",level:5}}
+     * Verifikasi penawaran Slot Increaser I (32 Emeralds) dan Armor Enchantment Orb (48 Emeralds).
+   - Weaponsmith Level 5:
+     /summon villager ~ ~ ~ {VillagerData:{profession:"minecraft:weaponsmith",level:5}}
+     * Verifikasi penawaran Stat Tracker Mobs (28 Emeralds), Stat Tracker Player Kills (32 Emeralds), dan Weapon Enchantment Orb (48 Emeralds).
+   - Toolsmith Level 5:
+     /summon villager ~ ~ ~ {VillagerData:{profession:"minecraft:toolsmith",level:5}}
+     * Verifikasi penawaran Stat Tracker Blocks (24 Emeralds), Stat Tracker Fish (24 Emeralds), dan Tool Enchantment Orb (48 Emeralds).
+4. Uji Wandering Trader (Pedagang Kelana):
+   - Spawn Wandering Trader:
+     /summon wandering_trader ~ ~ ~
+   - Klik kanan pedagang kelana -> periksa daftar penawaran khusus:
+     * Transmute Scroll (25 Emeralds)
+     * Randomization Scroll (30 Emeralds)
+     * White Scroll (35 Emeralds)
+     * Holy Scroll (50 Emeralds)
+     * Soul Gem (40 Emeralds)
+
+----------------------------------------------------------------------------------------
+5. PENGUJIAN INJEKSI LOOT DUNGEON & STRUKTUR ALAM LIAR (WORLD LOOT MODIFIER)
+----------------------------------------------------------------------------------------
+Tujuan:
+- Memastikan peti-peti dungeon dan reruntuhan alam liar secara natural memunculkan item RPG dan AdvancedEnchantments saat dieksplorasi.
+
+Langkah Pengujian:
+1. Uji Loot Dungeon Standar:
+   - Ketik:
+     /loot give @s loot minecraft:chests/simple_dungeon
+   - Periksa inventori yang diterima:
+     * Muncul Koin RPG, Mystery Dust, Magic Dust, Secret Dust, White Scroll, Transmute Scroll, Randomization Scroll, Slot Increaser I, atau Buku Custom Simple / Unique.
+2. Uji Loot Reruntuhan Piramida Gurun:
+   - Ketik:
+     /loot give @s loot minecraft:chests/desert_pyramid
+   - Periksa inventori:
+     * Muncul Takasha Gem, Black Scroll, Slot Increaser II, Soul Gem, Buku Custom Elite / Ultimate / Legendary / Fabled, atau Orb Senjata/Armor/Alat.
+3. Uji Loot Reruntuhan Kota Kuno (Ancient City):
+   - Ketik:
+     /loot give @s loot minecraft:chests/ancient_city
+   - Periksa inventori:
+     * Muncul Mythic Loot: Holy Scroll, Slot Increaser III, Buku Custom Heroic / Soul / Mastery, atau salah satu dari 5 Senjata Kosmik Legendaris (Dimensional Traveller, Koth Sword, Koth Axe, Phantom Scythe, Supreme Weapon).
+4. Uji Loot Kapal End (End City Treasure):
+   - Ketik:
+     /loot give @s loot minecraft:chests/end_city_treasure
+   - Periksa inventori:
+     * Muncul item mythic tingkat tinggi (Holy Scroll, Slot Increaser III, Senjata Kosmik, dan Ancient Keystone).
+
+----------------------------------------------------------------------------------------
+6. PENGUJIAN PERBAIKAN BUKU SIHIR, TERJEMAHAN INDONESIA, RATE ACAK & DRAG & DROP
+----------------------------------------------------------------------------------------
+Tujuan:
+- Memastikan Buku Sihir tidak berlabel "null" dan menampilkan judul serta tier berwarna secara dinamis.
+- Memastikan 336 Enchantment memiliki deskripsi efek berbahasa Indonesia lengkap tanpa artefak simbol.
+- Memastikan tingkat keberhasilan (Success Rate) dan kehancuran (Destroy Rate) teracak (RNG) sesuai tier buku.
+- Memastikan Magic Dust memiliki bonus persentase acak (+5% s/d +20%).
+- Memastikan mekanisme pemasangan Enchantment dan utilitas berfungsi melalui Drag & Drop di inventaris, mendukung Klik Kiri (PRIMARY) maupun Klik Kanan (SECONDARY), serta dua arah (Buku ke Gear atau Gear ke Buku).
+
+Langkah Pengujian:
+1. Uji Buku Sihir & Pembukaan Acak (Reveal):
+   - Ambil buku misteri:
+     /ae give @s simple
+     /ae give @s legendary
+     /ae give @s mastery
+   - Periksa saat masih di tangan:
+     * Label menampilkan nama tier yang jelas (misal: "Buku Sihir Simple (Belum Terbuka)"), BUKAN null atau raw ID.
+     * Tooltip berisi informasi tier dan petunjuk "Klik Kanan di Tangan untuk Membuka".
+   - Klik-Kanan di tangan untuk membuka buku:
+     * Muncul efek partikel sihir dan suara level-up.
+     * Buku berubah menjadi Revealed Custom Book dengan nama enchantment dan angka romawi (contoh: "§6§lRage III" atau "§c§lOverload II").
+     * Periksa Rate Sukses dan Rate Hancur: Angkanya teracak (RNG) sesuai tier (contoh: Sukses 40-90%, Hancur 0-45%).
+     * Periksa deskripsi efek: Teks efek telah diterjemahkan ke Bahasa Indonesia yang rapi.
+     * Periksa kategori "Diterapkan Ke": Menampilkan nama alat/senjata bahasa Indonesia (contoh: "Pedang / Kapak", "Semua Armor").
+
+2. Uji Pemasangan Drag & Drop (Dual-Click & Dua Arah):
+   - Siapkan Pedang Diamond di inventaris: /give @s diamond_sword
+   - Siapkan buku custom yang sudah terbuka (misal: buku pedang).
+   - Cara 1 (Buku ke Senjata):
+     * Ambil buku dengan kursor (bisa Klik Kiri atau Klik Kanan).
+     * Klik ke atas slot Pedang Diamond.
+     * Jika sukses: Buku terkonsumsi, terdengar suara level up, pesan chat hijau muncul, dan pada Pedang muncul lore enchantment serta status slot (contoh: "Custom Enchant Slots: 1/10").
+   - Cara 2 (Senjata ke Buku):
+     * Ambil Pedang Diamond dengan kursor.
+     * Klik ke atas slot Buku Sihir di inventaris.
+     * Enchantment otomatis terpasang ke pedang dengan hasil identik.
+
+3. Uji Magic Dust (Bonus Acak & Drag & Drop):
+   - Dapatkan Magic Dust: /give @s takasha_rpg:magic_dust 5
+   - Perhatikan nama item: Magic Dust menampilkan bonus persentase acak, misal: "Magic Dust (+12%)".
+   - Seret Magic Dust ke atas Buku Sihir di inventaris (atau seret Buku ke slot Magic Dust):
+     * Success Rate pada buku meningkat sesuai nilai bonus dust (maksimal cap 100%).
+     * 1 Magic Dust terpakai dan terdengar suara orb pickup.
+
+4. Uji Drag & Drop Scroll & Orbs:
+   - White Scroll: Seret White Scroll ke atas perlengkapan -> status "PROTECTED" muncul di lore item.
+   - Holy Scroll: Seret Holy Scroll ke atas perlengkapan -> status "*HOLY* PROTECTED" muncul di lore item.
+   - Black Scroll: Seret Black Scroll ke atas perlengkapan yang memiliki custom enchant -> 1 enchant dicabut dan kembali menjadi buku 100% sukses di inventaris.
+   - Randomization Scroll: Seret ke atas Buku Sihir -> Success Rate dan Destroy Rate buku diacak ulang.
+   - Slot Increaser / Weapon Orb: Seret ke senjata -> batas kapasitas slot bertambah (+1 Slot, hingga maksimal 20).
+
+5. Uji Drag & Drop Stat Tracker:
+   - Ambil Stat Tracker: /give @s takasha_rpg:stat_tracker_mobs
+   - Seret ke atas Senjata di inventaris -> Pada lore senjata muncul "Mob Kills: 0".
+   - Kalahkan monster dengan senjata tersebut -> angka Mob Kills otomatis bertambah!
+
+========================================================================================
+7. PANDUAN PENGUJIAN ADVANCED DUNGEON ARENA & PERMADEATH (VERSI 1.6.0+26.2)
+========================================================================================
+Tujuan:
+- Memastikan sistem kurungan fisik Tinted Glass (R=20, H=8) terpasang sempurna tanpa griefing dunia.
+- Memastikan pemanggilan arena dengan Dungeon Rift Keystone (Common, Nightmare, Sakura Boss).
+- Memastikan LevelledMobs scaling (Lvl 1 - 1000) dan mob anti-terbakar matahari.
+- Memastikan sistem permadeath: Gugur Wave 1 = 0 hadiah (hangus total), Gugur Wave 2+ = Peti Sisa di tengah, Menang Wave 5 = Peti Kemenangan Utama.
+- Memastikan probabilitas drop bahan keystone dari hostile mob (Fragment 5%, Thread 3%, Essence 1.5%).
+
+Langkah Pengujian:
+
+1. Uji Pemberian Keystone:
+   /dungeon givekeystone @s common 1
+   /dungeon givekeystone @s nightmare 1
+   /dungeon givekeystone @s sakura_boss 1
+   - Periksa inventori: Item Dungeon Rift Keystone muncul dengan tekstur resmi Fuben dan tooltip level/gelombang yang informatif.
+
+2. Uji Memulai Arena via Keystone:
+   - Pegang Dungeon Rift Keystone di tangan utama.
+   - Klik Kanan di area terbuka.
+   - Periksa in-world:
+     * Dinding kurungan fisik silinder Tinted Glass (Radius 20 blok, Tinggi 8 blok) muncul seketika mengurung pemain.
+     * Atap pelindung Tinted Glass mencegah mob undead terbakar sinar matahari.
+     * Title besar & subtitle muncul di layar mengumumkan dimulainya gelombang 1.
+     * Bossbar aktif di bagian atas layar menunjukkan sisa musuh dan timer gelombang.
+     * Keystone berkurang 1 dari inventaris.
+
+3. Uji Mob & LevelledMobs Scaling:
+   - Mob dungeon muncul di dalam arena membawa level eksplisit di atas kepala:
+     * Common: Lvl 100 s.d. 300
+     * Nightmare: Lvl 350 s.d. 750
+     * Sakura Boss: Lvl 600 s.d. 1000
+   - Mob zombie/skeleton tidak terbakar di siang hari berkat atap pelindung dan efek Fire Resistance.
+   - Mob memiliki AI agresif yang langsung mengejar penantang tanpa berkeliaran diam.
+
+4. Uji Mekanisme Permadeath & Peti Hadiah Titik Tengah:
+   - Skenario A (Gugur di Gelombang 1):
+     * Biarkan mob mengalahkan pemain di Wave 1 (atau ketik /kill).
+     * Hasil: Sesi gagal total! Seluruh blok arena di-rollback bersih. Tidak ada peti hadiah yang dimunculkan sama sekali.
+   - Skenario B (Gugur di Gelombang 2 ke atas):
+     * Kalahkan semua musuh di Wave 1 hingga masuk ke Wave 2.
+     * Di Wave 2, ketik `/dungeon leave` (menyerah) atau gugur.
+     * Hasil: Seluruh arena Tinted Glass di-rollback kembali ke blok semula, KECUALI titik tengah tempat Peti Sisa (Remains Chest) fisik muncul memuat hadiah dari Wave 1 yang telah diselesaikan.
+   - Skenario C (Kemenangan Penuh Wave 5):
+     * Selesaikan seluruh 5 gelombang dan kalahkan Boss Wave 5 (Lvl 300 / 750 / 1000).
+     * Hasil: Title VICTORY spektakuler muncul, suara perayaan terdengar, seluruh arena pulih kembali, dan Peti Kemenangan Utama (Victory Chest) muncul di titik tengah berisi koin melimpah, dust, scroll, dan peluang item langka (Ancient Keystone, Mystery Books, Armor/Senjata Supreme/Koth/Yeti/Yijki/Dimensional Traveller).
+
+5. Uji Perintah Operator:
+   - /dungeon info : Melihat status arena, tier, gelombang aktif, koordinat pusat, dan UUID challenger.
+   - /dungeon setstage 5 : Memaksa arena langsung melompat ke Wave 5 (Boss Wave).
+   - /dungeon rollback : Emergency manual rollback untuk memulihkan seluruh blok arena seketika.
+   - /dungeon stop false : Menghentikan arena secara paksa tanpa kemenangan.
+   - /dungeon reload : Memuat ulang konfigurasi dungeon arena.
+
+========================================================================================
+AKHIR DARI PANDUAN PENGUJIAN FITUR UPDATE v1.6.0+26.2
+========================================================================================
+
+

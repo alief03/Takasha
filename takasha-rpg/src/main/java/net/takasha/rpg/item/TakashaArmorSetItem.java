@@ -38,9 +38,14 @@ public class TakashaArmorSetItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> consumer, TooltipFlag flag) {
         super.appendHoverText(stack, context, display, consumer, flag);
-        consumer.accept(tier.getBadge());
-        consumer.accept(Component.literal("§6Set: §e" + setName + " Armor").withStyle(ChatFormatting.GOLD));
-        consumer.accept(Component.literal("§7Bonus Set Penuh (4/4):").withStyle(ChatFormatting.DARK_AQUA));
-        consumer.accept(Component.literal("  §f" + setBonusDescription).withStyle(ChatFormatting.WHITE));
+
+        java.util.List<String> bonusLines = new java.util.ArrayList<>();
+        bonusLines.add(setBonusDescription);
+
+        net.takasha.rpg.util.RpgTooltipBuilder.create(setName, tier)
+                .category("ARMOR SET")
+                .setBonus(setName, 4, bonusLines)
+                .affordance("Koleksi", "Ketik /armorsets untuk preview set bonus")
+                .build(consumer);
     }
 }

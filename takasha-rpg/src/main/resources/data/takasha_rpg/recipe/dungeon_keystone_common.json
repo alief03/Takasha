@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "CBC",
+    "BEB",
+    "CBC"
+  ],
+  "key": {
+    "C": "takasha_rpg:dungeon_core_fragment",
+    "B": "takasha_rpg:abyssal_binding_thread",
+    "E": "takasha_rpg:runic_essence"
+  },
+  "result": {
+    "id": "takasha_rpg:dungeon_keystone_common",
+    "count": 1
+  }
+}
