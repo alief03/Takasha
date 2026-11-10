@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <b>Ekosistem Mod Fabric Multi-Module Terpadu untuk Minecraft Java Edition: Sistem Manekin Sinematik, Otomasi Bertingkat (Kaizen & Vanilla), Mesin RPG Tanpa Spigot (AuraSkills & AdvancedEnchantments), Dungeon Rift Arena, dan Pendamping Touhou Little Maid dengan Integrasi YSM.</b>
+  <b>Ekosistem Mod Fabric Multi-Module Terpadu untuk Minecraft Java Edition: Sistem Manekin Sinematik, Otomasi Bertingkat (Kaizen & Vanilla), Mesin RPG Tanpa Spigot (AuraSkills & AdvancedEnchantments), dan Dungeon Rift Arena.</b>
 </p>
 
 <p align="center">
@@ -39,18 +39,12 @@
   - [3.5 Boneka Latih Tempur (Damage Dummy) & Status SubGUI DoT](#35-boneka-latih-tempur-damage-dummy--status-subgui-dot)
   - [3.6 Ekonomi Dinamis, Toko Harian Berputar & `/sellgui`](#36-ekonomi-dinamis-toko-harian-berputar--sellgui)
   - [3.7 Event Dunia Berkala & Grimoire 16 Gelar Kedaulatan](#37-event-dunia-berkala--grimoire-16-gelar-kedaulatan)
-- [4. Modul 3: Touhou Little Maid Companion (`touhou-little-maid`)](#4-modul-3-touhou-little-maid-companion-touhou-little-maid)
-  - [4.1 Universal Bedrock Geometry & Animation Engine](#41-universal-bedrock-geometry--animation-engine)
-  - [4.2 Integrasi Yes Steve Model (YSM)](#42-integrasi-yes-steve-model-ysm)
-  - [4.3 Kecerdasan Pendamping (Taming, Auto-Farm, Auto-Fish & Inventory 36-Slot)](#43-kecerdasan-pendamping-taming-auto-farm-auto-fish--inventory-36-slot)
-  - [4.4 Interaksi Kasih Sayang, Ciuman & Buff Maid's Prayer](#44-interaksi-kasih-sayang-ciuman--buff-maids-prayer)
-  - [4.5 SubScreen GUI 3D Model Selector & Instant Hot-Reload](#45-subscreen-gui-3d-model-selector--instant-hot-reload)
-- [5. Modul 4: Takasha RPG Web Companion (`takasha-rpg-web`)](#5-modul-4-takasha-rpg-web-companion-takasha-rpg-web)
-- [6. Struktur Direktori Repositori](#6-struktur-direktori-repositori)
-- [7. Panduan Instalasi & Penggunaan](#7-panduan-instalasi--penggunaan)
-- [8. Panduan Pengembang & Kompilasi (Build Guide)](#8-panduan-pengembang--kompilasi-build-guide)
-- [9. Riwayat Rilis & Semantic Versioning](#9-riwayat-rilis--semantic-versioning)
-- [10. Lisensi & Kredit](#10-lisensi--kredit)
+- [4. Modul 3: Takasha RPG Web Companion (`takasha-rpg-web`)](#4-modul-3-takasha-rpg-web-companion-takasha-rpg-web)
+- [5. Struktur Direktori Repositori](#5-struktur-direktori-repositori)
+- [6. Panduan Instalasi & Penggunaan](#6-panduan-instalasi--penggunaan)
+- [7. Panduan Pengembang & Kompilasi (Build Guide)](#7-panduan-pengembang--kompilasi-build-guide)
+- [8. Riwayat Rilis & Semantic Versioning](#8-riwayat-rilis--semantic-versioning)
+- [9. Lisensi & Kredit](#9-lisensi--kredit)
 
 ---
 
@@ -78,14 +72,7 @@ graph TD
             SOVEREIGN["Grimoire & Sovereignty<br/>(16 Titles & Traits, Story Quests, Events)"]
         end
 
-        subgraph "3. Touhou Little Maid (touhou-little-maid)"
-            TLM_CORE["Universal Bedrock Engine<br/>(1.10 & 1.12 Geometry, Dynamic Animation)"]
-            YSM["Yes Steve Model (YSM) Compat<br/>(Model Switching GUI, Roaming Sync)"]
-            MAID_AI["Companion Maid AI<br/>(Taming, 36-Slot Chest, Auto-Farm & Fish)"]
-            KISS["Affection & Kiss System<br/>(Hearts, Cat Sound, Maid's Prayer Buff)"]
-        end
-
-        subgraph "4. Web Companion (takasha-rpg-web)"
+        subgraph "3. Web Companion (takasha-rpg-web)"
             WEB["Interactive Web App<br/>(Port 5173, Catalog Browser, Stat Tracker)"]
         end
     end
@@ -253,43 +240,7 @@ Sistem petualangan dungeon instanced di dalam dunia Minecraft:
 
 ---
 
-## 4. Modul 3: Touhou Little Maid Companion (`touhou-little-maid`)
-
-Porting mandiri Fabric untuk entitas pendamping Touhou Little Maid ke Minecraft 26.2:
-
-### 4.1 Universal Bedrock Geometry & Animation Engine
-* **Universal Deserializer:** Mendukung model Bedrock format `1.10.0` dan `1.12.0` (Array UV & Per-Face UV box).
-* **Direct Pipeline Rendering:** Merender geometri kustom langsung melalui `SubmitNodeCollector.submitCustomGeometry` resmi Minecraft 26.2.
-* **Animation & Soundscape:** Mendukung animasi dinamis `.animation.json` dan pemutaran efek suara resmi karakter.
-
-### 4.2 Integrasi Yes Steve Model (YSM)
-* **Model Switch GUI:** Tombol ikon gaun (`👗`) di antarmuka utama maid untuk berganti model YSM secara instan.
-* **Network Synchronization:** Sinkronisasi pemilihan model, skin tekstur, dan status roaming variabel (`speed`, `is_sitting`, `is_sleeping`, `is_holding_item`) ke seluruh pemain di sekitar.
-* **Fallback Otomatis:** Otomatis beralih ke katalog model Bedrock internal jika YSM tidak terpasang.
-
-### 4.3 Kecerdasan Pendamping (Taming, Auto-Farm, Auto-Fish & Inventory 36-Slot)
-* **Penjinakan:** Dapat dijinakkan oleh pemain menggunakan kue atau makanan manis.
-* **Mode AI:** Toggle mode Duduk (*Sit*) atau Mengikuti Pemilik (*Follow*).
-* **Tas Penyimpanan:** Inventori terpasang 36 slot untuk menyimpan perlengkapan, makanan, dan hasil kerja maid.
-* **Tugas Otomatisasi Mandiri:**
-  - **Auto-Farm:** Memanen tanaman matang dan menanam kembali secara mandiri di sekeliling posisinya.
-  - **Auto-Fish:** Memancing ikan secara otomatis saat berada di dekat air.
-  - **Maid Revive:** Mengorbankan Totem of Undying di inventori maid untuk menyelamatkan pemilik saat sekarat.
-
-### 4.4 Interaksi Kasih Sayang, Ciuman & Buff Maid's Prayer
-* **Interaksi `KissMaidHandler`:**
-  - Lakukan *Shift + Klik Kanan Tangan Kosong* pada maid yang dijinakkan.
-  - Memancarkan partikel hati merah, memutar suara kasih sayang, dan menambah poin favorability (+1).
-* **Buff Maid's Prayer:** Mencapai 5x interaksi berturut-turut memberikan efek buff khusus `Maid's Prayer` yang meningkatkan damage dan pertahanan pemilik serta maid.
-
-### 4.5 SubScreen GUI 3D Model Selector & Instant Hot-Reload
-* **Interactive 3D Preview:** Model maid dapat diputar 360 derajat di layar preview GUI.
-* **Galeri Berpaginasi:** Menampilkan 6 model per halaman dengan navigasi tombol `<` dan `>`.
-* **Instant Hot-Reload:** Tombol `[📂 Buka Folder Model]` (`.minecraft/maid_models/`) dan tombol `[🔄 Reload]` untuk memuat model baru seketika tanpa perlu me-restart game.
-
----
-
-## 5. Modul 4: Takasha RPG Web Companion (`takasha-rpg-web`)
+## 4. Modul 3: Takasha RPG Web Companion (`takasha-rpg-web`)
 
 Aplikasi web lokal berbasis Node.js yang berfungsi sebagai dashboard visual dan pusat informasi pemain:
 * **Port Standar:** Berjalan pada port `http://localhost:5173/`.
@@ -301,7 +252,7 @@ Aplikasi web lokal berbasis Node.js yang berfungsi sebagai dashboard visual dan 
 
 ---
 
-## 6. Struktur Direktori Repositori
+## 5. Struktur Direktori Repositori
 
 ```
 Takasha/
@@ -335,15 +286,7 @@ Takasha/
 │       ├── title/                           # 16 Sovereign Titles & Passive Traits
 │       └── menu/                            # Enchanter, Tinkerer, Alchemist Menus
 │
-├── touhou-little-maid/                      <- Modul 3: Touhou Little Maid Companion Mod
-│   ├── README.md                            # Dokumentasi teknis Touhou Little Maid
-│   ├── build.gradle                         # Konfigurasi Gradle Loom TLM 26.2
-│   └── src/main/java/net/sakura/touhou/
-│       ├── client/render/bedrock/           # Universal Bedrock Geometry Engine
-│       ├── compat/                          # Integrasi Yes Steve Model (YSM)
-│       └── entity/                          # TakashaMaidEntity, KissHandler & AI
-│
-├── takasha-rpg-web/                         <- Modul 4: Takasha RPG Web Companion
+├── takasha-rpg-web/                         <- Modul 3: Takasha RPG Web Companion
 │   ├── README.md                            # Dokumentasi web dashboard & API
 │   ├── server.js                            # HTTP Server lokal (port 5173)
 │   ├── index.html                           # Antarmuka web modern
@@ -362,9 +305,9 @@ Takasha/
 
 ---
 
-## 7. Panduan Instalasi & Penggunaan
+## 6. Panduan Instalasi & Penggunaan
 
-### 7.1 Bagi Pengguna / Pemain (Minecraft Fabric)
+### 6.1 Bagi Pengguna / Pemain (Minecraft Fabric)
 1. **Prasyarat:**
    - Minecraft Java Edition **26.2** atau **1.21.11**.
    - **Fabric Loader** versi `0.19.3` atau lebih baru.
@@ -374,31 +317,29 @@ Takasha/
    - Unduh file JAR rilis dari tab [Releases](https://github.com/alief03/Takasha/releases):
      - `Takasha-2.8.0+26.2.jar` (Modul Core)
      - `Takasha-RPG-1.8.0+26.2.jar` (Modul RPG)
-     - `TouhouLittleMaid-0.8.2+26.2.jar` (Modul Maid Companion)
    - Masukkan file JAR ke folder `.minecraft/mods/` Anda.
    - Jalankan Minecraft. Seluruh fitur aktif secara otomatis!
 
-### 7.2 Daftar Tombol Pintas Default (Keybinds)
+### 6.2 Daftar Tombol Pintas Default (Keybinds)
 | Tombol | Fungsi | Modul Terkait |
 |:---|:---|:---|
 | **`K`** | Membuka Master Dashboard Takasha | Takasha Core |
 | **`F7`** atau **`P`** | Membuka Studio Replay Timeline | Takasha Core |
 | **`G`** | Membuka Grimoire of Realms (AuraSkills, Quests, Titles) | Takasha-RPG |
 | **`Shift + R-Click`** (pada Mannequin) | Membuka GUI Konfigurasi Manekin NPC | Takasha Core |
-| **`Shift + R-Click`** (pada Maid) | Interaksi Kasih Sayang / Ciuman Maid | Touhou Little Maid |
 | **`Shift + R-Click`** (pada Item Frame) | Menyembunyikan / Menampilkan Bingkai Kayu | Takasha Core |
 
 ---
 
-## 8. Panduan Pengembang & Kompilasi (Build Guide)
+## 7. Panduan Pengembang & Kompilasi (Build Guide)
 
-### 8.1 Prasyarat Lingkungan Pengembangan
+### 7.1 Prasyarat Lingkungan Pengembangan
 - **JDK 25 LTS** (Microsoft OpenJDK 25, Eclipse Temurin 25, atau Azul Zulu 25).
 - **JDK 21 LTS** (khusus subproyek 1.21.11).
 - **Node.js 18+** (untuk menjalankan web companion).
 - Git.
 
-### 8.2 Mengompilasi Modul Takasha Core (`sakura-weapons`)
+### 7.2 Mengompilasi Modul Takasha Core (`sakura-weapons`)
 Buka terminal PowerShell pada direktori `sakura-weapons/`:
 ```powershell
 Set-Location "sakura-weapons"
@@ -406,7 +347,7 @@ Set-Location "sakura-weapons"
 ```
 Output JAR berada di `versions/26.2/build/libs/` dan `versions/1.21.11/build/libs/`.
 
-### 8.3 Mengompilasi Modul Takasha-RPG (`takasha-rpg`)
+### 7.3 Mengompilasi Modul Takasha-RPG (`takasha-rpg`)
 Buka terminal PowerShell pada direktori `takasha-rpg/`:
 ```powershell
 Set-Location "takasha-rpg"
@@ -414,15 +355,7 @@ Set-Location "takasha-rpg"
 ```
 Output JAR berada di `build/libs/Takasha-RPG-1.8.0+26.2.jar`.
 
-### 8.4 Mengompilasi Modul Touhou Little Maid (`touhou-little-maid`)
-Buka terminal PowerShell pada direktori `touhou-little-maid/`:
-```powershell
-Set-Location "touhou-little-maid"
-.\gradlew.bat clean build
-```
-Output JAR berada di `build/libs/TouhouLittleMaid-0.8.2+26.2.jar`.
-
-### 8.5 Menjalankan Takasha RPG Web Companion
+### 7.4 Menjalankan Takasha RPG Web Companion
 Buka terminal PowerShell pada direktori `takasha-rpg-web/`:
 ```powershell
 Set-Location "takasha-rpg-web"
@@ -432,18 +365,15 @@ Akses dashboard di browser melalui `http://localhost:5173/`.
 
 ---
 
-## 9. Riwayat Rilis & Semantic Versioning
+## 8. Riwayat Rilis & Semantic Versioning
 
 * **v2.8.0+26.2 & v2.6.0+1.21.11 (The Unified Ecosystem Milestone):**
   - **Auto-Farm Crop Plot Memory & Resilient Replant Engine:** In-memory Crop Plot Memory Map, 0ms instant 1:1 harvest-replant pairing, throughput 12 aksi/tick, flow-control backpressure, sticky offhand caching, dan drop-delay resilient backoff retry.
   - **Standalone Takasha-RPG Engine:** Paritas penuh AuraSkills (7 keahlian, stat scaling nyata), 6 Tier AdvancedEnchantments (40+ combat & utility enchantments), 5 Tier Dungeon Rift Arena (wave survival & custom boss AI), Damage Test Dummy (floating combat damage numbers & DoT subGUI), Dynamic Economy & Daily Shop (`/sellgui`), World Events & Grimoire 16 Sovereign Titles.
-  - **Touhou Little Maid Companion Separation & YSM Integration:** Pemisahan mandiri ke subproyek terdedikasi, Universal Bedrock Geometry & Animation Engine, Yes Steve Model (YSM) support, AI Auto-Farm & Auto-Fish, Affection & Kissing mechanics (`KissMaidHandler`), 3D Model Selector GUI dengan instant hot-reload.
   - **Takasha RPG Web Companion:** Peluncuran aplikasi web lokal interaktif (port 5173) untuk katalog enchant dan stat tracker.
 * **v2.7.0+26.2 & v2.5.0+1.21.11 (Server Safe Mode & Engine Specialization):**
   - **Proteksi Server Safe Mode (`serverSafeMode`):** Deteksi otomatis multiplayer, supresi fitur sensitif tanpa desinkronisasi.
   - **Spesialisasi Kaizen vs Vanilla Engine:** Mode Kaizen (anti-AFK, raycast LoS, cooldown sync) vs Mode Vanilla (unthrottled, stationer, suara vanilla) untuk Auto Kill Mob dan Auto Fishing. Kontrol nilai manual 100%.
-* **v2.5.0+26.2 (Touhou Maid Initial Update):**
-  - Porting awal engine Bedrock Touhou Little Maid ke 26.2.
 * **v2.3.0+26.2:** Standarisasi Semantic Versioning via file `VERSION` dan 4 pose fundamental kanonis.
 * **v2.2.0 (Dual-Version Support):** Arsitektur multi-version Fabric Gradle (26.2 & 1.21.11).
 * **v2.1.1+26.2:** Overhaul total sistem fisika dorongan manekin NPC (`isEffectiveAi()`, `travel()`, `canBeCollidedWith`).
@@ -451,7 +381,7 @@ Akses dashboard di browser melalui `http://localhost:5173/`.
 
 ---
 
-## 10. Lisensi & Kredit
+## 9. Lisensi & Kredit
 
 * **Arsitektur & Pengembangan Mod:** Boma Narakasura
 * **Platform:** Fabric Mod Loader (Minecraft Java Edition)

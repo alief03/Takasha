@@ -1,348 +1,368 @@
 ========================================================================================
-   PANDUAN PENGUJIAN FITUR UPDATE TAKASHA-RPG (VERSI 1.2.0+26.2)
-   100% GUI PARITY ADVANCEDENCHANTMENTS, VILLAGER TRADES & WORLD LOOT
+   PANDUAN PENGUJIAN KOMPREHENSIF TAKASHA-RPG (MINECRAFT 26.2 FABRIC / JAVA 25 LTS)
+   SAMUS AWAKENED PYROMANCER 100% 1:1 TRUE PARITY, ANIMATION & FLIPBOOK SEQUENCER FIX
 ========================================================================================
 
 File Build Siap Uji:
-- Mod File : Hasil mod/Takasha-RPG-1.2.0+26.2.jar
-- Minecraft: 1.21.4 / 26.2 (Fabric Loader)
-- Java     : 25
-
-Dokumentasi ini KHUSUS memuat prosedur pengujian untuk pembaruan versi v1.2.0:
-1. Pengujian Enchanter Menu 18-Slot & Dialog Konfirmasi EXP (/enchanter)
-2. Pengujian Tinkerer Menu 54-Slot Dual-Column & Daur Ulang (/tinkerer atau /tinker)
-3. Pengujian Alchemist Menu 27-Slot Fusi & Upgrade (/alchemist)
-4. Pengujian Perdagangan Penduduk Desa & Pedagang Kelana (Villager & Wandering Trader)
-5. Pengujian Injeksi Loot Peti Dungeon & Struktur Alam Liar (World Loot Modifier)
+- Mod RPG File   : Hasil mod/Takasha-RPG-1.8.7+26.2.jar
+- Mod Core File  : Hasil mod/Takasha-2.8.7+26.2.jar
+- Target Versi   : Minecraft 26.2 (Fabric Loader >=0.19.3)
+- Runtime        : OpenJDK 25 LTS (x64 Windows)
+- Profil Game    : C:\Users\Administrator\AppData\Roaming\ModrinthApp\profiles\kaizenmc.id\mods\
+- Sumber Acuan   : Samus2002 Awakened Pyromancer Showcase (https://youtu.be/ttMQQve1i1Y)
+- Mod ID         : takasha_rpg, sakura_weapons
 
 ----------------------------------------------------------------------------------------
-1. PENGUJIAN ENCHANTER MENU 18-SLOT & EXP CONFIRMATION DIALOG (/enchanter)
+RINGKASAN PENYEMPURNAAN 1:1 PARITY SHOWCASE (v1.8.7 / v2.8.7):
 ----------------------------------------------------------------------------------------
-Tujuan:
-- Memastikan menu Enchanter memiliki layout 18-slot (2 baris x 9 kolom) identik dengan server sumber.
-- Memastikan 9 Tier Buku Misteri (Simple s.d. Mastery) hanya dapat dibeli dengan EXP Points murni.
-- Memastikan tombol pintas Tinkerer (slot 9) dan Alchemist (slot 17) berfungsi semestinya.
-- Memastikan Confirmation Inventory 9-slot terbuka saat buku diklik dan perhitungan EXP akurat.
+1. Animasi Tekstur Lidah Api Blazestaff (Flickering Flame Animation):
+   - Root Cause: File `flame_debuff.png.mcmeta` sebelumnya mengandung tag malformed `"mcmodels": ""`
+     yang merusak generator ticker atlas Minecraft 26.2, membekukan animasi api senjata.
+   - Perbaikan: 12 file `.mcmeta` dibersihkan dan distandarkan menjadi `{"animation":{"frametime":2,"interpolate":true}}`,
+     menghasilkan animasi nyala lidah api 10 frame yang berkobar dinamis dan halus di ujung tongkat Blazestaff.
 
-Langkah Pengujian:
-1. Masuk ke dunia Singleplayer dan berikan EXP ke diri sendiri untuk pengujian:
-   /experience add @s 50 levels
-2. Ketik perintah:
-   /enchanter
-3. Periksa tampilan GUI yang terbuka:
-   - Judul menu: "Server Enchanter"
-   - Ukuran menu: 18 slot (2 baris x 9 kolom).
-   - Seluruh slot kosong diisi pembatas abu-abu (Gray Stained Glass Pane).
-   - Terdapat 9 buku misteri dengan tier berjenjang:
-     * Simple Mystery Book    (Biaya: 50 EXP Points)
-     * Unique Mystery Book    (Biaya: 100 EXP Points)
-     * Elite Mystery Book     (Biaya: 250 EXP Points)
-     * Ultimate Mystery Book  (Biaya: 500 EXP Points)
-     * Legendary Mystery Book (Biaya: 1.000 EXP Points)
-     * Fabled Mystery Book    (Biaya: 1.750 EXP Points)
-     * Heroic Mystery Book    (Biaya: 2.500 EXP Points)
-     * Soul Mystery Book      (Biaya: 3.500 EXP Points)
-     * Mastery Mystery Book   (Biaya: 5.000 EXP Points)
-   - Slot 9 (kiri bawah): Landasan Anvil berlabel "Tinkerer" -> klik untuk langsung berpindah ke menu Tinkerer.
-   - Slot 17 (kanan bawah): End Portal Frame berlabel "Alchemist" -> klik untuk langsung berpindah ke menu Alchemist.
-4. Uji Pembelian & Dialog Konfirmasi:
-   - Klik salah satu buku (misal: "Simple Mystery Book").
-   - GUI beralih ke jendela konfirmasi 9-slot ("Confirmation Inventory"):
-     * Slot 0 s.d. 3: Kaca Hijau (Lime Stained Glass Pane) berlabel "Confirm Purchase".
-     * Slot 4 (tengah): Menampilkan preview buku misteri yang akan dibeli.
-     * Slot 5 s.d. 8: Kaca Merah (Red Stained Glass Pane) berlabel "Cancel Purchase".
-   - Klik salah satu slot kaca merah (Cancel):
-     * Dialog menutup dan pemain kembali ke menu utama Enchanter tanpa pengurangan EXP.
-   - Klik kembali buku misteri lalu klik salah satu slot kaca hijau (Confirm):
-     * EXP points pemain terpotong sebesar biaya buku (50 EXP).
-     * Buku misteri masuk ke inventori pemain.
-     * Terdengar efek suara level up ("entity.player.levelup").
-5. Uji Pembelian Saat EXP Tidak Cukup:
-   - Kosongkan EXP pemain: /experience set @s 0 points
-   - Buka /enchanter dan klik buku apa saja -> klik Confirm.
-   - Muncul peringatan chat merah: "EXP kamu tidak cukup untuk membeli buku ini!" dan terdengar efek suara gagal.
+2. Animasi Casting & Ayunan Lengan Pemain (Player Arm Swing Animations):
+   - `MMOInteractionHandler` kini memanggil `player.swing(hand, true)` pada seluruh interaksi:
+     * Klik Kanan (RMB - Volcanic Spear)
+     * Shift + Klik Kanan (Shift+RMB - Magma Dash)
+     * Double-Tap Sneak (Shift + Shift - Hellfire Overblast)
+     * Hold Sneak >= 0.5s (Hold Shift - Firestorm Volley)
+     * Air-Swings (Klik Kiri udara kosong - Pyro Combo & Infernal Judgement)
+   - Karakter pemain tidak lagi kaku seperti patung saat merapal mantra dan jurus!
 
-----------------------------------------------------------------------------------------
-2. PENGUJIAN TINKERER MENU 54-SLOT DUAL-COLUMN RECYCLE (/tinkerer atau /tinker)
-----------------------------------------------------------------------------------------
-Tujuan:
-- Memastikan GUI Tinkerer berukuran 54 slot dengan pembagi kolom tengah (Splitter).
-- Memastikan deposit item di sisi kiri (23 slot) langsung menghasilkan penawaran di sisi kanan (23 slot).
-- Memastikan buku custom ditukar dengan Dust (Mystery/Magic/Secret) dan gear bertuah ditukar dengan Botol Pengalaman.
-- Memastikan auto-refund aman saat GUI ditutup sebelum transaksi diterima.
+3. 3D Model Flipbook Sequencer (Volcanic Spear, Explosion, & Earthquake Rupture):
+   - `ActiveModelInstance` kini dilengkapi sekuenser model frame multi-step:
+     * Volcanic Spear: Transisi frame 1..8 secara dinamis (`volcanic_spear_1` -> `volcanic_spear_8`)
+       menciptakan tebasan tombak magma yang memanjang dan melesat seperti video showcase!
+     * VFX Explosion: Rangkaian frame ledakan api 1..12 (`vfx_explosion_1` -> `vfx_explosion_12`).
+     * VFX Earthquake Rupture: Transisi retakan tanah 1..5 (`vfx_earthquake_rupture_1` -> `5`) dengan delay tanah retak 44-tick.
 
-Langkah Pengujian:
-1. Dapatkan buku custom dan perlengkapan untuk pengujian:
-   /ae give @s simple
-   /ae give @s legendary
-   /give @s diamond_sword
-2. Buka menu Tinkerer:
-   /tinkerer (atau /tinker)
-3. Periksa tampilan GUI yang terbuka:
-   - Judul menu: "You                   Tinkerer"
-   - Ukuran: 54 slot (6 baris x 9 kolom).
-   - Kolom tengah (slot 4, 13, 22, 31, 40, 49) dilapisi kaca abu-abu dan kaca merah sebagai pembatas.
-   - Sisi kiri (23 slot) adalah area deposit item pemain.
-   - Sisi kanan (23 slot) adalah area penawaran otomatis Tinkerer.
-   - Slot 0 (kiri atas): Tombol status awal berupa kaca merah berlabel "Trade Status: Deposit items to trade".
-   - Slot 8 (kanan atas): Ikon informasi Tinkerer.
-4. Uji Penukaran Buku Custom:
-   - Taruh buku custom di salah satu slot sisi kiri (misal slot 1).
-   - Perhatikan sisi kanan (slot 7) seketika terisi otomatis dengan penawaran Dust (Magic Dust atau Secret Dust).
-   - Tombol Slot 0 seketika berubah menjadi kaca hijau berlabel "Accept Trade".
-   - Klik tombol Slot 0 (Accept):
-     * Buku di sisi kiri lenyap.
-     * Item Dust di sisi kanan masuk ke inventori pemain.
-     * Terdengar suara landasan tempa ("block.anvil.use").
-5. Uji Daur Ulang Senjata/Armor:
-   - Pasang enchantment pada pedang diamond, lalu taruh di sisi kiri Tinkerer.
-   - Perhatikan sisi kanan terisi otomatis dengan Botol Pengalaman (Experience Bottle).
-   - Klik Accept di Slot 0 -> Botol Pengalaman masuk ke inventori pemain.
-6. Uji Auto-Refund (Anti-Item Hilang):
-   - Taruh buku atau senjata di sisi kiri Tinkerer.
-   - Jangan klik tombol Accept, langsung tekan tombol ESC untuk menutup menu.
-   - Periksa inventori pemain -> seluruh item deposit kembali utuh ke tas pemain tanpa hilang.
+4. Routing Gesture Langsung (Direct Cast Routing):
+   - Double-Tap Sneak kini merutekan langsung ke `Hellfire_Overblast_CAST` (melewati deadlock aura timer Bukkit).
+   - Hold-Sneak (>=10 tick) kini merutekan langsung ke `Firestorm_Volley_CAST`.
 
-----------------------------------------------------------------------------------------
-3. PENGUJIAN ALCHEMIST MENU 27-SLOT FUSION & UPGRADE (/alchemist)
-----------------------------------------------------------------------------------------
-Tujuan:
-- Memastikan GUI Alchemist berukuran 27-slot (3 baris x 9 kolom) berlatar kaca hitam.
-- Memastikan slot 3 (Input 1), slot 5 (Input 2), slot 13 (Output Preview), dan slot 22 (Tombol Fusi) berfungsi presisi.
-- Memastikan seluruh resep fusi autentik berjalan: fusi buku naik level, fusi Magic Dust, fusi Slot Increaser, dan fusi White Scroll menjadi Holy Scroll.
-- Memastikan auto-refund bekerja saat GUI ditutup.
+5. Sinkronisasi Siklus Hidup Heat Mastery & Sound Pitch Progression:
+   - `ActiveOrbital` kini mendeteksi jumlah stack aura `HEAT` secara real-time:
+     * Stack 1: Model `stack_black1`, sound `block.trial_spawner.spawn_item` pitch 0.75.
+     * Stack 2: Model `stack_black2`, sound `block.trial_spawner.spawn_item` pitch 1.00.
+     * Stack 3: Model `stack_black3`, sound `block.trial_spawner.spawn_item` pitch 1.25 + partikel lava.
+     * Konsumsi Ignition: Begitu skill membakar stack `HEAT` menjadi 0, model orbital langsung dihapus secara instan!
 
-Langkah Pengujian:
-1. Dapatkan bahan-bahan pengujian:
-   /give @s takasha_rpg:magic_dust 4
-   /give @s takasha_rpg:white_scroll 2
-   /give @s takasha_rpg:slot_increaser_1 2
-   /ae book overload 1 100 0
-2. Buka menu Alchemist:
-   /alchemist (atau /alchem)
-3. Periksa tampilan GUI yang terbuka:
-   - Judul menu: "Alchemist"
-   - Ukuran: 27 slot (3 baris x 9 kolom) dengan bingkai kaca hitam.
-   - Slot 3: Slot Input 1 (ditandai kaca oranye saat kosong).
-   - Slot 5: Slot Input 2 (ditandai kaca oranye saat kosong).
-   - Slot 13 (tengah baris ke-2): Slot Output Preview (ditandai kaca merah saat belum ada resep valid).
-   - Slot 22 (tengah baris ke-3): Tombol Transaksi & Keterangan Biaya EXP.
-4. Uji Resep Fusi Buku (Naik Level):
-   - Dapatkan 2 buku sihir bertingkat sama (misal 2 buah buku Overload level 1).
-   - Letakkan satu buku di slot 3 dan satu buku di slot 5.
-   - Perhatikan slot 13 seketika menampilkan preview buku hasil fusi: Overload level 2!
-   - Slot 22 menampilkan biaya EXP yang dibutuhkan (misal: 10 EXP).
-   - Klik slot 22 (Exchange):
-     * Kedua buku di slot 3 dan 5 terpakai.
-     * Buku Overload level 2 masuk ke inventori pemain.
-     * EXP pemain terpotong.
-5. Uji Resep Fusi Magic Dust:
-   - Letakkan 2x Magic Dust di slot 3 dan slot 5.
-   - Slot 13 menampilkan Magic Dust dengan persentase sukses gabungan yang lebih tinggi.
-   - Klik slot 22 -> Magic Dust ter-upgrade berhasil diterima pemain.
-6. Uji Resep Fusi White Scroll -> Holy Scroll:
-   - Letakkan 2x White Scroll di slot 3 dan slot 5.
-   - Slot 13 menampilkan Holy Scroll!
-   - Klik slot 22 -> Holy Scroll (gulungan proteksi tertinggi) berhasil diciptakan.
-7. Uji Resep Fusi Slot Increaser:
-   - Letakkan 2x Slot Increaser I di slot 3 dan 5 -> menghasilkan Slot Increaser II.
-   - Letakkan 2x Slot Increaser II di slot 3 dan 5 -> menghasilkan Slot Increaser III.
-8. Uji Auto-Refund:
-   - Taruh item di slot 3 dan slot 5, lalu tekan ESC.
-   - Seluruh item input kembali utuh ke inventori pemain.
+6. Akselerasi Ballistics & Midair Hover Suspension:
+   - `ModifyProjectileMechanic` kini mengeksekusi `action=MULTIPLY` (`speed * val`), mengakselerasi rudal abu dan bola api secara bertahap di udara.
+   - `LungeMechanic` pada Infernal Judgement kini mengontrol gravitasi secara akurat saat `velocity <= 0.05`, menahan pemain melayang di udara selama 65 tick sambil memanggil tombak sebelum menukik membanting tanah.
+   - `@EntitiesInCone` fallback: Jika tidak ada musuh di depan pemain, serangan tetap melesat lurus ke arah crosshair (15 blok) tanpa macet di kaki.
+   - `ActiveProjectile.java` kini dilengkapi raycasting voxel tanah (`level.clip(...)`).
+   - Meteor tidak lagi melayang statis di langit! Meteor menukik diagonal ke tanah, meledak hebat pada kontak
+     permukaan (`onHit`), serta memunculkan batuan retak, letusan magma (`VFX_LAVA_RUPTURE`), dan kawah api.
 
-----------------------------------------------------------------------------------------
-4. PENGUJIAN PERDAGANGAN PENDUDUK DESA & PEDAGANG KELANA (VILLAGER TRADES)
-----------------------------------------------------------------------------------------
-Tujuan:
-- Memastikan item AdvancedEnchantments dan RPG dapat diperoleh secara natural lewat trading dengan Villager dan Wandering Trader sesuai lootConfiguration.yml.
+4. Perbaikan Penjadwalan Repeat & Delay Skill (Authentic Float & Multi-Beam):
+   - `MythicSkillExecutor` kini memproses `repeatCount` dan `repeatInterval` secara akurat bersamaan dengan `delay`.
+   - Infernal Judgement: Pemain melayang stabil di udara selama 65 tick sambil memanggil lingkaran sihir neraka
+     dan menghujani tombak magma sebelum menukik membanting ke tanah.
+   - Hellfire Overblast: Menembakkan semburan laser api berkelanjutan (15 gelombang beam bertubi-tubi) selama 4 detik.
+   - Magma Dash: Meluncur ke depan meninggalkan jejak lava berurutan yang meledak bertahap.
 
-Langkah Pengujian:
-1. Uji Pedagang Librarian (Pustakawan):
-   - Spawn Librarian level 1:
-     /summon villager ~ ~ ~ {VillagerData:{profession:"minecraft:librarian",level:1}}
-     * Klik kanan villager -> verifikasi ada penawaran Secret Dust (4 Emeralds) & Magic Dust (8 Emeralds).
-   - Spawn Librarian level 2:
-     /summon villager ~ ~ ~ {VillagerData:{profession:"minecraft:librarian",level:2}}
-     * Verifikasi ada penawaran Buku Custom Simple & Unique (Emeralds + Book).
-   - Spawn Librarian level 3:
-     /summon villager ~ ~ ~ {VillagerData:{profession:"minecraft:librarian",level:3}}
-     * Verifikasi ada penawaran Buku Custom Elite & Ultimate, serta White Scroll (20 Emeralds).
-   - Spawn Librarian level 4:
-     /summon villager ~ ~ ~ {VillagerData:{profession:"minecraft:librarian",level:4}}
-     * Verifikasi ada penawaran Buku Legendary & Fabled, Transmute Scroll (28 Emeralds), dan Black Scroll (32 Emeralds).
-   - Spawn Librarian level 5 (Master):
-     /summon villager ~ ~ ~ {VillagerData:{profession:"minecraft:librarian",level:5}}
-     * Verifikasi ada penawaran Buku Heroic & Mastery, Randomization Scroll (40 Emeralds), Holy Scroll (48 Emeralds), dan Slot Increaser I (36 Emeralds).
-2. Uji Pedagang Cleric (Klerus):
-   - Spawn Cleric level 3:
-     /summon villager ~ ~ ~ {VillagerData:{profession:"minecraft:cleric",level:3}}
-     * Verifikasi ada penawaran Soul Gem (28 Emeralds).
-   - Spawn Cleric level 4 & 5:
-     /summon villager ~ ~ ~ {VillagerData:{profession:"minecraft:cleric",level:4}} -> Holy Scroll (45 Emeralds).
-     /summon villager ~ ~ ~ {VillagerData:{profession:"minecraft:cleric",level:5}} -> Slot Increaser II (64 Emeralds).
-3. Uji Pedagang Armorer, Weaponsmith, dan Toolsmith (Level 5):
-   - Armorer Level 5:
-     /summon villager ~ ~ ~ {VillagerData:{profession:"minecraft:armorer",level:5}}
-     * Verifikasi penawaran Slot Increaser I (32 Emeralds) dan Armor Enchantment Orb (48 Emeralds).
-   - Weaponsmith Level 5:
-     /summon villager ~ ~ ~ {VillagerData:{profession:"minecraft:weaponsmith",level:5}}
-     * Verifikasi penawaran Stat Tracker Mobs (28 Emeralds), Stat Tracker Player Kills (32 Emeralds), dan Weapon Enchantment Orb (48 Emeralds).
-   - Toolsmith Level 5:
-     /summon villager ~ ~ ~ {VillagerData:{profession:"minecraft:toolsmith",level:5}}
-     * Verifikasi penawaran Stat Tracker Blocks (24 Emeralds), Stat Tracker Fish (24 Emeralds), dan Tool Enchantment Orb (48 Emeralds).
-4. Uji Wandering Trader (Pedagang Kelana):
-   - Spawn Wandering Trader:
-     /summon wandering_trader ~ ~ ~
-   - Klik kanan pedagang kelana -> periksa daftar penawaran khusus:
-     * Transmute Scroll (25 Emeralds)
-     * Randomization Scroll (30 Emeralds)
-     * White Scroll (35 Emeralds)
-     * Holy Scroll (50 Emeralds)
-     * Soul Gem (40 Emeralds)
+4. Implementasi Penuh 7 Skill Samus Awakened Pyromancer (100% Sesuai Showcase):
+   - Passive: Heat Mastery (LMB -> 1 Heat stack, 3 stacks -> Mode Ignition dengan api crimson tua).
+   - Basic Attack (LMB): Pyro Combo 4-Strike sequence:
+     * Serangan 1 & 2: Ash Missile melesat lurus ke depan.
+     * Serangan 3: Flame Shockwave berbentuk kipas (cone).
+     * Serangan 4: Meteor raksasa jatuh diagonal dari langit lalu meledak menghantam tanah.
+   - Skill 1 (RMB): Volcanic Spear Combo (Jab -> Flaming Slash -> Upward Slash -> Slam -> Piercing Jab).
+     * Mode Ignition: Tombak memanjang dan berwarna merah tua pekat.
+   - Skill 2 (Shift + Shift / Double-Tap Sneak): Hellfire Overblast (Semburan beam api continue 4 detik).
+     * Mode Ignition: Beam merah crimson dengan daya dorong knockback bertahap.
+   - Skill 3 (Hold Shift >= 0.5s): Firestorm Volley (Bola api berputar spiral membentuk bola lalu jatuh menghujani musuh terdekat).
+     * Mode Ignition: Ledakan area (AoE) besar pada tiap benturan.
+   - Skill 4 (Shift + RMB): Magma Dash (Melesat cepat meninggalkan jejak lava cair yang membakar).
+     * Mode Ignition: Jejak lava retak dan meledak beruntun (sequential rupture explosions).
+   - Ultimate Skill (Shift + LMB): Infernal Judgement (Melompat ke udara, lingkaran sihir bercahaya muncul di kiri-kanan, menembakkan hujan tombak api ke target arah pandangan).
 
-----------------------------------------------------------------------------------------
-5. PENGUJIAN INJEKSI LOOT DUNGEON & STRUKTUR ALAM LIAR (WORLD LOOT MODIFIER)
-----------------------------------------------------------------------------------------
-Tujuan:
-- Memastikan peti-peti dungeon dan reruntuhan alam liar secara natural memunculkan item RPG dan AdvancedEnchantments saat dieksplorasi.
+5. Perbaikan Bug Reset Mana (State Clamping Persistence):
+   - Memperbaiki urutan deserialisasi `TakashaRpgData.fromJson()`: `currentMana` kini dimuat setelah 
+     seluruh level skill terinisialisasi, sehingga mana pemain tidak lagi terpotong ke 20.0 saat relog.
 
-Langkah Pengujian:
-1. Uji Loot Dungeon Standar:
-   - Ketik:
-     /loot give @s loot minecraft:chests/simple_dungeon
-   - Periksa inventori yang diterima:
-     * Muncul Koin RPG, Mystery Dust, Magic Dust, Secret Dust, White Scroll, Transmute Scroll, Randomization Scroll, Slot Increaser I, atau Buku Custom Simple / Unique.
-2. Uji Loot Reruntuhan Piramida Gurun:
-   - Ketik:
-     /loot give @s loot minecraft:chests/desert_pyramid
-   - Periksa inventori:
-     * Muncul Takasha Gem, Black Scroll, Slot Increaser II, Soul Gem, Buku Custom Elite / Ultimate / Legendary / Fabled, atau Orb Senjata/Armor/Alat.
-3. Uji Loot Reruntuhan Kota Kuno (Ancient City):
-   - Ketik:
-     /loot give @s loot minecraft:chests/ancient_city
-   - Periksa inventori:
-     * Muncul Mythic Loot: Holy Scroll, Slot Increaser III, Buku Custom Heroic / Soul / Mastery, atau salah satu dari 5 Senjata Kosmik Legendaris (Dimensional Traveller, Koth Sword, Koth Axe, Phantom Scythe, Supreme Weapon).
-4. Uji Loot Kapal End (End City Treasure):
-   - Ketik:
-     /loot give @s loot minecraft:chests/end_city_treasure
-   - Periksa inventori:
-     * Muncul item mythic tingkat tinggi (Holy Scroll, Slot Increaser III, Senjata Kosmik, dan Ancient Keystone).
+6. Restriksi Mode Kreatif pada Perintah MMO Samus:
+   - `/mmo give` kini dibatasi ketat hanya untuk pemain dalam mode Creative (`player.isCreative()`).
 
-----------------------------------------------------------------------------------------
-6. PENGUJIAN PERBAIKAN BUKU SIHIR, TERJEMAHAN INDONESIA, RATE ACAK & DRAG & DROP
-----------------------------------------------------------------------------------------
-Tujuan:
-- Memastikan Buku Sihir tidak berlabel "null" dan menampilkan judul serta tier berwarna secara dinamis.
-- Memastikan 336 Enchantment memiliki deskripsi efek berbahasa Indonesia lengkap tanpa artefak simbol.
-- Memastikan tingkat keberhasilan (Success Rate) dan kehancuran (Destroy Rate) teracak (RNG) sesuai tier buku.
-- Memastikan Magic Dust memiliki bonus persentase acak (+5% s/d +20%).
-- Memastikan mekanisme pemasangan Enchantment dan utilitas berfungsi melalui Drag & Drop di inventaris, mendukung Klik Kiri (PRIMARY) maupun Klik Kanan (SECONDARY), serta dua arah (Buku ke Gear atau Gear ke Buku).
-
-Langkah Pengujian:
-1. Uji Buku Sihir & Pembukaan Acak (Reveal):
-   - Ambil buku misteri:
-     /ae give @s simple
-     /ae give @s legendary
-     /ae give @s mastery
-   - Periksa saat masih di tangan:
-     * Label menampilkan nama tier yang jelas (misal: "Buku Sihir Simple (Belum Terbuka)"), BUKAN null atau raw ID.
-     * Tooltip berisi informasi tier dan petunjuk "Klik Kanan di Tangan untuk Membuka".
-   - Klik-Kanan di tangan untuk membuka buku:
-     * Muncul efek partikel sihir dan suara level-up.
-     * Buku berubah menjadi Revealed Custom Book dengan nama enchantment dan angka romawi (contoh: "§6§lRage III" atau "§c§lOverload II").
-     * Periksa Rate Sukses dan Rate Hancur: Angkanya teracak (RNG) sesuai tier (contoh: Sukses 40-90%, Hancur 0-45%).
-     * Periksa deskripsi efek: Teks efek telah diterjemahkan ke Bahasa Indonesia yang rapi.
-     * Periksa kategori "Diterapkan Ke": Menampilkan nama alat/senjata bahasa Indonesia (contoh: "Pedang / Kapak", "Semua Armor").
-
-2. Uji Pemasangan Drag & Drop (Dual-Click & Dua Arah):
-   - Siapkan Pedang Diamond di inventaris: /give @s diamond_sword
-   - Siapkan buku custom yang sudah terbuka (misal: buku pedang).
-   - Cara 1 (Buku ke Senjata):
-     * Ambil buku dengan kursor (bisa Klik Kiri atau Klik Kanan).
-     * Klik ke atas slot Pedang Diamond.
-     * Jika sukses: Buku terkonsumsi, terdengar suara level up, pesan chat hijau muncul, dan pada Pedang muncul lore enchantment serta status slot (contoh: "Custom Enchant Slots: 1/10").
-   - Cara 2 (Senjata ke Buku):
-     * Ambil Pedang Diamond dengan kursor.
-     * Klik ke atas slot Buku Sihir di inventaris.
-     * Enchantment otomatis terpasang ke pedang dengan hasil identik.
-
-3. Uji Magic Dust (Bonus Acak & Drag & Drop):
-   - Dapatkan Magic Dust: /give @s takasha_rpg:magic_dust 5
-   - Perhatikan nama item: Magic Dust menampilkan bonus persentase acak, misal: "Magic Dust (+12%)".
-   - Seret Magic Dust ke atas Buku Sihir di inventaris (atau seret Buku ke slot Magic Dust):
-     * Success Rate pada buku meningkat sesuai nilai bonus dust (maksimal cap 100%).
-     * 1 Magic Dust terpakai dan terdengar suara orb pickup.
-
-4. Uji Drag & Drop Scroll & Orbs:
-   - White Scroll: Seret White Scroll ke atas perlengkapan -> status "PROTECTED" muncul di lore item.
-   - Holy Scroll: Seret Holy Scroll ke atas perlengkapan -> status "*HOLY* PROTECTED" muncul di lore item.
-   - Black Scroll: Seret Black Scroll ke atas perlengkapan yang memiliki custom enchant -> 1 enchant dicabut dan kembali menjadi buku 100% sukses di inventaris.
-   - Randomization Scroll: Seret ke atas Buku Sihir -> Success Rate dan Destroy Rate buku diacak ulang.
-   - Slot Increaser / Weapon Orb: Seret ke senjata -> batas kapasitas slot bertambah (+1 Slot, hingga maksimal 20).
-
-5. Uji Drag & Drop Stat Tracker:
-   - Ambil Stat Tracker: /give @s takasha_rpg:stat_tracker_mobs
-   - Seret ke atas Senjata di inventaris -> Pada lore senjata muncul "Mob Kills: 0".
-   - Kalahkan monster dengan senjata tersebut -> angka Mob Kills otomatis bertambah!
+7. Pembersihan Total Partikel Buatan Enchantment Wings:
+   - Efek terbang enchantment `wings` kini 100% bersih tanpa partikel kembang api/asap buatan.
 
 ========================================================================================
-7. PANDUAN PENGUJIAN ADVANCED DUNGEON ARENA & PERMADEATH (VERSI 1.6.0+26.2)
+DAFTAR TASK PENGUJIAN IN-GAME (STEP-BY-STEP VERIFICATION):
 ========================================================================================
-Tujuan:
-- Memastikan sistem kurungan fisik Tinted Glass (R=20, H=8) terpasang sempurna tanpa griefing dunia.
-- Memastikan pemanggilan arena dengan Dungeon Rift Keystone (Common, Nightmare, Sakura Boss).
-- Memastikan LevelledMobs scaling (Lvl 1 - 1000) dan mob anti-terbakar matahari.
-- Memastikan sistem permadeath: Gugur Wave 1 = 0 hadiah (hangus total), Gugur Wave 2+ = Peti Sisa di tengah, Menang Wave 5 = Peti Kemenangan Utama.
-- Memastikan probabilitas drop bahan keystone dari hostile mob (Fragment 5%, Thread 3%, Essence 1.5%).
+
+TASK 1: PENGUJIAN RESTRIKSI MODE KREATIF PERINTAH /MMO GIVE
+----------------------------------------------------------------------------------------
+Tujuan: Memastikan perintah `/mmo give` hanya dapat dieksekusi saat pemain dalam Mode Kreatif.
+Langkah Pengujian:
+1. Buka Minecraft 26.2 dan masuk ke dunia singleplayer.
+2. Pastikan berada dalam mode Survival:
+   /gamemode survival
+3. Coba jalankan perintah pemberian senjata:
+   /mmo give awakened_pyromancer_blazestaff
+   [Ekspektasi Uji]:
+   - Perintah DITOLAK.
+   - Muncul pesan error merah: "[Takasha-MMO] Perintah senjata Samus/MMO hanya dapat digunakan dalam Mode Kreatif!"
+   - Tidak ada item yang masuk ke inventori.
+4. Beralih ke mode Kreatif:
+   /gamemode creative
+5. Eksekusi kembali perintah:
+   /mmo give awakened_pyromancer_blazestaff
+   [Ekspektasi Uji]:
+   - Perintah BERHASIL.
+   - Muncul notifikasi hijau: "[Takasha-MMO] Memberikan 1x awakened_pyromancer_blazestaff ke [NamaPemain]."
+   - Item Awakened Pyromancer Blazestaff masuk ke tangan/hotbar pemain.
+
+
+TASK 2: VERIFIKASI VISUAL TEXTURE & ELIMINASI MISSING TEXTURE CUBES
+----------------------------------------------------------------------------------------
+Tujuan: Memverifikasi hilangnya kotak kubus hitam-ungu pada meteor dan zirah pemain.
+Langkah Pengujian:
+1. Pegang Awakened Pyromancer Blazestaff di tangan utama.
+2. Amati model senjata di tangan (tekan F5 untuk tampilan orang ketiga):
+   [Ekspektasi Uji]:
+   - Tongkat berwujud model 3D Blockbench api bertekstur magma oranye-merah dengan kristal menyala.
+   - Tidak ada missing texture pada tongkat.
+3. Kenakan set zirah RPG (misal: Dimensional Traveller atau Netherite/Diamond):
+   [Ekspektasi Uji]:
+   - Kaki dan badan pemain TIDAK ADA kotak hitam-ungu checkerboard.
+   - Tekstur zirah ter-render rapi dan mulus.
+4. Beralih ke area terbuka, arahkan pandangan ke depan dan lakukan 4 kali Basic Attack (LMB):
+   - Amati saat serangan ke-4 (Meteor raksasa jatuh dari langit):
+   [Ekspektasi Uji]:
+   - Bola meteor raksasa bertekstur batuan lahar api jatuh dari langit.
+   - Perhatikan area langit di samping kiri/kanan meteor:
+     4 KOTAK HITAM-UNGU KECIL YANG SEBELUMNYA MELAYANG DI LANGIT KINI TELAH HILANG TOTAL!
+   - Langit bersih, hanya meteor dan efek api asli yang tampil.
+
+
+TASK 3: PENGUJIAN 7 SKILL SAMUS AWAKENED PYROMANCER (100% PARITY)
+----------------------------------------------------------------------------------------
+Tujuan: Menguji seluruh 7 skill dan mekanisme Heat Mastery / Ignition sesuai video resmi showcase.
+
+A. Basic Attack & Passive Combo (LMB & Heat Mastery):
+   1. Serang ke udara (Air-Swing) atau monster/dummy dengan Klik Kiri (LMB) berturut-turut:
+      - Serangan 1: Menembakkan 1x Ash Missile api ke depan.
+      - Serangan 2: Menembakkan 1x Ash Missile api kedua.
+      - Serangan 3: Melepaskan Flame Shockwave berbentuk kipas di depan pemain.
+      - Serangan 4: Memanggil Meteor raksasa yang jatuh menukik ke tanah, meledak hebat dan memunculkan batuan retak lava.
+   2. Amati indikator Heat Mastery di atas kepala pemain:
+      - Tiap Basic Attack menambah 1 Heat stack (Stack 1 -> Stack 2 -> Stack 3) tanpa duplikasi model ganda.
+      - Pada Stack 3, pemain masuk ke status "IGNITION" (kobaran api menjadi crimson tua pekat).
+      - Menggunakan skill non-ultimate saat Ignition akan mengeksekusi versi kuat (-IGNITION) dan mereset stack ke 0.
+
+B. Skill 1 - Volcanic Spear (Klik Kanan / RMB):
+   1. Klik Kanan (RMB) saat memegang tongkat:
+      - Strike 1: Jab menusuk ke depan -> Flaming Slash horizontal dengan model tombak magma asli.
+      - Strike 2: Upward Slash ke atas -> Downward Slam ke tanah -> Final Piercing Jab.
+      - Menimbulkan burn damage pada semua target di lintasan.
+   2. Uji saat Ignition aktif:
+      - Tombak api memanjang secara visual, warna berubah merah tua (dark red), jangkauan serang bertambah.
+
+C. Skill 2 - Hellfire Overblast (Shift + Shift / Double-Tap Sneak):
+   1. Tekan tombol Shift dua kali dengan cepat (double-tap dalam ~0.5 detik):
+      - Api terkumpul di depan pemain lalu menyemburkan fire beam continuous selama 4 detik (15 gelombang laser api bertubi-tubi)!
+      - Musuh di jalur beam terbakar terus menerus.
+   2. Uji saat Ignition aktif:
+      - Semburan beam berubah menjadi merah crimson tua, jangkauan memanjang, musuh terdorong ke belakang (knockback).
+
+D. Skill 3 - Firestorm Volley (Hold Shift / Tahan Sneak >= 0.5 detik):
+   1. Tahan tombol Shift selama minimal 0.5 detik (10 ticks):
+      - Bola-bola api berputar spiral ke atas membentuk lingkaran bola api di atas kepala.
+      - Bola api tersebut pecah dan meluncur turun secara otomatis mengejar musuh terdekat (homing fireballs).
+   2. Uji saat Ignition aktif:
+      - Bola api menjadi merah tua dan memicu ledakan area (AoE) saat menghantam target.
+
+E. Skill 4 - Magma Dash (Shift + Klik Kanan / RMB):
+   1. Tahan Shift + Klik Kanan:
+      - Pemain melesat cepat ke depan meninggalkan jejak lava cair panas di tanah.
+      - Musuh yang menginjak jejak lava menerima damage terbakar.
+   2. Uji saat Ignition aktif:
+      - Jejak lava retak dan memicu rangkaian ledakan beruntun di sepanjang lintasan lari.
+
+F. Ultimate Skill - Infernal Judgement (Shift + Klik Kiri / LMB):
+   1. Tahan Shift + Klik Kiri (dapat dilakukan di udara kosong):
+      - Pemain melompat tinggi dan melayang stabil di udara selama ~3 detik (65 ticks).
+      - Di udara, lingkaran sihir menyala (Infernal Magic Circles) muncul berurutan di samping pemain.
+      - Hujan tombak api magma raksasa melesat menghujam tanah ke arah bidikan pemain.
+      - Diakhiri dengan pemain menukik membanting ke tanah, memicu letusan kiamat dan gemuruh ledakan dahsyat.
+
+
+TASK 4: PENGUJIAN PERSISTENSI MANA (ANTI-RESET SAAT RELOG)
+----------------------------------------------------------------------------------------
+Tujuan: Memastikan jumlah mana tersimpan akurat dan tidak reset ke 20.0 saat keluar-masuk dunia.
+Langkah Pengujian:
+1. Beralih ke mode Survival:
+   /gamemode survival
+2. Perhatikan bar Mana di HUD (contoh: 304 / 1010 Mana).
+3. Gunakan skill berkali-kali hingga mana berkurang (contoh: tersisa 150 Mana).
+4. Buka menu Game (Esc) -> klik "Save and Quit to Title".
+5. Buka kembali dunia singleplayer tersebut.
+6. Periksa langsung bar Mana pada detik pertama masuk:
+   [Ekspektasi Uji]:
+   - Nilai Mana TETAP berada pada angka sebelum keluar (150 Mana).
+   - Mana TIDAK LAGI reset ke angka default 20.0!
+   - Mana beregenerasi normal sesuai stat Wisdom pemain.
+
+
+TASK 5: PENGUJIAN ENCHANTMENT WINGS & MOBILITAS TANPA PARTIKEL
+----------------------------------------------------------------------------------------
+Tujuan: Memastikan kemampuan terbang enchantment Wings berfungsi bersih 100% tanpa polusi partikel.
+Langkah Pengujian:
+1. Pasang enchantment `wings` pada sepatu:
+   /ae enchant wings 1
+2. Kenakan sepatu tersebut di slot armor boots.
+3. Tekan spasi dua kali (Double-Space) untuk terbang di mode Survival:
+   [Ekspektasi Uji]:
+   - Karakter langsung terbang melayang di udara dengan mulus.
+   - Layar pandangan pemain BERSIH TOTAL dari partikel kembang api (`FIREWORK`) dan asap (`CLOUD`).
+   - Tidak ada partikel berlebihan yang menutupi penglihatan saat terbang cepat.
+4. Lepas sepatu saat sedang terbang di ketinggian:
+   [Ekspektasi Uji]:
+   - Mode terbang langsung dicabut, karakter jatuh ke tanah namun kebal 100% dari fall damage.
+
+
+TASK 6: VERIFIKASI LOG KONSOL & ZERO ERROR SPAM
+----------------------------------------------------------------------------------------
+Tujuan: Memastikan tidak ada warning model/texture atau exception di console log.
+Langkah Pengujian:
+1. Pantau log game di `.minecraft/logs/latest.log`.
+2. Verifikasi:
+   - TIDAK ADA error `Missing textures in model takasha_rpg:vfx/...`.
+   - TIDAK ADA error `JsonParseException: 'to' / 'from' specifier exceeds the allowed boundaries`.
+   - TIDAK ADA `NullPointerException` atau `ConcurrentModificationException`.
+   - Server tick stabil pada 20.0 TPS.
+
+
+TASK 7: PENGUJIAN PARITAS PENARGETAN DUMMY, ANIMASI ATLAS, XP BOSSBAR & NAMETAG
+----------------------------------------------------------------------------------------
+Tujuan: Memverifikasi perbaikan paritas sumber:
+  * Penargetan dummy / DamageDummyEntity berfungsi 100% menggunakan logika Exact Registry ID MythicMobs.
+  * Ticker animasi lidah api puncak Blazestaff di tangan beranimasi aktif via atlas items.json 26.2.
+  * Perolehan XP AuraSkills / AdvancedEnchantments memunculkan BossBar kuning progresif di atas layar.
+  * Pengaturan mob nametag modular via perintah `/takasha nametag on/off`.
 
 Langkah Pengujian:
-
-1. Uji Pemberian Keystone:
-   /dungeon givekeystone @s common 1
-   /dungeon givekeystone @s nightmare 1
-   /dungeon givekeystone @s sakura_boss 1
-   - Periksa inventori: Item Dungeon Rift Keystone muncul dengan tekstur resmi Fuben dan tooltip level/gelombang yang informatif.
-
-2. Uji Memulai Arena via Keystone:
-   - Pegang Dungeon Rift Keystone di tangan utama.
-   - Klik Kanan di area terbuka.
-   - Periksa in-world:
-     * Dinding kurungan fisik silinder Tinted Glass (Radius 20 blok, Tinggi 8 blok) muncul seketika mengurung pemain.
-     * Atap pelindung Tinted Glass mencegah mob undead terbakar sinar matahari.
-     * Title besar & subtitle muncul di layar mengumumkan dimulainya gelombang 1.
-     * Bossbar aktif di bagian atas layar menunjukkan sisa musuh dan timer gelombang.
-     * Keystone berkurang 1 dari inventaris.
-
-3. Uji Mob & LevelledMobs Scaling:
-   - Mob dungeon muncul di dalam arena membawa level eksplisit di atas kepala:
-     * Common: Lvl 100 s.d. 300
-     * Nightmare: Lvl 350 s.d. 750
-     * Sakura Boss: Lvl 600 s.d. 1000
-   - Mob zombie/skeleton tidak terbakar di siang hari berkat atap pelindung dan efek Fire Resistance.
-   - Mob memiliki AI agresif yang langsung mengejar penantang tanpa berkeliaran diam.
-
-4. Uji Mekanisme Permadeath & Peti Hadiah Titik Tengah:
-   - Skenario A (Gugur di Gelombang 1):
-     * Biarkan mob mengalahkan pemain di Wave 1 (atau ketik /kill).
-     * Hasil: Sesi gagal total! Seluruh blok arena di-rollback bersih. Tidak ada peti hadiah yang dimunculkan sama sekali.
-   - Skenario B (Gugur di Gelombang 2 ke atas):
-     * Kalahkan semua musuh di Wave 1 hingga masuk ke Wave 2.
-     * Di Wave 2, ketik `/dungeon leave` (menyerah) atau gugur.
-     * Hasil: Seluruh arena Tinted Glass di-rollback kembali ke blok semula, KECUALI titik tengah tempat Peti Sisa (Remains Chest) fisik muncul memuat hadiah dari Wave 1 yang telah diselesaikan.
-   - Skenario C (Kemenangan Penuh Wave 5):
-     * Selesaikan seluruh 5 gelombang dan kalahkan Boss Wave 5 (Lvl 300 / 750 / 1000).
-     * Hasil: Title VICTORY spektakuler muncul, suara perayaan terdengar, seluruh arena pulih kembali, dan Peti Kemenangan Utama (Victory Chest) muncul di titik tengah berisi koin melimpah, dust, scroll, dan peluang item langka (Ancient Keystone, Mystery Books, Armor/Senjata Supreme/Koth/Yeti/Yijki/Dimensional Traveller).
-
-5. Uji Perintah Operator:
-   - /dungeon info : Melihat status arena, tier, gelombang aktif, koordinat pusat, dan UUID challenger.
-   - /dungeon setstage 5 : Memaksa arena langsung melompat ke Wave 5 (Boss Wave).
-   - /dungeon rollback : Emergency manual rollback untuk memulihkan seluruh blok arena seketika.
-   - /dungeon stop false : Menghentikan arena secara paksa tanpa kemenangan.
-   - /dungeon reload : Memuat ulang konfigurasi dungeon arena.
+1. Spawn Combat Dummy latihan:
+   /dummy spawn
+2. Ambil senjata Samus Awakened Pyromancer Blazestaff:
+   /mmo give awakened_pyromancer_blazestaff
+3. Amati Blazestaff di tangan pemain (First-person dan Third-person):
+   [Ekspektasi Uji]:
+   - Puncak tongkat memiliki nyala lidah api (`flame_debuff`) yang berkedip dan berkobar beranimasi (10 frame kontinu).
+4. Lakukan serangan dasar (Klik Kiri) dan kemampuan jurus mengarah ke Dummy:
+   - Klik Kiri (LMB): Memunculkan proyektil abu api (`Pyro_Combo_ASH_Missiles`) yang melesat mengunci Dummy!
+   - Peluru mengenai Dummy: Timbul partikel impact, suara ledakan tumpul, Dummy menerima damage penuh,
+     angka DPS dan damage melayang (floating text) muncul di atas Dummy!
+   - Klik Kanan (RMB): Volcanic Spear menembus dan merusak Dummy.
+   - Shift + Klik Kanan (Shift+RMB): Magma Dash menerjang dan membakar Dummy.
+5. Perhatikan Bagian Atas Layar saat Memukul Dummy / Mendapatkan XP:
+   [Ekspektasi Uji]:
+   - Muncul BossBar kuning (YELLOW PROGRESS) bertuliskan:
+     "[FIGHTING] » Lvl X (Current / Req XP - %)"
+   - Progress bar terisi proporsional sesuai XP.
+   - BossBar bertahan selama 4 detik, lalu menghilang secara halus jika tidak ada serangan baru.
+6. Uji Perintah Pengaturan Nametag Server:
+   - Cek status: `/takasha nametag status`
+   - Matikan nametag agar bebas bentrok dengan mod nametag lain: `/takasha nametag off`
+     [Ekspektasi]: Muncul konfirmasi "Mob Nametag Level: DINONAKTIFKAN (Kompatibilitas mod nametag lain aktif)",
+     dan takasha-rpg tidak lagi menimpa nametag entitas di server.
+   - Hidupkan kembali: `/takasha nametag on`
 
 ========================================================================================
-AKHIR DARI PANDUAN PENGUJIAN FITUR UPDATE v1.6.0+26.2
+[BAGIAN 9] PENGUJIAN PARITAS 1:1 MMOITEMS CHAT EDITION & PEMBUATAN ITEM KOSONG (ZERO-STAT)
 ========================================================================================
+Fitur Utama yang Diuji:
+  * Pembuatan item baru (misal SWORD) HANYA menyetel base.material (stat, tier, nama, lore kosong murni).
+  * Format teks Chat Edition 1:1 Spigot (Banner atas tunggal coret kuning, prefix §8[§eMMOItems§8] §7, screen title).
+  * Toleransi kesalahan: Input salah TIDAK mengeluarkan pemain dari sesi chat (bisa langsung ketik ulang).
+  * Pembatalan senyap: Mengetik 'cancel' kembali ke GUI tanpa spam error.
+  * Interaksi Stat Edition: Klik Kiri membuka prompt chat, Klik Kanan menghapus/mengosongkan stat.
 
+Langkah Pengujian:
+1. Buat item pedang baru murni:
+   /mi create SWORD TES_PEDANG_BARU
+   [Ekspektasi]: Item tercipta dan otomatis membuka Item Edition GUI.
+2. Periksa Stat Item di GUI:
+   [Ekspektasi]:
+   - Display Name: 'None' (§cNone)
+   - Item Tier: 'None' (§cNone)
+   - Attack Damage: '---' (§a---)
+   - Attack Speed: '---' (§a---)
+   - Tidak ada nilai default 5.0 atau 1.6 palsu yang terisi!
+3. Uji Klik Kiri untuk Input Stat (Attack Damage):
+   - Klik Kiri pada ikon Iron Sword (Attack Damage).
+   [Ekspektasi]:
+   - GUI menutup.
+   - Di layar muncul Title emas: "Item Edition" dan Subtitle: "See chat."
+   - Di chat muncul:
+     §e§m-----------------------------------------------------
+     §8[§eMMOItems§8] §7Write in the chat the value you want.
+     §8[§eMMOItems§8] §7Type 'cancel' to abort editing.
+4. Uji Toleransi Kesalahan (Fault-Tolerant Session):
+   - Ketik sembarang kata di chat: "halo"
+   [Ekspektasi]:
+   - Muncul pesan error merah: §8[§eMMOItems§8] §c'halo' is not a valid number!
+   - Sesi chat TIDAK ditutup! Pemain TIDAK perlu membuka ulang GUI.
+   - Langsung ketik angka yang benar: "12.5"
+   [Ekspektasi]:
+   - Muncul konfirmasi hijau: §8[§eMMOItems§8] §aAttack Damage successfully changed to 12.5.
+   - GUI Item Edition otomatis terbuka kembali dengan Attack Damage = 12.5!
+5. Uji Klik Kanan untuk Menghapus Stat:
+   - Klik Kanan pada ikon Attack Damage.
+   [Ekspektasi]:
+   - Muncul notifikasi: §8[§eMMOItems§8] §aSuccessfully removed Attack Damage.
+   - Nilai kembali menjadi: §7Current Value: §a---
+6. Uji Pembatalan Senyap ('cancel'):
+   - Klik Kiri pada Display Name.
+   - Ketik: cancel
+   [Ekspektasi]: Sesi berakhir dan GUI terbuka kembali tanpa error spam.
 
+========================================================================================
+[BAGIAN 10] PENGUJIAN GUI MANAJEMEN HADIAH DUNGEON DINAMIS & SIMULASI ROLL
+========================================================================================
+Fitur Utama yang Diuji:
+  * GUI 54-Slot interaktif `/dungeon rewards [tier] [wave]` (alias `/dungeon loot`).
+  * Tab perpindahan Tier (Common, Nightmare, Sakura Boss) dan Gelombang (Wave 1 s.d. 5).
+  * Pengubahan Drop Chance & Rentang Jumlah via MMOChatEditionEngine.
+  * Tambah item dari tangan utama (LMB) atau ketik Resource ID (RMB).
+  * Tes Roll Undian Langsung (Slot 6 Dispenser).
+  * Reset Wave ke preset bawaan (Slot 49 Cauldron).
+  * Persistensi disk JSON (`config/takasha/dungeon_rewards.json`) dan reload (`/dungeon reload`).
+
+Langkah Pengujian:
+1. Buka GUI Manajemen Hadiah Dungeon:
+   /dungeon rewards
+   atau
+   /dungeon loot nightmare 3
+   [Ekspektasi]: Terbuka antarmuka 54 slot dengan judul "Dungeon Rewards: Nightmare (W3)".
+2. Navigasi Antar Wave & Tier:
+   - Klik tab Slot 0 (Common), Slot 1 (Nightmare), atau Slot 2 (Sakura Boss).
+   - Klik tab Slot 11 s.d. 15 (Wave 1 s.d. Wave 5).
+   [Ekspektasi]: Tab yang aktif bersinar enchanted dan menampilkan daftar item hadiah wave tersebut.
+3. Uji Simulasi Roll 1x:
+   - Klik ikon Dispenser di Slot 6: `[🎲 Simulasi Roll 1x]`.
+   [Ekspektasi]: Server menjalankan roll undian dengan persentase drop rate aktual dan mengirimkan
+   daftar item yang berhasil didapat langsung ke chat pemain beserta efek suara!
+4. Uji Pengubahan Peluang Drop (Chance):
+   - Klik Kiri pada salah satu item di grid (misal RPG Coin atau Mystery Book).
+   [Ekspektasi]: Muncul prompt chat untuk memasukkan persentase (1..100) atau desimal (0.01..1.0).
+   - Ketik: 75%
+   [Ekspektasi]: Peluang drop item tersebut berubah menjadi 75.0% di lore GUI.
+5. Uji Pengubahan Rentang Jumlah (Amount Range):
+   - Klik Kanan pada item di grid.
+   - Ketik rentang: 5-20
+   [Ekspektasi]: Jumlah drop item berubah menjadi 5 - 20 di lore GUI.
+6. Uji Tambah Item Hadiah Baru:
+   - Pegang item apa pun di tangan utama (misal Diamond Sword atau Sakura Katana).
+   - Klik Kiri pada Slot 45 `[➕ Tambah Item Hadiah]`.
+   [Ekspektasi]: Item tersebut langsung masuk ke dalam daftar hadiah wave aktif!
+7. Uji Hapus Item:
+   - Shift + Klik Kanan pada item yang baru ditambahkan.
+   [Ekspektasi]: Item dihapus dari drop pool wave tersebut dengan suara item break.
+8. Uji Simpan Konfigurasi & Reload:
+   - Klik Slot 7 `[💾 Simpan ke JSON]`.
+   - Jalankan `/dungeon reload` di console/chat untuk memastikan hot-reload berjalan tanpa restart server.
+========================================================================================
