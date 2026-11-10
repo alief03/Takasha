@@ -42,6 +42,8 @@ public class TakashaMobKillHandler {
     private long lastAttackTime = 0L;
     private long lastEquipAttemptTime = 0L;
     private long lastBreakWarningTime = 0L;
+    private float lockedGrinderYaw = Float.NaN;
+    private float lockedGrinderPitch = Float.NaN;
 
     public static TakashaMobKillHandler getInstance() {
         if (INSTANCE == null) {
@@ -71,16 +73,22 @@ public class TakashaMobKillHandler {
             return;
         }
 
+        // ABSOLUTE MUTEX: Pause combat & release all keys if Capcay solver is active, eating food, or any GUI screen is open
+        boolean capcayBusy = net.sakura.weapons.client.fishing.CapcayManager.getInstance().isBusy();
+        boolean autoEating = net.sakura.weapons.client.food.TakashaAutoEatHandler.getInstance().isEating();
+        boolean screenOpen = client.gui.screen() != null;
+
+        if (capcayBusy || autoEating || screenOpen) {
+            currentTarget = null;
+            antiAfk.releaseMovementKeys(client);
+            return;
+        }
+
         // Anti-AFK behavior: Active only in KAIZEN mode if enabled
         if (config.mobKillMode == TakashaMasterConfig.MobKillMode.KAIZEN && config.antiAfkEnabled) {
             antiAfk.tick(client, player);
         } else {
             antiAfk.reset(client);
-        }
-
-        // Pause if container or GUI screen is open
-        if (client.gui.screen() != null) {
-            return;
         }
 
         double reach = config.killReach;
@@ -94,6 +102,10 @@ public class TakashaMobKillHandler {
 
         if (candidates.isEmpty()) {
             currentTarget = null;
+            // In Kaizen mode: if no candidate mob is currently in reach, restore camera to locked grinder angle if drifted
+            if (config.mobKillMode == TakashaMasterConfig.MobKillMode.KAIZEN && config.autoCameraFix && !Float.isNaN(lockedGrinderYaw)) {
+                restoreLockedGrinderAngle(player, config);
+            }
             return;
         }
 
@@ -103,7 +115,15 @@ public class TakashaMobKillHandler {
         }
 
         if (currentTarget == null) {
+            if (config.mobKillMode == TakashaMasterConfig.MobKillMode.KAIZEN && config.autoCameraFix && !Float.isNaN(lockedGrinderYaw)) {
+                restoreLockedGrinderAngle(player, config);
+            }
             return;
+        }
+
+        // Kaizen Camera Auto-Fix: automatically and smoothly steer crosshair towards target/grinder opening
+        if (config.mobKillMode == TakashaMasterConfig.MobKillMode.KAIZEN && config.autoCameraFix) {
+            applyKaizenCameraFix(player, currentTarget, config);
         }
 
         // Check weapon validity and break protection
@@ -252,7 +272,11 @@ public class TakashaMobKillHandler {
 
         var stream = list.stream();
         if (config.maxFovAngle < 360.0) {
-            stream = stream.filter(e -> isInFrontalCone(player, e, config.maxFovAngle));
+            if (!(config.mobKillMode == TakashaMasterConfig.MobKillMode.KAIZEN && config.autoCameraFix)) {
+                stream = stream.filter(e -> isInFrontalCone(player, e, config.maxFovAngle));
+            } else {
+                stream = stream.filter(e -> hasLineOfSight(player, e));
+            }
         }
 
         Comparator<LivingEntity> comparator;
@@ -333,8 +357,66 @@ public class TakashaMobKillHandler {
         currentTarget = null;
     }
 
+    private void applyKaizenCameraFix(LocalPlayer player, LivingEntity target, TakashaMasterConfig config) {
+        Vec3 eyePos = player.getEyePosition();
+        Vec3 targetCenter = target.position().add(0, target.getEyeHeight() * 0.5, 0);
+        Vec3 targetFeet = target.position().add(0, 0.2, 0);
+        Vec3 aimPos = hasLineOfSight(player, target) ? (hasLineOfSightCenter(player, target) ? targetCenter : targetFeet) : targetCenter;
+
+        double dx = aimPos.x - eyePos.x;
+        double dy = aimPos.y - eyePos.y;
+        double dz = aimPos.z - eyePos.z;
+        double horizontalDist = Math.sqrt(dx * dx + dz * dz);
+
+        float targetYaw = (float) (Mth.atan2(dz, dx) * (180.0 / Math.PI)) - 90.0f;
+        float targetPitch = (float) (-(Mth.atan2(dy, horizontalDist) * (180.0 / Math.PI)));
+
+        lockedGrinderYaw = targetYaw;
+        lockedGrinderPitch = targetPitch;
+
+        float currentYaw = player.getYRot();
+        float currentPitch = player.getXRot();
+        float yawDiff = Mth.wrapDegrees(targetYaw - currentYaw);
+        float pitchDiff = targetPitch - currentPitch;
+
+        if (Math.abs(yawDiff) > 1.5f || Math.abs(pitchDiff) > 1.5f) {
+            float maxStep = (float) Math.max(5.0, config.autoCameraFixSpeed);
+            float stepYaw = Mth.clamp(yawDiff, -maxStep, maxStep);
+            float stepPitch = Mth.clamp(pitchDiff, -maxStep, maxStep);
+            player.setYRot(currentYaw + stepYaw);
+            player.setXRot(Mth.clamp(currentPitch + stepPitch, -90.0f, 90.0f));
+        }
+    }
+
+    private void restoreLockedGrinderAngle(LocalPlayer player, TakashaMasterConfig config) {
+        if (Float.isNaN(lockedGrinderYaw) || Float.isNaN(lockedGrinderPitch)) return;
+        float currentYaw = player.getYRot();
+        float currentPitch = player.getXRot();
+        float yawDiff = Mth.wrapDegrees(lockedGrinderYaw - currentYaw);
+        float pitchDiff = lockedGrinderPitch - currentPitch;
+
+        if (Math.abs(yawDiff) > 1.5f || Math.abs(pitchDiff) > 1.5f) {
+            float maxStep = (float) Math.max(5.0, config.autoCameraFixSpeed);
+            float stepYaw = Mth.clamp(yawDiff, -maxStep, maxStep);
+            float stepPitch = Mth.clamp(pitchDiff, -maxStep, maxStep);
+            player.setYRot(currentYaw + stepYaw);
+            player.setXRot(Mth.clamp(currentPitch + stepPitch, -90.0f, 90.0f));
+        }
+    }
+
+    private boolean hasLineOfSightCenter(LocalPlayer player, LivingEntity target) {
+        Vec3 eyePos = player.getEyePosition();
+        Vec3 targetCenter = target.position().add(0, target.getEyeHeight() * 0.5, 0);
+        HitResult hitCenter = player.level().clip(new ClipContext(
+                eyePos, targetCenter, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player
+        ));
+        return hitCenter.getType() == HitResult.Type.MISS;
+    }
+
     public void reset(Minecraft client) {
         currentTarget = null;
+        lockedGrinderYaw = Float.NaN;
+        lockedGrinderPitch = Float.NaN;
         antiAfk.reset(client);
     }
 }

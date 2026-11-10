@@ -160,6 +160,9 @@ public class CapcayManager {
         scheduledActionTime = stateEnteredAt + baseDelay + jitter;
 
         TakashaFishingHandler.getInstance().pauseForCapcay();
+        try {
+            net.sakura.weapons.client.combat.TakashaMobKillHandler.getInstance().reset(Minecraft.getInstance());
+        } catch (Throwable ignored) {}
 
         if (client.player != null && config.capcaySoundAlert) {
             client.player.playSound(SoundEvents.EXPERIENCE_ORB_PICKUP, 1.0f, 1.2f);
@@ -188,6 +191,9 @@ public class CapcayManager {
         scheduledActionTime = now + baseDelay + jitter;
 
         TakashaFishingHandler.getInstance().pauseForCapcay();
+        try {
+            net.sakura.weapons.client.combat.TakashaMobKillHandler.getInstance().reset(Minecraft.getInstance());
+        } catch (Throwable ignored) {}
         log("§6[AutoCapcay] Chest CAPCAY terdeteksi! Membaca pola item dalam " + (baseDelay + jitter) + " ms...");
     }
 
@@ -252,8 +258,8 @@ public class CapcayManager {
         state = State.IDLE;
         stateEnteredAt = 0L;
 
-        if (config.capcayAutoResumeAutofish) {
-            log("§2[AutoCapcay] Selesai! Melanjutkan Autofish...");
+        log("§2[AutoCapcay] Selesai! Melanjutkan seluruh modul otomasi...");
+        if (config.capcayAutoResumeAutofish && config.autoFishEnabled) {
             TakashaFishingHandler.getInstance().resumeAfterCapcay();
         }
     }

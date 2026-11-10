@@ -50,7 +50,7 @@ public final class CapcaySolver {
             Slot slot = menu.slots.get(i);
             if (slot.container != playerInventory) {
                 ItemStack stack = slot.getItem();
-                if (!ItemClassifier.isFiller(stack)) {
+                if (!ItemClassifier.isFiller(stack) && !ItemClassifier.isInfoOrInstructionItem(stack)) {
                     chestSlots.put(i, stack);
                 }
             }
@@ -142,6 +142,47 @@ public final class CapcaySolver {
                         itemName,
                         String.format("Ditemukan minoritas item ID %s (%d vs %d). Slot target: %d",
                                 itemName, minCount, maxCount, targetSlot)
+                );
+            }
+        }
+
+        // Tier 3 fallback: group by custom display / hover name (handles textured player heads & paper custom items)
+        Map<String, List<Integer>> nameGroups = new HashMap<>();
+        for (Map.Entry<Integer, ItemStack> entry : chestSlots.entrySet()) {
+            int slotIdx = entry.getKey();
+            ItemStack stack = entry.getValue();
+            String name = stack.getHoverName().getString();
+            nameGroups.computeIfAbsent(name, k -> new ArrayList<>()).add(slotIdx);
+        }
+
+        if (nameGroups.size() >= 2) {
+            String minorityName = null;
+            int minCount = Integer.MAX_VALUE;
+            int maxCount = Integer.MIN_VALUE;
+
+            for (Map.Entry<String, List<Integer>> entry : nameGroups.entrySet()) {
+                int count = entry.getValue().size();
+                if (count < minCount) {
+                    minCount = count;
+                    minorityName = entry.getKey();
+                }
+                if (count > maxCount) {
+                    maxCount = count;
+                }
+            }
+
+            if (minorityName != null && minCount < maxCount) {
+                List<Integer> candidateSlots = nameGroups.get(minorityName);
+                int targetSlot = candidateSlots.get(0);
+
+                return new SolveResult(
+                        true,
+                        targetSlot,
+                        candidateSlots,
+                        ItemCategory.OTHER,
+                        minorityName,
+                        String.format("Ditemukan minoritas display name '%s' (%d vs %d). Slot target: %d",
+                                minorityName, minCount, maxCount, targetSlot)
                 );
             }
         }

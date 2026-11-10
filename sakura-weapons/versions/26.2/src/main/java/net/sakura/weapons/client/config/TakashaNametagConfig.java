@@ -23,6 +23,8 @@ public class TakashaNametagConfig {
     private static final Path CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve("takasha_nametag_client.json");
 
     private static boolean playerNametagsDisabled = false;
+    private static boolean hideSelfOnly = true;
+    private static boolean serverPassthrough = true;
     private static boolean loaded = false;
 
     public static synchronized void ensureLoaded() {
@@ -37,6 +39,12 @@ public class TakashaNametagConfig {
             JsonObject json = JsonParser.parseReader(reader).getAsJsonObject();
             if (json.has("playerNametagsDisabled")) {
                 playerNametagsDisabled = json.get("playerNametagsDisabled").getAsBoolean();
+            }
+            if (json.has("hideSelfOnly")) {
+                hideSelfOnly = json.get("hideSelfOnly").getAsBoolean();
+            }
+            if (json.has("serverPassthrough")) {
+                serverPassthrough = json.get("serverPassthrough").getAsBoolean();
             }
         } catch (Throwable e) {
             SakuraWeaponsMod.LOGGER.warn("Failed to load Takasha nametag config from {}", CONFIG_PATH, e);
@@ -54,6 +62,8 @@ public class TakashaNametagConfig {
         try {
             JsonObject json = new JsonObject();
             json.addProperty("playerNametagsDisabled", playerNametagsDisabled);
+            json.addProperty("hideSelfOnly", hideSelfOnly);
+            json.addProperty("serverPassthrough", serverPassthrough);
             String jsonStr = GSON.toJson(json);
             CONFIG_EXECUTOR.submit(() -> {
                 try {
@@ -78,6 +88,32 @@ public class TakashaNametagConfig {
             ensureLoaded();
         }
         return playerNametagsDisabled;
+    }
+
+    public static boolean isHideSelfOnly() {
+        if (!loaded) {
+            ensureLoaded();
+        }
+        return hideSelfOnly;
+    }
+
+    public static void setHideSelfOnly(boolean selfOnly) {
+        ensureLoaded();
+        hideSelfOnly = selfOnly;
+        save();
+    }
+
+    public static boolean isServerPassthroughEnabled() {
+        if (!loaded) {
+            ensureLoaded();
+        }
+        return serverPassthrough;
+    }
+
+    public static void setServerPassthroughEnabled(boolean enabled) {
+        ensureLoaded();
+        serverPassthrough = enabled;
+        save();
     }
 
     public static void setPlayerNametagDisabled(boolean disabled, Player player) {

@@ -22,15 +22,36 @@ public final class ItemClassifier {
         Identifier id = BuiltInRegistries.ITEM.getKey(item);
         if (id == null) return true;
         String path = id.getPath();
-        return path.endsWith("_stained_glass_pane")
+        return path.contains("stained_glass")
             || path.equals("glass_pane")
+            || path.equals("glass")
+            || path.equals("iron_bars")
             || path.equals("barrier")
             || path.equals("air")
             || path.equals("structure_void");
     }
 
+    public static boolean isInfoOrInstructionItem(ItemStack stack) {
+        if (stack == null || stack.isEmpty()) return false;
+        String hover = stack.getHoverName().getString().toLowerCase();
+        if (hover.contains("info") || hover.contains("petunjuk") || hover.contains("aturan")
+                || hover.contains("panduan") || hover.contains("cara") || hover.contains("klik")
+                || hover.contains("verifikasi") || hover.contains("perhatian")
+                || hover.contains("pilih") || hover.contains("captcha") || hover.contains("capcay")
+                || hover.isBlank()) {
+            return true;
+        }
+        Item item = stack.getItem();
+        Identifier id = BuiltInRegistries.ITEM.getKey(item);
+        if (id == null) return false;
+        String path = id.getPath();
+        return path.equals("book") || path.equals("writable_book") || path.equals("written_book")
+                || path.equals("nether_star") || path.equals("compass") || path.endsWith("_sign")
+                || path.equals("bell");
+    }
+
     public static ItemCategory classify(ItemStack stack) {
-        if (isFiller(stack)) return ItemCategory.OTHER;
+        if (isFiller(stack) || isInfoOrInstructionItem(stack)) return ItemCategory.OTHER;
 
         Item item = stack.getItem();
         Identifier id = BuiltInRegistries.ITEM.getKey(item);

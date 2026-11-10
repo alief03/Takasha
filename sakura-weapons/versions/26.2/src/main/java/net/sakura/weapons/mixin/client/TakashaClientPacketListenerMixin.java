@@ -8,8 +8,11 @@ import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundDisguisedChatPacket;
 import net.minecraft.network.protocol.game.ClientboundSetActionBarTextPacket;
 import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
+import net.minecraft.network.protocol.game.ClientboundSetSubtitleTextPacket;
+import net.minecraft.network.protocol.game.ClientboundSetTitleTextPacket;
 import net.minecraft.network.protocol.game.ClientboundSoundPacket;
 import net.minecraft.network.protocol.game.ClientboundSystemChatPacket;
+import net.sakura.weapons.client.drop.TakashaAutoDropHandler;
 import net.sakura.weapons.client.fishing.CapcayManager;
 import net.sakura.weapons.client.fishing.TakashaFishingHandler;
 import net.sakura.weapons.client.fortune.TakashaFortuneReshaper;
@@ -44,6 +47,7 @@ public abstract class TakashaClientPacketListenerMixin extends ClientCommonPacke
         if (this.minecraft.isSameThread() && packet != null && packet.content() != null) {
             String text = packet.content().getString();
             CapcayManager.getInstance().onChatReceived(text);
+            TakashaAutoDropHandler.getInstance().onChatReceived(text);
 
             boolean cancel = TakashaFortuneReshaper.getInstance().handleIncomingText(packet.content(), packet.overlay());
             if (cancel) {
@@ -57,6 +61,7 @@ public abstract class TakashaClientPacketListenerMixin extends ClientCommonPacke
         if (this.minecraft.isSameThread() && packet != null && packet.message() != null) {
             String text = packet.message().getString();
             CapcayManager.getInstance().onChatReceived(text);
+            TakashaAutoDropHandler.getInstance().onChatReceived(text);
 
             boolean cancel = TakashaFortuneReshaper.getInstance().handleIncomingText(packet.message(), false);
             if (cancel) {
@@ -70,11 +75,30 @@ public abstract class TakashaClientPacketListenerMixin extends ClientCommonPacke
         if (this.minecraft.isSameThread() && packet != null && packet.text() != null) {
             String text = packet.text().getString();
             CapcayManager.getInstance().onChatReceived(text);
+            TakashaAutoDropHandler.getInstance().onChatReceived(text);
 
             boolean cancel = TakashaFortuneReshaper.getInstance().handleIncomingText(packet.text(), true);
             if (cancel) {
                 ci.cancel();
             }
+        }
+    }
+
+    @Inject(method = "setTitleText", at = @At("HEAD"))
+    private void onSetTitleText(ClientboundSetTitleTextPacket packet, CallbackInfo ci) {
+        if (this.minecraft.isSameThread() && packet != null && packet.text() != null) {
+            String text = packet.text().getString();
+            CapcayManager.getInstance().onChatReceived(text);
+            TakashaAutoDropHandler.getInstance().onChatReceived(text);
+        }
+    }
+
+    @Inject(method = "setSubtitleText", at = @At("HEAD"))
+    private void onSetSubtitleText(ClientboundSetSubtitleTextPacket packet, CallbackInfo ci) {
+        if (this.minecraft.isSameThread() && packet != null && packet.text() != null) {
+            String text = packet.text().getString();
+            CapcayManager.getInstance().onChatReceived(text);
+            TakashaAutoDropHandler.getInstance().onChatReceived(text);
         }
     }
 }

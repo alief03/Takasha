@@ -240,6 +240,14 @@ public class TakashaFishingSubScreen extends Screen {
         );
         this.addRenderableWidget(this.keybindWidget);
 
+        Button autoDropBtn = Button.builder(
+            Component.literal("🗑 Auto Drop"),
+            btn -> this.minecraft.setScreen(new TakashaAutoDropSubScreen(this))
+        ).bounds(left + 184, bottomY, 110, 18)
+        .tooltip(Tooltip.create(Component.literal("Buka pengaturan filter auto-drop hasil pancingan")))
+        .build();
+        this.addRenderableWidget(autoDropBtn);
+
         this.backBtn = Button.builder(
             Component.literal("◀ Kembali"),
             btn -> this.onClose()

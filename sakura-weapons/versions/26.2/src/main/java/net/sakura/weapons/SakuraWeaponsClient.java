@@ -53,10 +53,10 @@ public class SakuraWeaponsClient implements ClientModInitializer {
     public void onInitializeClient() {
         LOGGER.info("Initializing Sakura Weapons client rendering for Minecraft 26.2...");
 
-        // Asynchronously pre-warm configs and emote scanner at startup to eliminate delay on first keybind GUI open
+        // Pre-warm configs lazily at startup without spinning up disk-scanning threads
         TakashaMasterConfig.getInstance();
         TakashaNametagConfig.ensureLoaded();
-        EmotecraftCompat.prewarm();
+        // Emotecraft scanning is deferred lazily until the user opens the emote UI / NPC screen
 
         // Register custom decorative Sakura Wings and Sakura Hat feature renderers for players and armor stands
         LivingEntityRenderLayerRegistrationCallback.EVENT.register((entityType, renderer, helper, context) -> {
@@ -172,6 +172,7 @@ public class SakuraWeaponsClient implements ClientModInitializer {
                 if (client.player != null) {
                     var cfg = net.sakura.weapons.client.config.TakashaMasterConfig.getInstance();
                     cfg.autoFarmEnabled = !cfg.autoFarmEnabled;
+                    if (cfg.autoFarmEnabled) cfg.autoEatEnabled = true;
                     cfg.save();
                     client.player.sendOverlayMessage(net.minecraft.network.chat.Component.literal(
                         cfg.autoFarmEnabled ? "§a[Auto Farm] Aktif" : "§c[Auto Farm] Nonaktif"
@@ -182,6 +183,7 @@ public class SakuraWeaponsClient implements ClientModInitializer {
                 if (client.player != null) {
                     var cfg = net.sakura.weapons.client.config.TakashaMasterConfig.getInstance();
                     cfg.autoFishEnabled = !cfg.autoFishEnabled;
+                    if (cfg.autoFishEnabled) cfg.autoEatEnabled = true;
                     cfg.save();
                     client.player.sendOverlayMessage(net.minecraft.network.chat.Component.literal(
                         cfg.autoFishEnabled ? "§a[Auto Fishing] Aktif (" + cfg.fishingMode + ")" : "§c[Auto Fishing] Nonaktif"
@@ -192,6 +194,7 @@ public class SakuraWeaponsClient implements ClientModInitializer {
                 if (client.player != null) {
                     var cfg = net.sakura.weapons.client.config.TakashaMasterConfig.getInstance();
                     cfg.autoKillEnabled = !cfg.autoKillEnabled;
+                    if (cfg.autoKillEnabled) cfg.autoEatEnabled = true;
                     cfg.save();
                     client.player.sendOverlayMessage(net.minecraft.network.chat.Component.literal(
                         cfg.autoKillEnabled ? "§a[Auto Kill Mob] Aktif (Anti-Aura 35°)" : "§c[Auto Kill Mob] Nonaktif"
@@ -202,6 +205,7 @@ public class SakuraWeaponsClient implements ClientModInitializer {
                 if (client.player != null) {
                     var cfg = net.sakura.weapons.client.config.TakashaMasterConfig.getInstance();
                     cfg.autoBowEnabled = !cfg.autoBowEnabled;
+                    if (cfg.autoBowEnabled) cfg.autoEatEnabled = true;
                     cfg.save();
                     client.player.sendOverlayMessage(net.minecraft.network.chat.Component.literal(
                         cfg.autoBowEnabled ? "§a[Auto Bow] Aktif (Ballistic Aim)" : "§c[Auto Bow] Nonaktif"
@@ -227,11 +231,20 @@ public class SakuraWeaponsClient implements ClientModInitializer {
                 }
             }
 
-            // Run automation handlers
+            // 1. Capcay Anti-Bot Solver (Highest Priority)
+            net.sakura.weapons.client.fishing.CapcayManager.getInstance().tick(client);
+
+            // 2. Auto-Eat Engine (Food & Hunger Watcher)
+            net.sakura.weapons.client.food.TakashaAutoEatHandler.getInstance().tick(client);
+
+            // 3. Action Automation Handlers
             net.sakura.weapons.client.farming.TakashaFarmHandler.getInstance().tick(client);
             net.sakura.weapons.client.fishing.TakashaFishingHandler.getInstance().tick(client);
             net.sakura.weapons.client.combat.TakashaMobKillHandler.getInstance().tick(client);
             net.sakura.weapons.client.combat.TakashaAutoBowHandler.getInstance().tick(client);
+
+            // 4. Universal Auto-Drop Engine (Mining, Fishing, Kill)
+            net.sakura.weapons.client.drop.TakashaAutoDropHandler.getInstance().tick(client);
         });
 
         LOGGER.info("Takasha client successfully initialized with Anvil scrollable GUI sidebar, NPC rendering, menu screens, and studio shortcuts for Minecraft 26.2.");

@@ -57,7 +57,7 @@ public class RodSlipHandler {
             return;
         }
 
-        if (CapcayManager.getInstance().isBusy()) {
+        if (CapcayManager.getInstance().isBusy() || net.sakura.weapons.client.food.TakashaAutoEatHandler.getInstance().isEating()) {
             return;
         }
 

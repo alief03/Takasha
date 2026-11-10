@@ -174,14 +174,16 @@ public class TakashaDashboardScreen extends Screen {
         // Row 4, Col 1: Dynamic Nametag
         boolean nametagDisabled = TakashaNametagConfig.isPlayerNametagDisabled();
         this.nametagToggleBtn = Button.builder(
-            Component.literal(nametagDisabled ? "Nametag: §cTERSEMBUNYI" : "Nametag: §aMUNCUL"),
+            Component.literal(nametagDisabled ? "Nametag: §cTERSEMBUNYI (Self)" : "Nametag: §aMUNCUL"),
             btn -> {
                 if (this.minecraft.player != null) {
                     boolean nowDisabled = TakashaNametagConfig.toggle(this.minecraft.player);
-                    btn.setMessage(Component.literal(nowDisabled ? "Nametag: §cTERSEMBUNYI" : "Nametag: §aMUNCUL"));
+                    btn.setMessage(Component.literal(nowDisabled ? "Nametag: §cTERSEMBUNYI (Self)" : "Nametag: §aMUNCUL"));
                 }
             }
-        ).bounds(col1X + 4, row4Y + 22, 184, 18).build();
+        ).bounds(col1X + 4, row4Y + 22, 184, 18)
+        .tooltip(Tooltip.create(Component.literal("Sembunyikan nametag diri sendiri di F5. Di server multiplayer, nametag pemain lain tetap utuh & aman.")))
+        .build();
         this.addRenderableWidget(this.nametagToggleBtn);
 
         // Row 4, Col 2: Emote 0-Lag Cache Refresh
@@ -202,12 +204,20 @@ public class TakashaDashboardScreen extends Screen {
         this.masterKeybindWidget = new TakashaKeybindWidget(
             left + 14,
             bottomY,
-            150,
+            120,
             18,
             "Master Menu Key",
             SakuraWeaponsClient.DASHBOARD_KEY
         );
         this.addRenderableWidget(this.masterKeybindWidget);
+
+        Button autoDropBtn = Button.builder(
+            Component.literal("🗑 Auto Drop"),
+            btn -> this.minecraft.gui.setScreen(new TakashaAutoDropSubScreen(this))
+        ).bounds(left + 140, bottomY, 90, 18)
+        .tooltip(Tooltip.create(Component.literal("Konfigurasi filter pembuangan item inventaris (Mining, Fishing, Kill)")))
+        .build();
+        this.addRenderableWidget(autoDropBtn);
 
         boolean isMultiplayer = isMultiplayerServer();
         this.serverSafeBtn = Button.builder(
@@ -218,15 +228,15 @@ public class TakashaDashboardScreen extends Screen {
                 btn.setMessage(Component.literal("Server Safe: " + (config.serverSafeMode ? "§aON" : "§cOFF")));
                 updateServerSafeElements(isMultiplayerServer());
             }
-        ).bounds(left + 170, bottomY, 140, 18)
+        ).bounds(left + 236, bottomY, 96, 18)
         .tooltip(Tooltip.create(Component.literal("Proteksi Server: Otomatis nonaktifkan Replay Studio (F7) & scanner emote saat terhubung ke server multiplayer")))
         .build();
         this.addRenderableWidget(this.serverSafeBtn);
 
         this.closeBtn = Button.builder(
-            Component.literal("Tutup [ESC]"),
+            Component.literal("Tutup"),
             btn -> this.onClose()
-        ).bounds(left + panelW - 94, bottomY, 80, 18).build();
+        ).bounds(left + panelW - 80, bottomY, 66, 18).build();
         this.addRenderableWidget(this.closeBtn);
 
         updateServerSafeElements(isMultiplayer);

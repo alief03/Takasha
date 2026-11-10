@@ -19,6 +19,8 @@
     "flashback.ReplayServerMixin",
     "flashback.ReplayUIMixin",
     "flashback.SelectedEntityPopupMixin",
+    "client.LevelLoadTrackerMixin",
+    "client.LevelLoadingScreenMixin",
     "client.TakashaClientPacketListenerMixin"
   ],
   "injectors": {

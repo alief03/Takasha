@@ -100,6 +100,10 @@ public class TakashaFarmHandler {
             return;
         }
 
+        if (net.sakura.weapons.client.fishing.CapcayManager.getInstance().isBusy() || net.sakura.weapons.client.food.TakashaAutoEatHandler.getInstance().isEating()) {
+            return;
+        }
+
         long now = System.currentTimeMillis();
 
         // 1. Process SellGUI if screen is open

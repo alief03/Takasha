@@ -15,13 +15,31 @@ public class TakashaClientCommands {
 
     public static void initialize() {
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, buildContext) -> {
-            dispatcher.register(literal("takasha")
+            dispatcher.register(buildTakashaNode("takasha"));
+            dispatcher.register(buildTakashaNode("sakura"));
+        });
+    }
+
+    private static com.mojang.brigadier.builder.LiteralArgumentBuilder<net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource> buildTakashaNode(String root) {
+        return literal(root)
                 .executes(context -> {
                     openDashboard();
                     return 1;
                 })
                 .then(literal("menu").executes(context -> {
                     openDashboard();
+                    return 1;
+                }))
+                .then(literal("help").executes(context -> {
+                    var cfg = TakashaMasterConfig.getInstance();
+                    context.getSource().sendFeedback(Component.literal("§6§l✦ TAKASHA CLIENT SUITE ✦"));
+                    context.getSource().sendFeedback(Component.literal(" §e/" + root + " menu §7- Membuka Dashboard GUI"));
+                    context.getSource().sendFeedback(Component.literal(" §e/" + root + " autofarm [on|off|toggle|status] §7(" + (cfg.autoFarmEnabled ? "§aAKTIF" : "§cNONAKTIF") + "§7)"));
+                    context.getSource().sendFeedback(Component.literal(" §e/" + root + " autosell [on|off|toggle|status] §7(" + (cfg.autoSellGuiOnFull ? "§aAKTIF" : "§cNONAKTIF") + "§7)"));
+                    context.getSource().sendFeedback(Component.literal(" §e/" + root + " autofish [on|off|toggle|status] §7(" + (cfg.autoFishEnabled ? "§aAKTIF" : "§cNONAKTIF") + "§7)"));
+                    context.getSource().sendFeedback(Component.literal(" §e/" + root + " autokill [on|off|toggle|status] §7(" + (cfg.autoKillEnabled ? "§aAKTIF" : "§cNONAKTIF") + "§7)"));
+                    context.getSource().sendFeedback(Component.literal(" §e/" + root + " autobow [on|off|toggle|status] §7(" + (cfg.autoBowEnabled ? "§aAKTIF" : "§cNONAKTIF") + "§7)"));
+                    context.getSource().sendFeedback(Component.literal(" §e/" + root + " nametag [on|off|self|all|status]"));
                     return 1;
                 }))
                 .then(literal("autofarm")
@@ -246,17 +264,26 @@ public class TakashaClientCommands {
                         TakashaNametagConfig.setPlayerNametagDisabled(true, context.getSource().getPlayer());
                         return 1;
                     }))
+                    .then(literal("self").executes(context -> {
+                        TakashaNametagConfig.setHideSelfOnly(true);
+                        context.getSource().sendFeedback(Component.literal("§a[Takasha] Nametag mode: Sembunyikan diri sendiri saja (aman untuk multiplayer)."));
+                        return 1;
+                    }))
+                    .then(literal("all").executes(context -> {
+                        TakashaNametagConfig.setHideSelfOnly(false);
+                        context.getSource().sendFeedback(Component.literal("§e[Takasha] Nametag mode: Sembunyikan semua nametag (cinematic)."));
+                        return 1;
+                    }))
                     .then(literal("status").executes(context -> {
                         boolean disabled = TakashaNametagConfig.isPlayerNametagDisabled();
+                        boolean selfOnly = TakashaNametagConfig.isHideSelfOnly();
                         Component msg = disabled
-                            ? Component.translatable("message.sakura_weapons.nametag.disabled")
-                            : Component.translatable("message.sakura_weapons.nametag.enabled");
+                            ? Component.literal("§c[Takasha] Nametag: TERSEMBUNYI (" + (selfOnly ? "Diri Sendiri" : "Semua Pemain") + ")")
+                            : Component.literal("§a[Takasha] Nametag: MUNCUL");
                         context.getSource().sendFeedback(msg);
                         return 1;
                     }))
-                )
-            );
-        });
+                );
     }
 
     private static void openDashboard() {

@@ -23,6 +23,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.sakura.weapons.client.config.TakashaMasterConfig;
 
 import java.util.HashMap;
@@ -51,6 +52,9 @@ public class TakashaFishingHandler {
     private long scheduledReelInTime = 0L;
     private boolean isReelInQueued = false;
     private long lastReelInTime = 0L;
+    private float savedWaterYaw = Float.NaN;
+    private float savedWaterPitch = Float.NaN;
+    private boolean hasWaterTarget = false;
 
     // Catch Filter Watcher state
     private boolean isCatchWatcherActive = false;
@@ -79,6 +83,10 @@ public class TakashaFishingHandler {
 
         LocalPlayer player = client.player;
         if (player == null || client.level == null) {
+            return;
+        }
+
+        if (net.sakura.weapons.client.food.TakashaAutoEatHandler.getInstance().isEating()) {
             return;
         }
 
@@ -111,15 +119,25 @@ public class TakashaFishingHandler {
             prepareAndCast(client, config);
         }
 
-        // Monitor hook in water
+        // Monitor hook in water & record target angle
         FishingHook hook = player.fishing;
         if (hook != null && isHoldingRod(player)) {
             if (isBlockInWater(hook.level(), hook.getBoundingBox())) {
                 hasHitWater = true;
+                if (!hasWaterTarget || Float.isNaN(savedWaterYaw)) {
+                    savedWaterYaw = player.getYRot();
+                    savedWaterPitch = player.getXRot();
+                    hasWaterTarget = true;
+                }
             }
         } else {
             hasHitWater = false;
             bobberRiseTimestamp = 0L;
+        }
+
+        // Kaizen Camera Auto-Fix: automatically and smoothly restore crosshair towards water if drifted
+        if (config.fishingMode == TakashaMasterConfig.FishingMode.KAIZEN && config.autoCameraFix && hasWaterTarget) {
+            applyKaizenCameraFix(player, config);
         }
 
         // Process Catch Filter Watcher (auto-drop non-whitelisted catches)
@@ -336,6 +354,16 @@ public class TakashaFishingHandler {
             RodSlipHandler.getInstance().ensureRodEquipped(player, config);
         }
 
+        if (config.fishingMode == TakashaMasterConfig.FishingMode.KAIZEN && config.autoCameraFix) {
+            if (!hasWaterTarget) {
+                findWaterTarget(client, player);
+            }
+            if (hasWaterTarget) {
+                player.setYRot(savedWaterYaw);
+                player.setXRot(savedWaterPitch);
+            }
+        }
+
         if (isHoldingRod(player)) {
             useRod(client, player);
         }
@@ -381,6 +409,56 @@ public class TakashaFishingHandler {
         queueRecast(600L);
     }
 
+    private void applyKaizenCameraFix(LocalPlayer player, TakashaMasterConfig config) {
+        if (!hasWaterTarget || Float.isNaN(savedWaterYaw) || Float.isNaN(savedWaterPitch)) return;
+        float currentYaw = player.getYRot();
+        float currentPitch = player.getXRot();
+        float yawDiff = Mth.wrapDegrees(savedWaterYaw - currentYaw);
+        float pitchDiff = savedWaterPitch - currentPitch;
+
+        if (Math.abs(yawDiff) > 1.5f || Math.abs(pitchDiff) > 1.5f) {
+            float maxStep = (float) Math.max(5.0, config.autoCameraFixSpeed);
+            float stepYaw = Mth.clamp(yawDiff, -maxStep, maxStep);
+            float stepPitch = Mth.clamp(pitchDiff, -maxStep, maxStep);
+            player.setYRot(currentYaw + stepYaw);
+            player.setXRot(Mth.clamp(currentPitch + stepPitch, -90.0f, 90.0f));
+        }
+    }
+
+    private void findWaterTarget(Minecraft client, LocalPlayer player) {
+        if (player == null || client.level == null) return;
+        BlockPos playerPos = player.blockPosition();
+        BlockPos bestWater = null;
+        double bestDistSq = Double.MAX_VALUE;
+
+        for (int dx = -5; dx <= 5; dx++) {
+            for (int dy = -3; dy <= 2; dy++) {
+                for (int dz = -5; dz <= 5; dz++) {
+                    BlockPos pos = playerPos.offset(dx, dy, dz);
+                    if (client.level.getBlockState(pos).is(Blocks.WATER)) {
+                        double d = player.distanceToSqr(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
+                        if (d < bestDistSq) {
+                            bestDistSq = d;
+                            bestWater = pos;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (bestWater != null) {
+            Vec3 eyePos = player.getEyePosition();
+            double tx = bestWater.getX() + 0.5 - eyePos.x;
+            double ty = bestWater.getY() + 0.5 - eyePos.y;
+            double tz = bestWater.getZ() + 0.5 - eyePos.z;
+            double hDist = Math.sqrt(tx * tx + tz * tz);
+
+            this.savedWaterYaw = (float) (Mth.atan2(tz, tx) * (180.0 / Math.PI)) - 90.0f;
+            this.savedWaterPitch = (float) (-(Mth.atan2(ty, hDist) * (180.0 / Math.PI)));
+            this.hasWaterTarget = true;
+        }
+    }
+
     public void reset() {
         isCapcayPaused = false;
         hasHitWater = false;
@@ -388,6 +466,9 @@ public class TakashaFishingHandler {
         isRecastQueued = false;
         isReelInQueued = false;
         isCatchWatcherActive = false;
+        savedWaterYaw = Float.NaN;
+        savedWaterPitch = Float.NaN;
+        hasWaterTarget = false;
     }
 
     private void log(String message) {

@@ -136,8 +136,19 @@ public class TakashaMasterConfig {
     public int weaponBreakThreshold = 5;
     public boolean antiAfkEnabled = true;
     public boolean antiAfkContinuous = true;
+    public boolean antiAfkStrafeEnabled = true;
     public int antiAfkDurationMs = 180;
+    public int antiAfkIntervalMs = 0; // 0 = continuous
+    public enum AntiAfkPattern {
+        ALTERNATING,
+        LEFT_ONLY,
+        RIGHT_ONLY,
+        RANDOM_JITTER
+    }
+    public AntiAfkPattern antiAfkPattern = AntiAfkPattern.ALTERNATING;
     public boolean antiAfkAlwaysSneak = true;
+    public boolean autoCameraFix = true;
+    public double autoCameraFixSpeed = 25.0;
     public Set<String> killMobWhitelist = new HashSet<>(Set.of(
         "minecraft:cow",
         "minecraft:sheep",
@@ -189,6 +200,52 @@ public class TakashaMasterConfig {
     public String fortunePrefix = "§d[Takasha Fortune] ";
     public String fortuneColorProc = "§e";
     public String fortuneColorXp = "§b";
+
+    // --- AUTO EAT (UNIVERSAL FOOD WATCHER) ---
+    public boolean autoEatEnabled = true;
+    public int autoEatThreshold = 14;
+    public boolean autoEatLowHealth = true;
+
+    // --- AUTO DROP INVENTORY (MINING, FISHING, KILL) ---
+    public boolean autoDropMiningEnabled = false;
+    public Set<String> autoDropMiningList = new HashSet<>(Set.of(
+        "minecraft:cobblestone",
+        "minecraft:diorite",
+        "minecraft:andesite",
+        "minecraft:granite",
+        "minecraft:tuff",
+        "minecraft:gravel",
+        "minecraft:dirt"
+    ));
+
+    public boolean autoDropFishingEnabled = true;
+    public Set<String> autoDropFishingList = new HashSet<>(Set.of(
+        "minecraft:leather_boots",
+        "minecraft:bowl",
+        "minecraft:stick",
+        "minecraft:string",
+        "minecraft:rotten_flesh",
+        "minecraft:potion",
+        "minecraft:glass_bottle"
+    ));
+
+    public boolean autoDropKillEnabled = false;
+    public Set<String> autoDropKillList = new HashSet<>(Set.of(
+        "minecraft:rotten_flesh",
+        "minecraft:spider_eye",
+        "minecraft:bone",
+        "minecraft:arrow",
+        "minecraft:glass_bottle"
+    ));
+
+    public boolean serverDropActive = false;
+    public boolean serverDropGatekeeperEnabled = false;
+    public boolean protectEnchantedAndValuables = true;
+    public boolean autoDropSmartFoodReserve = true;
+
+    public boolean isAnyAutoEnabled() {
+        return autoFarmEnabled || autoFishEnabled || autoKillEnabled || autoBowEnabled;
+    }
 
     public static TakashaMasterConfig getInstance() {
         if (INSTANCE == null) {
@@ -257,5 +314,9 @@ public class TakashaMasterConfig {
         if (mobKillMode == null) mobKillMode = MobKillMode.KAIZEN;
         if (killTargetPriority == null) killTargetPriority = KillTargetPriority.NEAREST;
         if (attackRateMode == null) attackRateMode = AttackRateMode.COOLDOWN_SYNC;
+        if (antiAfkPattern == null) antiAfkPattern = AntiAfkPattern.ALTERNATING;
+        if (autoDropMiningList == null) autoDropMiningList = new HashSet<>();
+        if (autoDropFishingList == null) autoDropFishingList = new HashSet<>();
+        if (autoDropKillList == null) autoDropKillList = new HashSet<>();
     }
 }

@@ -56,7 +56,7 @@ public class TakashaAutoBowHandler {
             return;
         }
 
-        if (client.gui.screen() != null) {
+        if (client.gui.screen() != null || net.sakura.weapons.client.fishing.CapcayManager.getInstance().isBusy() || net.sakura.weapons.client.food.TakashaAutoEatHandler.getInstance().isEating()) {
             stopDrawing(client);
             return;
         }

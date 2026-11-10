@@ -39,6 +39,12 @@ public class TakashaMobKillAntiAfk {
             return;
         }
 
+        // Never simulate Anti-AFK keys if a container/screen is open, if Capcay solver is active, or if eating
+        if (client.gui.screen() != null || net.sakura.weapons.client.fishing.CapcayManager.getInstance().isBusy() || net.sakura.weapons.client.food.TakashaAutoEatHandler.getInstance().isEating()) {
+            reset(client);
+            return;
+        }
+
         // CRITICAL: Check if player is actively pressing any movement key
         boolean isPlayerMoving = client.options.keyUp.isDown()
                 || client.options.keyDown.isDown()
@@ -66,12 +72,39 @@ public class TakashaMobKillAntiAfk {
             }
         }
 
+        // If strafe is disabled, only keep sneak and do not press A/D
+        if (!config.antiAfkStrafeEnabled) {
+            stopLeft(client);
+            stopRight(client);
+            state = State.IDLE;
+            return;
+        }
+
+        boolean isContinuous = config.antiAfkContinuous && config.antiAfkIntervalMs <= 0;
+        long interval = config.antiAfkIntervalMs > 0 ? config.antiAfkIntervalMs : 2000L;
+
         switch (state) {
             case IDLE -> {
-                if (config.antiAfkContinuous || now >= nextCycleTime) {
-                    state = State.MOVING_LEFT;
-                    stateStartTime = now;
-                    pressLeft(client);
+                if (isContinuous || now >= nextCycleTime) {
+                    if (config.antiAfkPattern == TakashaMasterConfig.AntiAfkPattern.RIGHT_ONLY) {
+                        state = State.MOVING_RIGHT;
+                        stateStartTime = now;
+                        pressRight(client);
+                    } else if (config.antiAfkPattern == TakashaMasterConfig.AntiAfkPattern.RANDOM_JITTER) {
+                        if (Math.random() < 0.5) {
+                            state = State.MOVING_LEFT;
+                            stateStartTime = now;
+                            pressLeft(client);
+                        } else {
+                            state = State.MOVING_RIGHT;
+                            stateStartTime = now;
+                            pressRight(client);
+                        }
+                    } else {
+                        state = State.MOVING_LEFT;
+                        stateStartTime = now;
+                        pressLeft(client);
+                    }
                 }
             }
             case MOVING_LEFT -> {
@@ -84,23 +117,40 @@ public class TakashaMobKillAntiAfk {
             }
             case PAUSE_BETWEEN -> {
                 if (now - stateStartTime >= 40L) {
-                    state = State.MOVING_RIGHT;
-                    stateStartTime = now;
-                    pressRight(client);
+                    if (config.antiAfkPattern == TakashaMasterConfig.AntiAfkPattern.LEFT_ONLY) {
+                        if (isContinuous) {
+                            state = State.MOVING_LEFT;
+                            stateStartTime = now;
+                            pressLeft(client);
+                        } else {
+                            state = State.IDLE;
+                            stateStartTime = now;
+                            nextCycleTime = now + interval;
+                        }
+                    } else {
+                        state = State.MOVING_RIGHT;
+                        stateStartTime = now;
+                        pressRight(client);
+                    }
                 }
             }
             case MOVING_RIGHT -> {
                 pressRight(client);
                 if (now - stateStartTime >= durationMs) {
                     stopRight(client);
-                    if (config.antiAfkContinuous) {
-                        state = State.MOVING_LEFT;
+                    if (isContinuous) {
+                        if (config.antiAfkPattern == TakashaMasterConfig.AntiAfkPattern.RIGHT_ONLY) {
+                            state = State.MOVING_RIGHT;
+                        } else {
+                            state = State.MOVING_LEFT;
+                        }
                         stateStartTime = now;
-                        pressLeft(client);
+                        if (state == State.MOVING_LEFT) pressLeft(client);
+                        else pressRight(client);
                     } else {
                         state = State.IDLE;
                         stateStartTime = now;
-                        nextCycleTime = now + 2000L;
+                        nextCycleTime = now + interval;
                     }
                 }
             }
