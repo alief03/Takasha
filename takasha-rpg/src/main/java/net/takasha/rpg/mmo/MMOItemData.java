@@ -26,7 +26,7 @@ public class MMOItemData {
     private final List<String> potionEffects = new ArrayList<>();
     private final List<String> commands = new ArrayList<>();
 
-    // Tool Attributes & Special Properties (MMOItems 1:1)
+    // Tool Attributes & Special Properties
     private boolean autosmelt = false;
     private boolean bouncingCrack = false;
     private int pickaxePower = 0;
@@ -247,7 +247,7 @@ public class MMOItemData {
             if (root.contains(NBT_ROOT)) {
                 return Optional.of(fromTag(root.getCompoundOrEmpty(NBT_ROOT)));
             } else if (root.contains("MMOITEMS_ITEM_TYPE")) {
-                // Reconstruct from Spigot 1:1 tags
+                // Reconstruct from legacy tags
                 MMOItemData data = new MMOItemData();
                 data.type = root.getStringOr("MMOITEMS_ITEM_TYPE", "TOOL");
                 data.id = root.getStringOr("MMOITEMS_ITEM_ID", "");
@@ -271,7 +271,7 @@ public class MMOItemData {
             // 1. Structured internal Fabric component
             root.put(NBT_ROOT, toTag());
 
-            // 2. 1:1 Spigot MMOItems Standard Root NBT tags
+            // 2. Standard Root NBT tags
             if (type != null) root.putString("MMOITEMS_ITEM_TYPE", type);
             if (id != null) root.putString("MMOITEMS_ITEM_ID", id);
             if (tier != null) root.putString("MMOITEMS_TIER", tier.name());

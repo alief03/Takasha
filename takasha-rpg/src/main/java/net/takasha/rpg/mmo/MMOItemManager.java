@@ -250,7 +250,7 @@ public class MMOItemManager {
             template.setTier(MMOItemTier.fromString(String.valueOf(base.get("tier"))));
         }
 
-        // Tool Attributes 1:1
+        // Tool Attributes
         if (base.containsKey("autosmelt")) {
             template.setAutosmelt(Boolean.parseBoolean(String.valueOf(base.get("autosmelt"))));
         }
@@ -321,7 +321,7 @@ public class MMOItemManager {
             }
         }
 
-        // Gem Stone Attributes (MMOItems 1:1)
+        // Gem Stone Attributes
         if (base.containsKey("gem-color")) {
             template.setGemColor(String.valueOf(base.get("gem-color")));
         }
@@ -349,7 +349,7 @@ public class MMOItemManager {
             }
         }
 
-        // Advanced & Cosmetic Attributes (MMOItems 1:1)
+        // Advanced & Cosmetic Attributes
         if (base.containsKey("item-set") || base.containsKey("set")) {
             template.setItemSet(String.valueOf(base.containsKey("item-set") ? base.get("item-set") : base.get("set")));
         }
@@ -736,7 +736,7 @@ public class MMOItemManager {
             }
         }
 
-        // Authentic 1:1 MMOItems Lore Formatting (stats.yml & lore-format.yml)
+        // Authentic Lore Formatting (stats.yml & lore-format.yml)
         List<Component> loreLines = new ArrayList<>();
 
         // #item-type#
@@ -883,7 +883,7 @@ public class MMOItemManager {
             loreLines.add(TakashaColorParser.parseLoreLine("&7Durability: &f" + template.getMaxDurability() + " / " + template.getMaxDurability()));
         }
 
-        // Gem Sockets (MMOItems 1:1)
+        // Gem Sockets
         if (!template.getGemSockets().isEmpty()) {
             loreLines.add(Component.empty());
             for (String socket : template.getGemSockets()) {

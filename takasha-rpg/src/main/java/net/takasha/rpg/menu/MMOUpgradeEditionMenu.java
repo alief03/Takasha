@@ -17,7 +17,7 @@ import java.util.List;
 
 /**
  * MMOUpgradeEditionMenu
- * 1:1 Parity dengan Spigot UpgradingEdition.class.
+ * Antarmuka Manajemen Upgrade RPG Takasha.
  * Sub-menu GUI 27-slot untuk konfigurasi upgrade level tempa:
  * Max Upgrades, Upgrade Scaling, Reference Template.
  */
@@ -66,7 +66,7 @@ public class MMOUpgradeEditionMenu {
                 if (button == 1) { // Right Click: Remove
                     template.getStats().remove(MMOStatType.REQUIRED_LEVEL);
                     MMOItemDiskManager.saveTemplate(template);
-                    player.sendSystemMessage(Component.literal("§8[§eMMOItems§8] §7Max Upgrades successfully removed."));
+                    player.sendSystemMessage(Component.literal("§8[§eTakasha-RPG§8] §7Max Upgrades successfully removed."));
                     open(player, template, parentPage);
                 } else { // Left Click: Chat
                     List<String> promptLines = List.of(
@@ -79,7 +79,7 @@ public class MMOUpgradeEditionMenu {
                                 double val = Double.parseDouble(input.trim());
                                 template.getStats().put(MMOStatType.REQUIRED_LEVEL, val);
                                 MMOItemDiskManager.saveTemplate(template);
-                                player.sendSystemMessage(Component.literal("§8[§eMMOItems§8] §7Max Upgrades successfully changed to " + (int) val));
+                                player.sendSystemMessage(Component.literal("§8[§eTakasha-RPG§8] §7Max Upgrades successfully changed to " + (int) val));
                                 open(player, template, parentPage);
                                 return true;
                             });

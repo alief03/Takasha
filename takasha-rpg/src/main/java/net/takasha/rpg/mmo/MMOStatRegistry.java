@@ -7,7 +7,7 @@ import java.util.*;
 
 /**
  * MMOStatRegistry
- * Reconstructed 1:1 catalog of MMOItems statistics from Spigot net.Indyuce.mmoitems.ItemStats.
+ * Catalog of Takasha RPG item statistics.
  * Maps authentic vanilla icon materials, display names, categories, descriptions,
  * compatible item types, and interaction types.
  */

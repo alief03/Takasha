@@ -17,9 +17,9 @@ import java.util.*;
 
 /**
  * MMOTypeBrowserMenu
- * 1:1 MMOItems Type Browser GUI (54 slots) reconstructed from MMOItems Spigot bytecode & official documentation.
+ * Takasha RPG Type Browser GUI (54 slots).
  *
- * Contains authentic MMOItems item types (Root Types + Sub-Types + ALL).
+ * Contains authentic RPG item types (Root Types + Sub-Types + ALL).
  * Multi-page navigation:
  *   Slot 18: Previous Page (Arrow, visible if page > 1)
  *   Slot 26: Next Page (Arrow, visible if page < maxPage)
@@ -89,7 +89,7 @@ public class MMOTypeBrowserMenu {
 
     public static void open(ServerPlayer player, int page) {
         if (!player.isCreative()) {
-            player.sendSystemMessage(Component.literal("§c[MMOItems] Menu ini hanya dapat diakses dalam Mode Kreatif!"));
+            player.sendSystemMessage(Component.literal("§c[Takasha-RPG] Menu ini hanya dapat diakses dalam Mode Kreatif!"));
             player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.VILLAGER_NO, SoundSource.PLAYERS, 0.8f, 1.0f);
             return;
         }
@@ -109,12 +109,12 @@ public class MMOTypeBrowserMenu {
     }
 
     private static void populateContainer(SimpleContainer container, int page, int maxPage) {
-        // Clear all slots to pure AIR (1:1 with Spigot Bukkit.createInventory)
+        // Clear all slots to pure AIR
         for (int i = 0; i < 54; i++) {
             container.setItem(i, ItemStack.EMPTY);
         }
 
-        // Fill active grid with "- No type -" placeholders (1:1 with TypeBrowser.class bytecode)
+        // Fill active grid with "- No type -" placeholders
         ItemStack noType = new ItemStack(Items.STAINED_GLASS_PANE.gray());
         noType.set(DataComponents.CUSTOM_NAME, Component.literal("§c- No type -"));
         for (int slot : GRID_SLOTS) {

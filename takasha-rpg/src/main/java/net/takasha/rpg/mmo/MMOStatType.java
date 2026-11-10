@@ -10,7 +10,7 @@ public enum MMOStatType {
     KNOCKBACK_RESISTANCE("knockback-resistance", "Knockback Resistance", "🧱", "§7"),
     MOVEMENT_SPEED("movement-speed", "Movement Speed", "👟", "§f"),
 
-    // RPG Offensive Stats (MythicLib)
+    // RPG Offensive Stats
     PHYSICAL_DAMAGE("physical-damage", "Physical Damage", "🗡", "§c"),
     MAGIC_DAMAGE("magic-damage", "Magic Damage", "✨", "§d"),
     FIRE_DAMAGE("fire-damage", "Fire Damage", "🔥", "§6"),
@@ -80,7 +80,7 @@ public enum MMOStatType {
     MANA_COST("mana-cost", "Mana Cost", "💧", "§3"),
     COOLDOWN_REDUCTION("cooldown-reduction", "Cooldown Reduction", "⏳", "§a"),
 
-    // Tool & Mining Stats (MMOItems 1:1)
+    // Tool & Mining Stats
     PICKAXE_POWER("pickaxe-power", "Pickaxe Power", "⛏", "§6"),
     MINING_EFFICIENCY("mining-efficiency", "Mining Speed", "⚡", "§e"),
     LUCK("luck", "Mining Luck", "🍀", "§a"),
@@ -89,7 +89,7 @@ public enum MMOStatType {
     AUTOSMELT("autosmelt", "Autosmelt", "🔥", "§6"),
     BOUNCING_CRACK("bouncing-crack", "Bouncing Crack", "💥", "§e"),
 
-    // Requirements (MMOItems + AuraSkills)
+    // Requirements (AuraSkills & Attributes)
     REQUIRED_LEVEL("required-level", "Required Level", "⭐", "§e"),
     REQUIRED_FIGHTING("required-fighting", "Required Fighting", "⚔", "§c"),
     REQUIRED_MINING("required-mining", "Required Mining", "⛏", "§6"),

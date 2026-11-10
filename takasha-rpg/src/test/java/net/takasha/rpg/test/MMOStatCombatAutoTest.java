@@ -8,7 +8,7 @@ import java.util.*;
 
 /**
  * MMOStatCombatAutoTest
- * Automated Test Runner komprehensif untuk memverifikasi 100% dari 28 stat MMOItems:
+ * Automated Test Runner komprehensif untuk memverifikasi 100% dari 28 stat RPG Items:
  * 1. Edit Value & Persistensi (Single, Formula, Range, String, Boolean, Sub-Menu)
  * 2. Generasi Komponen Data (Attribute Modifiers, Custom Model Data, Item Data)
  * 3. Combat Realization (Kalkulasi Damage Melee, Crit, Elements, Lifesteal, PvE/Undead, Mitigasi)

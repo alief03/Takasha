@@ -21,14 +21,8 @@ import net.takasha.rpg.mmo.*;
 import java.util.*;
 
 /**
- * 1:1 Parity MMOItemEditionMenu for Takasha-RPG (Fabric 26.2).
- *
- * Reverse-engineered from:
- * net.Indyuce.mmoitems.gui.edition.ItemEdition.class
- * net.Indyuce.mmoitems.stat.type.DoubleStat.class
- * net.Indyuce.mmoitems.stat.type.StringStat.class
- * net.Indyuce.mmoitems.stat.type.BooleanStat.class
- * net.Indyuce.mmoitems.api.edition.StatEdition.class
+ * Takasha RPG Item Edition Menu (Fabric 26.2).
+ * Interactive 54-slot container for inspecting and modifying RPG item attributes and templates.
  */
 public class MMOItemEditionMenu {
 
@@ -52,7 +46,7 @@ public class MMOItemEditionMenu {
             template = MMOItemManager.getTemplateById(id);
         }
         if (template == null) {
-            player.sendSystemMessage(Component.literal("§8[§eMMOItems§8] §cTemplate not found: " + type + ":" + id));
+            player.sendSystemMessage(Component.literal("§8[§eTakasha-RPG§8] §cTemplate not found: " + type + ":" + id));
             return;
         }
 
@@ -62,11 +56,11 @@ public class MMOItemEditionMenu {
         int totalPages = Math.max(1, (int) Math.ceil((double) availableStats.size() / PAGE_SIZE));
         final int currentPage = Math.max(1, Math.min(page, totalPages));
 
-        // Screen title: "Item Edition: <ID>" (1:1 with Spigot ItemEdition.getName())
+        // Screen title: "Item Edition: <ID>"
         Component title = Component.literal("Item Edition: " + template.getId());
         SimpleContainer container = new SimpleContainer(54);
 
-        // Populate slots 1:1 with Spigot ItemEdition
+        // Populate slots
         // Slot 2: Chest (Left Click: Get item / Right Click: Reroll item)
         ItemStack getItem = new ItemStack(Items.CHEST);
         getItem.set(DataComponents.CUSTOM_NAME, Component.literal("§aGet Item"));
@@ -138,12 +132,12 @@ public class MMOItemEditionMenu {
             lore.add(Component.empty());
         }
 
-        // Current Value 1:1 formatting
+        // Current Value formatting
         String valDisplay = getFormattedStatValue(def, t);
         lore.add(Component.literal("§7Current Value: " + valDisplay));
         lore.add(Component.empty());
 
-        // Action Hints 1:1 with Spigot ItemEdition
+        // Action Hints
         switch (def.interactionType()) {
             case BOOLEAN -> {
                 lore.add(Component.literal("§e► Left click to switch this value."));
@@ -253,7 +247,7 @@ public class MMOItemEditionMenu {
                     player.drop(stack, false);
                 }
                 player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 0.7f, 1.2f);
-                player.sendSystemMessage(Component.literal("§8[§eMMOItems§8] §7Menerima §6" + (template.hasName() ? template.getName() : template.getId())));
+                player.sendSystemMessage(Component.literal("§8[§eTakasha-RPG§8] §7Menerima §6" + (template.hasName() ? template.getName() : template.getId())));
             } else { // Right click: reroll revision
                 template.setRevisionId(template.getRevisionId() + 1);
                 MMOItemDiskManager.saveTemplate(template);
@@ -306,7 +300,7 @@ public class MMOItemEditionMenu {
                 if (button == 1) { // Right click: remove/reset name
                     t.setName(null);
                     MMOItemDiskManager.saveTemplate(t);
-                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Successfully removed Display Name&7."));
+                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Successfully removed Display Name&7."));
                     open(pl, t.getItemType(), t.getId(), page);
                 } else { // Left click: prompt chat
                     List<String> promptLines = List.of(
@@ -320,7 +314,7 @@ public class MMOItemEditionMenu {
                             input -> {
                                 t.setName(input);
                                 MMOItemDiskManager.saveTemplate(t);
-                                pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Display Name successfully changed to '").copy()
+                                pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Display Name successfully changed to '").copy()
                                         .append(net.takasha.rpg.mmo.TakashaColorParser.parseItemName(input)).append(net.takasha.rpg.mmo.TakashaColorParser.parse("&7'.")));
                                 open(pl, t.getItemType(), t.getId(), page);
                                 return true;
@@ -332,7 +326,7 @@ public class MMOItemEditionMenu {
                     String defMat = MMOItemBrowserMenu.getDefaultMaterialForType(t.getItemType());
                     t.setMaterial(defMat);
                     MMOItemDiskManager.saveTemplate(t);
-                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Successfully reset Material to &e" + defMat + "&7."));
+                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Successfully reset Material to &e" + defMat + "&7."));
                     open(pl, t.getItemType(), t.getId(), page);
                 } else { // Left click: prompt material
                     List<String> promptLines = List.of(
@@ -347,12 +341,12 @@ public class MMOItemEditionMenu {
                                 String clean = input.trim().toUpperCase(Locale.ROOT);
                                 Item item = BuiltInRegistries.ITEM.getValue(Identifier.withDefaultNamespace(clean.toLowerCase(Locale.ROOT)));
                                 if (item == Items.AIR) {
-                                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &cInvalid material: " + clean));
+                                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &cInvalid material: " + clean));
                                     return false; // Stay in session!
                                 }
                                 t.setMaterial(clean);
                                 MMOItemDiskManager.saveTemplate(t);
-                                pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Material successfully changed to '&e" + clean + "&7'."));
+                                pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Material successfully changed to '&e" + clean + "&7'."));
                                 open(pl, t.getItemType(), t.getId(), page);
                                 return true;
                             });
@@ -362,7 +356,7 @@ public class MMOItemEditionMenu {
                 if (button == 1) { // Right click: remove tier
                     t.setTier(null);
                     MMOItemDiskManager.saveTemplate(t);
-                    pl.sendSystemMessage(Component.literal("§8[§eMMOItems§8] §7Successfully removed Item Tier§7."));
+                    pl.sendSystemMessage(Component.literal("§8[§eTakasha-RPG§8] §7Successfully removed Item Tier§7."));
                     open(pl, t.getItemType(), t.getId(), page);
                 } else { // Left click: open visual sub-menu!
                     pl.level().playSound(null, pl.getX(), pl.getY(), pl.getZ(), SoundEvents.UI_BUTTON_CLICK.value(), SoundSource.PLAYERS, 0.8f, 1.2f);
@@ -373,7 +367,7 @@ public class MMOItemEditionMenu {
                 if (clickType == ContainerInput.QUICK_MOVE) { // Shift-click: clear lore
                     t.getLore().clear();
                     MMOItemDiskManager.saveTemplate(t);
-                    pl.sendSystemMessage(Component.literal("§8[§eMMOItems§8] §7Successfully removed Lore§7."));
+                    pl.sendSystemMessage(Component.literal("§8[§eTakasha-RPG§8] §7Successfully removed Lore§7."));
                     open(pl, t.getItemType(), t.getId(), page);
                 } else {
                     pl.level().playSound(null, pl.getX(), pl.getY(), pl.getZ(), SoundEvents.UI_BUTTON_CLICK.value(), SoundSource.PLAYERS, 0.8f, 1.2f);
@@ -443,7 +437,7 @@ public class MMOItemEditionMenu {
                 if (button == 1) { // Right click: reset
                     t.setGemColor(null);
                     MMOItemDiskManager.saveTemplate(t);
-                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Successfully removed Gem Color."));
+                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Successfully removed Gem Color."));
                     open(pl, t.getItemType(), t.getId(), page);
                 } else {
                     List<String> promptLines = List.of(
@@ -458,14 +452,14 @@ public class MMOItemEditionMenu {
                                 if (clean.isEmpty()) return false;
                                 t.setGemColor(clean);
                                 MMOItemDiskManager.saveTemplate(t);
-                                pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Gem Color successfully set to '&b" + clean + "&7'."));
+                                pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Gem Color successfully set to '&b" + clean + "&7'."));
                                 open(pl, t.getItemType(), t.getId(), page);
                                 return true;
                             });
                 }
             }
             case "GEM_UPGRADE_SCALING" -> {
-                // Cycle 1:1 with Spigot ChooseStat: SUBSEQUENT -> NEVER -> HISTORIC -> SUBSEQUENT
+                // Cycle sequence: SUBSEQUENT -> NEVER -> HISTORIC -> SUBSEQUENT
                 String cur = t.getGemUpgradeScaling();
                 String next = switch (cur.toUpperCase(Locale.ROOT)) {
                     case "SUBSEQUENT" -> "NEVER";
@@ -474,14 +468,14 @@ public class MMOItemEditionMenu {
                 };
                 t.setGemUpgradeScaling(next);
                 MMOItemDiskManager.saveTemplate(t);
-                pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Gem Upgrade Scaling set to &a" + next + "&7."));
+                pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Gem Upgrade Scaling set to &a" + next + "&7."));
                 open(pl, t.getItemType(), t.getId(), page);
             }
             case "ITEM_TYPE_RESTRICTION" -> {
                 if (button == 1) { // Right click: clear restrictions
                     t.getItemTypeRestrictions().clear();
                     MMOItemDiskManager.saveTemplate(t);
-                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Cleared all Item Type Restrictions."));
+                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Cleared all Item Type Restrictions."));
                     open(pl, t.getItemType(), t.getId(), page);
                 } else {
                     List<String> promptLines = List.of(
@@ -497,10 +491,10 @@ public class MMOItemEditionMenu {
                                 if (clean.isEmpty()) return false;
                                 if (t.getItemTypeRestrictions().contains(clean)) {
                                     t.getItemTypeRestrictions().remove(clean);
-                                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &cRemoved restriction: " + clean));
+                                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &cRemoved restriction: " + clean));
                                 } else {
                                     t.getItemTypeRestrictions().add(clean);
-                                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &aAdded restriction: " + clean));
+                                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &aAdded restriction: " + clean));
                                 }
                                 MMOItemDiskManager.saveTemplate(t);
                                 open(pl, t.getItemType(), t.getId(), page);
@@ -512,7 +506,7 @@ public class MMOItemEditionMenu {
                 if (button == 1) {
                     t.setSuccessRate(100.0);
                     MMOItemDiskManager.saveTemplate(t);
-                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Reset Success Rate to &a100.0%&7."));
+                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Reset Success Rate to &a100.0%&7."));
                     open(pl, t.getItemType(), t.getId(), page);
                 } else {
                     List<String> promptLines = List.of(
@@ -527,11 +521,11 @@ public class MMOItemEditionMenu {
                                     double val = Double.parseDouble(input.replace("%", "").trim());
                                     t.setSuccessRate(Math.clamp(val, 0.0, 100.0));
                                     MMOItemDiskManager.saveTemplate(t);
-                                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Success Rate successfully changed to &a" + t.getSuccessRate() + "%&7."));
+                                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Success Rate successfully changed to &a" + t.getSuccessRate() + "%&7."));
                                     open(pl, t.getItemType(), t.getId(), page);
                                     return true;
                                 } catch (Exception e) {
-                                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &cInvalid number format: " + input));
+                                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &cInvalid number format: " + input));
                                     return false;
                                 }
                             });
@@ -541,7 +535,7 @@ public class MMOItemEditionMenu {
                 if (button == 1) {
                     t.setItemSet(null);
                     MMOItemDiskManager.saveTemplate(t);
-                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Successfully removed Equipment Set."));
+                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Successfully removed Equipment Set."));
                     open(pl, t.getItemType(), t.getId(), page);
                 } else {
                     List<String> promptLines = List.of(
@@ -555,7 +549,7 @@ public class MMOItemEditionMenu {
                                 String clean = input.trim().toUpperCase(Locale.ROOT);
                                 t.setItemSet(clean.isEmpty() ? null : clean);
                                 MMOItemDiskManager.saveTemplate(t);
-                                pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Equipment Set set to '&6" + clean + "&7'."));
+                                pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Equipment Set set to '&6" + clean + "&7'."));
                                 open(pl, t.getItemType(), t.getId(), page);
                                 return true;
                             });
@@ -565,7 +559,7 @@ public class MMOItemEditionMenu {
                 if (button == 1) {
                     t.setDisplayedType("");
                     MMOItemDiskManager.saveTemplate(t);
-                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Reset Displayed Type to default."));
+                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Reset Displayed Type to default."));
                     open(pl, t.getItemType(), t.getId(), page);
                 } else {
                     List<String> promptLines = List.of(
@@ -579,7 +573,7 @@ public class MMOItemEditionMenu {
                             input -> {
                                 t.setDisplayedType(input.trim());
                                 MMOItemDiskManager.saveTemplate(t);
-                                pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Displayed Type changed to '").copy()
+                                pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Displayed Type changed to '").copy()
                                         .append(net.takasha.rpg.mmo.TakashaColorParser.parse(input)).append(net.takasha.rpg.mmo.TakashaColorParser.parse("&7'.")));
                                 open(pl, t.getItemType(), t.getId(), page);
                                 return true;
@@ -590,7 +584,7 @@ public class MMOItemEditionMenu {
                 if (button == 1) {
                     t.setLoreFormat(null);
                     MMOItemDiskManager.saveTemplate(t);
-                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Reset Lore Format to default."));
+                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Reset Lore Format to default."));
                     open(pl, t.getItemType(), t.getId(), page);
                 } else {
                     List<String> promptLines = List.of(
@@ -604,7 +598,7 @@ public class MMOItemEditionMenu {
                                 String clean = input.trim().toUpperCase(Locale.ROOT);
                                 t.setLoreFormat(clean.isEmpty() ? null : clean);
                                 MMOItemDiskManager.saveTemplate(t);
-                                pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Lore Format set to '&e" + clean + "&7'."));
+                                pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Lore Format set to '&e" + clean + "&7'."));
                                 open(pl, t.getItemType(), t.getId(), page);
                                 return true;
                             });
@@ -614,7 +608,7 @@ public class MMOItemEditionMenu {
                 if (button == 1) {
                     t.setShieldPattern(null);
                     MMOItemDiskManager.saveTemplate(t);
-                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Removed Shield Pattern."));
+                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Removed Shield Pattern."));
                     open(pl, t.getItemType(), t.getId(), page);
                 } else {
                     List<String> promptLines = List.of(
@@ -627,7 +621,7 @@ public class MMOItemEditionMenu {
                             input -> {
                                 t.setShieldPattern(input.trim());
                                 MMOItemDiskManager.saveTemplate(t);
-                                pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Shield Pattern set to '&f" + input.trim() + "&7'."));
+                                pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Shield Pattern set to '&f" + input.trim() + "&7'."));
                                 open(pl, t.getItemType(), t.getId(), page);
                                 return true;
                             });
@@ -637,7 +631,7 @@ public class MMOItemEditionMenu {
                 if (button == 1) {
                     t.setDyeColor(null);
                     MMOItemDiskManager.saveTemplate(t);
-                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Removed Dye Color."));
+                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Removed Dye Color."));
                     open(pl, t.getItemType(), t.getId(), page);
                 } else {
                     List<String> promptLines = List.of(
@@ -650,7 +644,7 @@ public class MMOItemEditionMenu {
                             input -> {
                                 t.setDyeColor(input.trim());
                                 MMOItemDiskManager.saveTemplate(t);
-                                pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Dye Color set to '&f" + input.trim() + "&7'."));
+                                pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Dye Color set to '&f" + input.trim() + "&7'."));
                                 open(pl, t.getItemType(), t.getId(), page);
                                 return true;
                             });
@@ -660,7 +654,7 @@ public class MMOItemEditionMenu {
                 if (button == 1) {
                     t.setTrimMaterial(null);
                     MMOItemDiskManager.saveTemplate(t);
-                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Removed Trim Material."));
+                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Removed Trim Material."));
                     open(pl, t.getItemType(), t.getId(), page);
                 } else {
                     List<String> promptLines = List.of(
@@ -674,7 +668,7 @@ public class MMOItemEditionMenu {
                                 String clean = input.trim().toUpperCase(Locale.ROOT);
                                 t.setTrimMaterial(clean.isEmpty() ? null : clean);
                                 MMOItemDiskManager.saveTemplate(t);
-                                pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Trim Material set to '&b" + clean + "&7'."));
+                                pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Trim Material set to '&b" + clean + "&7'."));
                                 open(pl, t.getItemType(), t.getId(), page);
                                 return true;
                             });
@@ -684,7 +678,7 @@ public class MMOItemEditionMenu {
                 if (button == 1) {
                     t.setTrimPattern(null);
                     MMOItemDiskManager.saveTemplate(t);
-                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Removed Trim Pattern."));
+                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Removed Trim Pattern."));
                     open(pl, t.getItemType(), t.getId(), page);
                 } else {
                     List<String> promptLines = List.of(
@@ -698,7 +692,7 @@ public class MMOItemEditionMenu {
                                 String clean = input.trim().toUpperCase(Locale.ROOT);
                                 t.setTrimPattern(clean.isEmpty() ? null : clean);
                                 MMOItemDiskManager.saveTemplate(t);
-                                pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Trim Pattern set to '&b" + clean + "&7'."));
+                                pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Trim Pattern set to '&b" + clean + "&7'."));
                                 open(pl, t.getItemType(), t.getId(), page);
                                 return true;
                             });
@@ -708,7 +702,7 @@ public class MMOItemEditionMenu {
                 if (button == 1) {
                     t.setRequiredClass(null);
                     MMOItemDiskManager.saveTemplate(t);
-                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Removed Required Class."));
+                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Removed Required Class."));
                     open(pl, t.getItemType(), t.getId(), page);
                 } else {
                     List<String> promptLines = List.of(
@@ -722,7 +716,7 @@ public class MMOItemEditionMenu {
                                 String clean = input.trim().toUpperCase(Locale.ROOT);
                                 t.setRequiredClass(clean.isEmpty() ? null : clean);
                                 MMOItemDiskManager.saveTemplate(t);
-                                pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Required Class set to '&e" + clean + "&7'."));
+                                pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Required Class set to '&e" + clean + "&7'."));
                                 open(pl, t.getItemType(), t.getId(), page);
                                 return true;
                             });
@@ -732,7 +726,7 @@ public class MMOItemEditionMenu {
                 if (button == 1) {
                     t.setPermission(null);
                     MMOItemDiskManager.saveTemplate(t);
-                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Removed Permission requirement."));
+                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Removed Permission requirement."));
                     open(pl, t.getItemType(), t.getId(), page);
                 } else {
                     List<String> promptLines = List.of(
@@ -746,7 +740,7 @@ public class MMOItemEditionMenu {
                                 String clean = input.trim();
                                 t.setPermission(clean.isEmpty() ? null : clean);
                                 MMOItemDiskManager.saveTemplate(t);
-                                pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Permission set to '&f" + clean + "&7'."));
+                                pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Permission set to '&f" + clean + "&7'."));
                                 open(pl, t.getItemType(), t.getId(), page);
                                 return true;
                             });
@@ -782,7 +776,7 @@ public class MMOItemEditionMenu {
                 if (button == 1) {
                     t.getCommands().clear();
                     MMOItemDiskManager.saveTemplate(t);
-                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Cleared all Commands."));
+                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Cleared all Commands."));
                     open(pl, t.getItemType(), t.getId(), page);
                 } else {
                     List<String> promptLines = List.of(
@@ -798,10 +792,10 @@ public class MMOItemEditionMenu {
                                 if (clean.isEmpty()) return false;
                                 if (t.getCommands().contains(clean)) {
                                     t.getCommands().remove(clean);
-                                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &cRemoved command: " + clean));
+                                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &cRemoved command: " + clean));
                                 } else {
                                     t.getCommands().add(clean);
-                                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &aAdded command: " + clean));
+                                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &aAdded command: " + clean));
                                 }
                                 MMOItemDiskManager.saveTemplate(t);
                                 open(pl, t.getItemType(), t.getId(), page);
@@ -813,7 +807,7 @@ public class MMOItemEditionMenu {
                 if (button == 1) {
                     t.getPermEffects().clear();
                     MMOItemDiskManager.saveTemplate(t);
-                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Cleared all Permanent Effects."));
+                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Cleared all Permanent Effects."));
                     open(pl, t.getItemType(), t.getId(), page);
                 } else {
                     List<String> promptLines = List.of(
@@ -829,10 +823,10 @@ public class MMOItemEditionMenu {
                                 if (clean.isEmpty()) return false;
                                 if (t.getPermEffects().contains(clean)) {
                                     t.getPermEffects().remove(clean);
-                                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &cRemoved permanent effect: " + clean));
+                                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &cRemoved permanent effect: " + clean));
                                 } else {
                                     t.getPermEffects().add(clean);
-                                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &aAdded permanent effect: " + clean));
+                                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &aAdded permanent effect: " + clean));
                                 }
                                 MMOItemDiskManager.saveTemplate(t);
                                 open(pl, t.getItemType(), t.getId(), page);
@@ -844,7 +838,7 @@ public class MMOItemEditionMenu {
                 if (button == 1) {
                     t.getPotionEffects().clear();
                     MMOItemDiskManager.saveTemplate(t);
-                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Cleared all Potion Effects."));
+                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Cleared all Potion Effects."));
                     open(pl, t.getItemType(), t.getId(), page);
                 } else {
                     List<String> promptLines = List.of(
@@ -860,10 +854,10 @@ public class MMOItemEditionMenu {
                                 if (clean.isEmpty()) return false;
                                 if (t.getPotionEffects().contains(clean)) {
                                     t.getPotionEffects().remove(clean);
-                                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &cRemoved potion effect: " + clean));
+                                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &cRemoved potion effect: " + clean));
                                 } else {
                                     t.getPotionEffects().add(clean);
-                                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &aAdded potion effect: " + clean));
+                                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &aAdded potion effect: " + clean));
                                 }
                                 MMOItemDiskManager.saveTemplate(t);
                                 open(pl, t.getItemType(), t.getId(), page);
@@ -875,7 +869,7 @@ public class MMOItemEditionMenu {
                 if (button == 1) {
                     t.getCustomSounds().clear();
                     MMOItemDiskManager.saveTemplate(t);
-                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Cleared all Custom Sounds."));
+                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Cleared all Custom Sounds."));
                     open(pl, t.getItemType(), t.getId(), page);
                 } else {
                     List<String> promptLines = List.of(
@@ -890,10 +884,10 @@ public class MMOItemEditionMenu {
                                 if (clean.isEmpty()) return false;
                                 if (t.getCustomSounds().contains(clean)) {
                                     t.getCustomSounds().remove(clean);
-                                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &cRemoved custom sound: " + clean));
+                                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &cRemoved custom sound: " + clean));
                                 } else {
                                     t.getCustomSounds().add(clean);
-                                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &aAdded custom sound: " + clean));
+                                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &aAdded custom sound: " + clean));
                                 }
                                 MMOItemDiskManager.saveTemplate(t);
                                 open(pl, t.getItemType(), t.getId(), page);
@@ -905,7 +899,7 @@ public class MMOItemEditionMenu {
                 if (button == 1) {
                     t.setItemParticles(null);
                     MMOItemDiskManager.saveTemplate(t);
-                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Removed Item Particles."));
+                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Removed Item Particles."));
                     open(pl, t.getItemType(), t.getId(), page);
                 } else {
                     List<String> promptLines = List.of(
@@ -919,7 +913,7 @@ public class MMOItemEditionMenu {
                                 String clean = input.trim().toUpperCase(Locale.ROOT);
                                 t.setItemParticles(clean.isEmpty() ? null : clean);
                                 MMOItemDiskManager.saveTemplate(t);
-                                pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Item Particles set to '&f" + clean + "&7'."));
+                                pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Item Particles set to '&f" + clean + "&7'."));
                                 open(pl, t.getItemType(), t.getId(), page);
                                 return true;
                             });
@@ -929,7 +923,7 @@ public class MMOItemEditionMenu {
                 if (button == 1) {
                     t.setArrowParticles(null);
                     MMOItemDiskManager.saveTemplate(t);
-                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Removed Arrow Particles."));
+                    pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Removed Arrow Particles."));
                     open(pl, t.getItemType(), t.getId(), page);
                 } else {
                     List<String> promptLines = List.of(
@@ -943,7 +937,7 @@ public class MMOItemEditionMenu {
                                 String clean = input.trim().toUpperCase(Locale.ROOT);
                                 t.setArrowParticles(clean.isEmpty() ? null : clean);
                                 MMOItemDiskManager.saveTemplate(t);
-                                pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Arrow Particles set to '&f" + clean + "&7'."));
+                                pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Arrow Particles set to '&f" + clean + "&7'."));
                                 open(pl, t.getItemType(), t.getId(), page);
                                 return true;
                             });
@@ -957,7 +951,7 @@ public class MMOItemEditionMenu {
                             () -> t.getStats().remove(st),
                             val -> t.getStats().put(st, val));
                 } else {
-                    pl.sendSystemMessage(Component.literal("§8[§eMMOItems§8] §7Stat " + def.displayName() + " dikonfigurasi melalui config!"));
+                    pl.sendSystemMessage(Component.literal("§8[§eTakasha-RPG§8] §7Stat " + def.displayName() + " dikonfigurasi melalui config!"));
                 }
             }
         }
@@ -969,7 +963,7 @@ public class MMOItemEditionMenu {
         if (button == 1) { // Right click: remove stat
             onRemove.run();
             MMOItemDiskManager.saveTemplate(t);
-            pl.sendSystemMessage(Component.literal("§8[§eMMOItems§8] §7Successfully removed " + statName + "§7."));
+            pl.sendSystemMessage(Component.literal("§8[§eTakasha-RPG§8] §7Successfully removed " + statName + "§7."));
             open(pl, t.getItemType(), t.getId(), page);
         } else { // Left click: prompt chat
             List<String> promptLines = List.of(
@@ -985,7 +979,7 @@ public class MMOItemEditionMenu {
                         double parsed = parseNumericStatFormula(input.trim());
                         onSet.accept(parsed);
                         MMOItemDiskManager.saveTemplate(t);
-                        pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7" + statName + " successfully changed to {" + parsed + " - 0.0 - 0.0 - 0.0 - (0.0 -> 0.0)}"));
+                        pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7" + statName + " successfully changed to {" + parsed + " - 0.0 - 0.0 - 0.0 - (0.0 -> 0.0)}"));
                         open(pl, t.getItemType(), t.getId(), page);
                         return true;
                     });
@@ -1012,12 +1006,12 @@ public class MMOItemEditionMenu {
                     input -> {
                         double chance = Double.parseDouble(input.trim());
                         if (chance < 0 || chance > 100) {
-                            pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &cChance must be between 0 and 100"));
+                            pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &cChance must be between 0 and 100"));
                             return false; // Stay in session!
                         }
                         onToggle.run();
                         MMOItemDiskManager.saveTemplate(t);
-                        pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7" + def.displayName() + " successfully changed to &a" + chance + "%&7."));
+                        pl.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7" + def.displayName() + " successfully changed to &a" + chance + "%&7."));
                         open(pl, t.getItemType(), t.getId(), page);
                         return true;
                     });

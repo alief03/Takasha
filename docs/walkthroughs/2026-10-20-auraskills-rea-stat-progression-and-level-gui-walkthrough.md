@@ -1,4 +1,4 @@
-# Walkthrough: AuraSkills REA Stat Progression & 1:1 Level GUI Parity
+# Walkthrough: AuraSkills Stat Progression & Level GUI Parity Terstandarisasi
 
 Dokumen ini merangkum perombakan menyeluruh pada subsistem AuraSkills di subproject `:takasha-rpg` berdasarkan artefak rencana perbaikan v3 dan instruksi pengguna.
 
@@ -6,10 +6,10 @@ Dokumen ini merangkum perombakan menyeluruh pada subsistem AuraSkills di subproj
 
 ## 1. Ringkasan Perubahan Utama
 
-| Aspek | Sebelum Perubahan | Sesudah Perubahan (Kanonikal 1:1) |
+| Aspek | Sebelum Perubahan | Sesudah Perubahan (Kanonikal Terstandarisasi) |
 |---|---|---|
 | **Sistem AP (Available Stat Points)** | Pemain mendapat 2 AP per level up dan mengalokasikan manual via GUI `/stats`. | **Dihapus total.** Stat meningkat otomatis setiap kali skill naik level sesuai formula resmi AuraSkills. |
-| **Command Skill Individual** (`/fighting`, `/farming`, dll) | Hanya mencetak pesan lore singkat di chat box. | **Membuka antarmuka GUI 54-Slot "Kemajuan Level" (Level Progression)** 1:1 dengan layout serpentine track AuraSkills. |
+| **Command Skill Individual** (`/fighting`, `/farming`, dll) | Hanya mencetak pesan lore singkat di chat box. | **Membuka antarmuka GUI 54-Slot "Kemajuan Level" (Level Progression)** presisi dengan layout serpentine track AuraSkills. |
 | **Posisi Mouse Kursor pada GUI** | Kursor selalu melompat / reset ke tengah layar setiap berpindah menu atau berganti halaman. | **Zero Cursor Displacement Protocol**: Menggunakan *In-Place Container Reuse* pada menu 54-slot sehingga mouse kursor tetap berada di posisinya tanpa pernah melompat ke tengah. |
 | **Kemampuan Skill (Abilities)** | Beberapa ability belum memiliki cooldown, scaling biaya mana dinamis, dan verifikasi unlock level 6. | **55 Passive Abilities & 8 Active Mana Abilities** diaudit sesuai `referensi-rp/RPG/AuraSkills-2.4.0/`, lengkap dengan verifikasi level >= 6 sebelum alat dapat disiagakan (`tryReadyTool`). |
 
@@ -60,7 +60,7 @@ Dokumen ini merangkum perombakan menyeluruh pada subsistem AuraSkills di subproj
 
 ---
 
-### C. Phase 3: `AuraLevelProgressionMenu.java` (GUI Kemajuan Level 1:1)
+### C. Phase 3: `AuraLevelProgressionMenu.java` (GUI Kemajuan Level Presisi)
 - **Layout Serpentine Track 24 Slot Kanonikal:**
   - Track slot posisi: `[9, 18, 27, 36, 37, 38, 29, 20, 11, 12, 13, 22, 31, 40, 41, 42, 33, 24, 15, 16, 17, 26, 35, 44]`
   - Menampilkan 24 level per halaman hingga level 100 (5 halaman total).

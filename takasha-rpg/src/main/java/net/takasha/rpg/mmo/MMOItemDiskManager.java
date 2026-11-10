@@ -15,10 +15,10 @@ import java.util.stream.Stream;
 
 /**
  * MMOItemDiskManager
- * Handles real-time persistence of MMOItems templates to physical YAML files
- * in the configuration directory: config/takasha/mmoitems/item/<TYPE>.yml
+ * Handles real-time persistence of Takasha RPG item templates to physical YAML files
+ * in the configuration directory: config/takasha/rpg_items/item/<TYPE>.yml
  *
- * Implements 1:1 format compatibility with MMOItems Spigot YAML specifications.
+ * Implements YAML format compatibility for item specifications.
  */
 public class MMOItemDiskManager {
 
@@ -26,7 +26,12 @@ public class MMOItemDiskManager {
     private static final Object FILE_LOCK = new Object();
 
     public static Path getItemsDirectory() {
-        return FabricLoader.getInstance().getConfigDir().resolve("takasha/mmoitems/item");
+        Path primary = FabricLoader.getInstance().getConfigDir().resolve("takasha/rpg_items/item");
+        Path legacy = FabricLoader.getInstance().getConfigDir().resolve("takasha/mmoitems/item");
+        if (!Files.exists(primary) && Files.exists(legacy)) {
+            return legacy;
+        }
+        return primary;
     }
 
     public static Path getTypeFilePath(String type) {
@@ -35,7 +40,7 @@ public class MMOItemDiskManager {
     }
 
     /**
-     * Loads all custom MMOItems templates from config/takasha/mmoitems/item/<TYPE>.yml
+     * Loads all custom RPG item templates from config/takasha/rpg_items/item/<TYPE>.yml
      */
     public static int loadCustomTemplates() {
         Path dir = getItemsDirectory();
@@ -43,7 +48,7 @@ public class MMOItemDiskManager {
             try {
                 Files.createDirectories(dir);
             } catch (IOException e) {
-                LOGGER.error("Failed to create MMOItems config directory: {}", dir, e);
+                LOGGER.error("Failed to create RPG items config directory: {}", dir, e);
                 return 0;
             }
         }
@@ -60,21 +65,21 @@ public class MMOItemDiskManager {
                         if (loaded instanceof Map<?, ?> rootMap) {
                             MMOItemManager.loadItemTemplatesMap(rootMap, type);
                             loadedCount += rootMap.size();
-                            LOGGER.info("Loaded {} custom MMOItem template(s) from {}", rootMap.size(), fileName);
+                            LOGGER.info("Loaded {} custom RPG item template(s) from {}", rootMap.size(), fileName);
                         }
                     } catch (Exception e) {
-                        LOGGER.error("Failed to load custom MMOItem YAML: {}", fileName, e);
+                        LOGGER.error("Failed to load custom RPG item YAML: {}", fileName, e);
                     }
                 }
             }
         } catch (Exception e) {
-            LOGGER.error("Error reading MMOItems items directory: {}", dir, e);
+            LOGGER.error("Error reading RPG items directory: {}", dir, e);
         }
         return loadedCount;
     }
 
     /**
-     * Persists or updates a template directly to config/takasha/mmoitems/item/<TYPE>.yml
+     * Persists or updates a template directly to config/takasha/rpg_items/item/<TYPE>.yml
      */
     @SuppressWarnings("unchecked")
     public static boolean saveTemplate(MMOItemTemplate template) {
@@ -116,7 +121,7 @@ public class MMOItemDiskManager {
     }
 
     /**
-     * Deletes a template section from config/takasha/mmoitems/item/<TYPE>.yml
+     * Deletes a template section from config/takasha/rpg_items/item/<TYPE>.yml
      */
     @SuppressWarnings("unchecked")
     public static boolean deleteTemplateDisk(String type, String id) {
@@ -225,7 +230,7 @@ public class MMOItemDiskManager {
             baseMap.put("gem-sockets", new ArrayList<>(template.getGemSockets()));
         }
 
-        // Gem Stone Attributes (MMOItems 1:1)
+        // Gem Stone Attributes
         if (template.hasGemColor()) {
             baseMap.put("gem-color", template.getGemColor());
         }
@@ -239,7 +244,7 @@ public class MMOItemDiskManager {
             baseMap.put("success-rate", template.getSuccessRate());
         }
 
-        // Advanced & Cosmetic Attributes (MMOItems 1:1)
+        // Advanced & Cosmetic Attributes
         if (template.hasItemSet()) {
             baseMap.put("item-set", template.getItemSet());
         }

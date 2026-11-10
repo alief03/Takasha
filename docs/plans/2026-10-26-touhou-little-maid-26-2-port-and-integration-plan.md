@@ -2,7 +2,7 @@
 
 > **Target Version:** Minecraft 26.2 (Fabric API 0.161.0+26.2, Fabric Loader 0.19.3, OpenJDK 25 LTS)  
 > **Target Hardware Profile:** AMD Ryzen 3 7320U (4C/8T), 5.74 GB RAM (Free ~0.7 GB), AMD Radeon™ 610M iGPU (Shared VRAM)  
-> **Source Directory (REA Source):** `d:\Mod Minecraft\weapon set\sakura\referensi-rp\touhou`  
+> **Source Directory (Sumber Komprehensif):** `d:\Mod Minecraft\weapon set\sakura\referensi-rp\touhou`  
 > **Source Artifacts Audited:**  
 > 1. `touhoulittlemaid-fabric-0.8.2-neo1.5.3+mc1.21.1.jar` (2,480 decompiled classes)  
 > 2. `tlmo-additions-1.0.3+mc1.21.1.jar` (228 decompiled classes)  

@@ -73,7 +73,7 @@ public class MMOCommand {
     };
 
     public static void initialize() {
-        LOGGER.info("Registering 1:1 MMOItems Commands (/mi, /mmo) for Takasha-RPG...");
+        LOGGER.info("Registering Takasha RPG Item Commands (/mi, /mmo)...");
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
             registerCommands(dispatcher);
         });
@@ -105,7 +105,7 @@ public class MMOCommand {
                                     String val = StringArgumentType.getString(ctx, "value");
                                     boolean ok = net.takasha.rpg.menu.MMOChatEditionEngine.processInput(player, val);
                                     if (!ok) {
-                                        ctx.getSource().sendFailure(Component.literal("§c[MMOItems] Kamu tidak sedang dalam sesi chat edition!"));
+                                        ctx.getSource().sendFailure(Component.literal("§c[Takasha-RPG] Kamu tidak sedang dalam sesi chat edition!"));
                                         return 0;
                                     }
                                     return 1;
@@ -166,7 +166,7 @@ public class MMOCommand {
                                                 existing = new MMOItemTemplate(id, type);
                                                 existing.setName("&f" + id.replace('_', ' '));
                                                 MMOItemManager.saveAndRegisterTemplate(existing);
-                                                player.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&a[MMOItems] Berhasil membuat template item baru: &6" + type + ":" + id));
+                                                player.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&a[Takasha-RPG] Berhasil membuat template item baru: &6" + type + ":" + id));
                                             }
                                             MMOItemEditionMenu.open(player, type, id);
                                             return 1;
@@ -244,10 +244,10 @@ public class MMOCommand {
                                                     String newId = StringArgumentType.getString(ctx, "new_id").toUpperCase(Locale.ROOT);
                                                     MMOItemTemplate copied = MMOItemManager.copyTemplate(type, oldId, newId);
                                                     if (copied == null) {
-                                                        ctx.getSource().sendFailure(Component.literal("§c[MMOItems] Template asal '" + oldId + "' tidak ditemukan!"));
+                                                        ctx.getSource().sendFailure(Component.literal("§c[Takasha-RPG] Template asal '" + oldId + "' tidak ditemukan!"));
                                                         return 0;
                                                     }
-                                                    ctx.getSource().sendSuccess(() -> Component.literal("§a[MMOItems] Berhasil menduplikasi " + oldId + " menjadi " + newId + "!"), true);
+                                                    ctx.getSource().sendSuccess(() -> Component.literal("§a[Takasha-RPG] Berhasil menduplikasi " + oldId + " menjadi " + newId + "!"), true);
                                                     return 1;
                                                 })
                                         )
@@ -264,10 +264,10 @@ public class MMOCommand {
                                             String id = StringArgumentType.getString(ctx, "id").toUpperCase(Locale.ROOT);
                                             boolean deleted = MMOItemManager.deleteTemplate(type, id);
                                             if (!deleted) {
-                                                ctx.getSource().sendFailure(Component.literal("§c[MMOItems] Template '" + id + "' tidak ditemukan!"));
+                                                ctx.getSource().sendFailure(Component.literal("§c[Takasha-RPG] Template '" + id + "' tidak ditemukan!"));
                                                 return 0;
                                             }
-                                            ctx.getSource().sendSuccess(() -> Component.literal("§a[MMOItems] Berhasil menghapus template " + id + " dari memori & konfigurasi!"), true);
+                                            ctx.getSource().sendSuccess(() -> Component.literal("§a[Takasha-RPG] Berhasil menghapus template " + id + " dari memori & konfigurasi!"), true);
                                             return 1;
                                         })
                                 )
@@ -346,7 +346,7 @@ public class MMOCommand {
                             String val = StringArgumentType.getString(ctx, "value");
                             boolean ok = net.takasha.rpg.menu.MMOChatEditionEngine.processInput(player, val);
                             if (!ok) {
-                                ctx.getSource().sendFailure(Component.literal("§c[MMOItems] Kamu tidak sedang dalam sesi chat edition!"));
+                                ctx.getSource().sendFailure(Component.literal("§c[Takasha-RPG] Kamu tidak sedang dalam sesi chat edition!"));
                                 return 0;
                             }
                             return 1;
@@ -361,7 +361,7 @@ public class MMOCommand {
                             String val = StringArgumentType.getString(ctx, "value");
                             boolean ok = net.takasha.rpg.menu.MMOChatEditionEngine.processInput(player, val);
                             if (!ok) {
-                                ctx.getSource().sendFailure(Component.literal("§c[MMOItems] Kamu tidak sedang dalam sesi chat edition!"));
+                                ctx.getSource().sendFailure(Component.literal("§c[Takasha-RPG] Kamu tidak sedang dalam sesi chat edition!"));
                                 return 0;
                             }
                             return 1;
@@ -377,7 +377,7 @@ public class MMOCommand {
     }
 
     private static int executeHelp(CommandSourceStack source) {
-        source.sendSuccess(() -> Component.literal("§6§l✦ TAKASHA MMOITEMS 1:1 SUITE ✦"), false);
+        source.sendSuccess(() -> Component.literal("§6§l✦ TAKASHA RPG ITEM SUITE ✦"), false);
         source.sendSuccess(() -> Component.literal(" §e/mi browse [type] §7- Membuka Type/Item Browser GUI 54-slot"), false);
         source.sendSuccess(() -> Component.literal(" §e/mi edit <type> <id> §7- Membuka Item Edition GUI dengan live preview slot 4"), false);
         source.sendSuccess(() -> Component.literal(" §e/mi create <type> <id> §7- Membuat item MMO baru & membuka editor"), false);
@@ -395,13 +395,13 @@ public class MMOCommand {
 
     private static int executeGive(CommandSourceStack source, ServerPlayer target, String itemId, int amount) {
         if (source.getEntity() instanceof ServerPlayer callerPlayer && !callerPlayer.isCreative()) {
-            source.sendFailure(Component.literal("§c[MMOItems] Perintah pembuatan & pengambilan item MMO hanya dapat digunakan dalam Mode Kreatif!"));
+            source.sendFailure(Component.literal("§c[Takasha-RPG] Perintah pembuatan & pengambilan item MMO hanya dapat digunakan dalam Mode Kreatif!"));
             return 0;
         }
 
         ItemStack stack = MMOItemManager.generateItemStack(itemId);
         if (stack.isEmpty()) {
-            source.sendFailure(Component.literal("§c[MMOItems] Item '" + itemId + "' tidak ditemukan! Ketik /mi browse atau /mi list."));
+            source.sendFailure(Component.literal("§c[Takasha-RPG] Item '" + itemId + "' tidak ditemukan! Ketik /mi browse atau /mi list."));
             return 0;
         }
 
@@ -411,8 +411,8 @@ public class MMOCommand {
             target.drop(stack, false);
         }
 
-        source.sendSuccess(() -> Component.literal("§a[MMOItems] §fBerhasil memberikan §e" + amount + "x §6" + stack.getHoverName().getString() + " §fke §e" + target.getScoreboardName()), true);
-        target.sendSystemMessage(Component.literal("§a[MMOItems] §fKamu telah menerima §6" + amount + "x " + stack.getHoverName().getString()));
+        source.sendSuccess(() -> Component.literal("§a[Takasha-RPG] §fBerhasil memberikan §e" + amount + "x §6" + stack.getHoverName().getString() + " §fke §e" + target.getScoreboardName()), true);
+        target.sendSystemMessage(Component.literal("§a[Takasha-RPG] §fKamu telah menerima §6" + amount + "x " + stack.getHoverName().getString()));
         return 1;
     }
 
@@ -422,11 +422,11 @@ public class MMOCommand {
                 : MMOItemManager.getTemplatesByType(type);
 
         if (templates.isEmpty()) {
-            source.sendSuccess(() -> Component.literal("§e[MMOItems] §7Tidak ada item MMO terdaftar untuk tipe: " + type), false);
+            source.sendSuccess(() -> Component.literal("§e[Takasha-RPG] §7Tidak ada item MMO terdaftar untuk tipe: " + type), false);
             return 1;
         }
 
-        source.sendSuccess(() -> Component.literal("§6§l✦ DAFTAR ITEM MMOITEMS (" + templates.size() + ") ✦"), false);
+        source.sendSuccess(() -> Component.literal("§6§l✦ DAFTAR ITEM RPG (" + templates.size() + ") ✦"), false);
         for (MMOItemTemplate t : templates) {
             String giveCmd = "/mi get " + t.getId().toLowerCase(Locale.ROOT);
             Component line = Component.literal(" §7• §f" + t.getItemType().toUpperCase(Locale.ROOT) + " §8| §e" + t.getId() + " §7- " + t.getTier().getPrefixColor() + t.getTier().getDisplayName() + " ")
@@ -440,21 +440,21 @@ public class MMOCommand {
     }
 
     private static int executeReload(CommandSourceStack source) {
-        source.sendSuccess(() -> Component.literal("§e[MMOItems] §7Memuat ulang seluruh pack RPG, item tool, senjata, dan stat..."), true);
+        source.sendSuccess(() -> Component.literal("§e[Takasha-RPG] §7Memuat ulang seluruh pack RPG, item tool, senjata, dan stat..."), true);
         try {
             TakashaPackManager.getInstance().reloadAll();
-            source.sendSuccess(() -> Component.literal("§a[MMOItems] §fReload selesai! Total item terdaftar: §e" + MMOItemManager.getAllTemplates().size()), true);
+            source.sendSuccess(() -> Component.literal("§a[Takasha-RPG] §fReload selesai! Total item terdaftar: §e" + MMOItemManager.getAllTemplates().size()), true);
             return 1;
         } catch (Exception e) {
-            LOGGER.error("Failed to reload MMOItems packs: ", e);
-            source.sendFailure(Component.literal("§c[MMOItems] Terjadi kegagalan saat reload: " + e.getMessage()));
+            LOGGER.error("Failed to reload RPG packs: ", e);
+            source.sendFailure(Component.literal("§c[Takasha-RPG] Terjadi kegagalan saat reload: " + e.getMessage()));
             return 0;
         }
     }
 
     private static int executeGiveAll(CommandSourceStack source, String itemId, int amount) {
         if (source.getEntity() instanceof ServerPlayer callerPlayer && !callerPlayer.isCreative()) {
-            source.sendFailure(Component.literal("§c[MMOItems] Perintah giveall hanya dapat digunakan dalam Mode Kreatif!"));
+            source.sendFailure(Component.literal("§c[Takasha-RPG] Perintah giveall hanya dapat digunakan dalam Mode Kreatif!"));
             return 0;
         }
         if (source.getServer() == null) return 0;
@@ -466,12 +466,12 @@ public class MMOCommand {
                 if (!player.getInventory().add(stack)) {
                     player.drop(stack, false);
                 }
-                player.sendSystemMessage(Component.literal("§a[MMOItems] §fKamu telah menerima §6" + amount + "x " + stack.getHoverName().getString()));
+                player.sendSystemMessage(Component.literal("§a[Takasha-RPG] §fKamu telah menerima §6" + amount + "x " + stack.getHoverName().getString()));
                 count++;
             }
         }
         int finalCount = count;
-        source.sendSuccess(() -> Component.literal("§a[MMOItems] §fBerhasil membagikan §e" + amount + "x " + itemId + " §fke §6" + finalCount + " §fpemain online!"), true);
+        source.sendSuccess(() -> Component.literal("§a[Takasha-RPG] §fBerhasil membagikan §e" + amount + "x " + itemId + " §fke §6" + finalCount + " §fpemain online!"), true);
         return 1;
     }
 
@@ -479,7 +479,7 @@ public class MMOCommand {
         if (source.getServer() == null) return 0;
         ServerPlayer target = source.getServer().getPlayerList().getPlayerByName(playerName);
         if (target == null) {
-            source.sendFailure(Component.literal("§c[MMOItems] Pemain '" + playerName + "' tidak ditemukan!"));
+            source.sendFailure(Component.literal("§c[Takasha-RPG] Pemain '" + playerName + "' tidak ditemukan!"));
             return 0;
         }
         int remaining = Math.max(1, amount);
@@ -497,22 +497,22 @@ public class MMOCommand {
         }
         int taken = amount - remaining;
         if (taken == 0) {
-            source.sendFailure(Component.literal("§c[MMOItems] Pemain " + playerName + " tidak memiliki item MMO '" + itemId + "'!"));
+            source.sendFailure(Component.literal("§c[Takasha-RPG] Pemain " + playerName + " tidak memiliki item MMO '" + itemId + "'!"));
             return 0;
         }
-        source.sendSuccess(() -> Component.literal("§a[MMOItems] §fBerhasil mengambil §e" + taken + "x " + itemId + " §fdari §6" + playerName), true);
-        target.sendSystemMessage(Component.literal("§c[MMOItems] §e" + taken + "x " + itemId + " §ftelah diambil dari inventori Anda."));
+        source.sendSuccess(() -> Component.literal("§a[Takasha-RPG] §fBerhasil mengambil §e" + taken + "x " + itemId + " §fdari §6" + playerName), true);
+        target.sendSystemMessage(Component.literal("§c[Takasha-RPG] §e" + taken + "x " + itemId + " §ftelah diambil dari inventori Anda."));
         return 1;
     }
 
     private static int executeDrop(CommandSourceStack source, String itemId, int amount) {
         if (source.getEntity() instanceof ServerPlayer callerPlayer && !callerPlayer.isCreative()) {
-            source.sendFailure(Component.literal("§c[MMOItems] Perintah drop hanya dapat digunakan dalam Mode Kreatif!"));
+            source.sendFailure(Component.literal("§c[Takasha-RPG] Perintah drop hanya dapat digunakan dalam Mode Kreatif!"));
             return 0;
         }
         ItemStack stack = MMOItemManager.generateItemStack(itemId);
         if (stack.isEmpty()) {
-            source.sendFailure(Component.literal("§c[MMOItems] Item '" + itemId + "' tidak ditemukan!"));
+            source.sendFailure(Component.literal("§c[Takasha-RPG] Item '" + itemId + "' tidak ditemukan!"));
             return 0;
         }
         stack.setCount(Math.max(1, amount));
@@ -521,7 +521,7 @@ public class MMOCommand {
         var itemEntity = new net.minecraft.world.entity.item.ItemEntity(level, pos.x, pos.y, pos.z, stack);
         itemEntity.setDefaultPickUpDelay();
         level.addFreshEntity(itemEntity);
-        source.sendSuccess(() -> Component.literal("§a[MMOItems] §fBerhasil menjatuhkan §e" + amount + "x " + stack.getHoverName().getString() + " §fpada koordinat (" + (int)pos.x + ", " + (int)pos.y + ", " + (int)pos.z + ")"), true);
+        source.sendSuccess(() -> Component.literal("§a[Takasha-RPG] §fBerhasil menjatuhkan §e" + amount + "x " + stack.getHoverName().getString() + " §fpada koordinat (" + (int)pos.x + ", " + (int)pos.y + ", " + (int)pos.z + ")"), true);
         return 1;
     }
 
@@ -530,14 +530,14 @@ public class MMOCommand {
                 ? MMOItemManager.getAllTemplates()
                 : MMOItemManager.getTemplatesByType(typeOrAll);
         if (templates.isEmpty()) {
-            source.sendFailure(Component.literal("§c[MMOItems] Tidak ada item terdaftar untuk kategori: " + typeOrAll));
+            source.sendFailure(Component.literal("§c[Takasha-RPG] Tidak ada item terdaftar untuk kategori: " + typeOrAll));
             return 0;
         }
         for (MMOItemTemplate t : templates) {
             t.setRevisionId(t.getRevisionId() + 1);
             net.takasha.rpg.mmo.MMOItemDiskManager.saveTemplate(t);
         }
-        source.sendSuccess(() -> Component.literal("§a[MMOItems] §fRevision ID dinaikkan (+1) untuk §e" + templates.size() + " §fitem MMO (" + typeOrAll + ")! Item pemain akan ter-update otomatis saat /mi update."), true);
+        source.sendSuccess(() -> Component.literal("§a[Takasha-RPG] §fRevision ID dinaikkan (+1) untuk §e" + templates.size() + " §fitem MMO (" + typeOrAll + ")! Item pemain akan ter-update otomatis saat /mi update."), true);
         return 1;
     }
 
@@ -546,24 +546,24 @@ public class MMOCommand {
         try {
             player = source.getPlayerOrException();
         } catch (Exception e) {
-            source.sendFailure(Component.literal("§c[MMOItems] Perintah update hanya dapat digunakan oleh pemain in-game!"));
+            source.sendFailure(Component.literal("§c[Takasha-RPG] Perintah update hanya dapat digunakan oleh pemain in-game!"));
             return 0;
         }
         ItemStack held = player.getMainHandItem();
         if (held.isEmpty()) {
-            source.sendFailure(Component.literal("§c[MMOItems] Pegang item MMO di tangan utama untuk mengupdate!"));
+            source.sendFailure(Component.literal("§c[Takasha-RPG] Pegang item MMO di tangan utama untuk mengupdate!"));
             return 0;
         }
         if (!MMOItemData.hasMMOData(held)) {
-            source.sendFailure(Component.literal("§c[MMOItems] Item yang Anda pegang bukan item MMOItems!"));
+            source.sendFailure(Component.literal("§c[Takasha-RPG] Item yang Anda pegang bukan item RPG!"));
             return 0;
         }
         boolean updated = MMOItemManager.updateItem(held);
         if (updated) {
-            source.sendSuccess(() -> Component.literal("§a[MMOItems] §fItem di tangan utama berhasil diupdate ke revisi template terbaru!"), false);
+            source.sendSuccess(() -> Component.literal("§a[Takasha-RPG] §fItem di tangan utama berhasil diupdate ke revisi template terbaru!"), false);
             return 1;
         } else {
-            source.sendFailure(Component.literal("§c[MMOItems] Gagal mengupdate item: Template asal tidak ditemukan!"));
+            source.sendFailure(Component.literal("§c[Takasha-RPG] Gagal mengupdate item: Template asal tidak ditemukan!"));
             return 0;
         }
     }

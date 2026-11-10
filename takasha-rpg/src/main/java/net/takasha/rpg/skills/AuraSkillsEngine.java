@@ -612,7 +612,7 @@ public class AuraSkillsEngine {
             }
 
             ItemStack stack = player.getItemInHand(hand);
-            // REA Parity: Custom MMO RPG weapons handle their own abilities (e.g. Volcanic Spear, Magma Dash)
+            // Custom RPG weapons handle their own abilities (e.g. Volcanic Spear, Magma Dash)
             if (net.takasha.rpg.mmo.MMOItemData.hasMMOData(stack)) {
                 return InteractionResult.PASS;
             }

@@ -71,14 +71,14 @@ tasks.register('runSuggestionTests', JavaExec) {
 
 tasks.register('runParityTests', JavaExec) {
     group = 'verification'
-    description = 'Executes the automated MMOItems 1:1 REA parity verification test suite.'
+    description = 'Executes the automated RPG System Parity verification test suite.'
     classpath = sourceSets.test.runtimeClasspath
     mainClass = 'net.takasha.rpg.test.TakashaParityAutoTest'
 }
 
 tasks.register('runStatTests', JavaExec) {
     group = 'verification'
-    description = 'Executes the automated MMOItems 28-stat verification test suite.'
+    description = 'Executes the automated RPG 28-stat verification test suite.'
     classpath = sourceSets.test.runtimeClasspath
     mainClass = 'net.takasha.rpg.test.MMOStatCombatAutoTest'
 }
@@ -99,7 +99,7 @@ tasks.register('runMultiTypeAuditTests', JavaExec) {
 
 tasks.register('runStatIntegrationTests', JavaExec) {
     group = 'verification'
-    description = 'Executes the automated Full Stat Integration & REA Audit verification test suite.'
+    description = 'Executes the automated Full Stat Integration verification test suite.'
     classpath = sourceSets.test.runtimeClasspath
     mainClass = 'net.takasha.rpg.test.TakashaStatIntegrationAutoTest'
 }

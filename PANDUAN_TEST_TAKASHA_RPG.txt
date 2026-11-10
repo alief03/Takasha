@@ -1,6 +1,6 @@
 ========================================================================================
    PANDUAN PENGUJIAN KOMPREHENSIF TAKASHA-RPG (MINECRAFT 26.2 FABRIC / JAVA 25 LTS)
-   SAMUS AWAKENED PYROMANCER 100% 1:1 TRUE PARITY, ANIMATION & FLIPBOOK SEQUENCER FIX
+   SAMUS AWAKENED PYROMANCER ANIMATION & FLIPBOOK SEQUENCER FIX
 ========================================================================================
 
 File Build Siap Uji:
@@ -13,7 +13,7 @@ File Build Siap Uji:
 - Mod ID         : takasha_rpg, sakura_weapons
 
 ----------------------------------------------------------------------------------------
-RINGKASAN PENYEMPURNAAN 1:1 PARITY SHOWCASE (v1.8.7 / v2.8.7):
+RINGKASAN PENYEMPURNAAN SHOWCASE (v1.8.7 / v2.8.7):
 ----------------------------------------------------------------------------------------
 1. Animasi Tekstur Lidah Api Blazestaff (Flickering Flame Animation):
    - Root Cause: File `flame_debuff.png.mcmeta` sebelumnya mengandung tag malformed `"mcmodels": ""`
@@ -272,11 +272,11 @@ Langkah Pengujian:
    - Hidupkan kembali: `/takasha nametag on`
 
 ========================================================================================
-[BAGIAN 9] PENGUJIAN PARITAS 1:1 MMOITEMS CHAT EDITION & PEMBUATAN ITEM KOSONG (ZERO-STAT)
+[BAGIAN 9] PENGUJIAN TAKASHA-RPG CHAT EDITION & PEMBUATAN ITEM KOSONG (ZERO-STAT)
 ========================================================================================
 Fitur Utama yang Diuji:
   * Pembuatan item baru (misal SWORD) HANYA menyetel base.material (stat, tier, nama, lore kosong murni).
-  * Format teks Chat Edition 1:1 Spigot (Banner atas tunggal coret kuning, prefix §8[§eMMOItems§8] §7, screen title).
+  * Format teks Chat Edition (Banner atas tunggal coret kuning, prefix §8[§eTakasha-RPG§8] §7, screen title).
   * Toleransi kesalahan: Input salah TIDAK mengeluarkan pemain dari sesi chat (bisa langsung ketik ulang).
   * Pembatalan senyap: Mengetik 'cancel' kembali ke GUI tanpa spam error.
   * Interaksi Stat Edition: Klik Kiri membuka prompt chat, Klik Kanan menghapus/mengosongkan stat.
@@ -299,21 +299,21 @@ Langkah Pengujian:
    - Di layar muncul Title emas: "Item Edition" dan Subtitle: "See chat."
    - Di chat muncul:
      §e§m-----------------------------------------------------
-     §8[§eMMOItems§8] §7Write in the chat the value you want.
-     §8[§eMMOItems§8] §7Type 'cancel' to abort editing.
+     §8[§eTakasha-RPG§8] §7Write in the chat the value you want.
+     §8[§eTakasha-RPG§8] §7Type 'cancel' to abort editing.
 4. Uji Toleransi Kesalahan (Fault-Tolerant Session):
    - Ketik sembarang kata di chat: "halo"
    [Ekspektasi]:
-   - Muncul pesan error merah: §8[§eMMOItems§8] §c'halo' is not a valid number!
+   - Muncul pesan error merah: §8[§eTakasha-RPG§8] §c'halo' is not a valid number!
    - Sesi chat TIDAK ditutup! Pemain TIDAK perlu membuka ulang GUI.
    - Langsung ketik angka yang benar: "12.5"
    [Ekspektasi]:
-   - Muncul konfirmasi hijau: §8[§eMMOItems§8] §aAttack Damage successfully changed to 12.5.
+   - Muncul konfirmasi hijau: §8[§eTakasha-RPG§8] §aAttack Damage successfully changed to 12.5.
    - GUI Item Edition otomatis terbuka kembali dengan Attack Damage = 12.5!
 5. Uji Klik Kanan untuk Menghapus Stat:
    - Klik Kanan pada ikon Attack Damage.
    [Ekspektasi]:
-   - Muncul notifikasi: §8[§eMMOItems§8] §aSuccessfully removed Attack Damage.
+   - Muncul notifikasi: §8[§eTakasha-RPG§8] §aSuccessfully removed Attack Damage.
    - Nilai kembali menjadi: §7Current Value: §a---
 6. Uji Pembatalan Senyap ('cancel'):
    - Klik Kiri pada Display Name.

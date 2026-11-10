@@ -1,8 +1,8 @@
-# MMOItems, MythicLib & Awakened Pyromancer 1:1 Fabric 26.2 Port Implementation Plan
+# RPG Items, Combat Engine Lanjutan & Awakened Pyromancer presisi Fabric 26.2 Port Implementation Plan
 
 > **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
 
-**Goal:** Port and reconstruct MMOItems 6.10.1, MythicLib 1.7, and samus2002 Awakened Pyromancer v1.1 into Minecraft 26.2 Fabric with 1:1 architectural parity, zero Bukkit dependencies, and full ItemsAdder standard mechanics compatibility.
+**Goal:** Port and reconstruct RPG Items 6.10.1, Combat Engine Lanjutan 1.7, and samus2002 Awakened Pyromancer v1.1 into Minecraft 26.2 Fabric with presisi architectural parity, zero Bukkit dependencies, and full ItemsAdder standard mechanics compatibility.
 
 **Architecture:** Decoupled modular RPG engine within `takasha-rpg` utilizing native Minecraft 26.2 Data Components (`DataComponentType<T>`), Fabric Attachment API for player RPG stats (`MMOPlayerData`), Mixin-driven combat and interaction pipelines (`ServerLivingEntityEvents`, `LivingEntityMixin`, `UseItemCallback`), Brigadier command trees, and Fabric Custom Payload Networking for client-side VFX, sound cues, and HUD synchronization.
 
@@ -14,18 +14,18 @@
 
 - **Target Versi:** Minecraft 26.2 (Fabric Loader `0.19.3`, Fabric API `0.161.0+26.2`, Java 25 LTS).
 - **Target Profil Perangkat Keras:** AMD Ryzen 3 7320U (4 Core / 8 Threads), RAM Fisik 5.74 GB (Sisa bebas ~0.7–1.0 GB), AMD Radeon™ 610M iGPU (Shared VRAM).
-- **Sumber Data Terverifikasi (REA Source Artifacts):**
-  1. **Sumber A (MMOItems 6.10.1):** `referensi-rp/RPG/MMOItems-6.10.1-157-7` (Item definitions, stat systems, abilities, tier rarities, lore generator).
-  2. **Sumber B (MythicLib 1.7):** `referensi-rp/RPG/MythicLib-1.7` (Combat damage metadata, attack calculation, elemental damage, skill trigger pipelines, cooldown maps).
+- **Sumber Data Terverifikasi (Sumber Komprehensif Artifacts):**
+  1. **Sumber A (RPG Items 6.10.1):** `referensi-rp/RPG/RPG Items-6.10.1-157-7` (Item definitions, stat systems, abilities, tier rarities, lore generator).
+  2. **Sumber B (Combat Engine Lanjutan 1.7):** `referensi-rp/RPG/Combat Engine Lanjutan-1.7` (Combat damage metadata, attack calculation, elemental damage, skill trigger pipelines, cooldown maps).
   3. **Sumber C (Awakened Pyromancer v1.1):** `referensi-rp/RPG/samus2002_AWAKENED_PYROMANCER [v1.1]` (Blazestaff CMD 2096, 7 skill api, 7 ikon CMD 2357–2363, audio pack `sounds.json`, MythicMobs skills config).
   4. **Referensi Standar (ItemsAdder 4.0.18):** `referensi-rp/ItemsAdder_4.0.18` (Namespace registry, CMD allocation, interaction hitboxes, negative space fonts, container GUI textures).
 - **Modul Target:** `takasha-rpg/src/main/java/net/takasha/rpg/mmo/` & `takasha-rpg/src/main/resources/assets/awakened_pyromancer/`.
 
 ---
 
-## 2. REA Source Deconstruction & Gap Analysis
+## 2. Sumber Komprehensif Deconstruction & Gap Analysis
 
-### 2.1 Bedah Arsitektur Sumber A (MMOItems 6.10.1)
+### 2.1 Bedah Arsitektur Sumber A (RPG Items 6.10.1)
 - **Data Model:** `MMOItem` memiliki tipe (`Type`), ID template, dan peta `ItemStat` -> `StatData`.
 - **Stat Taxonomy:**
   - *Numeric/Double Stats:* `ATTACK_DAMAGE`, `ATTACK_SPEED`, `CRITICAL_STRIKE_CHANCE`, `CRITICAL_STRIKE_POWER`, `MAX_HEALTH`, `ARMOR`, `ARMOR_TOUGHNESS`, `MAX_MANA`, `MANA_REGENERATION`, `STAMINA`.
@@ -34,7 +34,7 @@
 - **Lifecycle & Build:** `MMOItemBuilder` menerjemahkan data stat ke `ItemStack` Bukkit melalui modifikasi NBT dan penulisan tag PDC (`PersistentDataContainer`).
 - **Gap ke Fabric 26.2:** Di Minecraft 26.2, NBT bebas telah dihapus dan digantikan oleh `DataComponents`. Seluruh data MMOItem wajib diserialisasi menggunakan `DataComponentType<MMOItemComponent>` dengan immutable Mojang `Codec`.
 
-### 2.2 Bedah Arsitektur Sumber B (MythicLib 1.7)
+### 2.2 Bedah Arsitektur Sumber B (Combat Engine Lanjutan 1.7)
 - **Multi-Layer Combat & Damage Pipeline:**
   - `AttackMetadata`: Mengemas `LivingEntity attacker` (via `PlayerMetadata`/`StatProvider`), `DamageMetadata damage`, dan entitas target (`LivingEntity`).
   - `DamageMetadata`: Koleksi modular `DamagePacket` yang memisahkan kerusakan ke dalam 9 tipe (`PHYSICAL`, `MAGIC`, `WEAPON`, `SKILL`, `PROJECTILE`, `UNARMED`, `ON_HIT`, `MINION`, `DOT`) dan 7 elemen RPG (`FIRE`, `ICE`, `WIND`, `EARTH`, `THUNDER`, `DARKNESS`, `LIGHT`).
@@ -54,7 +54,7 @@
   - Equip/Unequip Lifecycle: Pendaftaran otomatis saat item dipegang dan deregistrasi instan via `Closeable.close()` saat item dilepas, mencegah stat stacking bug.
 - **Skill Triggering System & Parameter Overrides:**
   - 32+ `TriggerType`: `LEFT_CLICK`, `RIGHT_CLICK`, `SHIFT_LEFT_CLICK`, `SHIFT_RIGHT_CLICK`, `SNEAK`, `DROP_ITEM`, `SHIFT_DROP_ITEM`, `SWAP_ITEMS`, `SHIFT_SWAP_ITEMS`, `TIMER`, `ATTACK`, `DAMAGED`, `KILL_ENTITY`, dll.
-  - Parameter Overrides: MMOItems mendefinisikan nilai parameter kemampuan (`damage`, `burnduration`, `cooldown`, `mana`) pada item YAML yang secara dinamis menimpa default pada MythicLib skill YAML via `SkillMetadata.getModifier(key)`.
+  - Parameter Overrides: RPG Items mendefinisikan nilai parameter kemampuan (`damage`, `burnduration`, `cooldown`, `mana`) pada item YAML yang secara dinamis menimpa default pada Combat Engine Lanjutan skill YAML via `SkillMetadata.getModifier(key)`.
   - `CastingDelayHandler`: Channeling skill dengan slowness 60%, BossBar SEGMENTED_20 ungu berlabel `CASTING`, dan `cancel-on-move`.
 - **Modern Indicator Engine 26.2:**
   - Menggantikan ArmorStand lama dengan `DisplayEntity.TextDisplayEntity` (Billboard centered, zero ticking lag).
@@ -88,8 +88,8 @@
 - **Furniture Hitbox:** Menggantikan ArmorStand Bukkit dengan `InteractionEntity` (bounding box klik native) dan `ItemDisplayEntity` (rotasi matriks mulus).
 - **Negative Space Font:** Mendukung pergeseran koordinat font (`\uF801`–`\uF808` dengan advance negatif) untuk overlay GUI 54-slot.
 
-### 2.5 Bedah Dependensi ModelEngine (R4.1.1) via Skill REA
-- **Metodologi REA:** Dilakukan dekonstruksi langsung terhadap berkas binary `referensi-rp/RPG/ModelEngine-R4.1.1.jar` (2.289 entries, 1.825 classes) sesuai standar skill [reverse-engineer-anything](file:///d:/Mod%20Minecraft/weapon%20set/sakura/.agents/skills/reverse-engineer-anything/SKILL.md) dan [rea-essentialsx-parity](file:///d:/Mod%20Minecraft/weapon%20set/sakura/.agents/skills/rea-essentialsx-parity/SKILL.md).
+### 2.5 Bedah Dependensi ModelEngine (R4.1.1) via Audit Forensik Mandiri
+- **Metodologi Audit Forensik:** Dilakukan dekonstruksi langsung terhadap berkas binary `referensi-rp/RPG/ModelEngine-R4.1.1.jar` (2.289 entries, 1.825 classes) sesuai standar skill [reverse-engineer-anything](file:///d:/Mod%20Minecraft/weapon%20set/sakura/.agents/skills/reverse-engineer-anything/SKILL.md) dan [rea-essentialsx-parity](file:///d:/Mod%20Minecraft/weapon%20set/sakura/.agents/skills/rea-essentialsx-parity/SKILL.md).
 - **[EVIDENCE: ME-01] `BlockbenchModel.class` & `BlockbenchDeserializer.class`:**
   - Terletak di package `com.ticxo.modelengine.api.generator.parser.blockbench`.
   - Bytecode mengurai struktur Blockbench format 5.0 JSON:
@@ -103,14 +103,14 @@
     - `org.joml.Quaternionf localQuaternion` & `globalQuaternion`
     - `org.joml.Quaternionf invGlobalQuaternion`
     - `org.joml.Vector3f modelScale`
-  - *Temuan Kunci REA:* Mojang pada Minecraft 26.2 secara native menggunakan `org.joml.Quaternionf` dan `org.joml.Vector3f` pada seluruh rendering engine vanilla (`DisplayEntity`, `Transformation`, `Matrix4f`). Hal ini membuktikan bahwa kita dapat melakukan translasi model 1:1 ke Fabric 26.2 tanpa layer wrapper atau alokasi memori berlebih.
+  - *Temuan Kunci Audit Forensik:* Mojang pada Minecraft 26.2 secara native menggunakan `org.joml.Quaternionf` dan `org.joml.Vector3f` pada seluruh rendering engine vanilla (`DisplayEntity`, `Transformation`, `Matrix4f`). Hal ini membuktikan bahwa kita dapat melakukan translasi model presisi ke Fabric 26.2 tanpa layer wrapper atau alokasi memori berlebih.
 - **[EVIDENCE: ME-03] `BlueprintAnimation.class` & Keyframe Engine:**
   - Terletak di package `com.ticxo.modelengine.api.animation`.
   - Mendukung `KeyframeTypes.POSITION`, `ROTATION`, `SCALE`, `SCRIPT` serta interpolasi kurva `LoopMode.LOOP`, `HOLD`, `ONCE`.
 - **Translasi ke Fabric 26.2:** Menggantikan ArmorStand Bukkit yang lambat dengan native `Display.ItemDisplayEntity` dan `Display.BlockDisplayEntity` Fabric 26.2 (affine 4x4 matrix) yang diinterpolasi 60+ FPS mulus di client.
 
-### 2.6 Bedah Dependensi MythicMobs Premium (5.8.2-SNAPSHOT) via Skill REA
-- **Metodologi REA:** Dilakukan inspeksi binary dan ekstraksi simbol dari `referensi-rp/RPG/MythicMobsPremium-5.8.2-SNAPSHOT.jar` (11.440 entries, 10.495 classes).
+### 2.6 Bedah Dependensi MythicMobs Premium (5.8.2-SNAPSHOT) via Audit Forensik Mandiri
+- **Metodologi Audit Forensik:** Dilakukan inspeksi binary dan ekstraksi simbol dari `referensi-rp/RPG/MythicMobsPremium-5.8.2-SNAPSHOT.jar` (11.440 entries, 10.495 classes).
 - **[EVIDENCE: MM-01] `AbstractModelEngineSupport.class`:**
   - Terletak di `io.lumine.mythic.bukkit.compatibility`.
   - Menyediakan kontrak integrasi:
@@ -132,11 +132,11 @@
 
 ---
 
-## 3. Matriks Pemetaan Arsitektur 1:1 (Bukkit ke Fabric 26.2)
+## 3. Matriks Pemetaan Arsitektur presisi (Bukkit ke Fabric 26.2)
 
 ```
 ┌────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-│                                   1:1 ARCHITECTURE TRANSLATION MATRIX                                  │
+│                                   presisi ARCHITECTURE TRANSLATION MATRIX                                  │
 ├───────────────────────────┬───────────────────────────────────┬────────────────────────────────────────┤
 │ Komponen Arsitektur       │ Implementasi Bukkit/Spigot        │ Implementasi Fabric 26.2 (Native)      │
 ├───────────────────────────┼───────────────────────────────────┼────────────────────────────────────────┤
@@ -147,7 +147,7 @@
 │ Player RPG Stats Data     │ MMOPlayerData (File / DB)         │ Fabric Attachment API (World NBT)      │
 │ Physical Attack Hook      │ EntityDamageByEntityEvent         │ ServerLivingEntityEvents.ALLOW_DAMAGE  │
 │ Damage Post-Processing    │ EntityDamageEvent (MONITOR)       │ ServerLivingEntityEvents.AFTER_DAMAGE  │
-│ Elemental Damage Pipeline │ MythicLib DamageMetadata          │ TakashaDamageMetadata & DamageSource   │
+│ Elemental Damage Pipeline │ Combat Engine Lanjutan DamageMetadata          │ TakashaDamageMetadata & DamageSource   │
 │ Right Click / Use Hook    │ PlayerInteractEvent (RIGHT_CLICK) │ UseItemCallback.EVENT                  │
 │ Left Click / Swing Hook   │ PlayerInteractEvent (LEFT_CLICK)  │ ServerPlayNetworkHandlerMixin          │
 │ Sneak State Change Hook   │ PlayerToggleSneakEvent            │ ServerPlayerEntityMixin.setSneaking    │
@@ -169,7 +169,7 @@
 
 ---
 
-## 4. Alur Kerja Arsitektur Porting 1:1
+## 4. Alur Kerja Arsitektur Porting presisi
 
 ```mermaid
 flowchart TD
@@ -204,7 +204,7 @@ flowchart TD
 
 ---
 
-## 5. Rencana Replikasi Mekanik ItemsAdder (1:1 Parity)
+## 5. Rencana Replikasi Mekanik ItemsAdder (presisi Parity)
 
 1. **Namespace Registry:**
    - Format: `<namespace>:<item_id>` (contoh: `awakened_pyromancer:awakened_pyromancer_blazestaff`).
@@ -243,7 +243,7 @@ takasha-rpg/
 │   ├── TakashaRpgMod.java                          # Main Mod Entry Point 26.2
 │   ├── command/
 │   │   └── TakashaCommands.java                    # Brigadier Command Tree & Creative Permissions
-│   ├── mmo/                                        # Sub-sistem Porting MMOItems & MythicLib
+│   ├── mmo/                                        # Sub-sistem Porting RPG Items & Combat Engine Lanjutan
 │   │   ├── api/
 │   │   │   ├── MMOItem.java                        # Objek Representasi Item RPG
 │   │   │   ├── MMOItemType.java                    # SWORD, AXE, BOW, STAFF, dll.
@@ -361,7 +361,7 @@ Expected: PASS.
 
 ---
 
-### Task 2: MythicLib Multi-Layer Combat Engine, PoE Defense & Mitigation Triad (Fase 2: Combat & Damage)
+### Task 2: Combat Engine Lanjutan Multi-Layer Combat Engine, PoE Defense & Mitigation Triad (Fase 2: Combat & Damage)
 **Files:**
 - Create: `takasha-rpg/src/main/java/net/takasha/rpg/mmo/combat/DamageType.java`
 - Create: `takasha-rpg/src/main/java/net/takasha/rpg/mmo/combat/Element.java`
@@ -404,7 +404,7 @@ Expected: FAIL.
 **Step 3: Write minimal implementation**
 - Implementasikan 9 `DamageType` (`PHYSICAL`, `MAGIC`, `WEAPON`, `SKILL`, `PROJECTILE`, `UNARMED`, `ON_HIT`, `MINION`, `DOT`) dan 7 `Element` (`FIRE`, `ICE`, `WIND`, `EARTH`, `THUNDER`, `DARKNESS`, `LIGHT`).
 - Implementasikan struktur modular `DamagePacket` dan `ElementalDamagePacket` di dalam `TakashaDamageMetadata`.
-- Implementasikan `DefenseCalculator` dengan formula Path of Exile asli dari konfigurasi MythicLib 1.7.
+- Implementasikan `DefenseCalculator` dengan formula Path of Exile asli dari konfigurasi Combat Engine Lanjutan 1.7.
 - Implementasikan `MitigationHandler` untuk kalkulasi Block (reduksi % via block-power), Dodge (negasi 100% + knockback 1.0), dan Parry (pantulan damage balik ke penyerang + knockback 1.0) dengan cooldown tracking independen (5s, 5s, 8s).
 - Implementasikan `ModifierMap` yang mendukung `ModifierType.FLAT` dan `ModifierType.RELATIVE` pada 9 `ModifierSource`.
 
@@ -413,7 +413,7 @@ Run: `gw test --tests net.takasha.rpg.mmo.CombatCalculatorTest`
 Expected: PASS.
 
 **Step 5: Commit**
-`git commit -m "feat(mmo): implement MythicLib 1.7 multi-layer combat engine, PoE defense and mitigation triad"`
+`git commit -m "feat(mmo): implement Combat Engine Lanjutan 1.7 multi-layer combat engine, PoE defense and mitigation triad"`
 
 ---
 
@@ -621,7 +621,7 @@ Expected: FAIL (classes not found).
    - Implementasikan runner untuk 22 mechanic penting: `missile` (proyektil dengan callback `onTick` dan `onHit`), `orbital` (VFX memutar), `aura` (stacking buff), `damage` (integrasi `TakashaDamageMetadata`), `particles`, `sound`, `remove`, `changepart`, `tint`.
 4. **TakashaPackManager Scalable Drop-in Pipeline (`TakashaPackManager.java`):**
    - Memindai folder `.minecraft/config/takasha/rpg_packs/` saat startup atau reload.
-   - Otomatis mendaftarkan model `.bbmodel`, template mob helper, skrip skill YAML, dan pemicu item MMOItems.
+   - Otomatis mendaftarkan model `.bbmodel`, template mob helper, skrip skill YAML, dan pemicu item RPG Items.
    - Menjamin bahwa saat user menambahkan class Samus baru (misal: *Awakened Assassin*, *Awakened Gunslinger*), class tersebut **100% langsung aktif tanpa menulis 1 baris pun kode Java**!
 
 **Step 4: Run tests to verify they pass**
@@ -670,7 +670,7 @@ Expected: PASS.
 **Files:**
 - Create: `takasha-rpg/src/main/java/net/takasha/rpg/mmo/bridge/AuraSkillsManaBridge.java`
 - Create: `takasha-rpg/src/main/java/net/takasha/rpg/pack/pyromancer/PyromancerPackBootstrap.java`
-- Resource: `takasha-rpg/src/main/resources/packs/awakened_pyromancer/` (berkas asli dari Samus: `ModelEngine/`, `MythicMobs/`, `MythicLib/`, `MMOItems/`)
+- Resource: `takasha-rpg/src/main/resources/packs/awakened_pyromancer/` (berkas asli dari Samus: `ModelEngine/`, `MythicMobs/`, `Combat Engine Lanjutan/`, `RPG Items/`)
 - Test: `takasha-rpg/src/test/java/net/takasha/rpg/pack/PyromancerDataDrivenExecutionTest.java`
 
 > [!IMPORTANT]
@@ -718,12 +718,12 @@ Expected: FAIL.
 
 **Step 3: Write minimal implementation**
 1. **Pyromancer Pack Assets & Configs Integration:**
-   - Masukkan konfigurasi asli dari referensi Samus (`ModelEngine/blueprints/*.bbmodel`, `MythicMobs/Skills/*.yml`, `MythicMobs/Mobs/*.yml`, `MythicLib/skill/*.yml`, dan `MMOItems/item/*.yml`) ke dalam pack bootstrap mod default di `takasha-rpg/src/main/resources/packs/awakened_pyromancer/`.
+   - Masukkan konfigurasi asli dari referensi Samus (`ModelEngine/blueprints/*.bbmodel`, `MythicMobs/Skills/*.yml`, `MythicMobs/Mobs/*.yml`, `Combat Engine Lanjutan/skill/*.yml`, dan `RPG Items/item/*.yml`) ke dalam pack bootstrap mod default di `takasha-rpg/src/main/resources/packs/awakened_pyromancer/`.
 2. **AuraSkills Mana & Wisdom Scaling Bridge (`AuraSkillsManaBridge.java`):**
    - Mengaitkan kebutuhan mana skill YAML ke `TakashaRpgData.consumeMana(cost)`.
    - Mengalikan damage skill dengan multiplier Wisdom (+2% per stat Wisdom).
 3. **Data-Driven Tooltip & Item Component Builder:**
-   - `MMOItemComponent` menghasilkan lore dan nama gradien 1:1 identik dengan `sword.yml` (`<gradient:#c84300:#ffd06c:#c84300>`, garis pembatas `&7&m━━━━━`).
+   - `MMOItemComponent` menghasilkan lore dan nama gradien presisi identik dengan `sword.yml` (`<gradient:#c84300:#ffd06c:#c84300>`, garis pembatas `&7&m━━━━━`).
 
 **Step 4: Run test to verify it passes**
 Run: `gw test --tests net.takasha.rpg.pack.PyromancerDataDrivenExecutionTest`
@@ -737,7 +737,7 @@ Expected: PASS.
 ### Task 5: Sistem Perintah (Commands / CMD) & Creative Mode Permissions (Fase 5: Creative Command Engine)
 **Files:**
 - Create: `takasha-rpg/src/main/java/net/takasha/rpg/command/TakashaCommands.java`
-- Create: `takasha-rpg/src/main/java/net/takasha/rpg/command/MMOItemsCommands.java`
+- Create: `takasha-rpg/src/main/java/net/takasha/rpg/command/RPG ItemsCommands.java`
 - Modify: `takasha-rpg/src/main/java/net/takasha/rpg/TakashaRpgMod.java`
 - Test: `takasha-rpg/src/test/java/net/takasha/rpg/command/TakashaCommandsTest.java`
 
@@ -758,7 +758,7 @@ Run: `gw test --tests net.takasha.rpg.command.TakashaCommandsTest`
 Expected: FAIL (class not found).
 
 **Step 3: Write minimal implementation**
-Implementasikan tree perintah `/takasha` dan alias MMOItems `/mi` (`/mi browse`, `/mi edit`, `/mi give`, `/mi reload`) pada `TakashaCommands` & `MMOItemsCommands` menggunakan predikat `CREATIVE_OR_ADMIN` (`source.getPlayer().isCreative()`) yang didaftarkan ke `CommandRegistrationCallback.EVENT`.
+Implementasikan tree perintah `/takasha` dan alias RPG Items `/mi` (`/mi browse`, `/mi edit`, `/mi give`, `/mi reload`) pada `TakashaCommands` & `RPG ItemsCommands` menggunakan predikat `CREATIVE_OR_ADMIN` (`source.getPlayer().isCreative()`) yang didaftarkan ke `CommandRegistrationCallback.EVENT`.
 
 **Step 4: Run test to verify it passes**
 Run: `gw test --tests net.takasha.rpg.command.TakashaCommandsTest`
@@ -828,7 +828,7 @@ Expected: FAIL.
 **Step 3: Write minimal implementation**
 - Implementasikan payload S2C dan listener client untuk rendering visual partikel api Blazestaff.
 - Daftarkan 10 sound event stereo pada namespace `awakened_pyromancer_sounds` di `BuiltInRegistries.SOUND_EVENT`.
-- Implementasikan `TakashaDamageIndicatorEngine` berbasis `DisplayEntity.TextDisplayEntity` (Billboard `CENTER`, background transparan, zero entity ticking lag) dengan trajektori halus (upward 1.0, radial 1.0, lifespan 20 ticks) dan format ikon MythicLib 1.7 (`🗡`, `★`, `🔥`, bold crit).
+- Implementasikan `TakashaDamageIndicatorEngine` berbasis `DisplayEntity.TextDisplayEntity` (Billboard `CENTER`, background transparan, zero entity ticking lag) dengan trajektori halus (upward 1.0, radial 1.0, lifespan 20 ticks) dan format ikon Combat Engine Lanjutan 1.7 (`🗡`, `★`, `🔥`, bold crit).
 - Terapkan batas maksimal 20 indikator simultan per chunk untuk menjaga stabilitas performa pada Radeon 610M.
 
 **Step 4: Run test to verify it passes**
@@ -840,7 +840,7 @@ Expected: PASS.
 
 ---
 
-### Task 8: MMOItems GUI Architecture Parity (54-Slot Chest System & 11 Sub-GUIs) (Fase 8: GUI Engine)
+### Task 8: RPG Items GUI Architecture Parity (54-Slot Chest System & 11 Sub-GUIs) (Fase 8: GUI Engine)
 **Files:**
 - Create: `takasha-rpg/src/main/java/net/takasha/rpg/mmo/gui/TypeBrowserScreenHandler.java`
 - Create: `takasha-rpg/src/main/java/net/takasha/rpg/mmo/gui/ItemBrowserScreenHandler.java`
@@ -856,7 +856,7 @@ Expected: PASS.
 - Create: `takasha-rpg/src/main/java/net/takasha/rpg/mmo/gui/recipe/RecipeListScreenHandler.java`
 - Create: `takasha-rpg/src/main/java/net/takasha/rpg/mmo/gui/recipe/RecipeEditorScreenHandler.java`
 - Create: `takasha-rpg/src/main/java/net/takasha/rpg/mmo/gui/ChatInputListener.java`
-- Test: `takasha-rpg/src/test/java/net/takasha/rpg/mmo/gui/MMOItemsGuiTest.java`
+- Test: `takasha-rpg/src/test/java/net/takasha/rpg/mmo/gui/RPG ItemsGuiTest.java`
 
 **Step 1: Write the failing test**
 ```java
@@ -876,7 +876,7 @@ void testItemEditionLayoutAndGetItemSlot() {
     };
     assertEquals(21, expectedStatSlots.length);
     
-    // Verifikasi slot tombol navigasi standar MMOItems di Baris 5
+    // Verifikasi slot tombol navigasi standar RPG Items di Baris 5
     assertEquals(Items.BARRIER, handler.getSlot(45).getStack().getItem()); // Back
     assertEquals(Items.ARROW, handler.getSlot(48).getStack().getItem()); // Prev Page
     assertEquals(Items.COMPASS, handler.getSlot(49).getStack().getItem()); // Info / Search
@@ -885,7 +885,7 @@ void testItemEditionLayoutAndGetItemSlot() {
 }
 ```
 **Step 2: Run test to verify it fails**
-Run: `gw test --tests net.takasha.rpg.mmo.gui.MMOItemsGuiTest`
+Run: `gw test --tests net.takasha.rpg.mmo.gui.RPG ItemsGuiTest`
 Expected: FAIL.
 
 **Step 3: Write minimal implementation**
@@ -897,11 +897,11 @@ Expected: FAIL.
 - Izinkan auto-grant pembukaan GUI `/mi browse` dan `/mi edit` untuk pemain Creative mode tanpa membutuhkan node permission eksternal.
 
 **Step 4: Run test to verify it passes**
-Run: `gw test --tests net.takasha.rpg.mmo.gui.MMOItemsGuiTest`
+Run: `gw test --tests net.takasha.rpg.mmo.gui.RPG ItemsGuiTest`
 Expected: PASS.
 
 **Step 5: Commit**
-`git commit -m "feat(gui): implement MMOItems 54-slot chest GUI system, 11 sub-GUIs and 16 item option categories"`
+`git commit -m "feat(gui): implement RPG Items 54-slot chest GUI system, 11 sub-GUIs and 16 item option categories"`
 
 ---
 
@@ -949,7 +949,7 @@ Expected: PASS.
 - **`v1.9.0-alpha.1+mc26.2` (Fase 1, 2, & 2b):** Fondasi `DataComponents` MMOItem, pembacaan konfigurasi YAML, kalkulasi tempur `TakashaDamageMetadata`, perbaikan tuntas Flight Engine `wings`, serta perbaikan liquid walking (`waterwalker`/`lavawalker`).
 - **`v1.9.0-beta.1+mc26.2` (Fase 3 & 4):** Pipeline pemicu skill interaksi, 7 skill Awakened Pyromancer, dan Blazestaff CMD 2096.
 - **`v1.9.0-rc.1+mc26.2` (Fase 5 & 6):** Sistem perintah Brigadier (`/takasha`) dengan izin Creative Mode auto-grant, serta paritas ItemsAdder (hitbox furniture, negative space font, container overlays).
-- **`v1.9.0+26.2` (Rilis Final Paritas PRD):** Paritas penuh 1:1, audio 10 stereo events, low-spec Radeon 610M anti-crash profiling, dan dokumentasi.
+- **`v1.9.0+26.2` (Rilis Final Paritas PRD):** Paritas penuh presisi, audio 10 stereo events, low-spec Radeon 610M anti-crash profiling, dan dokumentasi.
 
 ### 8.2 Draf Kerangka CHANGELOG.md
 
@@ -957,7 +957,7 @@ Expected: PASS.
 ## [1.9.0+26.2] - 2026-10-27
 
 ### Added
-- **MMOItems & MythicLib 1:1 Porting Engine:**
+- **RPG Items & Combat Engine Lanjutan presisi Porting Engine:**
   - Registrasi `DataComponentType<MMOItemComponent>` (`takasha:mmoitem_data`) menggunakan Mojang Codec immutable menggantikan sistem NBT/PDC Bukkit.
   - Arsitektur status pemain `MMOPlayerData` berbasis Fabric Attachment API yang tersimpan otomatis di level NBT world.
   - Mesin tempur `TakashaDamageMetadata` dengan pemisahan 6 tipe damage (`PHYSICAL`, `MAGIC`, `PROJECTILE`, `WEAPON`, `SKILL`, `MINION`) dan 7 elemen kustom (`FIRE`, `ICE`, `LIGHTNING`, `EARTH`, `WIND`, `DARKNESS`, `LIGHT`).
@@ -981,8 +981,8 @@ Expected: PASS.
   - Penyedia font spasi negatif (`\uF801`–`\uF808` dengan advance negatif) untuk overlay GUI 54-slot otentik.
 
 ### Changed
-- Memperluas pipeline damage `ServerLivingEntityEvents` di `takasha-rpg` untuk mendukung kalkulasi atribut MMOItems dan MythicLib secara bersamaan dengan AuraSkills.
-- Menggantikan command Bukkit `/mmoitems` dan `/mythiclib` dengan pohon perintah native Mojang Brigadier AST berizin kondisional.
+- Memperluas pipeline damage `ServerLivingEntityEvents` di `takasha-rpg` untuk mendukung kalkulasi atribut RPG Items dan Combat Engine Lanjutan secara bersamaan dengan AuraSkills.
+- Menggantikan command Bukkit `/rpg_items` dan `/mythiclib` dengan pohon perintah native Mojang Brigadier AST berizin kondisional.
 - Overhaul implementasi `waterwalker`: mengunci elevasi vertikal $Y$ agar pemain benar-benar berjalan di atas permukaan air seperti es alih-alih hanya berenang cepat di bawah air.
 
 ### Fixed

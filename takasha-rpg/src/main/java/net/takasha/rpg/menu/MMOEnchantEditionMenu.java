@@ -19,7 +19,7 @@ import java.util.*;
 
 /**
  * MMOEnchantEditionMenu
- * 1:1 MMOItems Enchantments Edition GUI (54 slots).
+ * Takasha RPG Enchantments Edition GUI (54 slots).
  * Mengelola Vanilla & AdvancedEnchantments pada item template.
  */
 public class MMOEnchantEditionMenu {
@@ -32,7 +32,7 @@ public class MMOEnchantEditionMenu {
 
     public static void open(ServerPlayer player, MMOItemTemplate template) {
         if (!player.isCreative()) {
-            player.sendSystemMessage(Component.literal("§c[MMOItems] Menu ini hanya dapat diakses dalam Mode Kreatif!"));
+            player.sendSystemMessage(Component.literal("§c[Takasha-RPG] Menu ini hanya dapat diakses dalam Mode Kreatif!"));
             return;
         }
 
@@ -152,12 +152,12 @@ public class MMOEnchantEditionMenu {
                         net.takasha.rpg.economy.catalog.EnchantmentDetailHelper.EnchantDetail det = net.takasha.rpg.economy.catalog.EnchantmentDetailHelper.getDetail(enchKey);
                         int maxLvl = def != null ? def.maxLevel : (det != null ? det.maxLevel() : 10);
                         if (level > maxLvl) {
-                            player.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &eLevel " + level + " melebihi batas maksimal (" + maxLvl + "). Disesuaikan menjadi level " + maxLvl + "."));
+                            player.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &eLevel " + level + " melebihi batas maksimal (" + maxLvl + "). Disesuaikan menjadi level " + maxLvl + "."));
                             level = maxLvl;
                         }
                         template.getAdvancedEnchants().put(enchKey, Math.max(1, level));
                         net.takasha.rpg.mmo.MMOItemDiskManager.saveTemplate(template);
-                        player.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Enchantment &e" + enchKey + " " + level + " &7successfully added."));
+                        player.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Enchantment &e" + enchKey + " " + level + " &7successfully added."));
                         player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.PLAYERS, 0.8f, 1.2f);
                         open(player, template);
                         return true;
@@ -180,7 +180,7 @@ public class MMOEnchantEditionMenu {
 
                 if (button == 0) { // Left Click: +1 level
                     if (currentLvl >= maxLvl) {
-                        player.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &c" + enchKey + " sudah mencapai batas maksimal level (Level " + maxLvl + ")!"));
+                        player.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &c" + enchKey + " sudah mencapai batas maksimal level (Level " + maxLvl + ")!"));
                         player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.UI_BUTTON_CLICK.value(), SoundSource.PLAYERS, 0.8f, 0.6f);
                         return;
                     }

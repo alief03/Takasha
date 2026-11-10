@@ -1,4 +1,4 @@
-# Rencana Komprehensif: Audit Total 336 REA Enchantment Effect & Perbaikan Mekanika AOE Lingkaran (Immolation, Cleave, Defense, Slayer & Dispatcher Engine)
+# Rencana Komprehensif: Audit Total 336 Audit Forensik Enchantment Effect & Perbaikan Mekanika AOE Lingkaran (Immolation, Cleave, Defense, Slayer & Dispatcher Engine)
 
 > **Target Versi:** `v1.5.0+26.2`  
 > **Modul:** `takasha-rpg` (Minecraft 26.2, Fabric 0.161.0, Java 25 LTS)  
@@ -25,7 +25,7 @@ Dari total 336 custom enchantment:
 - **46 Enchantment Handled / Aktif (13.7%):** Telah memiliki registrasi eksplisit atau terpicu oleh substring logic yang ada.
 - **290 Enchantment Unhandled / Parsial (86.3%):** Terabaikan (*silent drop*) atau hanya terpicu sebagian karena sistem kode lama mengandalkan rantai `if / else if (id.contains(...))` yang sangat rapuh.
 
-Seluruh 336 enchantment ini (termasuk ke-290 yang unhandled) kini **telah diaudit dan dipetakan secara tuntas ke dalam 12 tabel domain fungsional lengkap pada Bab 3** di bawah ini, memuat ID, Nama, Tier, Target Alat/Senjata, Tipe Trigger REA, Efek Otentik/Deskripsi, serta Status Implementasi Saat Ini.
+Seluruh 336 enchantment ini (termasuk ke-290 yang unhandled) kini **telah diaudit dan dipetakan secara tuntas ke dalam 12 tabel domain fungsional lengkap pada Bab 3** di bawah ini, memuat ID, Nama, Tier, Target Alat/Senjata, Tipe Trigger Audit Forensik, Efek Otentik/Deskripsi, serta Status Implementasi Saat Ini.
 
 ---
 
@@ -72,7 +72,7 @@ Seluruh 336 enchantment ini (termasuk ke-290 yang unhandled) kini **telah diaudi
 
 #### Detail Audit: 1. Melee AOE & Radial Burst (8 Enchantments)
 
-| ID | Nama Enchant | Tier | Target | Tipe Trigger REA | Efek Otentik / Deskripsi | Status Implementasi Saat Ini |
+| ID | Nama Enchant | Tier | Target | Tipe Trigger Audit Forensik | Efek Otentik / Deskripsi | Status Implementasi Saat Ini |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | `carve` | Carve | SIMPLE | Pedang | `CUSTOM_RPG` | Tebasan menyapu yang melukai beberapa musuh di sekitar target. | **UNHANDLED (0% dieksekusi)** |
 | `contagion` | Contagion | SIMPLE | Busur Panah | `CUSTOM_RPG` | Menyebarkan efek racun ke seluruh musuh di sekitar target. | **EXPLICIT_OK (100% aktif)** |
@@ -85,7 +85,7 @@ Seluruh 336 enchantment ini (termasuk ke-290 yang unhandled) kini **telah diaudi
 
 #### Detail Audit: 2. Mob-Specific Slayers (13 Enchantments)
 
-| ID | Nama Enchant | Tier | Target | Tipe Trigger REA | Efek Otentik / Deskripsi | Status Implementasi Saat Ini |
+| ID | Nama Enchant | Tier | Target | Tipe Trigger Audit Forensik | Efek Otentik / Deskripsi | Status Implementasi Saat Ini |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | `blazereaper` | Blaze Reaper | SIMPLE | Senjata Tempur | `CUSTOM_RPG` | Meningkatkan damage serangan terhadap makhluk dimensi Nether. | **UNHANDLED (0% dieksekusi)** |
 | `bonecrusher` | Bone Crusher | SIMPLE | Pedang & Kapak | `ATTACK_MOB` | ALL_SWORD; ALL_AXE | **UNHANDLED (0% dieksekusi)** |
@@ -103,7 +103,7 @@ Seluruh 336 enchantment ini (termasuk ke-290 yang unhandled) kini **telah diaudi
 
 #### Detail Audit: 3. Melee Combat Debuffs & Status DoTs (22 Enchantments)
 
-| ID | Nama Enchant | Tier | Target | Tipe Trigger REA | Efek Otentik / Deskripsi | Status Implementasi Saat Ini |
+| ID | Nama Enchant | Tier | Target | Tipe Trigger Audit Forensik | Efek Otentik / Deskripsi | Status Implementasi Saat Ini |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | `arcticfreeze` | Arctic freeze | SIMPLE | Pedang | `CUSTOM_RPG` | Peluang memberikan efek Slowness dan pendarahan pada musuh. | **PARTIAL (Generic slow freeze)** |
 | `blackout` | Blackout | SIMPLE | Pedang | `CUSTOM_RPG` | Memberikan efek kebutaan (Blindness) pada lawan saat diserang. | **UNHANDLED (0% dieksekusi)** |
@@ -130,7 +130,7 @@ Seluruh 336 enchantment ini (termasuk ke-290 yang unhandled) kini **telah diaudi
 
 #### Detail Audit: 4. Melee Combat Procs & Criticals (79 Enchantments)
 
-| ID | Nama Enchant | Tier | Target | Tipe Trigger REA | Efek Otentik / Deskripsi | Status Implementasi Saat Ini |
+| ID | Nama Enchant | Tier | Target | Tipe Trigger Audit Forensik | Efek Otentik / Deskripsi | Status Implementasi Saat Ini |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | `abrasion` | Abrasion | SIMPLE | Senjata Tempur | `CUSTOM_RPG` | Merusak dan mengikis ketahanan (durability) armor lawan saat diserang. | **UNHANDLED (0% dieksekusi)** |
 | `alacrity` | Alacrity | SIMPLE | Alat Perkakas | `CUSTOM_RPG` | Meningkatkan kecepatan ayunan saat menggunakan alat perkakas. | **UNHANDLED (0% dieksekusi)** |
@@ -173,7 +173,7 @@ Seluruh 336 enchantment ini (termasuk ke-290 yang unhandled) kini **telah diaudi
 | `enrage` | Enrage | ULTIMATE | Pedang | `CUSTOM_RPG` | Meningkatkan kekuatan serangan saat kesehatan pengguna berada di titik rendah. | **UNHANDLED (0% dieksekusi)** |
 | `exalted` | Exalted | ULTIMATE | Pedang | `ATTACK` | ALL_SWORD; CURE:SLOW @Attacker | **UNHANDLED (0% dieksekusi)** |
 | `fuddle` | Fuddle | ULTIMATE | Pedang | `ATTACK` | ALL_SWORD; SHUFFLE_HOTBAR @Victim | **UNHANDLED (0% dieksekusi)** |
-| `iceaspect` | Ice Aspect | ULTIMATE | Pedang | `ATTACK;ATTACK_MOB` | ALL_SWORD; POTION:SLOW:1:100 @Victim | **PARTIAL (Generic slow freeze)** |
+| `iceaspect` | Ice Aspect | ULTIMATE | Pedang | `ATTACK;ATTACK_MOB` | ALL_SWORD; POTION:SLOW:presisi00 @Victim | **PARTIAL (Generic slow freeze)** |
 | `interrupt` | Interrupt | ULTIMATE | Pedang | `ATTACK;ATTACK_MOB` | ALL_SWORD; POTION:SLOW_DIGGING:0:100 @Victim | **UNHANDLED (0% dieksekusi)** |
 | `nightowl` | Night Owl | ULTIMATE | Pedang | `ATTACK_MOB` | ALL_SWORD; INCREASE_DAMAGE:25 | **UNHANDLED (0% dieksekusi)** |
 | `permafrost` | Permafrost | ULTIMATE | Pedang | `ATTACK;ATTACK_MOB` | ALL_SWORD; DO_HARM:1 @Victim | **PARTIAL (Generic slow freeze)** |
@@ -214,7 +214,7 @@ Seluruh 336 enchantment ini (termasuk ke-290 yang unhandled) kini **telah diaudi
 
 #### Detail Audit: 5. Ranged & Projectile Combat (42 Enchantments)
 
-| ID | Nama Enchant | Tier | Target | Tipe Trigger REA | Efek Otentik / Deskripsi | Status Implementasi Saat Ini |
+| ID | Nama Enchant | Tier | Target | Tipe Trigger Audit Forensik | Efek Otentik / Deskripsi | Status Implementasi Saat Ini |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | `blow` | Double Blow | SIMPLE | Trisula | `CUSTOM_RPG` | Peluang melancarkan pukulan berkekuatan damage ganda. | **UNHANDLED (0% dieksekusi)** |
 | `flashbang` | Flashbang | SIMPLE | Busur Panah | `CUSTOM_RPG` | Menyilaukan dan membutakan lawan saat terkena tembakan panah. | **EXPLICIT_OK (100% aktif)** |
@@ -261,7 +261,7 @@ Seluruh 336 enchantment ini (termasuk ke-290 yang unhandled) kini **telah diaudi
 
 #### Detail Audit: 6. Armor Defense (When Hit) (106 Enchantments)
 
-| ID | Nama Enchant | Tier | Target | Tipe Trigger REA | Efek Otentik / Deskripsi | Status Implementasi Saat Ini |
+| ID | Nama Enchant | Tier | Target | Tipe Trigger Audit Forensik | Efek Otentik / Deskripsi | Status Implementasi Saat Ini |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | `adrenaline` | Adrenaline | SIMPLE | Semua Armor | `CUSTOM_RPG` | Memberikan dorongan Strength (Kekuatan) saat bertahan dari serangan monster. | **UNHANDLED (0% dieksekusi)** |
 | `aura` | Aura | SIMPLE | Semua Armor | `CUSTOM_RPG` | Mengurangi damage yang diterima oleh pemain sekutu di sekitar. | **UNHANDLED (0% dieksekusi)** |
@@ -372,7 +372,7 @@ Seluruh 336 enchantment ini (termasuk ke-290 yang unhandled) kini **telah diaudi
 
 #### Detail Audit: 7. Armor Passive & Static Buffs (11 Enchantments)
 
-| ID | Nama Enchant | Tier | Target | Tipe Trigger REA | Efek Otentik / Deskripsi | Status Implementasi Saat Ini |
+| ID | Nama Enchant | Tier | Target | Tipe Trigger Audit Forensik | Efek Otentik / Deskripsi | Status Implementasi Saat Ini |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | `aquatic` | Aquatic | SIMPLE | Helm Zirah | `EFFECT_STATIC` | ALL_HELMET; POTION:WATER_BREATHING:0 | **UNHANDLED (0% dieksekusi)** |
 | `glowing` | Glowing | SIMPLE | Helm Zirah | `EFFECT_STATIC` | ALL_HELMET; POTION:NIGHT_VISION:0 | **UNHANDLED (0% dieksekusi)** |
@@ -388,7 +388,7 @@ Seluruh 336 enchantment ini (termasuk ke-290 yang unhandled) kini **telah diaudi
 
 #### Detail Audit: 8. Mining & Excavation Tools (28 Enchantments)
 
-| ID | Nama Enchant | Tier | Target | Tipe Trigger REA | Efek Otentik / Deskripsi | Status Implementasi Saat Ini |
+| ID | Nama Enchant | Tier | Target | Tipe Trigger Audit Forensik | Efek Otentik / Deskripsi | Status Implementasi Saat Ini |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | `autosmelt` | Auto Smelt | SIMPLE | Beliung (Pickaxe) | `CUSTOM_RPG` | Melebur bijih logam secara otomatis saat ditambang. | **EXPLICIT_OK (100% aktif)** |
 | `blast_mining` | Blast Mining | SIMPLE | Beliung (Pickaxe) | `CUSTOM_RPG` | Menghancurkan blok dalam area 3x3 secara bersamaan. | **EXPLICIT_OK (100% aktif)** |
@@ -421,7 +421,7 @@ Seluruh 336 enchantment ini (termasuk ke-290 yang unhandled) kini **telah diaudi
 
 #### Detail Audit: 9. Farming & Agriculture Tools (6 Enchantments)
 
-| ID | Nama Enchant | Tier | Target | Tipe Trigger REA | Efek Otentik / Deskripsi | Status Implementasi Saat Ini |
+| ID | Nama Enchant | Tier | Target | Tipe Trigger Audit Forensik | Efek Otentik / Deskripsi | Status Implementasi Saat Ini |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | `replanter` | Replanter | UNIQUE | Cangkul | `MINING` | ALL_HOE | **EXPLICIT_OK (100% aktif)** |
 | `replenish` | Replenish | ELITE | Beliung (Pickaxe) | `MINING` | ALL_PICKAXE; ADD_FOOD:1 | **UNHANDLED (0% dieksekusi)** |
@@ -432,7 +432,7 @@ Seluruh 336 enchantment ini (termasuk ke-290 yang unhandled) kini **telah diaudi
 
 #### Detail Audit: 10. Fishing Rod Enchantments (9 Enchantments)
 
-| ID | Nama Enchant | Tier | Target | Tipe Trigger REA | Efek Otentik / Deskripsi | Status Implementasi Saat Ini |
+| ID | Nama Enchant | Tier | Target | Tipe Trigger Audit Forensik | Efek Otentik / Deskripsi | Status Implementasi Saat Ini |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | `allurement` | Allurement | SIMPLE | Alat Pancing | `CUSTOM_RPG` | Peluang mendapatkan tangkapan loot ganda saat memancing. | **UNHANDLED (0% dieksekusi)** |
 | `firehook` | Fire Hook | ELITE | Alat Pancing | `HOOK_ENTITY` | FISHING_ROD; BURN:40 @Victim | **UNHANDLED (0% dieksekusi)** |
@@ -440,13 +440,13 @@ Seluruh 336 enchantment ini (termasuk ke-290 yang unhandled) kini **telah diaudi
 | `poisonedhook` | Poisoned Hook | ELITE | Alat Pancing | `HOOK_ENTITY` | FISHING_ROD; POTION:POISON:0:80 @Victim | **UNHANDLED (0% dieksekusi)** |
 | `snap` | Snap | ELITE | Alat Pancing | `CATCH_FISH` | FISHING_ROD; PULL_CLOSER:1 @Victim | **UNHANDLED (0% dieksekusi)** |
 | `autoreel` | Auto Reel | ULTIMATE | Alat Pancing | `BITE_HOOK` | FISHING_ROD; AUTO_REEL | **UNHANDLED (0% dieksekusi)** |
-| `lucky` | Lucky | ULTIMATE | Alat Pancing | `RIGHT_CLICK` | FISHING_ROD; POTION:LUCK:1:1000 | **UNHANDLED (0% dieksekusi)** |
+| `lucky` | Lucky | ULTIMATE | Alat Pancing | `RIGHT_CLICK` | FISHING_ROD; POTION:LUCK:presisi000 | **UNHANDLED (0% dieksekusi)** |
 | `sharpnesshook` | Sharpness Hook | ULTIMATE | Alat Pancing | `HOOK_ENTITY` | FISHING_ROD; DO_HARM:2 @Victim | **UNHANDLED (0% dieksekusi)** |
 | `bait` | Bait | LEGENDARY | Alat Pancing | `CATCH_FISH` | FISHING_ROD; MORE_DROPS:1 | **UNHANDLED (0% dieksekusi)** |
 
 #### Detail Audit: 11. On-Kill & Soul Harvest Triggers (7 Enchantments)
 
-| ID | Nama Enchant | Tier | Target | Tipe Trigger REA | Efek Otentik / Deskripsi | Status Implementasi Saat Ini |
+| ID | Nama Enchant | Tier | Target | Tipe Trigger Audit Forensik | Efek Otentik / Deskripsi | Status Implementasi Saat Ini |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | `devour` | Devour | UNIQUE | Senjata Tempur | `KILL_MOB` | ALL_SWORD; ALL_AXE | **UNHANDLED (0% dieksekusi)** |
 | `inquisitive` | Inquisitive | LEGENDARY | Pedang | `KILL_MOB` | ALL_SWORD | **UNHANDLED (0% dieksekusi)** |
@@ -458,7 +458,7 @@ Seluruh 336 enchantment ini (termasuk ke-290 yang unhandled) kini **telah diaudi
 
 #### Detail Audit: 12. Mobility, Fall Damage & Curses (5 Enchantments)
 
-| ID | Nama Enchant | Tier | Target | Tipe Trigger REA | Efek Otentik / Deskripsi | Status Implementasi Saat Ini |
+| ID | Nama Enchant | Tier | Target | Tipe Trigger Audit Forensik | Efek Otentik / Deskripsi | Status Implementasi Saat Ini |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | `ascend` | Ascend | SIMPLE | Pedang | `CUSTOM_RPG` | Melayang ke udara (Levitasi). Klik-Kanan untuk mengaktifkan. | **UNHANDLED (0% dieksekusi)** |
 | `charge` | Charge | SIMPLE | Pedang | `CUSTOM_RPG` | Melesat kencang ke depan untuk menerjang lawan. | **UNHANDLED (0% dieksekusi)** |
@@ -584,4 +584,4 @@ Alih-alih `id.contains("burn")`, buat Set / Map kamus ID yang memetakan seluruh 
 ## 6. Komitmen Batasan (Constraints)
 - **Zero-Touch pada Mod Sakura-Weapons:** Mod `sakura-weapons` (`v2.5.0`) tidak disentuh sama sekali.
 - **Zero-Code-First:** Tidak ada pengubahan kode Java sebelum rencana ini disetujui pengguna.
-- **Kepatuhan REA Otentik:** Nilai durasi, radius, dan partikel mengikuti dokumen resmi `enchantments.yml` dari AdvancedEnchantments.
+- **Kepatuhan Audit Forensik Otentik:** Nilai durasi, radius, dan partikel mengikuti dokumen resmi `enchantments.yml` dari AdvancedEnchantments.

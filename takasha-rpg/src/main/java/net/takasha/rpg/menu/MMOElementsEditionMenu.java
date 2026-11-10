@@ -18,7 +18,7 @@ import java.util.List;
 
 /**
  * MMOElementsEditionMenu
- * 1:1 Parity dengan Spigot net.Indyuce.mmoitems.gui.edition.ElementsEdition.class.
+ * Antarmuka Manajemen Elemen RPG Takasha.
  * Sub-menu GUI 27-slot yang mengelola 6 elemen RPG:
  * Fire, Ice, Lightning, Earth, Light, Darkness (Damage % & Defense %).
  */
@@ -54,7 +54,7 @@ public class MMOElementsEditionMenu {
         }
         container.setItem(4, previewStack);
 
-        // Slot 26: Back Button (1:1 with Spigot Back)
+        // Slot 26: Back Button
         ItemStack backButton = new ItemStack(Items.BARRIER);
         backButton.set(DataComponents.CUSTOM_NAME, Component.literal("§cBack"));
         backButton.set(DataComponents.LORE, new ItemLore(List.of(
@@ -117,7 +117,7 @@ public class MMOElementsEditionMenu {
         if (button == 1) { // Right Click: Remove
             template.getStats().remove(statType);
             MMOItemDiskManager.saveTemplate(template);
-            player.sendSystemMessage(Component.literal("§8[§eMMOItems§8] §7" + statName + " successfully removed."));
+            player.sendSystemMessage(Component.literal("§8[§eTakasha-RPG§8] §7" + statName + " successfully removed."));
             player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.UI_BUTTON_CLICK.value(), SoundSource.PLAYERS, 0.8f, 1.2f);
             open(player, template, parentPage);
         } else { // Left Click: Chat Edition
@@ -133,7 +133,7 @@ public class MMOElementsEditionMenu {
                         double parsed = parseNumeric(input.trim());
                         template.getStats().put(statType, parsed);
                         MMOItemDiskManager.saveTemplate(template);
-                        player.sendSystemMessage(Component.literal("§8[§eMMOItems§8] §7" + statName + " successfully changed to {" + parsed + " - 0.0 - 0.0 - 0.0 - (0.0 -> 0.0)}"));
+                        player.sendSystemMessage(Component.literal("§8[§eTakasha-RPG§8] §7" + statName + " successfully changed to {" + parsed + " - 0.0 - 0.0 - 0.0 - (0.0 -> 0.0)}"));
                         open(player, template, parentPage);
                         return true;
                     });

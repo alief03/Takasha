@@ -24,7 +24,7 @@ import java.util.Set;
 
 /**
  * MMOGemSocketMenu
- * 1:1 MMOItems Gem Sockets Edition GUI (54 slots).
+ * Takasha RPG Gem Sockets Edition GUI (54 slots).
  * Allows configuring gem socket types (Red, Blue, Yellow, Diamond, etc.) on an item template.
  */
 public class MMOGemSocketMenu {
@@ -37,7 +37,7 @@ public class MMOGemSocketMenu {
 
     public static void open(ServerPlayer player, MMOItemTemplate template, int returnPage) {
         if (!player.isCreative()) {
-            player.sendSystemMessage(Component.literal("§c[MMOItems] Menu ini hanya dapat diakses dalam Mode Kreatif!"));
+            player.sendSystemMessage(Component.literal("§c[Takasha-RPG] Menu ini hanya dapat diakses dalam Mode Kreatif!"));
             return;
         }
 
@@ -134,7 +134,7 @@ public class MMOGemSocketMenu {
                 }
             }
 
-            // Standard MMOItems socket colors
+            // Standard RPG socket colors
             List<String> standardColors = List.of("Red", "Blue", "Yellow", "Green", "Prismatic", "Any");
             for (String sc : standardColors) {
                 discoveredColors.add(sc);
@@ -164,7 +164,7 @@ public class MMOGemSocketMenu {
                         }
                         template.getGemSockets().add(clean);
                         MMOItemDiskManager.saveTemplate(template);
-                        player.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &aGem socket &6" + clean + " &aberhasil ditambahkan!"));
+                        player.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &aGem socket &6" + clean + " &aberhasil ditambahkan!"));
                         player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_LEVELUP, SoundSource.PLAYERS, 0.8f, 1.2f);
                         open(player, template, returnPage);
                         return true;
@@ -180,7 +180,7 @@ public class MMOGemSocketMenu {
                 if (button == 1) { // Right Click: Remove
                     String removed = list.remove(i);
                     MMOItemDiskManager.saveTemplate(template);
-                    player.sendSystemMessage(Component.literal("§c[MMOItems] Gem socket §e" + removed + " §ctelah dihapus dari template."));
+                    player.sendSystemMessage(Component.literal("§c[Takasha-RPG] Gem socket §e" + removed + " §ctelah dihapus dari template."));
                     player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.LAVA_EXTINGUISH, SoundSource.PLAYERS, 0.7f, 1.2f);
                     open(player, template, returnPage);
                     return;

@@ -28,7 +28,7 @@ Berdasarkan koreksi dan umpan balik pengguna:
 
 ---
 
-## 2. Audit Teknis REA (Reverse Engineering & Analysis)
+## 2. Audit Teknis Audit Forensik (Audit Forensik)
 
 ### A. Akar Masalah Bug Status Effect `virus` & Senjata Proyektil (Crossbow/Bow)
 1. **Omission di Dummy**: Di `DamageDummyEntity.java` baris 153–189, pengecekan string hanya mencakup 12 kata kunci: `bleed`, `freeze`, `burn`, `shock`, `silence`, `disarm`, `fracture`, `snowblind`, `poison`, `wither`, `slow`, `weak`. Enchantment **`virus`** tidak mengandung kata "poison" atau "wither", sehingga terabaikan (*silent drop*).

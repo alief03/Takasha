@@ -23,7 +23,7 @@ import java.util.Random;
 
 /**
  * MMOCombatEngine
- * Menghubungkan seluruh statistik MMOItems & MythicLib ke sistem pertempuran Minecraft 26.2:
+ * Menghubungkan seluruh statistik item RPG ke sistem pertempuran Minecraft 26.2:
  * - Offense: Critical Strike, Elements (Fire, Ice, Lightning, Earth, Light, Darkness), Lifesteal, Spell Vampirism,
  *            PvE Damage, PvP Damage, Weapon/Physical/Magic Damage multipliers.
  * - Defense: Dodge Rating (whoosh SFX, cancel), Parry Rating (shield block SFX, cancel),

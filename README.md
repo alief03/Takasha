@@ -147,7 +147,7 @@ Buka menu utama Takasha Dashboard dengan menekan tombol **`K`**:
 * **Fortune Reshaper:** Otomatis menukar perkakas tangan ke alat ber-enchantment Fortune/Silk Touch saat memecahkan blok bijih.
 
 ### 2.7 Mesin Pertanian Pintar (Crop Plot Memory & Zero-Hole Replant)
-Sistem Auto-Farm generasi baru (`TakashaFarmHandler`) menghadirkan **Zero-Hole Guarantee** yang mengimbangi kecepatan panen secara 1:1:
+Sistem Auto-Farm generasi baru (`TakashaFarmHandler`) menghadirkan **Zero-Hole Guarantee** yang mengimbangi kecepatan panen secara instan dan presisi:
 * **Crop Plot Memory Map:** Pemetaan spasial lahan pertanian in-memory selama sesi aktif. Mengenali jenis benih asli per koordinat (`FARMLAND` untuk gandum/wortel/kentang/bit, `SOUL_SAND` untuk nether wart, `JUNGLE_LOGS` untuk kakao).
 * **In-Tick Instant Pairing (0ms Delay):** Paket panen dan paket penanaman kembali dikirim secara berpasangan dalam tick yang sama.
 * **Symmetric Batch Throughput:** Mendukung hingga 12 aksi per tick.
@@ -368,7 +368,7 @@ Akses dashboard di browser melalui `http://localhost:5173/`.
 ## 8. Riwayat Rilis & Semantic Versioning
 
 * **v2.8.0+26.2 & v2.6.0+1.21.11 (The Unified Ecosystem Milestone):**
-  - **Auto-Farm Crop Plot Memory & Resilient Replant Engine:** In-memory Crop Plot Memory Map, 0ms instant 1:1 harvest-replant pairing, throughput 12 aksi/tick, flow-control backpressure, sticky offhand caching, dan drop-delay resilient backoff retry.
+  - **Auto-Farm Crop Plot Memory & Resilient Replant Engine:** In-memory Crop Plot Memory Map, 0ms instant harvest-replant pairing, throughput 12 aksi/tick, flow-control backpressure, sticky offhand caching, dan drop-delay resilient backoff retry.
   - **Standalone Takasha-RPG Engine:** Paritas penuh AuraSkills (7 keahlian, stat scaling nyata), 6 Tier AdvancedEnchantments (40+ combat & utility enchantments), 5 Tier Dungeon Rift Arena (wave survival & custom boss AI), Damage Test Dummy (floating combat damage numbers & DoT subGUI), Dynamic Economy & Daily Shop (`/sellgui`), World Events & Grimoire 16 Sovereign Titles.
   - **Takasha RPG Web Companion:** Peluncuran aplikasi web lokal interaktif (port 5173) untuk katalog enchant dan stat tracker.
 * **v2.7.0+26.2 & v2.5.0+1.21.11 (Server Safe Mode & Engine Specialization):**

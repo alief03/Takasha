@@ -3,7 +3,7 @@
 ## Ringkasan Eksekusi
 Porting menyeluruh dan integrasi **Touhou Little Maid (TLM)** bersama ekosistem tambahannya (**Yes Steve Model / YSM**, **TLMO Maid Beacon**, **Maid Useful Tasks**, **Touhou Maid Affection**, dan **Takasha-RPG Companion Engine**) telah selesai diimplementasikan untuk target platform Minecraft 26.2 (Fabric Loader 0.19.3, Fabric API 0.161.0+26.2, OpenJDK 25 LTS).
 
-Implementasi dirancang dengan kepatuhan 100% terhadap bytecode sumber referensi (`tlmo-additions-1.0.3+mc1.21.1.jar`, `touhoulittlemaid-fabric-0.8.2-neo1.5.3+mc1.21.1.jar`, dan `ysm-2.6.5-fabric+mc1.21.1-release.jar`) menggunakan metodologi Reverse Engineering Architecture (REA).
+Implementasi dirancang dengan kepatuhan 100% terhadap bytecode sumber referensi (`tlmo-additions-1.0.3+mc1.21.1.jar`, `touhoulittlemaid-fabric-0.8.2-neo1.5.3+mc1.21.1.jar`, dan `ysm-2.6.5-fabric+mc1.21.1-release.jar`) menggunakan metodologi Reverse Engineering Architecture (Audit Forensik).
 
 ---
 

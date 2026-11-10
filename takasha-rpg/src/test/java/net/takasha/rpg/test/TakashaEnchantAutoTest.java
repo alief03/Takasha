@@ -30,7 +30,7 @@ import java.util.*;
  * 5. Combat Engine Triggers & Soft-Cap Balance Multipliers
  * 6. Utility Engine Triggers (Autosmelt, Telepathy, Obsidian Breaker)
  * 7. Gacha Economy & Pricing Matrix
- * 8. MMOItems Template Integration
+ * 8. RPG Template Integration
  */
 public class TakashaEnchantAutoTest {
 
@@ -65,7 +65,7 @@ public class TakashaEnchantAutoTest {
             // 7. GACHA ECONOMY & PRICING MATRIX
             testGachaEconomyPricing();
 
-            // 8. MMOITEMS TEMPLATE SYNC
+            // 8. RPG TEMPLATE SYNC
             testMmoItemTemplateSync();
 
             // 9. INDIVIDUAL 336 ENCHANTS TEST (ONE-BY-ONE EXHAUSTIVE VERIFICATION)
@@ -389,10 +389,10 @@ public class TakashaEnchantAutoTest {
     }
 
     // ==================================================================================
-    // 8. MMOITEMS TEMPLATE SYNC
+    // 8. RPG TEMPLATE SYNC
     // ==================================================================================
     private static void testMmoItemTemplateSync() {
-        System.out.println("\n--- [8/8] Pengujian Integrasi Template MMOItems ---");
+        System.out.println("\n--- [8/8] Pengujian Integrasi Template RPG Items ---");
 
         MMOItemTemplate template = new MMOItemTemplate("KATANA_ENCHANT_TEST", "SWORD");
 

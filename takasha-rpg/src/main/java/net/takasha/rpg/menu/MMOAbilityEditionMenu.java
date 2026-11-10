@@ -18,7 +18,7 @@ import java.util.*;
 
 /**
  * MMOAbilityEditionMenu
- * 1:1 MMOItems Ability Edition GUI (54 slots).
+ * Takasha RPG Ability Edition GUI (54 slots).
  * Mengelola kemampuan aktif dan pasif (Trigger, Cooldown, Mana Cost) pada item template.
  */
 public class MMOAbilityEditionMenu {
@@ -31,7 +31,7 @@ public class MMOAbilityEditionMenu {
 
     public static void open(ServerPlayer player, MMOItemTemplate template) {
         if (!player.isCreative()) {
-            player.sendSystemMessage(Component.literal("§c[MMOItems] Menu ini hanya dapat diakses dalam Mode Kreatif!"));
+            player.sendSystemMessage(Component.literal("§c[Takasha-RPG] Menu ini hanya dapat diakses dalam Mode Kreatif!"));
             return;
         }
 
@@ -150,7 +150,7 @@ public class MMOAbilityEditionMenu {
                         template.getAbilities().add(newAb);
                         net.takasha.rpg.mmo.MMOItemDiskManager.saveTemplate(template);
 
-                        player.sendSystemMessage(Component.literal("§a[MMOItems] Ability §6" + abType + " §7[" + trigger.getDisplay() + "] §aberhasil ditambahkan ke template!"));
+                        player.sendSystemMessage(Component.literal("§a[Takasha-RPG] Ability §6" + abType + " §7[" + trigger.getDisplay() + "] §aberhasil ditambahkan ke template!"));
                         player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_LEVELUP, SoundSource.PLAYERS, 0.8f, 1.2f);
                         open(player, template);
                     }
@@ -165,7 +165,7 @@ public class MMOAbilityEditionMenu {
                 if (button == 1) { // Right Click: Remove
                     MMOItemTemplate.AbilityConfig removed = list.remove(i);
                     net.takasha.rpg.mmo.MMOItemDiskManager.saveTemplate(template);
-                    player.sendSystemMessage(Component.literal("§c[MMOItems] Ability §e" + removed.getType() + " §ctelah dihapus dari template."));
+                    player.sendSystemMessage(Component.literal("§c[Takasha-RPG] Ability §e" + removed.getType() + " §ctelah dihapus dari template."));
                     player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.LAVA_EXTINGUISH, SoundSource.PLAYERS, 0.7f, 1.2f);
                     open(player, template);
                     return;

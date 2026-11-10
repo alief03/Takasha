@@ -21,7 +21,7 @@ import java.util.List;
 
 /**
  * AuraLevelProgressionMenu
- * GUI Level Progression kanonikal 1:1 AuraSkills 2.4.0 (54-slot chest).
+ * GUI Level Progression kanonikal AuraSkills (54-slot chest).
  * Menampilkan Serpentine Track 24-slot dengan indikator status:
  * - Hijau (Lime): Level yang sudah tercapai (Unlocked)
  * - Kuning (Yellow): Level berikutnya yang sedang dipelajari (In Progress)

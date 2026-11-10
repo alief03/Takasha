@@ -10,7 +10,7 @@ import java.util.Objects;
 
 /**
  * TakashaParityAutoTest
- * Automated verification suite for MMOItems 1:1 Parity:
+ * Automated verification suite for RPG System Parity:
  * 1. Material Stat presence on ALL 40 item types.
  * 2. GEM_STONE applicable stats (> 60 stats combat/defense/gems).
  * 3. Dedicated Gemstone stats (GEM_COLOR, GEM_UPGRADE_SCALING, ITEM_TYPE_RESTRICTION, SUCCESS_RATE).
@@ -24,7 +24,7 @@ public class TakashaParityAutoTest {
 
     public static void main(String[] args) {
         System.out.println("==================================================================");
-        System.out.println("   TAKASHA-RPG: MMOITEMS 1:1 REA PARITY VERIFICATION SUITE   ");
+        System.out.println("   TAKASHA-RPG: RPG SYSTEM PARITY VERIFICATION SUITE   ");
         System.out.println("==================================================================");
 
         try {

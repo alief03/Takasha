@@ -15,7 +15,7 @@ import java.util.function.Consumer;
 
 /**
  * ReadOnlyChestMenu
- * Container menu untuk antarmuka GUI RPG (Skills, Shop, DailyShop, Enchanter, Transaction, MMOItems)
+ * Container menu untuk antarmuka GUI RPG (Skills, Shop, DailyShop, Enchanter, Transaction, RPG Items)
  * yang mencegah pemain mengambil item display dari dalam menu, dengan dukungan deteksi
  * jenis klik (Left-click, Right-click, Shift-click).
  *

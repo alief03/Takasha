@@ -383,7 +383,7 @@ public class DungeonRewardManagerMenu {
                             if (trimmed.toLowerCase(Locale.ROOT).startsWith("mmo:")) {
                                 String[] parts = trimmed.split(":");
                                 if (parts.length < 2) {
-                                    player.sendSystemMessage(Component.literal("§8[§eDungeon Rewards§8] §cFormat MMOItems salah! Gunakan format mmo:<TYPE>:<ID> atau mmo:<ID>."));
+                                    player.sendSystemMessage(Component.literal("§8[§eDungeon Rewards§8] §cFormat item salah! Gunakan format mmo:<TYPE>:<ID> atau mmo:<ID>."));
                                     return false;
                                 }
                             } else {

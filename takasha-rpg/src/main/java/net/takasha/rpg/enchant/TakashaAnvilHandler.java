@@ -83,7 +83,7 @@ public class TakashaAnvilHandler {
             return false;
         }
 
-        // Dukungan penuh untuk seluruh 40 tipe item MMOItems
+        // Dukungan penuh untuk seluruh 40 tipe item RPG
         Optional<net.takasha.rpg.mmo.MMOItemData> mmoOpt = net.takasha.rpg.mmo.MMOItemData.readFromStack(gear);
         if (mmoOpt.isPresent()) {
             String mmoType = mmoOpt.get().getType().toUpperCase(Locale.ROOT);

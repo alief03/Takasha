@@ -343,7 +343,7 @@ public class TakashaFarmHandler {
         client.gameMode.destroyBlock(pos);
         player.swing(InteractionHand.MAIN_HAND);
 
-        // IN-TICK INSTANT 1:1 REPLANT PAIRING:
+        // IN-TICK INSTANT REPLANT PAIRING:
         // Jika benih sudah siap di tas/offhand dan jarak interaksi survival valid (<= 4.2m)
         if (seedItem != null) {
             Vec3 eyePos = player.getEyePosition();

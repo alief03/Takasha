@@ -67,7 +67,7 @@ public class MMOLoreEditionMenu {
             if (slotId == 51) {
                 template.getLore().clear();
                 MMOItemDiskManager.saveTemplate(template);
-                player.sendSystemMessage(Component.literal("§8[§eMMOItems§8] §7Successfully removed Lore§7."));
+                player.sendSystemMessage(Component.literal("§8[§eTakasha-RPG§8] §7Successfully removed Lore§7."));
                 player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ANVIL_USE, SoundSource.PLAYERS, 0.8f, 1.2f);
                 open(player, template, parentPage);
                 return;
@@ -85,7 +85,7 @@ public class MMOLoreEditionMenu {
                         input -> {
                             template.getLore().add(input);
                             MMOItemDiskManager.saveTemplate(template);
-                            player.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Lore line added: ").copy()
+                            player.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Lore line added: ").copy()
                                     .append(net.takasha.rpg.mmo.TakashaColorParser.parseLoreLine(input)));
                             open(player, template, parentPage);
                             return true;
@@ -98,7 +98,7 @@ public class MMOLoreEditionMenu {
                 if (button == 1) { // Right Click: Delete line
                     template.getLore().remove(lineIndex);
                     MMOItemDiskManager.saveTemplate(template);
-                    player.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Removed line #" + (lineIndex + 1)));
+                    player.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Removed line #" + (lineIndex + 1)));
                     open(player, template, parentPage);
                 } else { // Left Click: Edit line
                     List<String> promptLines = List.of(
@@ -112,7 +112,7 @@ public class MMOLoreEditionMenu {
                             input -> {
                                 template.getLore().set(lineIndex, input);
                                 MMOItemDiskManager.saveTemplate(template);
-                                player.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &7Line #" + (lineIndex + 1) + " updated!"));
+                                player.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Line #" + (lineIndex + 1) + " updated!"));
                                 open(player, template, parentPage);
                                 return true;
                             });

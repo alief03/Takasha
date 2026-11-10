@@ -64,7 +64,7 @@ public class CombatMitigationEngine {
             source = serverLevel.damageSources().magic();
         }
 
-        // REA Parity: Reset vanilla invulnerability ticks so rapid RPG skill combos & missiles register
+        // Reset vanilla invulnerability ticks so rapid RPG skill combos & missiles register
         target.invulnerableTime = 0;
 
         // Apply server damage

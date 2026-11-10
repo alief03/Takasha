@@ -20,7 +20,7 @@ import java.util.Optional;
 
 /**
  * TakashaStatIntegrationAutoTest
- * Pengujian otomatis komprehensif integrasi statistik MMOItems:
+ * Pengujian otomatis komprehensif integrasi statistik RPG Items:
  * 1. MAX_HEALTH pada Senjata (Sword) ke ItemAttributeModifiers & Display.hidden().
  * 2. Dynamic Primary EquipmentSlotGroup Resolution across all 40 item types.
  * 3. 11 Atribut Fisik Vanilla (Damage, Speed, HP, Armor, Toughness, KB Res, Speed, Knockback, Luck, Mining Efficiency, Range).
@@ -35,7 +35,7 @@ public class TakashaStatIntegrationAutoTest {
 
     public static void main(String[] args) {
         System.out.println("==================================================================");
-        System.out.println("   TAKASHA-RPG: FULL STAT INTEGRATION & REA AUDIT TEST SUITE     ");
+        System.out.println("   TAKASHA-RPG: FULL STAT INTEGRATION TEST SUITE     ");
         System.out.println("==================================================================");
 
         SharedConstants.tryDetectVersion();
@@ -127,7 +127,7 @@ public class TakashaStatIntegrationAutoTest {
     }
 
     /**
-     * 2. Verifikasi Dynamic Primary Slot Group Resolution lintas 40 tipe item MMOItems.
+     * 2. Verifikasi Dynamic Primary Slot Group Resolution lintas 40 tipe RPG item.
      */
     private static void testDynamicSlotResolution() {
         System.out.println("\n--- 2. Testing Dynamic Primary Slot Group Resolution ---");

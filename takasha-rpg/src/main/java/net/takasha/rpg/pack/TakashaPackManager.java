@@ -24,7 +24,7 @@ import java.util.stream.Stream;
 
 /**
  * Scalable pack loader that scans both bundled jar resources and the external .minecraft/config/takasha/rpg_packs directory.
- * Automatically loads .bbmodel 3D models, MythicMobs mobs & skills, and MMOItems templates.
+ * Automatically loads .bbmodel 3D models, MythicMobs mobs & skills, and RPG item templates.
  */
 public class TakashaPackManager {
 
@@ -80,13 +80,13 @@ public class TakashaPackManager {
             LOGGER.error("Failed to access external packs directory: {}", configDir, e);
         }
 
-        // 3. Load custom created MMOItem templates from config/takasha/mmoitems/item/<TYPE>.yml
+        // 3. Load custom created RPG item templates from disk
         int customItems = net.takasha.rpg.mmo.MMOItemDiskManager.loadCustomTemplates();
         if (customItems > 0) {
-            LOGGER.info("Loaded {} custom MMOItem template(s) from user config disk.", customItems);
+            LOGGER.info("Loaded {} custom RPG item template(s) from user config disk.", customItems);
         }
 
-        LOGGER.info("Successfully loaded {} RPG pack(s). Total MMOItem templates active: {}, total skills registered: {}.",
+        LOGGER.info("Successfully loaded {} RPG pack(s). Total RPG item templates active: {}, total skills registered: {}.",
                 packCount, MMOItemManager.getAllTemplates().size(), MythicSkillExecutor.getInstance().getRegisteredSkillsCount());
     }
 
@@ -123,9 +123,6 @@ public class TakashaPackManager {
             allFiles.sort((p1, p2) -> {
                 String s1 = p1.toString().replace('\\', '/').toLowerCase();
                 String s2 = p2.toString().replace('\\', '/').toLowerCase();
-                // Ensure MMOITEMS skills are loaded AFTER MMOCORE so MMOITEMS definitions override MMOCORE
-                if (s1.contains("mmoitems") && s2.contains("mmocore")) return 1;
-                if (s1.contains("mmocore") && s2.contains("mmoitems")) return -1;
                 return s1.compareTo(s2);
             });
 
@@ -133,7 +130,7 @@ public class TakashaPackManager {
                 String fileName = file.getFileName().toString();
                 String pathStr = file.toString().replace('\\', '/').toLowerCase();
 
-                // Skip conflicting alternative plugin formats to preserve 1:1 MMOItems parity & PvP/Dummy targeting (hp=true)
+                // Skip conflicting alternative plugin formats to preserve combat & PvP/Dummy targeting (hp=true)
                 if (pathStr.contains("only damage mobs") || pathStr.contains("for crucible")
                         || pathStr.contains("/mythicrpg/") || pathStr.contains("/oraxen")
                         || pathStr.contains("/nexo") || pathStr.contains("/itemsadder/")) {
@@ -161,7 +158,7 @@ public class TakashaPackManager {
                         if (loaded instanceof Map<?, ?> rootMap && !rootMap.isEmpty()) {
                             boolean isSkill = pathStr.contains("/skills/");
                             boolean isMob = pathStr.contains("/mobs/");
-                            boolean isItem = pathStr.contains("/item/") || pathStr.contains("/mmoitems/");
+                            boolean isItem = pathStr.contains("/item/") || pathStr.contains("/items/") || pathStr.contains("/mmoitems/");
 
                             if (!isSkill && !isMob && !isItem) {
                                 if (pathStr.contains("/itemsadder/") || pathStr.contains("/oraxen") || pathStr.contains("/nexo")) {

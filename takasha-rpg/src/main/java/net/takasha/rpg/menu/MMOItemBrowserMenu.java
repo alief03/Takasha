@@ -19,7 +19,7 @@ import java.util.*;
 
 /**
  * MMOItemBrowserMenu
- * 1:1 MMOItems Item Explorer GUI (54 slots) reconstructed from Spigot ItemBrowser.class bytecode & official documentation.
+ * Takasha RPG Item Explorer GUI (54 slots).
  *
  * Slots & Layout:
  *   Slot 18: Previous Page (Arrow)
@@ -45,7 +45,7 @@ public class MMOItemBrowserMenu {
 
     public static void open(ServerPlayer player, String type, int page) {
         if (!player.isCreative()) {
-            player.sendSystemMessage(Component.literal("§c[MMOItems] Menu ini hanya dapat diakses dalam Mode Kreatif!"));
+            player.sendSystemMessage(Component.literal("§c[Takasha-RPG] Menu ini hanya dapat diakses dalam Mode Kreatif!"));
             player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.VILLAGER_NO, SoundSource.PLAYERS, 0.8f, 1.0f);
             return;
         }
@@ -69,7 +69,7 @@ public class MMOItemBrowserMenu {
     }
 
     private static void populateContainer(SimpleContainer container, ServerPlayer player, String type, List<MMOItemTemplate> items, int page, int maxPage) {
-        // Clear all slots to pure AIR (1:1 with Spigot Bukkit.createInventory)
+        // Clear all slots to pure AIR
         for (int i = 0; i < 54; i++) {
             container.setItem(i, ItemStack.EMPTY);
         }
@@ -112,21 +112,21 @@ public class MMOItemBrowserMenu {
             container.setItem(GRID_SLOTS[i], generated);
         }
 
-        // Slot 18: Previous Page (1:1 with ItemBrowser.class Slot 18)
+        // Slot 18: Previous Page
         if (page > 0) {
             ItemStack prev = new ItemStack(Items.ARROW);
             prev.set(DataComponents.CUSTOM_NAME, Component.literal("§aPrevious Page"));
             container.setItem(18, prev);
         }
 
-        // Slot 26: Next Page (1:1 with ItemBrowser.class Slot 26)
+        // Slot 26: Next Page
         if (page < maxPage) {
             ItemStack next = new ItemStack(Items.ARROW);
             next.set(DataComponents.CUSTOM_NAME, Component.literal("§aNext Page"));
             container.setItem(26, next);
         }
 
-        // Slot 45: Download Default Resourcepack (1:1 with ItemBrowser.class Slot 45)
+        // Slot 45: Download Default Resourcepack
         if ("BLOCK".equalsIgnoreCase(type)) {
             ItemStack packBtn = new ItemStack(Items.HOPPER);
             packBtn.set(DataComponents.CUSTOM_NAME, Component.literal("§aDownload Default Resourcepack"));
@@ -140,12 +140,12 @@ public class MMOItemBrowserMenu {
             container.setItem(45, packBtn);
         }
 
-        // Slot 47: Delete Mode Toggle (1:1 with ItemBrowser.class: CAULDRON)
+        // Slot 47: Delete Mode Toggle
         ItemStack deleteBtn = new ItemStack(Items.CAULDRON);
         deleteBtn.set(DataComponents.CUSTOM_NAME, Component.literal(isDeleteMode ? "§cCancel Deletion" : "§cDelete Item"));
         container.setItem(47, deleteBtn);
 
-        // Slot 49: Back to Type Browser (1:1 with ItemBrowser.class: ARROW)
+        // Slot 49: Back to Type Browser
         ItemStack back = new ItemStack(Items.ARROW);
         back.set(DataComponents.CUSTOM_NAME, Component.literal("§a◄ Back"));
         back.set(DataComponents.LORE, new ItemLore(List.of(
@@ -153,7 +153,7 @@ public class MMOItemBrowserMenu {
         )));
         container.setItem(49, back);
 
-        // Slot 51: Create a new Item (1:1 with ItemBrowser.class: WRITABLE_BOOK)
+        // Slot 51: Create a new Item
         if (!isDeleteMode) {
             ItemStack createBtn = new ItemStack(Items.WRITABLE_BOOK);
             createBtn.set(DataComponents.CUSTOM_NAME, Component.literal("§aCreate New"));
@@ -181,7 +181,7 @@ public class MMOItemBrowserMenu {
 
         // Slot 45: Resourcepack link
         if (slotId == 45 && "BLOCK".equalsIgnoreCase(type)) {
-            player.sendSystemMessage(Component.literal("§a[MMOItems] §fDownload resourcepack blok: §bhttps://www.dropbox.com/s/90w9pvdbfeyxu94/MICustomBlockPack.zip?dl=1"));
+            player.sendSystemMessage(Component.literal("§a[Takasha-RPG] §fDownload resourcepack blok: §bhttps://www.dropbox.com/s/90w9pvdbfeyxu94/MICustomBlockPack.zip?dl=1"));
             player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.PLAYERS, 0.8f, 1.0f);
             return;
         }
@@ -190,11 +190,11 @@ public class MMOItemBrowserMenu {
         if (slotId == 47) {
             if (isDeleteMode) {
                 DELETE_MODE_PLAYERS.remove(player.getUUID());
-                player.sendSystemMessage(Component.literal("§a[MMOItems] Delete Mode deactivated."));
+                player.sendSystemMessage(Component.literal("§a[Takasha-RPG] Delete Mode deactivated."));
                 player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.PLAYERS, 0.8f, 1.2f);
             } else {
                 DELETE_MODE_PLAYERS.add(player.getUUID());
-                player.sendSystemMessage(Component.literal("§c[MMOItems] Delete Mode activated! Clicking an item will delete its template."));
+                player.sendSystemMessage(Component.literal("§c[Takasha-RPG] Delete Mode activated! Clicking an item will delete its template."));
                 player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ANVIL_USE, SoundSource.PLAYERS, 0.7f, 0.8f);
             }
             open(player, type, page);
@@ -220,7 +220,7 @@ public class MMOItemBrowserMenu {
             );
             MMOChatEditionEngine.beginSession(
                     player,
-                    "Create MMOItem",
+                    "Create RPG Item",
                     "ID",
                     promptLines,
                     MMOChatEditionEngine.SuggestionType.ID,
@@ -229,18 +229,18 @@ public class MMOItemBrowserMenu {
                     newId -> {
                         String cleanId = newId.trim().toUpperCase(Locale.ROOT).replace(' ', '_');
                         if (cleanId.isEmpty()) {
-                            player.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&c[MMOItems] ID tidak boleh kosong!"));
+                            player.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&c[Takasha-RPG] ID tidak boleh kosong!"));
                             open(player, type, page);
                             return true;
                         }
 
                         if (MMOItemManager.getTemplate(creationType, cleanId) != null) {
-                            player.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &cThere is already an item called " + cleanId + "."));
+                            player.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &cThere is already an item called " + cleanId + "."));
                             open(player, type, page);
                             return true;
                         }
 
-                        // MMOItems 1:1 Parity - Pure Empty Item Creation (CreateCommandTreeNode.java L229-267)
+                        // Pure Empty Item Creation Contract
                         // Only <id>.base.material is set. Zero default stats, zero tier, zero fake damage!
                         MMOItemTemplate newTemplate = new MMOItemTemplate(cleanId, creationType);
                         newTemplate.setMaterial(getDefaultMaterialForType(creationType));
@@ -248,7 +248,7 @@ public class MMOItemBrowserMenu {
                         MMOItemManager.registerTemplate(newTemplate);
                         MMOItemDiskManager.saveTemplate(newTemplate);
 
-                        player.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eMMOItems&8] &aYou successfully created " + cleanId + "!"));
+                        player.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&8[&eTakasha-RPG&8] &aYou successfully created " + cleanId + "!"));
                         MMOItemEditionMenu.open(player, creationType, cleanId);
                         return true;
                     }
@@ -271,7 +271,7 @@ public class MMOItemBrowserMenu {
                     MMOItemDiskManager.deleteTemplateDisk(template.getItemType(), template.getId());
 
                     player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ANVIL_BREAK, SoundSource.PLAYERS, 0.8f, 1.0f);
-                    player.sendSystemMessage(Component.literal("§c[MMOItems] Template §e" + template.getId() + " §cpermanently deleted."));
+                    player.sendSystemMessage(Component.literal("§c[Takasha-RPG] Template §e" + template.getId() + " §cpermanently deleted."));
 
                     // Refresh page
                     open(player, type, page);
@@ -280,7 +280,7 @@ public class MMOItemBrowserMenu {
 
                 // Normal Mode Clicks:
                 // Left Click (button == 0) -> Obtain item
-                // Right Click (button == 1) -> Edit item (1:1 with MMOItems Spigot bytecode)
+                // Right Click (button == 1) -> Edit item
                 if (button == 1) {
                     player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.UI_BUTTON_CLICK.value(), SoundSource.PLAYERS, 0.8f, 1.2f);
                     MMOItemEditionMenu.open(player, template.getItemType(), template.getId(), 1);
@@ -290,7 +290,7 @@ public class MMOItemBrowserMenu {
                         player.drop(stack, false);
                     }
                     player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 0.7f, 1.2f);
-                    player.sendSystemMessage(Component.literal("§a[MMOItems] §fMenerima §6" + template.getName()));
+                    player.sendSystemMessage(Component.literal("§a[Takasha-RPG] §fMenerima §6" + template.getName()));
                 }
                 return;
             }
@@ -298,7 +298,7 @@ public class MMOItemBrowserMenu {
     }
 
     /**
-     * Authentic 1:1 default material mapping for all 40 MMOItems types (default/item-types.yml).
+     * Authentic default material mapping for all 40 item types.
      */
     public static String getDefaultMaterialForType(String type) {
         if (type == null) return "IRON_SWORD";

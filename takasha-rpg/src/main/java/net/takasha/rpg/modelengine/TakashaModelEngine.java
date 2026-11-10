@@ -31,7 +31,7 @@ public class TakashaModelEngine {
             tick();
         });
 
-        // REA Parity: Sweep and discard orphaned / leftover display entities on chunk or entity load
+        // Sweep and discard orphaned / leftover display entities on chunk or entity load
         ServerEntityEvents.ENTITY_LOAD.register((entity, world) -> {
             if (entity instanceof Display.ItemDisplay display) {
                 if (!isManagedDisplay(display)) {

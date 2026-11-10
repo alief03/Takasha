@@ -119,7 +119,7 @@ public interface SkillCondition {
                 if (target == null) {
                     return (!finalExpected) ? ConditionResult.PASS : ConditionResult.FAIL;
                 }
-                // REA Parity with MythicMobs Bukkit: Exact Registry ID match (never Java instanceof)
+                // Exact Registry ID match (never Java instanceof)
                 Identifier key = BuiltInRegistries.ENTITY_TYPE.getKey(target.getType());
                 String path = key.getPath().toUpperCase(Locale.ROOT);
                 String full = key.toString().toUpperCase(Locale.ROOT);

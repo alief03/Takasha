@@ -524,7 +524,7 @@
       - *Multi-Substrate Targeted Healing:* Memulihkan lahan kosong berdasarkan substrat (`SOUL_SAND` $\rightarrow$ Nether Wart, `FARMLAND` $\rightarrow$ Benih spesifik sesuai riwayat memori, `JUNGLE_LOG` $\rightarrow$ Cocoa Beans).
       - *Zero Residual Memory Leak:* Sesuai preferensi pengguna, memori plot disimpan secara eksklusif selama sesi aktif (`config.autoFarmEnabled == true`) dan dibersihkan total (`activePlots.clear()`, `pendingReplants.clear()`) saat fitur dimatikan atau saat berpindah dunia/server.
     - **Sinkronisasi Replant Mengimbangi Kecepatan Panen (Zero-Hole Guarantee):**
-      - *In-Tick Instant 1:1 Harvest-Replant Pairing:* Mengeksekusi penanaman kembali di tick dan thread yang sama persis setelah paket hancur blok (`destroyBlock` $\rightarrow$ langsung `useItemOn`) dengan jeda 0ms jika benih tersedia di tangan kiri (offhand) atau tas pemain.
+      - *In-Tick Instant Harvest-Replant Pairing:* Mengeksekusi penanaman kembali di tick dan thread yang sama persis setelah paket hancur blok (`destroyBlock` $\rightarrow$ langsung `useItemOn`) dengan jeda 0ms jika benih tersedia di tangan kiri (offhand) atau tas pemain.
       - *Symmetric Batch Throughput:* Throughput replant ditingkatkan setara kecepatan panen hingga 12 aksi per tick (`farmActionsPerTick = 12`) dengan default jeda replant 0 ms (`farmReplantDelayMs = 0`).
       - *Dynamic Flow-Control Backpressure:* Mencegah defisit replant saat berlari; jika terdeteksi $\ge 2$ petak tanah bolong dalam jarak dekat pemain ($\le 4.2$m), sistem menahan pemanenan tanaman baru untuk memprioritaskan penanaman kembali hingga kebun utuh.
       - *Sticky Offhand Caching:* Mempertahankan tumpukan benih tanaman aktif di slot offhand selama sesi bertani, mengeliminasi spam paket swap bolak-balik di setiap tick yang sebelumnya memicu desinkronisasi inventaris server.
@@ -755,7 +755,7 @@
 
 ---
 
-### 14.22 Riwayat Pembaruan Takasha-RPG v1.5.0 (Minor Feature Release — Full REA 336 Custom Enchantments Combat Engine Dispatcher & Radial AOE Burn Immolation)
+### 14.22 Riwayat Pembaruan Takasha-RPG v1.5.0 (Minor Feature Release — Full 336 Custom Enchantments Combat Engine Dispatcher & Radial AOE Burn Immolation)
 *Tanggal Rilis: 2026-10-19*
 
 1. **Audit Total 336 Custom Enchantments (182 AE Otentik + 154 Custom RPG):**
@@ -827,7 +827,7 @@
    - Menambahkan penanganan mandiri status `burnTicks` pada siklus tick `DamageDummyEntity`. Saat dummy terbakar oleh `immolation` atau status api lainnya, dummy secara otomatis menerima 1.0 HP DoT damage setiap 20 tick, tercatat ke dalam sliding window DPS 5 detik, memperbarui metrik billboard overhead, serta memunculkan floating damage indicator khusus `§6-1.0 🔥`.
 
 7. **Kebijakan Semantic Versioning (SemVer):**
-   - `takasha-rpg`: Ditingkatkan dari `v1.4.0` ke `v1.5.0` (Minor release: Full REA 336 Custom Enchantments Combat Engine Dispatcher, Radial AOE Immolation Burn Ring, Mob Slayers, Melee Debuffs/DoTs & Status Procs, Armor Defense Reflector/Dodge/Deflect, On-Kill Decapitation & Devour, Dummy DoT Damage Parity).
+   - `takasha-rpg`: Ditingkatkan dari `v1.4.0` ke `v1.5.0` (Minor release: Full 336 Custom Enchantments Combat Engine Dispatcher, Radial AOE Immolation Burn Ring, Mob Slayers, Melee Debuffs/DoTs & Status Procs, Armor Defense Reflector/Dodge/Deflect, On-Kill Decapitation & Devour, Dummy DoT Damage Parity).
    - `sakura-weapons`: Tetap terkunci baku pada `v2.5.0` (zero-touch).
    - Dokumen PRD: Ditingkatkan dari `v3.4.0` ke `v3.5.0`.
 
@@ -987,7 +987,7 @@
 *Tanggal Rilis: 2026-10-27*
 
 1. **Optimalisasi Menyeluruh Auto-Farm: Crop Plot Memory & Resilient Replant Engine (`TakashaFarmHandler`):**
-   - **Penyelesaian Isu Lahan Bolong (*Zero-Hole Guarantee*):** Mengatasi keluhan pemain mengenai memori lahan yang hilang saat farming berkecepatan tinggi, memastikan seluruh petak tanaman yang dipanen langsung ditanami kembali secara 1:1 tanpa menyisakan tanah kosong.
+   - **Penyelesaian Isu Lahan Bolong (*Zero-Hole Guarantee*):** Mengatasi keluhan pemain mengenai memori lahan yang hilang saat farming berkecepatan tinggi, memastikan seluruh petak tanaman yang dipanen langsung ditanami kembali secara instan dan presisi tanpa menyisakan tanah kosong.
    - **Crop Plot Memory Map (In-Memory Sesi Aktif):**
      - Model data `CropPlotInfo` & `PendingReplant` menyimpan koordinat `BlockPos`, jenis benih tanaman asli (`CropType`: Gandum, Wortel, Kentang, Beetroot, Nether Wart, Cocoa Beans), dan timestamp pencatatan.
      - Memori kebun beroperasi murni in-memory selama fitur aktif (`config.autoFarmEnabled == true`). Begitu fitur dimatikan atau pemain keluar dunia, memori dibersihkan total (`activePlots.clear()`) untuk mencegah memory leak (*Zero residual memory leak*).
@@ -995,7 +995,7 @@
      - `Blocks.SOUL_SAND` $\rightarrow$ Prioritas penanaman kembali bibit `NETHER_WART`.
      - `Blocks.FARMLAND` $\rightarrow$ Benih spesifik dari memori lahan (kebun wortel tetap ditanami wortel, kebun kentang tetap ditanami kentang).
      - `BlockState.is(BlockTags.JUNGLE_LOGS)` $\rightarrow$ Penanaman kembali biji kakao (`COCOA`).
-   - **In-Tick Instant 1:1 Harvest-Replant Pairing (0ms Delay):**
+   - **In-Tick Instant Harvest-Replant Pairing (0ms Delay):**
      - Paket panen `destroyBlock(...)` dan paket penanaman kembali `useItemOn(...)` dieksekusi secara instan berpasangan dalam tick yang sama jika benih tersedia di offhand atau tas pemain.
      - Menghilangkan jeda antar-tick dan menjaga rasio 1 panen : 1 tanam secara sempurna bahkan saat pemain bergerak cepat atau sprint.
    - **Symmetric Batch Throughput (Hingga 12 Aksi/Tick):**
@@ -1093,8 +1093,8 @@
     - **Restorasi Animasi Held Weapon Blazestaff (20 fps Otentik):**
       - Menghapus file atlas ganda yang rusak (assets/minecraft/atlases/items.json, assets/takasha_rpg/atlases/items.json, dan assets/takasha_rpg/atlases/blocks.json) yang sebelumnya memicu peringatan duplicate sprite dan menonaktifkan ticker animasi sprite pada blocks.png.
       - Memulihkan konfigurasi otentik Samus pada flame_debuff.png.mcmeta dan flame_debuff_e.png.mcmeta menjadi {"animation": {"frametime": 1}} tanpa interpolasi buram. Lidah api di ujung tongkat Blazestaff kini berkobar hidup dan tajam pada 20 fps.
-    - **Perbaikan Timer MMOItems Passive & Heat Mastery 100% Uptime:**
-      - Memperbaiki konversi timer kemampuan di MMOInteractionHandler.java dari hitungan detik mentah menjadi tick MMOItems otentik (10 tick = 500ms). Aura Heat_Mastery_AURA (durasi 20 tick = 1.0 detik) kini terus diperbarui setiap 0.5 detik tanpa ada jeda mati.
+    - **Perbaikan Timer Passive & Heat Mastery 100% Uptime:**
+      - Memperbaiki konversi timer kemampuan di MMOInteractionHandler.java dari hitungan detik mentah menjadi tick kemampuan otentik (10 tick = 500ms). Aura Heat_Mastery_AURA (durasi 20 tick = 1.0 detik) kini terus diperbarui setiap 0.5 detik tanpa ada jeda mati.
     - **Dukungan UUID Fallback pada BlockbenchParser untuk Bola Api Orbital:**
       - Menambahkan penanganan fallback UUID jika grup bone pada file .bbmodel memiliki nama kosong (name: ""). Hal ini memungkinkan seluruh 6 bone bola api pada heat_stack_vfx.bbmodel diparsing secara utuh tanpa saling menimpa, sehingga formasi orbital stack 1 s.d. 3 tampil sempurna di sekeliling pemain.
     - **Kepatuhan Versi & Deployment:**
@@ -1140,7 +1140,7 @@
       - takasha-rpg ditingkatkan ke `v1.8.10+26.2`.
       - Biner `Takasha-RPG-1.8.10+26.2.jar` dikompilasi ke `Hasil mod/` dan dideploy langsung ke folder launcher profil Modrinth `kaizenmc.id/mods/`.
 
-41. **REA Source Parity, Grammar-Aware MythicMobs Parser, Ballistics & Projectile Trajectory Fix, Full 8-Targeter Suite, dan Totem/Potion/Throw Mechanics (v2.8.11 / Takasha-RPG v1.8.11+26.2):**
+41. **Arsitektur Mandiri Komprehensif, Grammar-Aware MythicMobs Parser, Ballistics & Projectile Trajectory Fix, Full 8-Targeter Suite, dan Totem/Potion/Throw Mechanics (v2.8.11 / Takasha-RPG v1.8.11+26.2):**
     - **Grammar-Aware MythicMobs Parser (Bracket-Depth Tracking):**
       - Memperbaiki kegagalan regex targeter saat membaca parameter yang memiliki targeter bersarang, seperti `skill{s=Pyro_Combo_ASH_Missiles;origin=@SelfEyeLocation{fo=-0.5;yo=-0.2}} @EntitiesInCone{a=25;r=17}`.
       - Parser kini menggunakan tokenizer kedalaman kurung kurawal `{...}` untuk mengisolasi parameter mekanik dengan tepat, sehingga parameter `origin` tetap utuh dan targeter luar (`@EntitiesInCone`, `@forward`, `@eir`) diekstrak tanpa terpotong atau korup.
@@ -1164,12 +1164,12 @@
       - takasha-rpg ditingkatkan ke `v1.8.11+26.2`.
       - Biner `Takasha-RPG-1.8.11+26.2.jar` (9.456.728 bytes) berhasil dikompilasi ke `Hasil mod/` dan dideploy langsung ke folder launcher profil Modrinth `kaizenmc.id/mods/`.
 
-42. **VFX 1:1 Parity Repair, Minecraft Atlas Registration, Missing Impact Texture/Font Alignment, TextDisplay Projectile Engine, dan State Normalization (v2.8.12 / Takasha-RPG v1.8.12+26.2):**
+42. **VFX Parity Repair, Minecraft Atlas Registration, Missing Impact Texture/Font Alignment, TextDisplay Projectile Engine, dan State Normalization (v2.8.12 / Takasha-RPG v1.8.12+26.2):**
     - **Akar Masalah Kubus Hitam-Ungu (Missing Textures Atlas Resolver):**
       - Pada Minecraft 26.2 / 1.21.4+, atlas jahitan tekstur (`TextureAtlas.LOCATION_BLOCKS`) hanya membaca file konfigurasi standar di `assets/minecraft/atlases/blocks.json` dan `items.json`, serta mengabaikan folder atlas di namespace custom (`takasha_rpg/atlases/`).
       - Sebelumnya, `blocks.json` dan `items.json` hanya mendaftarkan `awakened_pyromancer_texture`. Folder `vfx` dan `awakened_assassin_texture` tidak terdaftar, menyebabkan Minecraft gagal memasukkan seluruh sprite efek ke dalam sheet atlas dan menghasilkan fallback missing texture (kubus/persegi hitam-ungu raksasa) pada setiap tebasan dan proyektil.
       - **Solusi:** Menambahkan direktori `vfx` (`source: "vfx"`, `prefix: "vfx/"`) dan `awakened_assassin_texture` ke dalam `assets/minecraft/atlases/blocks.json` dan `items.json`, serta menghapus folder redundant `assets/takasha_rpg/atlases/`.
-    - **Restorasi Asset Font & Tekstur Impak Samus 1:1:**
+    - **Restorasi Asset Font & Tekstur Impak Samus:**
       - Menyalin aset font asli `assets/minecraft/font/default.json` dari `Raw Resource Pack` referensi samus2002.
       - Menyalin seluruh file tekstur bitmap `vfx_dusk_impact_1.png` hingga `vfx_dusk_impact_7.png` ke dalam direktori `assets/minecraft/textures/awakened_assassin_texture/` dan `assets/takasha_rpg/textures/awakened_assassin_texture/`.
       - Pemetaan Unicode `\u1780` s/d `\u1786` kini terdaftar dan di-render secara akurat oleh Font Renderer Minecraft pada tinggi 180 dan ascent 85.
@@ -1180,7 +1180,7 @@
       - Mengintegrasikan entitas `TextDisplay` dengan billboard `CENTER` dan brightness luminous `(15, 15)` ke dalam `MythicMobManager`, `ProjectileMechanic`, `ActiveProjectile`, dan `SummonMechanic` yang otomatis memutar siklus 7 frame `\u1780`–`\u1786` setiap tick dan membersihkan diri secara otomatis (zero persistence).
     - **Normalisasi Pencocokan State Animasi (`ActiveModelInstance.java`):**
       - Menambahkan resolver cerdas `resolveAnimationName` pada `ActiveModelInstance.playAnimation` untuk menangani variasi penamaan state dari file mob/skill MythicMobs (misal: `slash1` -> `slash_normal1`, `pierce` -> `pierce_normal`).
-    - **Audit Kelengkapan Bone Model 1:1:**
+    - **Audit Kelengkapan Bone Model Presisi:**
       - Melakukan audit menyeluruh terhadap seluruh 40 berkas `.bbmodel` sumber asli. Seluruh 495 visual bone yang memiliki geometri mesh kubus terkonfirmasi memiliki definisi item JSON di `assets/takasha_rpg/items/` dan model JSON di `assets/takasha_rpg/models/vfx/` dengan 2.052 referensi tekstur valid di disk.
     - **Kepatuhan Versi & Deployment:**
       - Root VERSION dinaikkan ke `2.8.12`.
@@ -1217,7 +1217,7 @@
         2. `FISHING`: Khusus membuang sampah hasil memancing (leather boots, bowl, rotten flesh, string, water bottle, stick, dll).
         3. `MOB_KILL`: Khusus membuang drop mob yang tidak diinginkan (rotten flesh, bone, spider eye, poisonous potato, glass bottle, dll).
       - **Scalable Multi-Criteria Matching (`DropFilterEntry.java`):**
-        - Mendukung penyaringan fleksibel untuk item Minecraft vanilla, item mod, serta item custom dari server (ItemsAdder, Oraxen, MMOItems):
+        - Mendukung penyaringan fleksibel untuk item Minecraft vanilla, item mod, serta item custom dari server (ItemsAdder, Oraxen, Takasha-RPG):
           - **Item ID:** Berdasarkan identifier namespace (misal: `minecraft:cobblestone`, `custom_mod:item_id` dengan fallback otomatis `minecraft:`).
           - **CustomModelData:** Sintaks `#cmd` (misal: `#10042` atau `paper#10042`) untuk menyaring item server yang dibedakan lewat angka CustomModelData.
           - **Display Name Match:** Sintaks `name:"..."` (misal: `name:"Batu Biasa"` atau `name:"Ikan Busuk"`) untuk mencocokkan nama kustom item tanpa terikat pada ID item dasarnya.
@@ -1252,20 +1252,20 @@
       - Cabang LTS `versions/1.21.11` ditingkatkan ke **`v2.6.1+1.21.11`**.
       - Biner terbitan dikompilasi ke `Hasil mod/Takasha-2.8.14+26.2.jar` dan `Hasil mod/Takasha-2.6.1+1.21.11.jar`.
 
-45. **Purge Senjata Samus Awakened Pyromancer, Transformasi Arsitektur MMOItems 1:1, GUI Suite 54-Slot Eksklusif Mode Kreatif, dan Integrasi Hadiah Dungeon (v2.9.0 / takasha-rpg v1.9.0):**
+45. **Purge Senjata Samus Awakened Pyromancer, Transformasi Arsitektur RPG Items, GUI Suite 54-Slot Eksklusif Mode Kreatif, dan Integrasi Hadiah Dungeon (v2.9.0 / takasha-rpg v1.9.0):**
     - **Pembersihan Total Senjata Samus:**
       - Menghapus seluruh aset visual, audio, model 3D Blockbench, tekstur, file definisi item `awakened_pyromancer_blazestaff`, dan pack `awakened_pyromancer`.
       - Menghapus perintah `/samus`, sub-command `/rpg samus`, serta seluruh hardcoding nama skill Samus di `MMOInteractionHandler.java`, `MMOCommand.java`, `TakashaRpgCommands.java`, `TakashaPackManager.java`, dan `ModRpgItemGroups.java`.
-    - **Arsitektur NBT & Format Lore MMOItems 1:1:**
-      - Mengadopsi NBT ganda 1:1 dengan Spigot MMOItems (`MMOITEMS_ITEM_TYPE`, `MMOITEMS_ITEM_ID`, `MMOITEMS_TIER`, `MMOITEMS_AUTOSMELT`, `MMOITEMS_BOUNCING_CRACK`, `MMOITEMS_PICKAXE_POWER`, `MMOITEMS_MAX_DURABILITY`, `MMOITEMS_WILL_BREAK`) berdampingan dengan NBT terstruktur `TakashaMMOItem`.
-      - Format Lore otentik 1:1 mengikuti `lore-format.yml` dan `stats.yml` Phoenix Development: Header kategori `#item-type#`, stat bar pembatas, persyaratan AuraSkills/Level, atribut fisik & mining (`Pickaxe Power`, `Mining Speed`), mekanika khusus (`Auto-Smelt`, `Bouncing Crack`), durabilitas kustom, dan footer tier kelangkaan.
-    - **GUI Suite 54-Slot 1:1 Bebas Flicker (ReadOnlyChestMenu):**
+    - **Arsitektur NBT & Format Lore RPG Items Presisi:**
+      - Mengadopsi NBT ganda kompatibel standar RPG (tag kunci tipe item, item ID, tier, autosmelt, bouncing crack, pickaxe power, max durability, dan breakability) berdampingan dengan NBT terstruktur `TakashaMMOItem`.
+      - Format Lore otentik terstruktur mengikuti tata letak standar RPG: Header kategori `#item-type#`, stat bar pembatas, persyaratan AuraSkills/Level, atribut fisik & mining (`Pickaxe Power`, `Mining Speed`), mekanika khusus (`Auto-Smelt`, `Bouncing Crack`), durabilitas kustom, dan footer tier kelangkaan.
+    - **GUI Suite 54-Slot Bebas Flicker (ReadOnlyChestMenu):**
       - `MMOTypeBrowserMenu`: Menampilkan kategori item (TOOL, SWORD, AXE, ARMOR, BOW, CROSSBOW, CONSUMABLE, GEM_STONE, ACCESSORY, CATALYST, ALL) beserta penghitung item terdaftar.
       - `MMOItemBrowserMenu`: Menampilkan preview item dalam grid 21 slot (Left-click ambil 1x, Shift-left-click ambil 64x, Right-click buka editor).
       - `MMOItemEditionMenu`: Live item preview di Slot 4, opsi pengubahan nama, lore, material, model, tier, tool passives, serta durability & stats secara real-time.
       - Primary command `/mi` dan alias `/mmo` (`/mi browse`, `/mi edit <type> <id>`, `/mi create <type> <id>`, `/mi get`, `/mi give`, `/mi list`, `/mi reload`) diproteksi khusus **Mode Kreatif**.
     - **Ekosistem & Integrasi Gameplay:**
-      - Perkakas MMOItems terintegrasi dengan pemecahan blok di `TakashaEnchantUtilityEngine.java`: `autosmelt` melebur ore langsung ke ingot + partikel lava, `bouncing-crack` memecah hingga 8 blok sejenis di radius 3x3x3.
+      - Perkakas RPG terintegrasi dengan pemecahan blok di `TakashaEnchantUtilityEngine.java`: `autosmelt` melebur ore langsung ke ingot + partikel lava, `bouncing-crack` memecah hingga 8 blok sejenis di radius 3x3x3.
       - Pengecekan syarat level AuraSkills (`required-mining`, `required-farming`, `required-woodcutting`) dengan efek suara `VILLAGER_NO` jika pemain belum memenuhi syarat.
       - Paket konfigurasi default 15 item RPG (`tool.yml` dengan 8 perkakas, `axe.yml` dengan 4 kapak, `sword.yml` dengan 3 pedang).
       - Integrasi perolehan item di survival secara murni melalui **Hadiah Dungeon** (`DungeonRewardAccumulator.java`): Wave 3 (Common/Uncommon), Wave 4 (Rare), Wave 5 (Epic/Mythical/Awakened).
@@ -1273,16 +1273,16 @@
       - Root VERSION: `2.9.0`.
       - Mod `takasha-rpg`: `v1.9.0+26.2`.
 
-46. **Resolusi Konfigurasi /drop Gatekeeper Mod Takasha, Paritas Penuh 35 Modul Phoenix Development MMOItems, dan Peningkatan SemVer (v2.9.1 / Takasha-RPG v1.9.1 / Takasha v2.8.15 & v2.6.2):**
+46. **Resolusi Konfigurasi /drop Gatekeeper Mod Takasha, Paritas Penuh 35 Modul Arsitektur RPG Items, dan Peningkatan SemVer (v2.9.1 / Takasha-RPG v1.9.1 / Takasha v2.8.15 & v2.6.2):**
     - **Resolusi Konfigurasi /drop Gatekeeper Mod Takasha (sakura-weapons):**
       - **Akar Masalah:** Logika `TakashaAutoDropHandler.java` sebelumnya otomatis mengirimkan perintah `/drop` ke server jika `isKaizen` bernilai `true` (`fishingMode == KAIZEN || mobKillMode == KAIZEN`). Hal ini membingungkan pengguna karena tidak tersedia tombol atau konfigurasi eksplisit untuk menonaktifkan fitur tersebut, dan tombol pada GUI hanya bertuliskan `"Uji /drop Server"`.
       - **Toggle Eksplisit `serverDropGatekeeperEnabled`:** Menambahkan opsi konfigurasi `public boolean serverDropGatekeeperEnabled = false;` di `TakashaMasterConfig.java` (default: FALSE agar aman dan tidak memicu pengiriman perintah yang tidak diinginkan).
       - **Kontrol GUI Ramah Pengguna:** Mengubah tombol di `TakashaAutoDropSubScreen.java` menjadi tombol toggle interaktif `Gatekeeper /drop: [AKTIF / NONAKTIF]` lengkap dengan tooltip penjelasan transparan: *"Jika NONAKTIF, mod sama sekali tidak akan mendeteksi atau mengirimkan perintah /drop ke server. Item akan dibuang secara lokal tanpa verifikasi server."*
       - **Bypass Total Saat Dinonaktifkan:** Pada `TakashaAutoDropHandler.java`, jika opsi ini `false`, seluruh pemeriksaan dan pengiriman perintah `/drop` langsung dilewati, memungkinkan proses pembuangan item berjalan murni secara lokal tanpa interaksi server.
       - **Dukungan Multi-Version:** Diterapkan secara sinkron pada cabang modern `sakura-weapons/versions/26.2` dan cabang LTS `sakura-weapons/versions/1.21.11`.
-    - **Paritas 1:1 MMOItems 35 Modul Dokumentasi Phoenix Development (takasha-rpg):**
-      - **Audit Forensik Bytecode REA:** Memetakan seluruh 35 modul dokumentasi resmi Phoenix Development ke dalam kelas-kelas bytecode referensi `referensi-rp/RPG/MMOItems-6.10.1-157-7.jar`.
-      - **Commands & Revision-ID Parity:** Command tree `/mi` 1:1 (`create`, `edit`, `copy`, `delete`, `browse`, `give`, `giveall`, `take`, `drop`, `reload`, `update`, `stations`, `revid`) dan penanganan auto-update template item di inventori berbasis NBT `MMOITEMS_REVISION_ID`.
+    - **Paritas Penuh 35 Modul Arsitektur RPG Items (takasha-rpg):**
+      - **Audit Forensik Bytecode:** Memetakan seluruh 35 modul fungsional sistem item RPG ke dalam implementasi Fabric 26.2 native.
+      - **Commands & Revision-ID Parity:** Command tree `/mi` lengkap (`create`, `edit`, `copy`, `delete`, `browse`, `give`, `giveall`, `take`, `drop`, `reload`, `update`, `stations`, `revid`) dan penanganan auto-update template item di inventori berbasis NBT revision-id.
       - **Suite GUI 54-Slot & Asinkronus Chat Edition:**
         - `TypeBrowser`: 21 slot kategori aktif (`10-16`, `19-25`, `28-34`) dengan hitungan item dan link ke `ItemBrowser`.
         - `ItemBrowser`: Navigasi halaman Slot 18 & 26, tombol Delete Mode Slot 47, tombol Back Slot 49, dan tombol Create New Slot 51 yang memicu prompt pembuatan ID item baru.
@@ -1298,18 +1298,18 @@
       - Mod `sakura-weapons/versions/1.21.11`: **`v2.6.2+1.21.11`**.
       - Mod `takasha-rpg`: **`v1.9.1+26.2`**.
 
-47. **Paritas Faktual 1:1 MMOItems (Detail per GUI Tiap Command & Dynamic Follow-up State), Mesin Persistensi Disk YAML, dan Optimasi Antigravity Anti-100% CPU (v2.9.2 / Takasha-RPG v1.9.2+26.2 / Takasha v2.9.2+26.2):**
+47. **Paritas Faktual Sistem RPG Items (Detail per GUI Tiap Command & Dynamic Follow-up State), Mesin Persistensi Disk YAML, dan Optimasi Antigravity Anti-100% CPU (v2.9.2 / Takasha-RPG v1.9.2+26.2 / Takasha v2.9.2+26.2):**
     - **Optimasi Workspace Antigravity IDE (Anti-100% CPU):**
       - Mengonfigurasi `.vscode/settings.json` dengan `files.watcherExclude`, `search.exclude`, dan `java.import.exclusions` terhadap folder `referensi-rp/**` dan `Hasil mod/**`.
       - Mematikan auto-indexing berlebih dengan `java.autobuild.enabled: false`, `java.maxConcurrentBuilds: 1`, serta menyematkan argumen JVM `-XX:+UseSerialGC -Xmx768M -XX:MaxMetaspaceSize=256M`. Beban CPU host saat membuka workspace langsung turun di bawah 10%.
-    - **Mesin Persistensi Disk YAML 1:1 (`MMOItemDiskManager`):**
-      - Mengimplementasikan serialisasi dan deserialisasi format YAML otentik MMOItems ke direktori fisik `config/takasha/mmoitems/item/<TYPE>.yml`.
+    - **Mesin Persistensi Disk YAML (`MMOItemDiskManager`):**
+      - Mengimplementasikan serialisasi dan deserialisasi format YAML otentik item RPG ke direktori fisik `config/takasha/rpg_items/item/<TYPE>.yml`.
       - Perintah `/mi create`, `/mi copy`, dan `/mi delete` (maupun Delete Mode di GUI) terhubung langsung dengan file disk fisik secara real-time.
       - `/mi revid` menyimpan kenaikan revision ID template ke disk, dan `/mi reload` memuat ulang seluruh pack bawaan jar dan konfigurasi disk kustom.
-    - **Rekonstruksi Penuh 1:1 GUI Suite Tiap Command:**
-      - `MMOTypeBrowserMenu`: 40 item types resmi MMOItems (23 Root Types + 17 Sub-Types + ALL) tanpa kategori artifisial, lengkap dengan paginasi 2 halaman (Slot 18 & 26), Slot 49 Pack Info, dan auto-fill `GRAY_STAINED_GLASS_PANE` (`- No Type -`).
+    - **Rekonstruksi Penuh GUI Suite Tiap Command:**
+      - `MMOTypeBrowserMenu`: 40 item types resmi sistem RPG (23 Root Types + 17 Sub-Types + ALL) tanpa kategori artifisial, lengkap dengan paginasi 2 halaman (Slot 18 & 26), Slot 49 Pack Info, dan auto-fill `GRAY_STAINED_GLASS_PANE` (`- No Type -`).
       - `MMOItemBrowserMenu`: Paginasi multi-halaman Slot 18 & 26, auto-fill `GRAY_STAINED_GLASS_PANE` (`- No Item -`), Slot 47 Delete Mode Toggle dengan penyesuaian judul dinamis (`Item Explorer: <TYPE>` vs `Delete Mode: <TYPE>`), Slot 49 Barrier Back, dan Slot 51 Anvil New Item chat edition.
-      - `MMOItemEditionMenu`: Paginasi multi-halaman Slot 27 & 35 dengan pemfilteran stat dinamis per tipe item (`ModifierSource`), format lore tombol 1:1 (`Current Value: ...`, `➔ Left click to change`, `➔ Right click to reset`), live preview Slot 4 (`getCachedItem()`), Slot 2 Chest claim/reroll, Slot 6 Barrier back, dan zero-navigation loss (membuka kembali halaman yang sama persis setelah chat input).
+      - `MMOItemEditionMenu`: Paginasi multi-halaman Slot 27 & 35 dengan pemfilteran stat dinamis per tipe item (`ModifierSource`), format lore tombol terstandarisasi (`Current Value: ...`, `➔ Left click to change`, `➔ Right click to reset`), live preview Slot 4 (`getCachedItem()`), Slot 2 Chest claim/reroll, Slot 6 Barrier back, dan zero-navigation loss (membuka kembali halaman yang sama persis setelah chat input).
       - Sub-Menu Suite: `MMOAbilityEditionMenu`, `MMOEnchantEditionMenu`, dan `MMOGemSocketMenu` (pengaturan warna dan jenis soket permata).
       - `CraftingStationMenu`: 2-tier GUI untuk `/mi stations open <station_id>` (Tier 1: 54 slots station view dengan antrian perakitan slots `[38..42]`; Tier 2: 45 slots preview dengan matriks 3x3 bahan, slot output 24, dan tombol konfirmasi emerald slot 34).
     - **Kepatuhan SemVer & Matriks Versi Rilis:**
@@ -1318,20 +1318,20 @@
       - Mod `sakura-weapons/versions/1.21.11`: **`v2.6.2+1.21.11`**.
       - Mod `takasha-rpg`: **`v1.9.2+26.2`**.
 
-48. **Paritas Faktual 1:1 GUI MMOItems (Audit Forensik 186 Stat Bytecode, Eliminasi Polusi Border Kaca & Judul Tertinggal), Porting 216 Item Bawaan (34 File YAML), dan Matriks Pengujian Stat 7-Layer (v2.9.3 / Takasha-RPG v1.9.3+26.2):**
+48. **Paritas Faktual GUI RPG Items (Audit Forensik 186 Stat, Eliminasi Polusi Border Kaca & Judul Tertinggal), Porting 216 Item Bawaan (34 File YAML), dan Matriks Pengujian Stat 7-Layer (v2.9.3 / Takasha-RPG v1.9.3+26.2):**
     - **Audit Forensik & Eliminasi Anomali Gambar 1 (MMOItemEditionMenu):**
       - **Packet Judul Layar:** Memperbaiki bug packet di mana `ReadOnlyChestMenu` me-reuse layar tanpa mengirimkan `ClientboundOpenScreenPacket` baru. Kini judul layar diperbarui secara mulus dan konsisten:
         - `Type Browser` pada `/mi browse`.
         - `Item Explorer: <TYPE>` pada `/mi browse <type>`.
         - `Item Edition: <ITEM_ID>` pada `/mi edit <type> <id>` atau klik kanan item.
-      - **Eliminasi Polusi Kaca Abu-Abu (Glass Border Removal):** Menghapus loop pengisian 54-slot kaca abu-abu. Seluruh slot non-grid (Slot 0, 1, 3, 5, 7, 8, 9..17, 18, 26, 36, 44, 45..53) kini **AIR MURNI (`ItemStack.EMPTY`)** sehingga tekstur GUI chest vanilla transparan alami terlihat 1:1 dengan Spigot. Placeholder `§c- No Item Stat -` HANYA berada pada slot kosong di dalam 21 grid stat (`[19..25, 28..34, 37..43]`).
-      - **Bilah Kontrol Item Explorer 1:1:** Slot 47 `CAULDRON` (`Delete Item`), Slot 49 `ARROW` (`Back`), Slot 51 `WRITABLE_BOOK` (`Create New`), dan Slot 45 `HOPPER` (Download Resourcepack khusus block).
+      - **Eliminasi Polusi Kaca Abu-Abu (Glass Border Removal):** Menghapus loop pengisian 54-slot kaca abu-abu. Seluruh slot non-grid (Slot 0, 1, 3, 5, 7, 8, 9..17, 18, 26, 36, 44, 45..53) kini **AIR MURNI (`ItemStack.EMPTY`)** sehingga tekstur GUI chest vanilla transparan alami terlihat alami dan transparan. Placeholder `§c- No Item Stat -` HANYA berada pada slot kosong di dalam 21 grid stat (`[19..25, 28..34, 37..43]`).
+      - **Bilah Kontrol Item Explorer Presisi:** Slot 47 `CAULDRON` (`Delete Item`), Slot 49 `ARROW` (`Back`), Slot 51 `WRITABLE_BOOK` (`Create New`), dan Slot 45 `HOPPER` (Download Resourcepack khusus block).
     - **Katalog 186 Stat Bytecode & Ikon Vanilla Otentik (`MMOStatRegistry`):**
-      - Memetakan 186 stat distinct dari `net.Indyuce.mmoitems.ItemStats.class` lengkap dengan ikon material vanilla otentik Spigot (`IRON_SWORD` untuk Attack Damage, `LIGHT_GRAY_DYE` untuk Attack Speed, `BLAZE_POWDER` untuk Abilities, `SLIME_BALL` untuk Elements, `ANVIL` untuk Unbreakable, `DIAMOND` untuk Tier, `FLINT` untuk Upgrade, `COAL` untuk Autosmelt, `COBBLESTONE_WALL` untuk Bouncing Crack, `PAPER` untuk Can-Identify/Can-Deconstruct).
+      - Memetakan 186 stat distinct lengkap dengan ikon material vanilla otentik (`IRON_SWORD` untuk Attack Damage, `LIGHT_GRAY_DYE` untuk Attack Speed, `BLAZE_POWDER` untuk Abilities, `SLIME_BALL` untuk Elements, `ANVIL` untuk Unbreakable, `DIAMOND` untuk Tier, `FLINT` untuk Upgrade, `COAL` untuk Autosmelt, `COBBLESTONE_WALL` untuk Bouncing Crack, `PAPER` untuk Can-Identify/Can-Deconstruct).
       - Paginasi multi-halaman dinamis berbasis kompatibilitas tipe item: Halaman 1 (21 stat) memuat Slot 35 (`Next Page ►`), Halaman 2 memuat Slot 27 (`◄ Previous Page`).
-    - **Porting Lengkap 216 Item Bawaan MMOItems (34 File YAML):**
-      - Seluruh 34 file konfigurasi bawaan dari `referensi-rp/RPG/MMOItems-6.10.1-157-7.jar` (`default/item/*.yml`) diekstrak utuh ke `takasha/rpg_packs/default_mmoitems/item/`.
-      - Mendaftarkan auto-load pack `default_mmoitems` pada `TakashaPackManager.java` sehingga seluruh 216 item langsung aktif di `MMOItemManager`.
+    - **Porting Lengkap 216 Item Bawaan RPG (34 File YAML):**
+      - Seluruh 34 file konfigurasi bawaan (`default/item/*.yml`) diekstrak utuh ke `takasha/rpg_packs/default_items/item/`.
+      - Mendaftarkan auto-load pack `default_items` pada `TakashaPackManager.java` sehingga seluruh 216 item langsung aktif di `MMOItemManager`.
       - Menyertakan fungsionalitas operasional item: Set Zirah Dragon (kebal api, nafas naga), Set Steel (knockback resistance), Set Spellcaster (mana pool & spell vampirism), Falcon Blade (Life Ender), Soulstealer (Vampirism lifesteal), Amethyst Sword (Grand Heal), Frozen Blade (Frozen Aura), Autosmelt Pickaxe, Crack Pickaxe (bouncing crack 3x3x3), Scroll of Identification (drag-to-identify), Item Crusher (drag-to-deconstruct), dan socketing Gem Stones.
     - **Matriks Pengujian Stat 7-Layer (7-Layer Verification Matrix):**
       - Mengadopsi matriks pengujian komprehensif: Layer 1 (`/mi stats` character sheet), Layer 2 (Combat Training Dummy `DamageDummyEntity` + Action Bar feedback), Layer 3 (PoE mitigation & fall/fire damage), Layer 4 (Autosmelt & Bouncing Crack mining), Layer 5 (Drag-and-drop inventory interaction), Layer 6 (Threshold 4/4 set bonus), dan Layer 7 (Automated headless unit tests via Gradle).
@@ -1341,24 +1341,24 @@
       - Mod `sakura-weapons/versions/1.21.11`: **`v2.6.2+1.21.11`**.
       - Mod `takasha-rpg`: **`v1.9.3+26.2`**.
 
-49. **Paritas 1:1 MMOItems Chat Edition & Stat Edition Input, Zero-Stat Pure Item Creation Contract, dan GUI Dinamis Manajemen Hadiah Dungeon (v2.9.4 / Takasha-RPG v1.9.4+26.2):**
-    - **Paritas Input Chat Edition 1:1 MMOItems (`MMOChatEditionEngine.java` & `MMOItemEditionMenu.java`):**
-      - Mengadopsi arsitektur `net.Indyuce.mmoitems.api.edition.StatEdition` dan `PlayerInputHandler`:
+49. **Paritas Chat Edition & Stat Edition Input, Zero-Stat Pure Item Creation Contract, dan GUI Dinamis Manajemen Hadiah Dungeon (v2.9.4 / Takasha-RPG v1.9.4+26.2):**
+    - **Paritas Input Chat Edition (`MMOChatEditionEngine.java` & `MMOItemEditionMenu.java`):**
+      - Mengadopsi arsitektur input stat dan penanganan sesi input pemain:
         - Banner dekoratif atas tunggal coret kuning `§e§m-----------------------------------------------------` tanpa garis bawah.
-        - Prefix resmi MMOItems: `§8[§eMMOItems§8] §7`.
+        - Prefix resmi RPG: `§8[§eTakasha-RPG§8] §7`.
         - Animasi screen title: Judul `§6§lItem Edition` dan subtitle `See chat.` (FadeIn: 10, Stay: 40, FadeOut: 10).
-        - Baris instruksi pembatalan resmi: `§8[§eMMOItems§8] §7Type 'cancel' to abort editing.`.
+        - Baris instruksi pembatalan resmi: `§8[§eTakasha-RPG§8] §7Type 'cancel' to abort editing.`.
         - Mesin toleransi kesalahan (Fault-Tolerant Session): Jika input teks tidak valid, sesi chat TIDAK diputus; pemain dapat langsung mengetik ulang input yang benar di chat.
         - Pembatalan senyap (Silent Cancel): Mengetik `cancel` akan menutup sesi dan membuka kembali inventaris tanpa pesan error spam.
-    - **Interaksi Stat Edition 1:1 Spigot MMOItems:**
+    - **Interaksi Stat Edition Terstandarisasi:**
       - Klik Kiri (`PICKUP_ALL`): Membuka sesi prompt chat dengan instruksi dan contoh konkret (bukan menambah nilai di tempat).
       - Klik Kanan (`PICKUP_HALF`): Menghapus/meniadakan nilai stat (`null`), mengirim notifikasi `Successfully removed <StatName>.` dan mengembalikan tampilan nilai ke `§a---` (numerik) atau `§cNone` (teks/tier).
       - Stat Boolean (Unbreakable, Will Break): Klik kiri men-toggle status `true` / `null`, Klik kanan membuka prompt peluang persentase.
     - **Zero-Stat Pure Item Creation Contract:**
-      - Mengadopsi `net.Indyuce.mmoitems.command.mmoitems.CreateCommandTreeNode.class` (lines 229–267) dan `default/item-types.yml`:
-      - Pembuatan item baru melalui perintah `/mmoitems create <TYPE> <ID>` maupun tombol GUI `[➕ Create New]` HANYA menyetel `base.material`. Seluruh stat dasar (`attack-damage`, `attack-speed`, `tier`, `lore`, `display-name`) bernilai `null` (kosong).
+      - Mengadopsi alur pembuatan item murni:
+      - Pembuatan item baru melalui perintah `/mi create <TYPE> <ID>` maupun tombol GUI `[➕ Create New]` HANYA menyetel `base.material`. Seluruh stat dasar (`attack-damage`, `attack-speed`, `tier`, `lore`, `display-name`) bernilai `null` (kosong).
       - Tampilan lore stat kosong di GUI: numerik menampilkan `§7Current Value: §a---`, sedangkan teks dan tier menampilkan `§7Current Value: §cNone`.
-      - Pemetaan material default 40 tipe item MMOItems sesuai dokumen otentik (SWORD -> IRON_SWORD, DAGGER -> STONE_SWORD, SPEAR -> TRIDENT, dll.).
+      - Pemetaan material default 40 tipe item RPG sesuai standar otentik (SWORD -> IRON_SWORD, DAGGER -> STONE_SWORD, SPEAR -> TRIDENT, dll.).
     - **Antarmuka Interaktif Manajemen Hadiah Dungeon (`DungeonRewardManagerMenu.java` & `DungeonRewardConfigManager.java`):**
       - Antarmuka GUI 54 slot yang dapat diakses oleh OP/Gamemaster via `/dungeon rewards [tier] [wave]` dan alias `/dungeon loot`:
         - Tab Tier (Row 0): Common (x1), Nightmare (x2), Sakura Boss (x4).
@@ -1372,17 +1372,17 @@
       - Mod `sakura-weapons/versions/26.2`: **`v2.9.4+26.2`**.
       - Mod `takasha-rpg`: **`v1.9.4+26.2`**.
 
-50. **Paritas Sub-Menu GUI Stat MMOItems (Elements, Abilities, Enchants, Gem Sockets, Upgrade, Lore, Tier), Anti-Cursor Reset In-Place Screen Update, Restrukturisasi 3-Dungeon Selector, Resolusi Custom Model Data Hadiah Dungeon, dan Automated Combat Realization (v2.9.5 / Takasha-RPG v1.9.5+26.2):**
-    - **Sub-Menu GUI Stat Komposit ("Kaya Element") 1:1 MMOItems:**
+50. **Paritas Sub-Menu GUI Stat (Elements, Abilities, Enchants, Gem Sockets, Upgrade, Lore, Tier), Anti-Cursor Reset In-Place Screen Update, Restrukturisasi 3-Dungeon Selector, Resolusi Custom Model Data Hadiah Dungeon, dan Automated Combat Realization (v2.9.5 / Takasha-RPG v1.9.5+26.2):**
+    - **Sub-Menu GUI Stat Komposit ("Kaya Element") Terpadu:**
       - Menghapus total notifikasi dead-end `"Stat dikonfigurasi melalui config!"`.
-      - `MMOElementsEditionMenu`: Antarmuka sub-menu 27-slot mengelola 6 Elemen RPG bawaan MMOItems (Fire, Ice, Lightning, Earth, Light, Darkness) untuk Damage dan Defense dengan dukungan input prompt chat dan pembersihan klik kanan.
+      - `MMOElementsEditionMenu`: Antarmuka sub-menu 27-slot mengelola 6 Elemen RPG (Fire, Ice, Lightning, Earth, Light, Darkness) untuk Damage dan Defense dengan dukungan input prompt chat dan pembersihan klik kanan.
       - `MMOTierEditionMenu`: Sub-menu pemilih tingkatan rarity (Common s.d. Mythic).
       - `MMOLoreEditionMenu`: Sub-menu editor baris deskripsi lore visual (tambah baris via chat, hapus baris tertentu, bersihkan seluruh lore).
       - Penyambungan sub-menu eksisting (`MMOAbilityEditionMenu`, `MMOEnchantEditionMenu`, `MMOGemSocketMenu`) secara langsung dari grid stat utama.
     - **Anti-Cursor Reset In-Place Screen Update (`ReadOnlyChestMenu.openOrUpdate`):**
       - Mencegah pergeseran kursor mouse ke tengah layar saat pergantian halaman dan navigasi sub-menu berukuran baris sama dengan memperbarui slot kontainer secara in-place dan memanggil `broadcastChanges()`, meniadakan pengiriman ulang `ClientboundOpenScreenPacket`.
-    - **Format Input DoubleStat Otentik 1:1 Bytecode:**
-      - Mengirimkan tepat 3 baris instruksi format + 1 baris cancel prompt sesuai `net.Indyuce.mmoitems.stat.type.DoubleStat`:
+    - **Format Input DoubleStat Otentik Presisi:**
+      - Mengirimkan tepat 3 baris instruksi format + 1 baris cancel prompt sesuai standar DoubleStat:
         - Format 1: Angka desimal/tunggal (`25.0`).
         - Format 2: Formula 6-parameter `{Base} {Scaling} {Spread} {MaxSpread} {HardMin} {HardMax}`.
         - Format 3: Rentang acak seragam `{Min} -> {Max}`.
@@ -1400,7 +1400,7 @@
       - Mod `sakura-weapons`: Tetap stabil pada `v1.6.2` / `v2.9.4` (tanpa perubahan).
       - Mod `takasha-rpg`: **`v1.9.5+26.2`**.
 
-51. **Penghapusan Subproyek Touhou Little Maid, Pembersihan Git Dump, Paritas Penuh 67 Stat MMOItems Termasuk GEM_STONE, dan Integrasi Stat Fisik Vanilla (v2.9.5):**
+51. **Penghapusan Subproyek Touhou Little Maid, Pembersihan Git Dump, Paritas Penuh 67 Stat RPG Termasuk GEM_STONE, dan Integrasi Stat Fisik Vanilla (v2.9.5):**
     - **Penghapusan Tuntas Subproyek Touhou Little Maid:**
       - Menghapus direktori subproyek `touhou-little-maid/` beserta seluruh modul Bedrock rendering, AI pendamping, dan aset modelnya.
       - Memperbarui `sakura-weapons/settings.gradle` dan `sakura-weapons/build.gradle` (meniadakan target `touhou-little-maid` dari `buildAll` & `cleanAll`).
@@ -1408,9 +1408,9 @@
     - **Pembersihan Crash Dump & Git Hygiene:**
       - Menambahkan filter `hs_err_pid*.log`, `replay_pid*.log`, dan direktori `dev/` pada `.gitignore`.
       - Menghapus ~48 berkas crash dump JVM lokal yang tidak sengaja terbuat selama pengujian intensif.
-    - **Paritas Penuh 67 Stat MMOItems & Tipe GEM_STONE:**
+    - **Paritas Penuh 67 Stat RPG & Tipe GEM_STONE:**
       - Penambahan tipe item `GEM_STONE` ke dalam `ItemType.java` dengan pemetaan material default `EMERALD`.
-      - Pemetaan lengkap 67 stat MMOItems (DoubleStat, BooleanStat, CompositeStat) dengan formula parser dan validasi chat input.
+      - Pemetaan lengkap 67 stat RPG (DoubleStat, BooleanStat, CompositeStat) dengan formula parser dan validasi chat input.
       - Implementasi engine kode warna universal `TakashaColorParser` mendukung format hex `&#RRGGBB`, `§x§r§r§g§g§b§b`, dan legacy `&a`-`&f`.
     - **Integrasi Penuh Stat Fisik Vanilla (`TakashaStatIntegrationHandler`):**
       - Pendaftaran attribute modifiers vanilla (`Attributes.MAX_HEALTH`, `ARMOR`, `ARMOR_TOUGHNESS`, `KNOCKBACK_RESISTANCE`, `MOVEMENT_SPEED`, `MINING_EFFICIENCY`, `BLOCK_INTERACTION_RANGE`, `ENTITY_INTERACTION_RANGE`) ke dalam `DataComponents.ATTRIBUTE_MODIFIERS`.

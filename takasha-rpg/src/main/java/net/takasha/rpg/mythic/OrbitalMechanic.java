@@ -8,7 +8,7 @@ import net.takasha.rpg.modelengine.TakashaModelEngine;
 import java.util.Map;
 
 /**
- * Creates an orbiting VFX model revolving around the target or caster with 1:1 dual anchor support.
+ * Creates an orbiting VFX model revolving around the target or caster with dual anchor support.
  */
 public class OrbitalMechanic implements MythicMechanic {
 
@@ -38,7 +38,7 @@ public class OrbitalMechanic implements MythicMechanic {
 
     @Override
     public void execute(SkillExecutionContext context) {
-        // 1:1 Parity: Bind to target if explicitly targeted (e.g. FlameDebuff @TargetedTarget), else caster (@self)
+        // Bind to target if explicitly targeted (e.g. FlameDebuff @TargetedTarget), else caster (@self)
         LivingEntity anchor = (context.getTarget() != null && context.getTarget() != context.getCaster())
                 ? context.getTarget()
                 : context.getCaster();

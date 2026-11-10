@@ -18,7 +18,7 @@ import java.util.*;
 
 /**
  * CraftingStationMenu
- * 1:1 MMOItems Crafting Station 2-Tier GUI suite:
+ * Takasha RPG Crafting Station 2-Tier GUI suite:
  *   Tier 1: Station View (54 slots) - recipe grid & crafting queue
  *   Tier 2: Recipe Preview (45 slots) - ingredient matrix & instant/queued crafting
  */
@@ -70,7 +70,7 @@ public class CraftingStationMenu {
         String cleanStation = (stationId == null || stationId.isBlank()) ? "arcane-forge" : stationId.toLowerCase(Locale.ROOT);
         List<StationRecipe> recipes = STATIONS.getOrDefault(cleanStation, STATIONS.get("arcane-forge"));
         if (recipes == null || recipes.isEmpty()) {
-            player.sendSystemMessage(Component.literal("§c[MMOItems] Crafting station '" + cleanStation + "' tidak ditemukan!"));
+            player.sendSystemMessage(Component.literal("§c[Takasha-RPG] Crafting station '" + cleanStation + "' tidak ditemukan!"));
             return;
         }
 
@@ -251,7 +251,7 @@ public class CraftingStationMenu {
                 }
 
                 if (!canCraft) {
-                    player.sendSystemMessage(Component.literal("§c[MMOItems] Kamu tidak memiliki bahan yang cukup untuk membuat item ini!"));
+                    player.sendSystemMessage(Component.literal("§c[Takasha-RPG] Kamu tidak memiliki bahan yang cukup untuk membuat item ini!"));
                     player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.VILLAGER_NO, SoundSource.PLAYERS, 0.8f, 1.0f);
                     return;
                 }

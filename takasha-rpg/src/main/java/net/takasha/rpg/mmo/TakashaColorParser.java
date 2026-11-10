@@ -11,7 +11,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Universal high-performance color and style parser for Takasha RPG & MMOItems.
+ * Universal high-performance color and style parser for Takasha RPG items.
  * Supports:
  * - Legacy formatting: &0-&f, &l, &m, &n, &o, &k, &r (and section signs §0-§f)
  * - Hex colors: &#RRGGBB, <#RRGGBB>, <color:#RRGGBB>, &x&r&r&g&g&b&b

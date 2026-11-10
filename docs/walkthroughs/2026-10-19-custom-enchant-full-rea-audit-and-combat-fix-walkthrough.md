@@ -1,7 +1,7 @@
-# Walkthrough: Full REA 336 Custom Enchantments Audit & Combat Engine Overhaul (Takasha-RPG v1.5.0)
+# Walkthrough: Penuh 336 Custom Enchantments Audit & Combat Engine Overhaul (Takasha-RPG v1.5.0)
 
 ## 1. Ringkasan Eksekutif
-Dalam pembaruan ini, seluruh 336 custom enchantment (182 AdvancedEnchantments otentik + 154 Custom RPG) telah diaudit secara menyeluruh dengan REA skill dari berkas referensi `referensi-rp\RPG\AdvancedEnchantments-9.24.15\enchantments.yml`.
+Dalam pembaruan ini, seluruh 336 custom enchantment (182 AdvancedEnchantments otentik + 154 Custom RPG) telah diaudit secara menyeluruh dengan Audit Forensik skill dari berkas referensi `referensi-rp\RPG\AdvancedEnchantments-9.24.15\enchantments.yml`.
 
 Akar masalah di mana enchant seperti **Immolation** tidak berfungsi telah teridentifikasi dan diperbaiki secara tuntas:
 - **Penyebab:** Pada engine lama, pengecekan string parsial hanya mencocokkan `"burn"` atau `"ignit"`, sehingga sihir `"immolation"` terabaikan (*silent drop*). Selain itu, sistem lama hanya membakar target tunggal tanpa query spasial AoE atau partikel lingkaran.

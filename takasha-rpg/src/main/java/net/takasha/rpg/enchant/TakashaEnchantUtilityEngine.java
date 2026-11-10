@@ -34,14 +34,14 @@ import java.util.*;
 
 /**
  * TakashaEnchantUtilityEngine
- * Engine eksekusi terpusat untuk Custom Enchantment non-tempur dan perkakas MMOItems (Bouncing Crack, Autosmelt, Durability).
+ * Engine eksekusi terpusat untuk Custom Enchantment non-tempur dan perkakas RPG (Bouncing Crack, Autosmelt, Durability).
  */
 public class TakashaEnchantUtilityEngine {
 
     private static boolean isExecutingSubBlock = false;
 
     public static void initialize() {
-        // 1. Block Break Event (BEFORE): Telepathy, Smelting, Veinminer, Trench, MMOItems Bouncing Crack & Autosmelt
+        // 1. Block Break Event (BEFORE): Telepathy, Smelting, Veinminer, Trench, Bouncing Crack & Autosmelt
         PlayerBlockBreakEvents.BEFORE.register((level, player, pos, state, blockEntity) -> {
             if (isExecutingSubBlock || level.isClientSide()) return true;
             if (!(player instanceof ServerPlayer sp) || !(level instanceof ServerLevel sl)) return true;
@@ -49,7 +49,7 @@ public class TakashaEnchantUtilityEngine {
             ItemStack tool = sp.getMainHandItem();
             if (tool.isEmpty()) return true;
 
-            // 0. MMOItems Tool Check & AuraSkills Requirements
+            // 0. RPG Tool Check & AuraSkills Requirements
             Optional<MMOItemData> mmoOpt = MMOItemData.readFromStack(tool);
             boolean mmoAutosmelt = false;
             boolean mmoBouncingCrack = false;
@@ -131,7 +131,7 @@ public class TakashaEnchantUtilityEngine {
                 ExperienceOrb.award(sl, sp.position(), 2 + lvl * 3);
             }
 
-            // A. MMOItems Bouncing Crack (Area pecahan 3x3x3 blok sejenis)
+            // A. Bouncing Crack (Area pecahan 3x3x3 blok sejenis)
             if (mmoBouncingCrack) {
                 isExecutingSubBlock = true;
                 try {
@@ -352,7 +352,7 @@ public class TakashaEnchantUtilityEngine {
     }
 
     /**
-     * Menambang blok sejenis di sekitar dalam radius 3x3x3 (MMOItems Bouncing Crack).
+     * Menambang blok sejenis di sekitar dalam radius 3x3x3 (Bouncing Crack).
      */
     private static void mineBouncingCrack(ServerLevel level, ServerPlayer player, BlockPos center, BlockState targetState, ItemStack tool, boolean telepathy, boolean smelting) {
         Block targetBlock = targetState.getBlock();

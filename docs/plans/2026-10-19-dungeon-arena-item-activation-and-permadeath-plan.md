@@ -1,4 +1,4 @@
-# Rencana Implementasi: Sistem Dungeon Arena Berbasis Blok Fisik, LevelledMobs, Peti Hadiah Per-Wave & Permadeath (REA AdvancedDungeonArena)
+# Rencana Implementasi: Sistem Dungeon Arena Berbasis Blok Fisik, LevelledMobs, Peti Hadiah Per-Wave & Permadeath (Audit Forensik AdvancedDungeonArena)
 
 > **Target Versi Mod:** `takasha-rpg` **`v1.6.0+26.2`** (Minor Feature Release)  
 > **Status Dokumen PRD:** Penyelarasan Menuju **`v3.6.0`** (Bab 18: AdvancedDungeonArena Physical Enclosure Engine)  

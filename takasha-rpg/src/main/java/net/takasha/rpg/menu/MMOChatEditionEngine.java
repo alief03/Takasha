@@ -27,9 +27,8 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 /**
- * 1:1 Parity Engine for MMOItems Chat Edition & Stat Edition.
- * Reverse-engineered from net.Indyuce.mmoitems.api.edition.StatEdition,
- * net.Indyuce.mmoitems.api.edition.input.PlayerInputHandler, and ChatEdition.
+ * Takasha RPG Chat Edition & Stat Edition Engine.
+ * Implements interactive chat prompt session and value processor.
  *
  * Enhanced with:
  * - Universal Color Parser support (TakashaColorParser)
@@ -128,14 +127,14 @@ public class MMOChatEditionEngine {
                     success = session.processor().apply(clean);
                 } catch (Exception e) {
                     LOGGER.warn("Input processing exception for player {}: {}", player.getScoreboardName(), e.getMessage());
-                    player.sendSystemMessage(TakashaColorParser.parse("&8[&eMMOItems&8] &c" + (e.getMessage() != null ? e.getMessage() : "Invalid input format.")));
+                    player.sendSystemMessage(TakashaColorParser.parse("&8[&eTakasha-RPG&8] &c" + (e.getMessage() != null ? e.getMessage() : "Invalid input format.")));
                     success = false;
                 }
 
                 if (success) {
                     ACTIVE_SESSIONS.remove(uuid);
                 } else {
-                    // FAULT-TOLERANCE 1:1:
+                    // FAULT-TOLERANCE:
                     // Keep session active for immediate retry
                 }
             });
@@ -183,13 +182,13 @@ public class MMOChatEditionEngine {
                 processor
         ));
 
-        // 3. Send decorative chat banner 1:1 with StatEdition.java
+        // 3. Send decorative chat banner
         player.sendSystemMessage(TakashaColorParser.parse("&e&m-----------------------------------------------------"));
 
-        // Each prompt line with official prefix §8[§eMMOItems§8] §7
+        // Each prompt line with official prefix §8[§eTakasha-RPG§8] §7
         if (promptLines != null) {
             for (String line : promptLines) {
-                player.sendSystemMessage(TakashaColorParser.parse("&8[&eMMOItems&8] &7" + line));
+                player.sendSystemMessage(TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7" + line));
             }
         }
 
@@ -217,10 +216,10 @@ public class MMOChatEditionEngine {
                         .withClickEvent(new ClickEvent.SuggestCommand("/input "))
                         .withHoverEvent(new HoverEvent.ShowText(Component.literal("§eKlik untuk langsung mengisi '/input ' di chat bar dan membuka pop-up autocompletion Tab!"))));
         player.sendSystemMessage(tabButton);
-        player.sendSystemMessage(TakashaColorParser.parse("&8[&eMMOItems&8] &eKetik &b/input <Tab> &eatau klik tombol di atas untuk melihat seluruh opsi autocomplete!"));
+        player.sendSystemMessage(TakashaColorParser.parse("&8[&eTakasha-RPG&8] &eKetik &b/input <Tab> &eatau klik tombol di atas untuk melihat seluruh opsi autocomplete!"));
 
         // Cancel instruction
-        player.sendSystemMessage(TakashaColorParser.parse("&8[&eMMOItems&8] &7Type 'cancel' to abort editing."));
+        player.sendSystemMessage(TakashaColorParser.parse("&8[&eTakasha-RPG&8] &7Type 'cancel' to abort editing."));
 
         // 4. Send screen title: Title = "§6§l" + title, Subtitle = "See chat."
         player.connection.send(new ClientboundSetTitlesAnimationPacket(10, 40, 10));

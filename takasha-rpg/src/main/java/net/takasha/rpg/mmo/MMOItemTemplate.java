@@ -60,7 +60,7 @@ public class MMOItemTemplate {
     private final List<AbilityConfig> abilities = new ArrayList<>();
     private MMOItemTier tier = null;
 
-    // Tool Attributes & Special Abilities (MMOItems 1:1)
+    // Tool Attributes & Special Abilities
     private Boolean autosmelt = null;
     private Boolean bouncingCrack = null;
     private Integer pickaxePower = null;
@@ -76,13 +76,13 @@ public class MMOItemTemplate {
     private final Map<String, Double> auraSkillStats = new LinkedHashMap<>();
     private int revisionId = 1;
 
-    // Gem Stone Specific Attributes (MMOItems 1:1)
+    // Gem Stone Specific Attributes
     private String gemColor = null;
     private String gemUpgradeScaling = "SUBSEQUENT";
     private final List<String> itemTypeRestrictions = new ArrayList<>();
     private Double successRate = null;
 
-    // Advanced & Cosmetic Attributes (MMOItems 1:1)
+    // Advanced & Cosmetic Attributes
     private String itemSet = null;
     private String loreFormat = null;
     private String shieldPattern = null;

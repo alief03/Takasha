@@ -2,7 +2,7 @@ import os
 from PIL import Image, ImageDraw, ImageFont
 
 def create_side_list():
-    # Native 1:1 scale matching default.json & uniform.json height 266
+    # Native scale presisi matching default.json & uniform.json height 266
     WIDTH = 264
     HEIGHT = 266
 

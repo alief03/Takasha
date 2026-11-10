@@ -22,7 +22,7 @@ Sistem baru ini menyelesaikan keluhan pemain mengenai *"tanaman tidak dapat mena
      - `BlockState.is(BlockTags.JUNGLE_LOGS)` $\rightarrow$ Biji Kakao (`COCOA`).
 
 ### B. Sinkronisasi Replant Mengimbangi Kecepatan Panen
-1. **In-Tick Instant 1:1 Harvest-Replant Pairing (0ms Delay):**
+1. **In-Tick Instant Instant Harvest-Replant Pairing (0ms Delay):**
    - Saat tanaman matang dipanen dengan `destroyBlock(...)`, klien seketika itu juga mengeksekusi penanaman kembali (`useItemOn(...)`) di baris berikutnya dalam tick yang sama jika benih tersedia di offhand atau tas.
    - Menghilangkan jeda antar-tick dan menjaga rasio 1 panen : 1 tanam secara sempurna bahkan saat pemain bergerak atau sprint.
 2. **Symmetric Batch Throughput (Hingga 12 Aksi/Tick):**

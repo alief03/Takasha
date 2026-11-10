@@ -22,10 +22,10 @@ import java.util.*;
  * TakashaMultiTypeAuditAutoTest
  * Automated test suite covering:
  * 1. Tooltip enchantment rendering across 8 different item types (Sword, Bow, Axe, Chestplate, Helmet, Boots, Pickaxe, Shield).
- * 2. Anvil and drag-and-drop compatibility for MMOItems with non-vanilla materials (e.g. stick, amethyst shard).
+ * 2. Anvil and drag-and-drop compatibility for RPG items with non-vanilla materials (e.g. stick, amethyst shard).
  * 3. Strict max level clamping (chat, anvil, YAML).
  * 4. 25 Fallthrough stats coverage (Zero fallthrough out of 97 stats).
- * 5. Serialization & Deserialization parity for new MMOItems attributes.
+ * 5. Serialization & Deserialization parity for new RPG attributes.
  */
 public class TakashaMultiTypeAuditAutoTest {
 

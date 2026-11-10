@@ -1,9 +1,9 @@
-# Rencana Implementasi: Rekonstruksi & Duplikasi Penuh AdvancedDungeonArena-8.6.0 ke Takasha-RPG (Minecraft 26.2 Fabric) Menggunakan Skill REA
+# Rencana Implementasi: Rekonstruksi & Duplikasi Penuh AdvancedDungeonArena-8.6.0 ke Takasha-RPG (Minecraft 26.2 Fabric) Menggunakan Audit Forensik Mandiri
 
 > **Target Versi:** `v1.6.0+26.2`  
 > **Modul:** `takasha-rpg` (Minecraft 26.2, Fabric 0.161.0, Java 25 LTS)  
 > **Mod Sakura-Weapons:** **LOCKED** baku pada `v2.5.0` (Zero-touch, dilarang dimodifikasi)  
-> **Referensi Sumber REA:** `referensi-rp\RPG\AdvancedDungeonArena-8.6.0.jar` (Total 317 kelas decompiled bytecode)  
+> **Referensi Sumber Audit Forensik:** `referensi-rp\RPG\AdvancedDungeonArena-8.6.0.jar` (Total 317 kelas decompiled bytecode)  
 > **Status:** Menunggu Review & Persetujuan Pengguna (Draft Planning Mode)
 
 ---
@@ -37,11 +37,11 @@ Sistem prototype `TakashaArenaManager.java` (yang sebelumnya hanya berupa 5-wave
 
 ---
 
-## 3. Hasil Audit REA: Pemetaan Arsitektur 8 Pilar AdvancedDungeonArena
+## 3. Hasil Audit Forensik: Pemetaan Arsitektur 8 Pilar AdvancedDungeonArena
 
 Berdasarkan pembongkaran bytecode 317 kelas `AdvancedDungeonArena-8.6.0.jar`, sistem terbagi ke dalam 8 pilar arsitektur yang akan kita rekonstruksi secara native ke Fabric:
 
-| No | Pilar Arsitektur Asli (NightExpress ADA) | Kelas Sumber REA | Rekonstruksi Native Fabric di `takasha-rpg` | Status Porting |
+| No | Pilar Arsitektur Asli (NightExpress ADA) | Kelas Sumber Audit Forensik | Rekonstruksi Native Fabric di `takasha-rpg` | Status Porting |
 | :--- | :--- | :--- | :--- | :--- |
 | **1** | **Spatial Boundary & Selection** | `SelectionManager`, `CuboidSelection`, `BlockHighlighter` | `DungeonCuboid.java`, `DungeonWandItem.java`, `DungeonRegionRenderer.java` | 100% Native Fabric (Particle Box & Box collision) |
 | **2** | **Configuration & Schema** | `DungeonConfig`, `GameSettings`, `Features` | `DungeonConfig.java`, `DungeonGameSettings.java`, `DungeonFeatures.java` | JSON GSON data-driven di `config/takasha_rpg/` |

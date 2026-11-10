@@ -120,7 +120,7 @@ public class MMOInteractionHandler {
 
             boolean onHitTriggered = tryTriggerAbility(serverPlayer, stack, MMOAbilityTrigger.ON_HIT, target);
             if (triggered || onHitTriggered) {
-                // REA Parity: Return PASS so melee weapon attack executes alongside the triggered ability
+                // Return PASS so melee weapon attack executes alongside the triggered ability
                 return InteractionResult.PASS;
             }
 
@@ -439,7 +439,7 @@ public class MMOInteractionHandler {
             if ("FIRESTORM_VOLLEY".equalsIgnoreCase(ab.getType())) continue;
 
             String skillId = ab.getType();
-            // REA Parity: In MMOItems, timer is configured in ticks (e.g. timer: 10 = 10 ticks = 500ms)
+            // Timer is configured in ticks (e.g. timer: 10 = 10 ticks = 500ms)
             long intervalMs;
             if (ab.getTimer() >= 1.0) {
                 intervalMs = (long) (ab.getTimer() * 50L);

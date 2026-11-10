@@ -21,7 +21,7 @@ import java.util.Random;
 /**
  * Entri Hadiah Loot Dungeon.
  * Mewakili item dalam drop pool dengan probabilitas chance (0.01 s.d. 1.0),
- * rentang kuantitas min-max, multiplier scaling, identifikasi item (Vanilla / Takasha / MMOItems),
+ * rentang kuantitas min-max, multiplier scaling, identifikasi item (Vanilla / Takasha / RPG Items),
  * serta preservasi Custom Model Data dan Item Model untuk mencegah artefak barrier block.
  */
 public class DungeonLootEntry {

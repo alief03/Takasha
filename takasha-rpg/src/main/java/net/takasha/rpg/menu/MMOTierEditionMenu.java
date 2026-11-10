@@ -68,7 +68,7 @@ public class MMOTierEditionMenu {
             if (slotId == 22) {
                 template.setTier(null);
                 MMOItemDiskManager.saveTemplate(template);
-                player.sendSystemMessage(Component.literal("§8[§eMMOItems§8] §7Successfully removed Item Tier§7."));
+                player.sendSystemMessage(Component.literal("§8[§eTakasha-RPG§8] §7Successfully removed Item Tier§7."));
                 player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ANVIL_USE, SoundSource.PLAYERS, 0.8f, 1.2f);
                 MMOItemEditionMenu.open(player, template.getItemType(), template.getId(), parentPage);
                 return;
@@ -87,7 +87,7 @@ public class MMOTierEditionMenu {
             if (chosen != null) {
                 template.setTier(chosen);
                 MMOItemDiskManager.saveTemplate(template);
-                player.sendSystemMessage(Component.literal("§8[§eMMOItems§8] §7Tier successfully changed to " + chosen.name() + "."));
+                player.sendSystemMessage(Component.literal("§8[§eTakasha-RPG§8] §7Tier successfully changed to " + chosen.name() + "."));
                 player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.PLAYERS, 1.0f, 1.2f);
                 MMOItemEditionMenu.open(player, template.getItemType(), template.getId(), parentPage);
             }

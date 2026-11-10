@@ -113,7 +113,7 @@ public class ActiveModelInstance {
             float bScale = TakashaModelEngine.getBoneScale(model.getModelId(), def.getName());
             instance.setBoneScale(bScale);
 
-            // REA ModelEngine Parity: Strip non-visual bones and bones without mesh cubes
+            // Strip non-visual bones and bones without mesh cubes
             if (!TakashaModelEngine.isNonVisualBone(def.getName()) && !def.getCubes().isEmpty()) {
                 ItemStack boneItem = TakashaModelEngine.createBoneItemStack(model.getModelId(), def.getName(),
                         def.getUuid());
@@ -121,7 +121,7 @@ public class ActiveModelInstance {
                     Display.ItemDisplay display = new Display.ItemDisplay(EntityTypes.ITEM_DISPLAY, level);
                     display.setPos(spawnPos.x, spawnPos.y, spawnPos.z);
                     display.getSlot(0).set(boneItem);
-                    // REA MythicMobs Parity: brightness{b=15;s=15} for full luminous VFX rendering
+                    // brightness{b=15;s=15} for full luminous VFX rendering
                     ((net.takasha.rpg.mixin.DisplayAccessor) display).callSetBrightnessOverride(new net.minecraft.util.Brightness(15, 15));
                     display.addTag("takasha_temp_vfx");
                     TakashaModelEngine.registerActiveBoneDisplay(display);

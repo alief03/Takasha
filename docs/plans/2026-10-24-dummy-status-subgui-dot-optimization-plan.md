@@ -1,6 +1,6 @@
-# Rencana Perbaikan REA: Status Dummy NPC, Sub-GUI Interaktif AuraSkills, dan Optimasi Interval DOT
+# Rencana Perbaikan Audit Forensik: Status Dummy NPC, Sub-GUI Interaktif AuraSkills, dan Optimasi Interval DOT
 
-> **Dokumen Perencanaan REA (Reverse Engineering & Audit)**  
+> **Dokumen Perencanaan Audit Forensik (Audit Forensik)**  
 > **Target Subproject:** `:takasha-rpg` (Minecraft 26.2, Fabric Loom 1.17.21, Java 25)  
 > **Scope Guard:** Subproject `sakura-weapons` **STRICTLY ZERO-TOUCH**  
 > **Status:** DISETUJUI & DALAM IMPLEMENTASI (Poin C.1 & C.2 Diterapkan, Poin C.3 Dihapus)

@@ -59,7 +59,7 @@ Berdasarkan audit teknis mendalam terhadap kode [TakashaFarmHandler.java](file:/
 
 > [!IMPORTANT]
 > **2. Sinkronisasi Kecepatan Replant Mengimbangi Panen (*Replant Pacing & Harvest Balance*) — DISETUJUI**:
-> - **In-Tick Instant 1:1 Harvest-Replant Pairing:** Saat memanen tanaman matang, jika benih yang cocok sudah tersedia di tas/offhand (kasus 95% saat bertani dengan cadangan benih), penanaman kembali dilakukan **pada tick dan iterasi yang sama seketika** (0ms latency)! Ini mengunci rasio 1 panen : 1 tanam secara harmonis dan menghilangkan celah waktu pemain bergerak menjauh.
+> - **In-Tick Instant presisi Harvest-Replant Pairing:** Saat memanen tanaman matang, jika benih yang cocok sudah tersedia di tas/offhand (kasus 95% saat bertani dengan cadangan benih), penanaman kembali dilakukan **pada tick dan iterasi yang sama seketika** (0ms latency)! Ini mengunci rasio 1 panen : 1 tanam secara harmonis dan menghilangkan celah waktu pemain bergerak menjauh.
 > - **Symmetric Batch Throughput:** Jika ada antrean penanaman tertunda (karena menunggu benih jatuh), replanting diproses dengan kapasitas throughput setara kapasitas panen maksimum (`farmActionsPerTick` hingga 12 tanaman/tick). Default `farmReplantDelayMs = 0`.
 > - **Dynamic Flow Control Backpressure:** Pemanenan baru **DIREM (ditahan)** jika ada $\ge 2$ petak bolong di sekitar pemain ($\le 4.2$m) yang sedang menunggu penanaman. Kecepatan panen otomatis tunduk pada kecepatan penanaman, menjamin pemain berlari kencang tidak akan pernah meninggalkan jejak bolong di belakangnya.
 > - **Zero-Swap Overhead:** Benih dipertahankan di offhand selama jenis tanaman sama, meniadakan delay mouse click inventory antar tanaman.
