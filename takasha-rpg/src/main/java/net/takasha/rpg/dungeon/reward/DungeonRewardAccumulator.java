@@ -8,6 +8,7 @@ import net.takasha.rpg.registry.ModRpgItems;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 /**
  * Akumulator Hadiah Dungeon per-Wave.
@@ -30,213 +31,30 @@ public class DungeonRewardAccumulator {
             case SAKURA_BOSS -> 4;
         };
 
-        switch (waveNumber) {
-            case 1 -> {
-                // Fixed: 50 RPG Coins, 2 Magic Dust
-                addOrStackItem(new ItemStack(ModRpgItems.RPG_COIN, 50 * coinMultiplier));
-                addOrStackItem(new ItemStack(ModRpgItems.MAGIC_DUST, 2));
-
-                // Peluang 40%: Mystery Book Simple
-                if (rng.nextFloat() < 0.40f) {
-                    addOrStackItem(new ItemStack(ModRpgItems.MYSTERY_BOOK_SIMPLE, 1));
-                }
-                // Peluang 15%: Relik Dasar
-                if (rng.nextFloat() < 0.15f) {
-                    Item relic = rng.nextBoolean() ? ModRpgItems.ASTROLABE_NAVIGATOR : ModRpgItems.TEAR_FROSTBORN;
-                    addOrStackItem(new ItemStack(relic, 1));
-                }
-            }
-            case 2 -> {
-                // Fixed: 120 RPG Coins, 4 Magic Dust, 1 Mystery Dust
-                addOrStackItem(new ItemStack(ModRpgItems.RPG_COIN, 120 * coinMultiplier));
-                addOrStackItem(new ItemStack(ModRpgItems.MAGIC_DUST, 4));
-                addOrStackItem(new ItemStack(ModRpgItems.MYSTERY_DUST, 1));
-
-                // Peluang 45%: Mystery Book Unique
-                if (rng.nextFloat() < 0.45f) {
-                    addOrStackItem(new ItemStack(ModRpgItems.MYSTERY_BOOK_UNIQUE, 1));
-                }
-                // Peluang 30%: Stat Tracker Acak
-                if (rng.nextFloat() < 0.30f) {
-                    Item tracker = switch (rng.nextInt(3)) {
-                        case 0 -> ModRpgItems.STAT_TRACKER_KILLS;
-                        case 1 -> ModRpgItems.STAT_TRACKER_MOBS;
-                        default -> ModRpgItems.STAT_TRACKER_BLOCKS;
-                    };
-                    addOrStackItem(new ItemStack(tracker, 1));
-                }
-                // Peluang 20%: Jimat Pemulih
-                if (rng.nextFloat() < 0.20f) {
-                    addOrStackItem(new ItemStack(ModRpgItems.DREAMCATCHER_CHARM, 1));
-                }
-            }
-            case 3 -> {
-                // Fixed: 250 RPG Coins, 1 Gold Coin
-                addOrStackItem(new ItemStack(ModRpgItems.RPG_COIN, 250 * coinMultiplier));
-                addOrStackItem(new ItemStack(ModRpgItems.RPG_GOLD_COIN, 1 * coinMultiplier));
-
-                // Peluang 40%: Mystery Book Elite
-                if (rng.nextFloat() < 0.40f) {
-                    addOrStackItem(new ItemStack(ModRpgItems.MYSTERY_BOOK_ELITE, 1));
-                }
-                // Peluang 25%: Mystery Book Ultimate
-                if (rng.nextFloat() < 0.25f) {
-                    addOrStackItem(new ItemStack(ModRpgItems.MYSTERY_BOOK_ULTIMATE, 1));
-                }
-                // Peluang 35%: 1-2 Item Utilitas AE
-                if (rng.nextFloat() < 0.35f) {
-                    int count = 1 + rng.nextInt(2);
-                    for (int i = 0; i < count; i++) {
-                        Item util = switch (rng.nextInt(3)) {
-                            case 0 -> ModRpgItems.SLOT_INCREASER_1;
-                            case 1 -> ModRpgItems.SECRET_DUST;
-                            default -> ModRpgItems.RANDOMIZATION_SCROLL;
-                        };
-                        addOrStackItem(new ItemStack(util, 1));
-                    }
-                }
-                // Peluang 20%: Kitab Portabel Kuno
-                if (rng.nextFloat() < 0.20f) {
-                    Item portable = switch (rng.nextInt(3)) {
-                        case 0 -> ModRpgItems.TOME_WORKBENCH;
-                        case 1 -> ModRpgItems.SCROLL_ASCENSION;
-                        default -> ModRpgItems.WANDERER_COMPASS;
-                    };
-                    addOrStackItem(new ItemStack(portable, 1));
-                }
-            }
-            case 4 -> {
-                // Fixed: 500 RPG Coins, 2 Gold Coins, 1 White Scroll
-                addOrStackItem(new ItemStack(ModRpgItems.RPG_COIN, 500 * coinMultiplier));
-                addOrStackItem(new ItemStack(ModRpgItems.RPG_GOLD_COIN, 2 * coinMultiplier));
-                addOrStackItem(new ItemStack(ModRpgItems.WHITE_SCROLL, 1));
-
-                // Peluang Ancient Keystone (+1 Max Home)
-                float keystoneChance = switch (tier) {
-                    case COMMON -> 0.45f;
-                    case NIGHTMARE -> 0.65f;
-                    case SAKURA_BOSS -> 0.85f;
-                };
-                if (rng.nextFloat() < keystoneChance) {
-                    addOrStackItem(new ItemStack(ModRpgItems.ANCIENT_KEYSTONE, 1));
-                }
-
-                // Peluang 30%: Mystery Book Legendary
-                if (rng.nextFloat() < 0.30f) {
-                    addOrStackItem(new ItemStack(ModRpgItems.MYSTERY_BOOK_LEGENDARY, 1));
-                }
-                // Peluang 15%: Mystery Book Fabled
-                if (rng.nextFloat() < 0.15f) {
-                    addOrStackItem(new ItemStack(ModRpgItems.MYSTERY_BOOK_FABLED, 1));
-                }
-                // Peluang 35%: 1-2 Bagian Zirah Set Kit AE (Phantom / Ranger)
-                if (rng.nextFloat() < 0.35f) {
-                    int count = 1 + rng.nextInt(2);
-                    for (int i = 0; i < count; i++) {
-                        Item armor = getRandomMidTierArmor();
-                        addOrStackItem(new ItemStack(armor, 1));
-                    }
-                }
-                // Peluang 20%: Kitab Tempa Kuno
-                if (rng.nextFloat() < 0.20f) {
-                    Item smith = switch (rng.nextInt(3)) {
-                        case 0 -> ModRpgItems.TOME_ANVIL;
-                        case 1 -> ModRpgItems.TOME_SMITHING;
-                        default -> ModRpgItems.TOME_GRINDSTONE;
-                    };
-                    addOrStackItem(new ItemStack(smith, 1));
-                }
-            }
-            case 5 -> {
-                // Fixed Boss: 1.000 RPG Coins, 5 Gold Coins, 3 Takasha Gems, 1 Holy Scroll
-                addOrStackItem(new ItemStack(ModRpgItems.RPG_COIN, 1000 * coinMultiplier));
-                addOrStackItem(new ItemStack(ModRpgItems.RPG_GOLD_COIN, 5 * coinMultiplier));
-                addOrStackItem(new ItemStack(ModRpgItems.TAKASHA_GEM, 3 * (tier == DungeonTier.SAKURA_BOSS ? 2 : 1)));
-                addOrStackItem(new ItemStack(ModRpgItems.HOLY_SCROLL, 1));
-
-                // Peluang Ancient Keystone (+1 Max Home, batas 10)
-                float keystoneChance = switch (tier) {
-                    case COMMON -> 0.75f;
-                    case NIGHTMARE -> 0.85f;
-                    case SAKURA_BOSS -> 0.95f;
-                };
-                if (rng.nextFloat() < keystoneChance) {
-                    addOrStackItem(new ItemStack(ModRpgItems.ANCIENT_KEYSTONE, 1));
-                }
-
-                // Peluang Mystery Book Heroic (50%)
-                if (rng.nextFloat() < (tier == DungeonTier.COMMON ? 0.50f : 0.70f)) {
-                    addOrStackItem(new ItemStack(ModRpgItems.MYSTERY_BOOK_HEROIC, 1));
-                }
-                // Peluang Mystery Book Soul (25% s.d. 75%)
-                float soulChance = switch (tier) {
-                    case COMMON -> 0.25f;
-                    case NIGHTMARE -> 0.50f;
-                    case SAKURA_BOSS -> 0.75f;
-                };
-                if (rng.nextFloat() < soulChance) {
-                    addOrStackItem(new ItemStack(ModRpgItems.MYSTERY_BOOK_SOUL, 1));
-                }
-                // Peluang Mystery Book Mastery (10% s.d. 45%)
-                float masteryChance = switch (tier) {
-                    case COMMON -> 0.10f;
-                    case NIGHTMARE -> 0.25f;
-                    case SAKURA_BOSS -> 0.45f;
-                };
-                if (rng.nextFloat() < masteryChance) {
-                    addOrStackItem(new ItemStack(ModRpgItems.MYSTERY_BOOK_MASTERY, 1));
-                }
-
-                // Peluang 45%: 1-2 Bagian Zirah Set Kit AE Tingkat Tinggi
-                if (rng.nextFloat() < 0.45f) {
-                    int count = 1 + rng.nextInt(2);
-                    for (int i = 0; i < count; i++) {
-                        Item highArmor = getRandomHighTierArmor();
-                        addOrStackItem(new ItemStack(highArmor, 1));
-                    }
-                }
-
-                // Peluang Senjata Kosmik AE Acak (25% s.d. 75%)
-                float weaponChance = switch (tier) {
-                    case COMMON -> 0.25f;
-                    case NIGHTMARE -> 0.50f;
-                    case SAKURA_BOSS -> 0.75f;
-                };
-                if (rng.nextFloat() < weaponChance) {
-                    Item weapon = switch (rng.nextInt(5)) {
-                        case 0 -> ModRpgItems.PHANTOM_SCYTHE;
-                        case 1 -> ModRpgItems.KOTH_SWORD;
-                        case 2 -> ModRpgItems.KOTH_AXE;
-                        case 3 -> ModRpgItems.DIMENSIONAL_SWORD;
-                        default -> ModRpgItems.SUPREME_WEAPON;
-                    };
-                    addOrStackItem(new ItemStack(weapon, 1));
-                }
-
-                // Peluang 25%: Relik Sakral Eksekutif Acak
-                if (rng.nextFloat() < 0.25f) {
-                    Item sacredRelic = switch (rng.nextInt(5)) {
-                        case 0 -> ModRpgItems.HAMMER_MASTER_SMITH;
-                        case 1 -> ModRpgItems.HAMMER_DIVINE_SMITH;
-                        case 2 -> ModRpgItems.SIGIL_VITALITY;
-                        case 3 -> ModRpgItems.SIGIL_GOURMET;
-                        default -> ModRpgItems.TOME_ENDERCHEST;
-                    };
-                    addOrStackItem(new ItemStack(sacredRelic, 1));
-                }
-
-                // Peluang 35%: Soul Gem atau Orb
-                if (rng.nextFloat() < 0.35f) {
-                    Item orb = switch (rng.nextInt(4)) {
-                        case 0 -> ModRpgItems.SOUL_GEM;
-                        case 1 -> ModRpgItems.WEAPON_ENCHANTMENT_ORB;
-                        case 2 -> ModRpgItems.ARMOR_ENCHANTMENT_ORB;
-                        default -> ModRpgItems.TOOL_ENCHANTMENT_ORB;
-                    };
-                    addOrStackItem(new ItemStack(orb, 1));
+        List<DungeonLootEntry> entries = DungeonRewardConfigManager.getInstance().getLootForWave(tier, waveNumber);
+        for (DungeonLootEntry entry : entries) {
+            if (rng.nextFloat() <= entry.getChance()) {
+                ItemStack stack = entry.createItemStack(coinMultiplier, rng);
+                if (!stack.isEmpty()) {
+                    addOrStackItem(stack);
                 }
             }
         }
+    }
+
+    private ItemStack getRandomMMOItemByTiers(net.takasha.rpg.mmo.MMOItemTier... tiers) {
+        List<net.takasha.rpg.mmo.MMOItemTemplate> matches = new ArrayList<>();
+        Set<net.takasha.rpg.mmo.MMOItemTier> targetTiers = Set.of(tiers);
+        for (net.takasha.rpg.mmo.MMOItemTemplate t : net.takasha.rpg.mmo.MMOItemManager.getAllTemplates()) {
+            if (targetTiers.contains(t.getTier())) {
+                matches.add(t);
+            }
+        }
+        if (matches.isEmpty()) {
+            return ItemStack.EMPTY;
+        }
+        net.takasha.rpg.mmo.MMOItemTemplate picked = matches.get(rng.nextInt(matches.size()));
+        return net.takasha.rpg.mmo.MMOItemManager.generateItemStack(picked.getItemType(), picked.getId(), 1);
     }
 
     private Item getRandomMidTierArmor() {

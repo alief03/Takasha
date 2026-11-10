@@ -1,0 +1,175 @@
+{
+  "textures": {
+    "0": "takasha_rpg:vfx/infernal_judgement_vfx/0",
+    "1": "takasha_rpg:vfx/infernal_judgement_vfx/1",
+    "2": "takasha_rpg:vfx/infernal_judgement_vfx/2",
+    "3": "takasha_rpg:vfx/infernal_judgement_vfx/3",
+    "particle": "#0"
+  },
+  "elements": [
+    {
+      "from": [
+        5.0026,
+        8,
+        6.5
+      ],
+      "to": [
+        11.002600000000001,
+        18,
+        9.5
+      ],
+      "faces": {
+        "north": {
+          "texture": "#3",
+          "uv": [
+            9,
+            0,
+            12,
+            5
+          ]
+        },
+        "east": {
+          "texture": "#3",
+          "uv": [
+            2.5,
+            10,
+            4,
+            15
+          ]
+        },
+        "south": {
+          "texture": "#3",
+          "uv": [
+            12,
+            0,
+            9,
+            5
+          ]
+        },
+        "west": {
+          "texture": "#3",
+          "uv": [
+            4,
+            10,
+            5.5,
+            15
+          ]
+        },
+        "up": {
+          "texture": "#3",
+          "uv": [
+            12,
+            14,
+            9,
+            12.5
+          ]
+        },
+        "down": {
+          "texture": "#3",
+          "uv": [
+            15,
+            12.5,
+            12,
+            14
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        4.095750000000001,
+        14.41421,
+        6.525
+      ],
+      "to": [
+        8.34575,
+        18.66421,
+        9.475
+      ],
+      "faces": {
+        "north": {
+          "texture": "#3",
+          "uv": [
+            9,
+            14,
+            11,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#3",
+          "uv": [
+            11,
+            14,
+            12.5,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#3",
+          "uv": [
+            11,
+            14,
+            9,
+            16
+          ]
+        },
+        "west": {
+          "texture": "#3",
+          "uv": [
+            12.5,
+            14,
+            14,
+            16
+          ]
+        },
+        "up": {
+          "texture": "#3",
+          "uv": [
+            16,
+            15.5,
+            14,
+            14
+          ]
+        },
+        "down": {
+          "texture": "#3",
+          "uv": [
+            2,
+            14.5,
+            0,
+            16
+          ]
+        }
+      },
+      "rotation": {
+        "origin": [
+          5.345750000000001,
+          19.41421,
+          8
+        ],
+        "axis": "z",
+        "angle": 45
+      }
+    }
+  ],
+  "display": {
+    "fixed": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    }
+  }
+}

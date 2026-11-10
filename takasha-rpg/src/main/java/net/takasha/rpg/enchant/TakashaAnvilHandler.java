@@ -83,6 +83,28 @@ public class TakashaAnvilHandler {
             return false;
         }
 
+        // Dukungan penuh untuk seluruh 40 tipe item MMOItems
+        Optional<net.takasha.rpg.mmo.MMOItemData> mmoOpt = net.takasha.rpg.mmo.MMOItemData.readFromStack(gear);
+        if (mmoOpt.isPresent()) {
+            String mmoType = mmoOpt.get().getType().toUpperCase(Locale.ROOT);
+            if (applies.equals("ANY") || applies.contains("ALL") || applies.contains("SEMUA") || applies.contains("GLOBAL")) return true;
+            if ((applies.contains("WEAPON") || applies.contains("SENJATA")) && net.takasha.rpg.mmo.MMOStatRegistry.isWeapon(mmoType)) return true;
+            if ((applies.contains("ARMOR") || applies.contains("ZIRAH")) && net.takasha.rpg.mmo.MMOStatRegistry.isArmor(mmoType)) return true;
+            if ((applies.contains("TOOL") || applies.contains("ALAT") || applies.contains("PERKAKAS")) && net.takasha.rpg.mmo.MMOStatRegistry.isTool(mmoType)) return true;
+
+            if ((applies.contains("SWORD") || applies.contains("PEDANG")) && (mmoType.equals("SWORD") || mmoType.equals("GREATSWORD") || mmoType.equals("KATANA") || mmoType.equals("LONG_SWORD") || mmoType.equals("THRUSTING_SWORD") || mmoType.equals("STAFF") || mmoType.equals("DAGGER") || mmoType.equals("SPEAR") || mmoType.equals("HAMMER") || mmoType.equals("GAUNTLET") || mmoType.equals("WHIP"))) return true;
+            if ((applies.contains("AXE") || applies.contains("KAPAK")) && (mmoType.equals("AXE") || mmoType.equals("GREATAXE"))) return true;
+            if ((applies.contains("BOW") || applies.contains("BUSUR")) && (mmoType.equals("BOW") || mmoType.equals("GREATBOW") || mmoType.equals("CROSSBOW"))) return true;
+            if ((applies.contains("CROSSBOW") || applies.contains("SILANG")) && mmoType.equals("CROSSBOW")) return true;
+            if ((applies.contains("PICKAXE") || applies.contains("BELIUNG")) && (mmoType.equals("PICKAXE") || mmoType.equals("TOOL"))) return true;
+            if ((applies.contains("SHIELD") || applies.contains("PERISAI")) && mmoType.equals("SHIELD")) return true;
+            if ((applies.contains("HELMET") || applies.contains("HELM")) && mmoType.equals("HELMET")) return true;
+            if ((applies.contains("CHESTPLATE") || applies.contains("ZIRAH DADA") || applies.contains("DADA")) && mmoType.equals("CHESTPLATE")) return true;
+            if ((applies.contains("LEGGINGS") || applies.contains("CELANA")) && mmoType.equals("LEGGINGS")) return true;
+            if ((applies.contains("BOOTS") || applies.contains("SEPATU")) && mmoType.equals("BOOTS")) return true;
+            if ((applies.contains("ACCESSORY") || applies.contains("AKSESORIS")) && net.takasha.rpg.mmo.MMOStatRegistry.isEquipment(mmoType)) return true;
+        }
+
         if (applies.equals("ANY") || applies.contains("ALL") || applies.contains("SEMUA") || applies.contains("GLOBAL")) {
             return gear.isDamageableItem();
         }
@@ -162,13 +184,13 @@ public class TakashaAnvilHandler {
 
         int bookLevel = TakashaCustomBookItem.getEnchantLevel(bookStack);
         int currentLevel = TakashaEnchantManager.getEnchantLevel(targetGear, enchantId);
-        int targetLevel = bookLevel;
+        int targetLevel = Math.min(def.maxLevel, bookLevel);
 
         if (currentLevel > 0) {
             if (bookLevel == currentLevel) {
                 targetLevel = Math.min(def.maxLevel, currentLevel + 1);
             } else {
-                targetLevel = Math.max(currentLevel, bookLevel);
+                targetLevel = Math.min(def.maxLevel, Math.max(currentLevel, bookLevel));
             }
         }
 
@@ -222,6 +244,12 @@ public class TakashaAnvilHandler {
      */
     public static void refreshGearLore(ItemStack stack) {
         if (stack.isEmpty()) return;
+
+        // Jika item adalah MMOItem, sinkronkan ke MMOItemManager agar atribut & stat tidak terhapus
+        if (net.takasha.rpg.mmo.MMOItemData.readFromStack(stack).isPresent()) {
+            net.takasha.rpg.mmo.MMOItemManager.updateItem(stack);
+            return;
+        }
 
         Map<String, Integer> enchants = TakashaEnchantManager.getCustomEnchants(stack);
         int maxSlots = TakashaEnchantManager.getMaxSlots(stack);

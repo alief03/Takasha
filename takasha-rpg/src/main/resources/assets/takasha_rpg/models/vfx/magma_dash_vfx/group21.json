@@ -1,0 +1,59 @@
+{
+  "textures": {
+    "0": "takasha_rpg:vfx/magma_dash_vfx/0",
+    "particle": "#0"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        8,
+        0
+      ],
+      "to": [
+        16,
+        8,
+        16
+      ],
+      "faces": {
+        "up": {
+          "texture": "#0",
+          "uv": [
+            4,
+            4,
+            0,
+            0
+          ]
+        },
+        "down": {
+          "texture": "#0",
+          "uv": [
+            4,
+            0,
+            0,
+            4
+          ]
+        }
+      }
+    }
+  ],
+  "display": {
+    "fixed": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    }
+  }
+}

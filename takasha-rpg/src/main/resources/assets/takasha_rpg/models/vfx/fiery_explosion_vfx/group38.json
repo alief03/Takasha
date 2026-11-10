@@ -1,0 +1,59 @@
+{
+  "textures": {
+    "0": "takasha_rpg:vfx/fiery_explosion_vfx/0",
+    "particle": "#0"
+  },
+  "elements": [
+    {
+      "from": [
+        6.5,
+        -1,
+        8
+      ],
+      "to": [
+        9.5,
+        17,
+        8
+      ],
+      "faces": {
+        "north": {
+          "texture": "#0",
+          "uv": [
+            7,
+            10,
+            8.25,
+            14.5
+          ]
+        },
+        "south": {
+          "texture": "#0",
+          "uv": [
+            8.25,
+            10,
+            7,
+            14.5
+          ]
+        }
+      }
+    }
+  ],
+  "display": {
+    "fixed": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    }
+  }
+}

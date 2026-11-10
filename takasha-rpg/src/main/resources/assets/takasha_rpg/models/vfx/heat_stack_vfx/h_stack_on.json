@@ -1,0 +1,59 @@
+{
+  "textures": {
+    "0": "takasha_rpg:vfx/heat_stack_vfx/0",
+    "particle": "#0"
+  },
+  "elements": [
+    {
+      "from": [
+        2,
+        0.5,
+        8
+      ],
+      "to": [
+        14,
+        15.5,
+        8
+      ],
+      "faces": {
+        "north": {
+          "texture": "#0",
+          "uv": [
+            8.5,
+            6.5,
+            16,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#0",
+          "uv": [
+            16,
+            6.5,
+            8.5,
+            16
+          ]
+        }
+      }
+    }
+  ],
+  "display": {
+    "fixed": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    }
+  }
+}

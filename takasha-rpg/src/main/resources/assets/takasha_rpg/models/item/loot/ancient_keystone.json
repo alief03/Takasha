@@ -1,4 +1,4 @@
-﻿{
+{
   "parent": "minecraft:item/generated",
   "textures": {
     "layer0": "takasha_rpg:item/loot/ancient_keystone"

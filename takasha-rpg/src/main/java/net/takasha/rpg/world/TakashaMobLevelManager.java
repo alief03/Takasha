@@ -1,7 +1,10 @@
 package net.takasha.rpg.world;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -15,6 +18,8 @@ import net.takasha.rpg.data.TakashaRpgManager;
 import net.takasha.rpg.dungeon.TakashaArenaManager;
 import net.takasha.rpg.optimization.TakashaPerformanceConfig;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -48,6 +53,44 @@ public class TakashaMobLevelManager {
             this.attackDamage = attackDamage;
             this.trueDamagePercent = trueDamagePercent;
             this.hasAntiMeltCap = hasAntiMeltCap;
+        }
+    }
+
+    private static final Path CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve("takasha_mob_nametag.json");
+    private static boolean mobNametagEnabled = true;
+
+    static {
+        loadConfig();
+    }
+
+    public static boolean isMobNametagEnabled() {
+        return mobNametagEnabled;
+    }
+
+    public static void setMobNametagEnabled(boolean enabled) {
+        mobNametagEnabled = enabled;
+        saveConfig();
+    }
+
+    private static void loadConfig() {
+        try {
+            if (Files.exists(CONFIG_PATH)) {
+                String str = Files.readString(CONFIG_PATH);
+                JsonObject json = JsonParser.parseString(str).getAsJsonObject();
+                if (json.has("enabled")) {
+                    mobNametagEnabled = json.get("enabled").getAsBoolean();
+                }
+            }
+        } catch (Exception ignored) {
+        }
+    }
+
+    private static void saveConfig() {
+        try {
+            JsonObject json = new JsonObject();
+            json.addProperty("enabled", mobNametagEnabled);
+            Files.writeString(CONFIG_PATH, json.toString());
+        } catch (Exception ignored) {
         }
     }
 
@@ -135,7 +178,9 @@ public class TakashaMobLevelManager {
         }
 
         if (MOB_DATA.containsKey(entity.getUUID())) {
-            return MOB_DATA.get(entity.getUUID());
+            MobLevelData existing = MOB_DATA.get(entity.getUUID());
+            updateMobNametag(entity, existing);
+            return existing;
         }
 
         ServerLevel level = (ServerLevel) entity.level();
@@ -339,6 +384,7 @@ public class TakashaMobLevelManager {
 
     public static void updateMobNametag(LivingEntity entity, MobLevelData data) {
         if (entity == null || data == null) return;
+        if (!mobNametagEnabled) return;
         float currentHp = Math.max(0.0f, entity.getHealth());
         float maxHp = data.maxHp;
         float ratio = Math.max(0.0f, Math.min(1.0f, currentHp / maxHp));

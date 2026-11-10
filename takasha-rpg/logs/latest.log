@@ -1,0 +1,27 @@
+[20:40:16] [main/INFO]: TakashaEnchantRegistry successfully loaded 336 custom enchantments across 9 tiers!
+[20:40:16] [main/INFO]: [STDOUT]: 
+--- [1/5] Verifikasi Tooltip Enchantment Lintas 8 Tipe Item ---
+[20:40:16] [main/INFO]: Registered MMOItem template: SWORD:TEST_SWORD
+[20:40:16] [main/INFO]: Registered MMOItem template: BOW:TEST_BOW
+[20:40:16] [main/INFO]: Registered MMOItem template: AXE:TEST_AXE
+[20:40:16] [main/INFO]: Registered MMOItem template: CHESTPLATE:TEST_CHEST
+[20:40:16] [main/INFO]: Registered MMOItem template: HELMET:TEST_HELMET
+[20:40:16] [main/INFO]: Registered MMOItem template: BOOTS:TEST_BOOTS
+[20:40:16] [main/INFO]: Registered MMOItem template: PICKAXE:TEST_PICK
+[20:40:16] [main/INFO]: Registered MMOItem template: SHIELD:TEST_SHIELD
+[20:40:16] [main/INFO]: [STDOUT]: 
+--- [2/5] Verifikasi Kompatibilitas Anvil MMOItem Base Material Kustom ---
+[20:40:16] [main/INFO]: Registered MMOItem template: STAFF:ARCANE_STAFF
+[20:40:16] [main/INFO]: Registered MMOItem template: CATALYST:VOID_CATALYST
+[20:40:16] [main/INFO]: [STDOUT]: 
+--- [3/5] Verifikasi Pembatasan Ketat Level Maksimal (Strict Clamping) ---
+[20:40:16] [main/INFO]: Registered MMOItem template: SWORD:OVERCAP_SWORD
+[20:40:16] [main/INFO]: [STDOUT]: 
+--- [4/5] Verifikasi 0 Fallthrough dari Seluruh 97 Stat ---
+[20:40:16] [main/INFO]: [STDOUT]: 
+--- [5/5] Verifikasi Serialisasi & Deserialisasi Paritas 25 Stat Baru ---
+[20:40:16] [main/INFO]: Registered MMOItem template: SWORD:PARITY_LOADED_GEAR
+[20:40:16] [main/INFO]: [STDOUT]: 
+==================================================================
+[20:40:16] [main/INFO]: [STDOUT]:    STATUS: 100% SUKSES SEMPURNA (ALL MULTI-TYPE TESTS PASSED)     
+[20:40:16] [main/INFO]: [STDOUT]: ==================================================================

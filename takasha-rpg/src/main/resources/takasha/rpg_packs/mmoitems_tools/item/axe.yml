@@ -1,0 +1,71 @@
+LUMBERJACK_AXE:
+  base:
+    material: DIAMOND_AXE
+    name: "&2&lLumberjack Timber Axe"
+    displayed-type: "&2&lRare Logging Axe"
+    tier: RARE
+    attack-damage: 9.0
+    attack-speed: 1.0
+    required-woodcutting: 15
+    max-durability: 1800
+    will-break: true
+    enchants:
+      unbreaking: 3
+      efficiency: 4
+    advancedenchantments:
+      telepathy: 1
+    lore:
+      - "&7Kapak para penebang hutan legendaris."
+
+EXECUTIONER_AXE:
+  base:
+    material: NETHERITE_AXE
+    name: "&4&lBloodbound Executioner Axe"
+    displayed-type: "&4&lEpic Battleaxe"
+    tier: EPIC
+    attack-damage: 13.0
+    attack-speed: 0.9
+    required-fighting: 20
+    max-durability: 2500
+    will-break: true
+    physical-damage: 4.0
+    critical-strike-chance: 15.0
+    critical-strike-power: 35.0
+    enchants:
+      sharpness: 5
+      unbreaking: 3
+    lore:
+      - "&cMemberikan tebasan fatal dengan peluang kritikal tinggi."
+
+UNDEAD_SLAYER:
+  base:
+    material: DIAMOND_AXE
+    name: "&6&lPaladin Undead Cleaver"
+    displayed-type: "&6&lRare Holy Axe"
+    tier: RARE
+    attack-damage: 10.0
+    attack-speed: 1.0
+    required-fighting: 14
+    max-durability: 1600
+    will-break: true
+    enchants:
+      smite: 5
+      unbreaking: 3
+    lore:
+      - "&7Diberkati cahaya suci untuk menghancurkan mayat hidup."
+
+BUTCHER_AXE:
+  base:
+    material: IRON_AXE
+    name: "&f&lIron Butcher Cleaver"
+    displayed-type: "&f&lCommon Farming Cleaver"
+    tier: COMMON
+    attack-damage: 7.0
+    attack-speed: 0.9
+    required-farming: 5
+    max-durability: 600
+    will-break: true
+    enchants:
+      looting: 2
+    lore:
+      - "&7Kapak potong daging standar peternak."

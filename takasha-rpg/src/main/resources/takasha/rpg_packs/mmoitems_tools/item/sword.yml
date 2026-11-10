@@ -1,0 +1,61 @@
+SILVER_SWORD:
+  base:
+    material: IRON_SWORD
+    name: "&f&lSilver Witcher Blade"
+    displayed-type: "&f&lUncommon Silver Sword"
+    tier: UNCOMMON
+    attack-damage: 6.5
+    attack-speed: 1.6
+    required-fighting: 8
+    max-durability: 750
+    will-break: true
+    physical-damage: 2.0
+    enchants:
+      sharpness: 3
+      unbreaking: 2
+    lore:
+      - "&7Pedang perak khusus untuk melawan makhluk kutukan."
+
+GRAND_CLAYMORE:
+  base:
+    material: DIAMOND_SWORD
+    name: "&b&lRoyal Knight Grand Claymore"
+    displayed-type: "&b&lRare Two-Handed Sword"
+    tier: RARE
+    attack-damage: 9.5
+    attack-speed: 1.4
+    required-fighting: 16
+    max-durability: 1800
+    will-break: true
+    physical-damage: 3.5
+    defense: 5.0
+    enchants:
+      sharpness: 4
+      sweeping_edge: 3
+      unbreaking: 3
+    lore:
+      - "&7Pedang dua tangan ksatria kerajaan berdaya tebas luas."
+
+DUNGEON_REAVER:
+  base:
+    material: NETHERITE_SWORD
+    name: "&c&lHellfire Dungeon Reaver"
+    displayed-type: "&c&lMythical Infernal Blade"
+    tier: MYTHICAL
+    attack-damage: 14.0
+    attack-speed: 1.6
+    fire-damage: 6.0
+    critical-strike-chance: 20.0
+    critical-strike-power: 50.0
+    required-fighting: 25
+    required-level: 30
+    max-durability: 4500
+    will-break: false
+    additional-wisdom: 12
+    enchants:
+      sharpness: 5
+      fire_aspect: 2
+      unbreaking: 3
+      looting: 3
+    lore:
+      - "&cPedang pusaka neraka yang membakar setiap musuh."

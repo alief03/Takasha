@@ -5,11 +5,11 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -18,28 +18,30 @@ import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CocoaBlock;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.NetherWartBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.takasha.rpg.TakashaRpgMod;
+import net.takasha.rpg.data.TakashaRpgData;
+import net.takasha.rpg.data.TakashaRpgManager;
+import net.takasha.rpg.mmo.MMOItemData;
+import net.takasha.rpg.mmo.MMOStatType;
+import net.takasha.rpg.skills.AuraSkillType;
 
 import java.util.*;
 
 /**
  * TakashaEnchantUtilityEngine
- * Engine eksekusi terpusat untuk 45+ Custom Enchantment non-tempur (Utilitas, Farming, Mining, Mobilitas, Pasif).
+ * Engine eksekusi terpusat untuk Custom Enchantment non-tempur dan perkakas MMOItems (Bouncing Crack, Autosmelt, Durability).
  */
 public class TakashaEnchantUtilityEngine {
 
     private static boolean isExecutingSubBlock = false;
 
     public static void initialize() {
-        // 1. Block Break Event (BEFORE): Telepathy, Smelting, Veinminer, Trench
+        // 1. Block Break Event (BEFORE): Telepathy, Smelting, Veinminer, Trench, MMOItems Bouncing Crack & Autosmelt
         PlayerBlockBreakEvents.BEFORE.register((level, player, pos, state, blockEntity) -> {
             if (isExecutingSubBlock || level.isClientSide()) return true;
             if (!(player instanceof ServerPlayer sp) || !(level instanceof ServerLevel sl)) return true;
@@ -47,11 +49,68 @@ public class TakashaEnchantUtilityEngine {
             ItemStack tool = sp.getMainHandItem();
             if (tool.isEmpty()) return true;
 
-            Map<String, Integer> enchants = TakashaEnchantManager.getCustomEnchants(tool);
-            if (enchants.isEmpty()) return true;
+            // 0. MMOItems Tool Check & AuraSkills Requirements
+            Optional<MMOItemData> mmoOpt = MMOItemData.readFromStack(tool);
+            boolean mmoAutosmelt = false;
+            boolean mmoBouncingCrack = false;
+            if (mmoOpt.isPresent()) {
+                MMOItemData mmo = mmoOpt.get();
+                TakashaRpgData rpgData = TakashaRpgManager.getOrCreateData(sp);
 
+                // AuraSkills level requirements
+                double reqMining = mmo.getStat(MMOStatType.REQUIRED_MINING);
+                if (reqMining > 0 && rpgData.getSkillLevel(AuraSkillType.MINING) < reqMining) {
+                    sp.sendSystemMessage(Component.literal("§c⛔ Butuh Mining Level §e" + (int) reqMining + " §cuntuk menggunakan perkakas ini!"));
+                    sl.playSound(null, pos, SoundEvents.VILLAGER_NO, SoundSource.PLAYERS, 0.8f, 1.0f);
+                    return false;
+                }
+                double reqFarming = mmo.getStat(MMOStatType.REQUIRED_FARMING);
+                if (reqFarming > 0 && rpgData.getSkillLevel(AuraSkillType.FARMING) < reqFarming) {
+                    sp.sendSystemMessage(Component.literal("§c⛔ Butuh Farming Level §e" + (int) reqFarming + " §cuntuk menggunakan perkakas ini!"));
+                    sl.playSound(null, pos, SoundEvents.VILLAGER_NO, SoundSource.PLAYERS, 0.8f, 1.0f);
+                    return false;
+                }
+                double reqForaging = mmo.getStat(MMOStatType.REQUIRED_WOODCUTTING);
+                if (reqForaging > 0 && rpgData.getSkillLevel(AuraSkillType.FORAGING) < reqForaging) {
+                    sp.sendSystemMessage(Component.literal("§c⛔ Butuh Woodcutting Level §e" + (int) reqForaging + " §cuntuk menggunakan perkakas ini!"));
+                    sl.playSound(null, pos, SoundEvents.VILLAGER_NO, SoundSource.PLAYERS, 0.8f, 1.0f);
+                    return false;
+                }
+                double reqTotal = mmo.getStat(MMOStatType.REQUIRED_LEVEL);
+                if (reqTotal > 0 && rpgData.getTotalSkillLevel() < reqTotal) {
+                    sp.sendSystemMessage(Component.literal("§c⛔ Butuh Total Skill Level §e" + (int) reqTotal + " §cuntuk menggunakan perkakas ini!"));
+                    sl.playSound(null, pos, SoundEvents.VILLAGER_NO, SoundSource.PLAYERS, 0.8f, 1.0f);
+                    return false;
+                }
+
+                // Check tool passives
+                mmoAutosmelt = mmo.isAutosmelt() || mmo.getStat(MMOStatType.AUTOSMELT) > 0;
+                mmoBouncingCrack = mmo.isBouncingCrack() || mmo.getStat(MMOStatType.BOUNCING_CRACK) > 0;
+
+                // Handle custom durability
+                if (mmo.getMaxDurability() > 0) {
+                    int curDur = mmo.getCurrentDurability();
+                    if (curDur <= 1) {
+                        if (mmo.isWillBreak()) {
+                            tool.shrink(1);
+                            sl.playSound(null, sp.getX(), sp.getY(), sp.getZ(), SoundEvents.ITEM_BREAK, SoundSource.PLAYERS, 1.0f, 1.0f);
+                            sp.sendSystemMessage(Component.literal("§cPerkakas MMO kamu telah hancur!"));
+                        } else {
+                            mmo.setCurrentDurability(0);
+                            mmo.writeToStack(tool);
+                            sp.sendSystemMessage(Component.literal("§cPerkakas MMO kamu kehabisan durabilitas!"));
+                            return false;
+                        }
+                    } else {
+                        mmo.setCurrentDurability(curDur - 1);
+                        mmo.writeToStack(tool);
+                    }
+                }
+            }
+
+            Map<String, Integer> enchants = TakashaEnchantManager.getCustomEnchants(tool);
             boolean hasTelepathy = hasEnchant(enchants, "telepathy");
-            boolean hasSmelting = hasEnchant(enchants, "smelt") || hasEnchant(enchants, "autosmelt");
+            boolean hasSmelting = mmoAutosmelt || hasEnchant(enchants, "smelt") || hasEnchant(enchants, "autosmelt");
             boolean hasVeinminer = hasEnchant(enchants, "veinminer");
             boolean hasTrench = hasEnchant(enchants, "trench") || hasEnchant(enchants, "blast_mining");
 
@@ -72,7 +131,18 @@ public class TakashaEnchantUtilityEngine {
                 ExperienceOrb.award(sl, sp.position(), 2 + lvl * 3);
             }
 
-            // A. Veinminer (Menambang seluruh urat bijih yang tersambung)
+            // A. MMOItems Bouncing Crack (Area pecahan 3x3x3 blok sejenis)
+            if (mmoBouncingCrack) {
+                isExecutingSubBlock = true;
+                try {
+                    mineBouncingCrack(sl, sp, pos, state, tool, hasTelepathy, hasSmelting);
+                } finally {
+                    isExecutingSubBlock = false;
+                }
+                return false;
+            }
+
+            // B. Veinminer (Menambang seluruh urat bijih yang tersambung)
             if (hasVeinminer && isOre(state)) {
                 isExecutingSubBlock = true;
                 try {
@@ -83,7 +153,7 @@ public class TakashaEnchantUtilityEngine {
                 return false; // Blok utama dan uratnya sudah diproses
             }
 
-            // B. Trench / Blast Mining (Area tambang 3x3x3)
+            // C. Trench / Blast Mining (Area tambang 3x3x3)
             if (hasTrench) {
                 int lvl = Math.max(getEnchantLevel(enchants, "trench"), getEnchantLevel(enchants, "blast_mining"));
                 isExecutingSubBlock = true;
@@ -95,7 +165,7 @@ public class TakashaEnchantUtilityEngine {
                 return false;
             }
 
-            // C. Telepathy & Smelting untuk blok tunggal
+            // D. Telepathy & Smelting untuk blok tunggal
             if (hasTelepathy || hasSmelting) {
                 List<ItemStack> drops = Block.getDrops(state, sl, pos, blockEntity, sp, tool);
                 sl.destroyBlock(pos, false, sp);
@@ -113,6 +183,9 @@ public class TakashaEnchantUtilityEngine {
 
                 if (hasTelepathy) {
                     sl.sendParticles(ParticleTypes.PORTAL, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 4, 0.2, 0.2, 0.2, 0.05);
+                }
+                if (hasSmelting) {
+                    sl.sendParticles(ParticleTypes.LAVA, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 3, 0.2, 0.2, 0.2, 0.05);
                 }
                 return false; // Block drops dikontrol sendiri
             }
@@ -205,7 +278,6 @@ public class TakashaEnchantUtilityEngine {
                 if (!boots.isEmpty()) {
                     Map<String, Integer> bEnchants = TakashaEnchantManager.getCustomEnchants(boots);
                     if (hasEnchant(bEnchants, "jellylegs") || hasEnchant(bEnchants, "feather_step")) {
-                        // Batalkan 100% kerusakan jatuh!
                         sp.level().playSound(null, sp.getX(), sp.getY(), sp.getZ(), SoundEvents.SLIME_BLOCK_FALL, SoundSource.PLAYERS, 0.8f, 1.2f);
                         return false;
                     }
@@ -277,6 +349,41 @@ public class TakashaEnchantUtilityEngine {
                 }
             }
         }
+    }
+
+    /**
+     * Menambang blok sejenis di sekitar dalam radius 3x3x3 (MMOItems Bouncing Crack).
+     */
+    private static void mineBouncingCrack(ServerLevel level, ServerPlayer player, BlockPos center, BlockState targetState, ItemStack tool, boolean telepathy, boolean smelting) {
+        Block targetBlock = targetState.getBlock();
+        int cracked = 0;
+        for (int dx = -1; dx <= 1 && cracked < 8; dx++) {
+            for (int dy = -1; dy <= 1 && cracked < 8; dy++) {
+                for (int dz = -1; dz <= 1 && cracked < 8; dz++) {
+                    if (dx == 0 && dy == 0 && dz == 0) continue;
+                    BlockPos p = center.offset(dx, dy, dz);
+                    BlockState s = level.getBlockState(p);
+                    if (s.is(targetBlock)) {
+                        List<ItemStack> drops = Block.getDrops(s, level, p, level.getBlockEntity(p), player, tool);
+                        level.destroyBlock(p, false, player);
+                        level.sendParticles(ParticleTypes.CRIT, p.getX() + 0.5, p.getY() + 0.5, p.getZ() + 0.5, 4, 0.2, 0.2, 0.2, 0.05);
+
+                        for (ItemStack drop : drops) {
+                            ItemStack finalDrop = smelting ? smeltItemStack(drop) : drop;
+                            if (telepathy) {
+                                if (!player.getInventory().add(finalDrop)) {
+                                    player.drop(finalDrop, false);
+                                }
+                            } else {
+                                level.addFreshEntity(new ItemEntity(level, p.getX() + 0.5, p.getY() + 0.5, p.getZ() + 0.5, finalDrop));
+                            }
+                        }
+                        cracked++;
+                    }
+                }
+            }
+        }
+        level.playSound(null, center, SoundEvents.ZOMBIE_BREAK_WOODEN_DOOR, SoundSource.BLOCKS, 0.7f, 1.6f);
     }
 
     /**

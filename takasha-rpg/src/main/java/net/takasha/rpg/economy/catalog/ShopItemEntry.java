@@ -181,9 +181,9 @@ public class ShopItemEntry {
 
         // Pasang Custom Name jika ada (override dari config, atau jika spawner)
         if (displayName != null && !displayName.isEmpty()) {
-            stack.set(DataComponents.CUSTOM_NAME, Component.literal(formatColor(displayName)));
+            stack.set(DataComponents.CUSTOM_NAME, net.takasha.rpg.mmo.TakashaColorParser.parseItemName(displayName));
         } else if (spawnerType != null && !spawnerType.isEmpty()) {
-            stack.set(DataComponents.CUSTOM_NAME, Component.literal("§e" + spawnerType.replace("_", " ") + " Spawner"));
+            stack.set(DataComponents.CUSTOM_NAME, net.takasha.rpg.mmo.TakashaColorParser.parseItemName("&e" + spawnerType.replace("_", " ") + " Spawner"));
         }
 
         if (withPriceLore) {
@@ -192,9 +192,9 @@ public class ShopItemEntry {
             // 1. Lore asli dari berkas konfigurasi
             if (!lore.isEmpty()) {
                 for (String l : lore) {
-                    finalLore.add(Component.literal(formatColor(l)));
+                    finalLore.add(net.takasha.rpg.mmo.TakashaColorParser.parseLoreLine(l));
                 }
-                finalLore.add(Component.literal(""));
+                finalLore.add(Component.empty());
             }
 
             // 2. Info Detail Enchantment jika ada

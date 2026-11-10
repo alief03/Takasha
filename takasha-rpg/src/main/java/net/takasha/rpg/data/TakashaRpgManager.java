@@ -125,6 +125,10 @@ public class TakashaRpgManager {
 
         if (levelUp) {
             int newLvl = data.getSkillLevel(skill);
+            double currentXp = data.getSkillXp(skill);
+            double reqXp = skill.getXpForNextLevel(newLvl);
+            net.takasha.rpg.hud.TakashaXpBossbarManager.showXpProgress(player, skill, xp, newLvl, currentXp, reqXp, true);
+
             player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
                 SoundEvents.PLAYER_LEVELUP, SoundSource.PLAYERS, 1.0f, 1.2f);
 
@@ -136,8 +140,7 @@ public class TakashaRpgManager {
                 Component.literal("§e" + skill.getDisplayName() + " §7Level §b" + oldLvl + " §f➜ §a§l" + newLvl)
             ));
 
-            player.sendOverlayMessage(Component.literal("§6▲ §e" + skill.getDisplayName() + " §fLevel §a§l" + newLvl)
-                .withStyle(ChatFormatting.GOLD, ChatFormatting.BOLD));
+            // Level up divisualisasikan melalui Title, Chat breakdown, suara, dan Bossbar atas tanpa menimpa Actionbar HUD.
 
             // Aplikasikan atribut fisik baru ke pemain
             net.takasha.rpg.skills.AuraStatModifierEngine.applyStats(player);
@@ -195,16 +198,13 @@ public class TakashaRpgManager {
             }
             player.sendSystemMessage(Component.literal("§8§m----------------------------------------"));
         } else {
-            if (!net.takasha.rpg.dungeon.TakashaArenaManager.isPlayerInArena(player) &&
-                !net.takasha.rpg.dungeon.DungeonArenaEngine.getInstance().isPlayerInDungeon(player)) {
-                int currentLvl = data.getSkillLevel(skill);
-                double currentXp = data.getSkillXp(skill);
-                double reqXp = skill.getXpForNextLevel(currentLvl);
-                player.sendOverlayMessage(Component.literal(
-                    String.format("§6[AuraSkills] §a+%.1f §2%s XP §7(Lvl %d • %.0f/%.0f)",
-                        xp, skill.getDisplayName(), currentLvl, currentXp, reqXp)
-                ));
-            }
+            int currentLvl = data.getSkillLevel(skill);
+            double currentXp = data.getSkillXp(skill);
+            double reqXp = skill.getXpForNextLevel(currentLvl);
+
+            net.takasha.rpg.hud.TakashaXpBossbarManager.showXpProgress(player, skill, xp, currentLvl, currentXp, reqXp, false);
+            // Non-level-up XP message: Progres divisualisasikan secara terpusat melalui TakashaXpBossbarManager di layar atas.
+            // Overlay actionbar dinonaktifkan agar tidak menumpuk dengan HUD HP & Mana (TakashaActionbarHud).
         }
 
         syncToClient(player);

@@ -1,0 +1,15 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "takasha_rpg:dimensional_traveller"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "takasha_rpg:dimensional_traveller"
+      }
+    ]
+  }
+}
+

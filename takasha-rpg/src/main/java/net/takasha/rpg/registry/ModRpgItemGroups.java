@@ -123,6 +123,14 @@ public class ModRpgItemGroups {
                         output.accept(ModRpgItems.PHANTOM_SCYTHE);
                         output.accept(ModRpgItems.SUPREME_WEAPON);
 
+                        // MMOItems Dynamic Templates (Semua Tool, Senjata & Perkakas RPG Terdaftar)
+                        for (net.takasha.rpg.mmo.MMOItemTemplate template : net.takasha.rpg.mmo.MMOItemManager.getAllTemplates()) {
+                            ItemStack mmoItem = net.takasha.rpg.mmo.MMOItemManager.generateItemStack(template.getItemType(), template.getId(), 1);
+                            if (!mmoItem.isEmpty()) {
+                                output.accept(mmoItem);
+                            }
+                        }
+
                         // Advanced Dungeon Arena (ADA) - Materials & Rift Keystones
                         output.accept(ModRpgItems.DUNGEON_CORE_FRAGMENT);
                         output.accept(ModRpgItems.RUNIC_ESSENCE);

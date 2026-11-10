@@ -85,6 +85,12 @@ public class DamageDummyEntity extends ArmorStand {
     }
 
     @Override
+    public void die(DamageSource damageSource) {
+        // Combat dummy is immortal and never dies from combat damage
+        this.setHealth(this.getMaxHealth());
+    }
+
+    @Override
     public boolean canBeAffected(MobEffectInstance effect) {
         return true; // Mendukung SEMUA efek potion vanilla
     }
@@ -237,6 +243,7 @@ public class DamageDummyEntity extends ArmorStand {
         textDisplay.setBillboardConstraints(Display.BillboardConstraints.CENTER);
         textDisplay.setNoGravity(true);
         textDisplay.addTag("takasha_damage_indicator");
+        textDisplay.addTag("takasha_temp_vfx");
 
         level.addFreshEntity(textDisplay);
 

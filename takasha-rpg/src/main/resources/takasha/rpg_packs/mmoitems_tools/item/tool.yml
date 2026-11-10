@@ -1,0 +1,149 @@
+CRACK_PICKAXE:
+  base:
+    material: DIAMOND_PICKAXE
+    name: "&b&lBouncing Crack Pickaxe"
+    displayed-type: "&b&lRare Mining Tool"
+    tier: RARE
+    pickaxe-power: 35
+    mining-efficiency: 15
+    bouncing-crack: true
+    required-mining: 15
+    max-durability: 1800
+    will-break: true
+    enchants:
+      unbreaking: 3
+      efficiency: 4
+    advancedenchantments:
+      telepathy: 1
+    lore:
+      - "&7Batu di sekitar akan pecah bersamaan"
+      - "&7ketika kamu menambang urat bijih mineral."
+
+AUTOSMELT_PICKAXE:
+  base:
+    material: IRON_PICKAXE
+    name: "&6&lMagma Core Smelter"
+    displayed-type: "&6&lRare Smelting Tool"
+    tier: RARE
+    pickaxe-power: 30
+    mining-efficiency: 10
+    autosmelt: true
+    required-mining: 10
+    max-durability: 1200
+    will-break: true
+    enchants:
+      fortune: 2
+      unbreaking: 2
+    lore:
+      - "&7Memancarkan panas magma inti bumi yang"
+      - "&7langsung melebur bijih besi dan emas seketika."
+
+STEEL_PICKAXE:
+  base:
+    material: IRON_PICKAXE
+    name: "&f&lReinforced Steel Pickaxe"
+    displayed-type: "&f&lCommon Mining Tool"
+    tier: COMMON
+    pickaxe-power: 20
+    mining-efficiency: 5
+    required-mining: 5
+    max-durability: 850
+    will-break: true
+    enchants:
+      efficiency: 2
+    lore:
+      - "&7Perkakas standar para penambang pemula."
+
+STEEL_SHOVEL:
+  base:
+    material: IRON_SHOVEL
+    name: "&f&lReinforced Steel Shovel"
+    displayed-type: "&f&lCommon Excavation Tool"
+    tier: COMMON
+    mining-efficiency: 8
+    required-mining: 3
+    max-durability: 850
+    will-break: true
+    enchants:
+      unbreaking: 1
+    lore:
+      - "&7Sekop kokoh untuk menggali kerikil dan pasir."
+
+SILK_SHEARS:
+  base:
+    material: SHEARS
+    name: "&a&lSilk Touch Shears"
+    displayed-type: "&a&lUncommon Utility Tool"
+    tier: UNCOMMON
+    required-farming: 5
+    max-durability: 500
+    will-break: true
+    enchants:
+      silk_touch: 1
+      unbreaking: 2
+    lore:
+      - "&7Gunting halus pemotong daun dan sarang laba-laba."
+
+FAST_PICK:
+  base:
+    material: GOLDEN_PICKAXE
+    name: "&e&lWindstrider Drill Pickaxe"
+    displayed-type: "&e&lUncommon Speed Tool"
+    tier: UNCOMMON
+    pickaxe-power: 25
+    mining-efficiency: 30
+    required-mining: 12
+    max-durability: 750
+    will-break: true
+    enchants:
+      efficiency: 5
+    advancedenchantments:
+      hasten: 2
+    lore:
+      - "&7Berputar dengan kecepatan angin luar biasa."
+
+TRENCH_SHOVEL:
+  base:
+    material: DIAMOND_SHOVEL
+    name: "&3&lExcavator Trench Shovel"
+    displayed-type: "&3&lRare Excavation Tool"
+    tier: RARE
+    mining-efficiency: 20
+    required-mining: 18
+    max-durability: 2000
+    will-break: true
+    enchants:
+      efficiency: 4
+      unbreaking: 3
+    advancedenchantments:
+      trench: 1
+      telepathy: 1
+    lore:
+      - "&7Menggali area tanah 3x3x3 dalam sekali ayunan."
+
+ABYSSAL_MINER:
+  base:
+    material: NETHERITE_PICKAXE
+    name: "&5&lAbyssal Void Miner"
+    displayed-type: "&5&lMythical Master Tool"
+    tier: MYTHICAL
+    pickaxe-power: 50
+    mining-efficiency: 50
+    autosmelt: true
+    bouncing-crack: true
+    required-mining: 25
+    required-level: 30
+    max-durability: 5000
+    will-break: false
+    additional-wisdom: 10
+    additional-luck: 5
+    enchants:
+      efficiency: 5
+      fortune: 3
+      unbreaking: 3
+    advancedenchantments:
+      telepathy: 1
+      blast_mining: 1
+    lore:
+      - "&5Peninggalan penguasa kedalaman Abyssal."
+      - "&5Melebur dan memecah formasi batu dalam skala masif."

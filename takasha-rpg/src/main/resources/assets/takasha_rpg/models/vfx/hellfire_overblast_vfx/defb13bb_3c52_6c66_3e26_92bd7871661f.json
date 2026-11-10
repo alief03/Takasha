@@ -1,0 +1,77 @@
+{
+  "textures": {
+    "0": "takasha_rpg:vfx/hellfire_overblast_vfx/0",
+    "particle": "#0"
+  },
+  "elements": [
+    {
+      "from": [
+        1,
+        1,
+        -2.5
+      ],
+      "to": [
+        15,
+        15,
+        18.5
+      ],
+      "faces": {
+        "east": {
+          "texture": "#0",
+          "uv": [
+            5.625,
+            3,
+            3,
+            4.75
+          ]
+        },
+        "west": {
+          "texture": "#0",
+          "uv": [
+            3,
+            3,
+            5.625,
+            4.75
+          ]
+        },
+        "up": {
+          "texture": "#0",
+          "uv": [
+            4.75,
+            7.375,
+            3,
+            4.75
+          ]
+        },
+        "down": {
+          "texture": "#0",
+          "uv": [
+            4.75,
+            4.75,
+            3,
+            7.375
+          ]
+        }
+      }
+    }
+  ],
+  "display": {
+    "fixed": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    }
+  }
+}

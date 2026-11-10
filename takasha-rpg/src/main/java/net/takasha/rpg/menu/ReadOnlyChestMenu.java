@@ -1,6 +1,9 @@
 package net.takasha.rpg.menu;
 
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
+import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ChestMenu;
@@ -12,9 +15,12 @@ import java.util.function.Consumer;
 
 /**
  * ReadOnlyChestMenu
- * Container menu untuk antarmuka GUI RPG (Skills, Shop, DailyShop, Enchanter, Transaction)
+ * Container menu untuk antarmuka GUI RPG (Skills, Shop, DailyShop, Enchanter, Transaction, MMOItems)
  * yang mencegah pemain mengambil item display dari dalam menu, dengan dukungan deteksi
  * jenis klik (Left-click, Right-click, Shift-click).
+ *
+ * Dilengkapi kemampuan in-place screen content update (openOrUpdate) untuk mencegah
+ * pergeseran cursor mouse kembali ke tengah monitor saat navigasi halaman / toggle stat.
  */
 public class ReadOnlyChestMenu extends ChestMenu {
 
@@ -25,11 +31,17 @@ public class ReadOnlyChestMenu extends ChestMenu {
 
     private final Consumer<Integer> clickCallback;
     private SlotClickAction slotClickAction;
+    private final int rowCount;
 
     public ReadOnlyChestMenu(int containerId, Inventory playerInventory, Container container, int rows, SlotClickAction slotClickAction) {
         super(getMenuType(rows), containerId, playerInventory, container, rows);
         this.slotClickAction = slotClickAction;
         this.clickCallback = null;
+        this.rowCount = rows;
+    }
+
+    public int getRowCount() {
+        return rowCount;
     }
 
     public void setSlotClickAction(SlotClickAction slotClickAction) {
@@ -40,10 +52,28 @@ public class ReadOnlyChestMenu extends ChestMenu {
         super(getMenuType(rows), containerId, playerInventory, container, rows);
         this.clickCallback = clickCallback;
         this.slotClickAction = null;
+        this.rowCount = rows;
     }
 
     public ReadOnlyChestMenu(int containerId, Inventory playerInventory, Container container, int rows) {
         this(containerId, playerInventory, container, rows, (Consumer<Integer>) null);
+    }
+
+    public static void openOrUpdate(ServerPlayer player, Component title, Container newContent, int rows, SlotClickAction clickAction) {
+        if (player.containerMenu instanceof ReadOnlyChestMenu current && current.getRowCount() == rows) {
+            Container container = current.getContainer();
+            for (int i = 0; i < container.getContainerSize(); i++) {
+                ItemStack stack = i < newContent.getContainerSize() ? newContent.getItem(i) : ItemStack.EMPTY;
+                container.setItem(i, stack);
+            }
+            current.setSlotClickAction(clickAction);
+            current.broadcastChanges();
+        } else {
+            player.openMenu(new SimpleMenuProvider(
+                    (syncId, inv, p) -> new ReadOnlyChestMenu(syncId, inv, newContent, rows, clickAction),
+                    title
+            ));
+        }
     }
 
     private static MenuType<ChestMenu> getMenuType(int rows) {

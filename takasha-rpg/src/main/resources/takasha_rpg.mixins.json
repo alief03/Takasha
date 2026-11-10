@@ -5,6 +5,10 @@
   "compatibilityLevel": "JAVA_25",
   "mixins": [
     "AnvilMenuMixin",
+    "DisplayAccessor",
+    "EntityMixin",
+    "ServerGamePacketListenerImplMixin",
+    "TextDisplayAccessor",
     "VillagerMixin",
     "WanderingTraderMixin"
   ],

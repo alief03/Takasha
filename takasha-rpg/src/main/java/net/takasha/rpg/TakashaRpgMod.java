@@ -82,8 +82,17 @@ public class TakashaRpgMod implements ModInitializer {
         TakashaMobLevelManager.initialize();
         TakashaTitleManager.initialize();
         TakashaQuestManager.initialize();
-        net.takasha.rpg.economy.catalog.ShopCatalog.initialize();
         net.takasha.rpg.world.event.TakashaEventManager.initialize();
+
+        // 3b. Takasha MMO & MythicMobs Engine Port (Core hooks)
+        net.takasha.rpg.modelengine.TakashaModelEngine.initialize();
+        net.takasha.rpg.mythic.MythicSkillExecutor.initialize();
+        net.takasha.rpg.mmo.MMOInteractionHandler.initialize();
+        net.takasha.rpg.command.MMOCommand.initialize();
+        net.takasha.rpg.hud.TakashaXpBossbarManager.initialize();
+        net.takasha.rpg.menu.MMOChatEditionEngine.initialize();
+        net.takasha.rpg.mmo.MMOCombatEngine.initialize();
+        net.takasha.rpg.dungeon.reward.DungeonRewardConfigManager.getInstance().initialize();
 
         // Custom Enchantment Combat Engine Hook (ALLOW_DAMAGE)
         net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents.ALLOW_DAMAGE.register((entity, source, amount) -> {
@@ -113,6 +122,9 @@ public class TakashaRpgMod implements ModInitializer {
 
         // 4. Server Lifecycle & Player Data Management
         ServerLifecycleEvents.SERVER_STARTING.register(server -> {
+            // Deferred / Lazy Loading: Load heavy YAML packs, 3D Blockbench models, and shop catalog once world starts
+            net.takasha.rpg.economy.catalog.ShopCatalog.initialize();
+            net.takasha.rpg.pack.TakashaPackManager.getInstance().initialize();
             TakashaRpgManager.init(server);
             DungeonArenaEngine.getInstance().checkAndRecoverCrash(server);
         });
@@ -189,6 +201,7 @@ public class TakashaRpgMod implements ModInitializer {
         ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> {
             DungeonArenaEngine.getInstance().handlePlayerDisconnect(handler.getPlayer());
             TakashaTitleManager.setActiveTitle(handler.getPlayer().getUUID(), null);
+            net.takasha.rpg.mmo.MMOInteractionHandler.clearPlayerData(handler.getPlayer().getUUID());
             TakashaRpgManager.onPlayerDisconnect(handler.getPlayer().getUUID());
         });
 
@@ -214,6 +227,36 @@ public class TakashaRpgMod implements ModInitializer {
                 for (ServerPlayer player : server.getPlayerList().getPlayers()) {
                     if (player == null || player.isRemoved() || player.hasDisconnected() || player.connection == null) continue;
                     TakashaRpgData data = TakashaRpgManager.getOrCreateData(player);
+
+                    // 1. Scan player active gear for MAX_MANA & PERM_EFFECTS
+                    net.minecraft.world.entity.EquipmentSlot[] activeSlots = {
+                        net.minecraft.world.entity.EquipmentSlot.MAINHAND, net.minecraft.world.entity.EquipmentSlot.OFFHAND,
+                        net.minecraft.world.entity.EquipmentSlot.HEAD, net.minecraft.world.entity.EquipmentSlot.CHEST,
+                        net.minecraft.world.entity.EquipmentSlot.LEGS, net.minecraft.world.entity.EquipmentSlot.FEET
+                    };
+                    double gearBonusMana = 0.0;
+                    for (net.minecraft.world.entity.EquipmentSlot slot : activeSlots) {
+                        net.minecraft.world.item.ItemStack gear = player.getItemBySlot(slot);
+                        if (gear.isEmpty()) continue;
+                        java.util.Optional<net.takasha.rpg.mmo.MMOItemData> opt = net.takasha.rpg.mmo.MMOItemData.readFromStack(gear);
+                        if (opt.isPresent()) {
+                            net.takasha.rpg.mmo.MMOItemData mmoData = opt.get();
+                            gearBonusMana += mmoData.getStats().getOrDefault(net.takasha.rpg.mmo.MMOStatType.MAX_MANA, 0.0);
+
+                            java.util.List<String> permEffects = mmoData.getPermEffects();
+                            if (permEffects.isEmpty()) {
+                                net.takasha.rpg.mmo.MMOItemTemplate tmpl = net.takasha.rpg.mmo.MMOItemManager.getTemplate(mmoData.getType(), mmoData.getId());
+                                if (tmpl != null) {
+                                    permEffects = tmpl.getPermEffects();
+                                }
+                            }
+                            for (String pe : permEffects) {
+                                net.takasha.rpg.mmo.MMOInteractionHandler.applyPotionEffectString(player, pe);
+                            }
+                        }
+                    }
+                    data.setEquipmentBonusMana(gearBonusMana);
+
                     double manaRegenBonus = data.getTraitValue(net.takasha.rpg.skills.AuraTraitType.MANA_REGEN);
                     double regenAmount = 1.5 * (1.0 + manaRegenBonus);
                     data.restoreMana(regenAmount);
@@ -238,7 +281,8 @@ public class TakashaRpgMod implements ModInitializer {
             }
         });
 
-        // 6. Register Commands
+        // 6. Register Commands & MMO Chat Edition Engine
+        net.takasha.rpg.menu.MMOChatEditionEngine.initialize();
         TakashaRpgCommands.initialize();
 
         LOGGER.info("Takasha-RPG successfully initialized! AuraSkills, AdvancedEnchantments, Arena, ShopGUI & EssentialsX active.");

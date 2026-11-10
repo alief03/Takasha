@@ -1,0 +1,107 @@
+{
+  "textures": {
+    "0": "takasha_rpg:vfx/infernal_judgement_vfx/0",
+    "1": "takasha_rpg:vfx/infernal_judgement_vfx/1",
+    "2": "takasha_rpg:vfx/infernal_judgement_vfx/2",
+    "3": "takasha_rpg:vfx/infernal_judgement_vfx/3",
+    "particle": "#0"
+  },
+  "elements": [
+    {
+      "from": [
+        6.25,
+        6,
+        6.25
+      ],
+      "to": [
+        9.75,
+        8,
+        9.75
+      ],
+      "faces": {
+        "north": {
+          "texture": "#0",
+          "uv": [
+            4.25,
+            9.125,
+            4.75,
+            9.375
+          ]
+        },
+        "east": {
+          "texture": "#0",
+          "uv": [
+            9.125,
+            4.375,
+            9.625,
+            4.625
+          ]
+        },
+        "south": {
+          "texture": "#0",
+          "uv": [
+            9.125,
+            8.375,
+            9.625,
+            8.625
+          ]
+        },
+        "west": {
+          "texture": "#0",
+          "uv": [
+            0,
+            9.25,
+            0.5,
+            9.5
+          ]
+        },
+        "up": {
+          "texture": "#0",
+          "uv": [
+            8.75,
+            3.75,
+            8.25,
+            3.25
+          ]
+        },
+        "down": {
+          "texture": "#0",
+          "uv": [
+            4.75,
+            8.25,
+            4.25,
+            8.75
+          ]
+        }
+      },
+      "rotation": {
+        "origin": [
+          8,
+          7,
+          8
+        ],
+        "axis": "y",
+        "angle": -45
+      }
+    }
+  ],
+  "display": {
+    "fixed": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    }
+  }
+}

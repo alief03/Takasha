@@ -1,0 +1,117 @@
+{
+  "textures": {
+    "0": "takasha_rpg:vfx/volcanic_spear_5/0",
+    "1": "takasha_rpg:vfx/volcanic_spear_5/1",
+    "2": "takasha_rpg:vfx/volcanic_spear_5/2",
+    "3": "takasha_rpg:vfx/volcanic_spear_5/3",
+    "4": "takasha_rpg:vfx/volcanic_spear_5/4",
+    "particle": "#0"
+  },
+  "elements": [
+    {
+      "from": [
+        3.5,
+        8,
+        -13.75
+      ],
+      "to": [
+        12.5,
+        8,
+        29.75
+      ],
+      "faces": {
+        "up": {
+          "texture": "#4",
+          "uv": [
+            16,
+            5.875,
+            0,
+            10
+          ],
+          "rotation": 270
+        },
+        "down": {
+          "texture": "#4",
+          "uv": [
+            0,
+            5.875,
+            16,
+            10
+          ],
+          "rotation": 270
+        }
+      },
+      "rotation": {
+        "origin": [
+          8,
+          8,
+          8
+        ],
+        "axis": "z",
+        "angle": 22.5
+      }
+    },
+    {
+      "from": [
+        3.5,
+        8,
+        -13.75
+      ],
+      "to": [
+        12.5,
+        8,
+        29.75
+      ],
+      "faces": {
+        "up": {
+          "texture": "#4",
+          "uv": [
+            16,
+            10,
+            0,
+            5.875
+          ],
+          "rotation": 270
+        },
+        "down": {
+          "texture": "#4",
+          "uv": [
+            0,
+            10,
+            16,
+            5.875
+          ],
+          "rotation": 270
+        }
+      },
+      "rotation": {
+        "origin": [
+          8,
+          8,
+          8
+        ],
+        "axis": "z",
+        "angle": -22.5
+      }
+    }
+  ],
+  "display": {
+    "fixed": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "sources": [
+    {
+      "type": "minecraft:directory",
+      "source": "awakened_pyromancer_texture",
+      "prefix": "awakened_pyromancer_texture/"
+    },
+    {
+      "type": "minecraft:directory",
+      "source": "vfx",
+      "prefix": "vfx/"
+    },
+    {
+      "type": "minecraft:directory",
+      "source": "awakened_assassin_texture",
+      "prefix": "awakened_assassin_texture/"
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "textures": {
+    "0": "takasha_rpg:vfx/vfx_flamedebuff/0",
+    "1": "takasha_rpg:vfx/vfx_flamedebuff/1",
+    "particle": "#0"
+  },
+  "elements": [
+    {
+      "from": [
+        2.5,
+        8,
+        8
+      ],
+      "to": [
+        13.5,
+        26.5,
+        8
+      ],
+      "faces": {
+        "north": {
+          "texture": "#1",
+          "uv": [
+            4.375,
+            1.25,
+            11.75,
+            14.875
+          ]
+        },
+        "south": {
+          "texture": "#1",
+          "uv": [
+            11.75,
+            1.25,
+            4.375,
+            14.875
+          ]
+        }
+      },
+      "rotation": {
+        "origin": [
+          8,
+          17.25,
+          8
+        ],
+        "axis": "y",
+        "angle": 45
+      }
+    },
+    {
+      "from": [
+        2.5,
+        8,
+        8
+      ],
+      "to": [
+        13.5,
+        26.5,
+        8
+      ],
+      "faces": {
+        "north": {
+          "texture": "#1",
+          "uv": [
+            4.375,
+            1.25,
+            11.75,
+            14.875
+          ]
+        },
+        "south": {
+          "texture": "#1",
+          "uv": [
+            11.75,
+            1.25,
+            4.375,
+            14.875
+          ]
+        }
+      },
+      "rotation": {
+        "origin": [
+          8,
+          17.25,
+          8
+        ],
+        "axis": "y",
+        "angle": -45
+      }
+    }
+  ],
+  "display": {
+    "fixed": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    }
+  }
+}

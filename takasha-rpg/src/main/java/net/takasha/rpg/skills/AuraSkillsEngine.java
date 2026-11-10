@@ -271,6 +271,10 @@ public class AuraSkillsEngine {
 
         // 2. Entity Death XP Listener (Fighting/Combat & Archery with LevelledMobs scaling)
         ServerLivingEntityEvents.AFTER_DEATH.register((entity, damageSource) -> {
+            if (entity instanceof DamageDummyEntity || entity.getType().toShortString().toLowerCase().contains("dummy")
+                    || (entity.getCustomName() != null && entity.getCustomName().getString().toLowerCase().contains("dummy"))) {
+                return;
+            }
             if (entity instanceof Enemy && damageSource.getEntity() instanceof ServerPlayer player) {
                 boolean isArrow = damageSource.getDirectEntity() instanceof Projectile;
                 AuraSkillType targetSkill = isArrow ? AuraSkillType.ARCHERY : AuraSkillType.FIGHTING;
@@ -608,6 +612,10 @@ public class AuraSkillsEngine {
             }
 
             ItemStack stack = player.getItemInHand(hand);
+            // REA Parity: Custom MMO RPG weapons handle their own abilities (e.g. Volcanic Spear, Magma Dash)
+            if (net.takasha.rpg.mmo.MMOItemData.hasMMOData(stack)) {
+                return InteractionResult.PASS;
+            }
             long now = System.currentTimeMillis();
             TakashaRpgData data = TakashaRpgManager.getOrCreateData(serverPlayer);
 

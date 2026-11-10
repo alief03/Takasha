@@ -1,0 +1,50 @@
+{
+  "textures": {
+    "0": "takasha_rpg:vfx/flame_shockwave_vfx/0",
+    "particle": "#0"
+  },
+  "elements": [
+    {
+      "from": [
+        -9.25,
+        8,
+        -9.75
+      ],
+      "to": [
+        25.25,
+        8,
+        25.75
+      ],
+      "faces": {
+        "up": {
+          "texture": "#0",
+          "uv": [
+            7.1875,
+            16,
+            0,
+            9.25
+          ]
+        }
+      }
+    }
+  ],
+  "display": {
+    "fixed": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "textures": {
+    "0": "takasha_rpg:vfx/lava_obsidian_pieces_eruption_vfx/0",
+    "particle": "#0"
+  },
+  "elements": [
+    {
+      "from": [
+        2.5,
+        8,
+        8
+      ],
+      "to": [
+        13.5,
+        28,
+        8
+      ],
+      "faces": {
+        "north": {
+          "texture": "#0",
+          "uv": [
+            0,
+            0,
+            5.5,
+            10
+          ]
+        },
+        "south": {
+          "texture": "#0",
+          "uv": [
+            5.5,
+            0,
+            0,
+            10
+          ]
+        }
+      }
+    }
+  ],
+  "display": {
+    "fixed": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    }
+  }
+}

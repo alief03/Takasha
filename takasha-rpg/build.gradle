@@ -3,7 +3,7 @@ plugins {
     id 'maven-publish'
 }
 
-def globalModVersion = '1.8.0'
+def globalModVersion = '1.9.5'
 def globalGroup = 'net.takasha.rpg'
 def globalBaseName = 'Takasha-RPG'
 
@@ -16,16 +16,21 @@ base {
 
 repositories {
     maven {
+        name = "LocalRepo"
+        url = uri("${projectDir}/local-repo")
+    }
+    maven {
         name = "Fabric"
         url = "https://maven.fabricmc.net/"
     }
-    mavenCentral()
 }
 
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     implementation "net.fabricmc:fabric-loader:${project.loader_version}"
     implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    implementation 'org.yaml:snakeyaml:2.2'
+    include 'org.yaml:snakeyaml:2.2'
 }
 
 processResources {
@@ -40,10 +45,63 @@ tasks.withType(JavaCompile).configureEach {
     it.options.release = 25
 }
 
+tasks.named('test') {
+    failOnNoDiscoveredTests = false
+}
+
 java {
     withSourcesJar()
     sourceCompatibility = JavaVersion.VERSION_25
     targetCompatibility = JavaVersion.VERSION_25
+}
+
+tasks.register('runColorTests', JavaExec) {
+    group = 'verification'
+    description = 'Executes the automated Color Code Engine verification test suite.'
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'net.takasha.rpg.test.TakashaColorParserAutoTest'
+}
+
+tasks.register('runSuggestionTests', JavaExec) {
+    group = 'verification'
+    description = 'Executes the automated Command & Chat Suggestion verification test suite.'
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'net.takasha.rpg.test.TakashaCommandSuggestionAutoTest'
+}
+
+tasks.register('runParityTests', JavaExec) {
+    group = 'verification'
+    description = 'Executes the automated MMOItems 1:1 REA parity verification test suite.'
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'net.takasha.rpg.test.TakashaParityAutoTest'
+}
+
+tasks.register('runStatTests', JavaExec) {
+    group = 'verification'
+    description = 'Executes the automated MMOItems 28-stat verification test suite.'
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'net.takasha.rpg.test.MMOStatCombatAutoTest'
+}
+
+tasks.register('runEnchantTests', JavaExec) {
+    group = 'verification'
+    description = 'Executes the automated 336 Custom Enchantments verification test suite.'
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'net.takasha.rpg.test.TakashaEnchantAutoTest'
+}
+
+tasks.register('runMultiTypeAuditTests', JavaExec) {
+    group = 'verification'
+    description = 'Executes the automated Multi-Type Enchant & Stat Audit verification test suite.'
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'net.takasha.rpg.test.TakashaMultiTypeAuditAutoTest'
+}
+
+tasks.register('runStatIntegrationTests', JavaExec) {
+    group = 'verification'
+    description = 'Executes the automated Full Stat Integration & REA Audit verification test suite.'
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'net.takasha.rpg.test.TakashaStatIntegrationAutoTest'
 }
 
 tasks.named('build') {

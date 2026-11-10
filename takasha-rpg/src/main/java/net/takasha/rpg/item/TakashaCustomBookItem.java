@@ -236,7 +236,7 @@ public class TakashaCustomBookItem extends Item {
         if (action != ClickAction.PRIMARY && action != ClickAction.SECONDARY) return false;
 
         ItemStack target = slot.getItem();
-        if (target.isEmpty() || (!target.isDamageableItem() && !(target.getItem() instanceof TakashaCustomWeaponItem) && !(target.getItem() instanceof TakashaArmorSetItem))) return false;
+        if (target.isEmpty() || (!target.isDamageableItem() && !(target.getItem() instanceof TakashaCustomWeaponItem) && !(target.getItem() instanceof TakashaArmorSetItem) && !net.takasha.rpg.mmo.MMOItemData.readFromStack(target).isPresent())) return false;
 
         String enchId = getEnchantId(self);
         if (enchId == null || enchId.isEmpty()) return false;

@@ -63,6 +63,7 @@ public class TakashaRpgData {
 
     // Mana
     private double currentMana = BASE_MANA;
+    private double equipmentBonusMana = 0.0;
 
     // Client Preferences
     private boolean showScoreboard = true;
@@ -574,7 +575,15 @@ public class TakashaRpgData {
     }
 
     public double getMaxMana() {
-        return getTraitValue(AuraTraitType.MAX_MANA);
+        return getTraitValue(AuraTraitType.MAX_MANA) + equipmentBonusMana;
+    }
+
+    public double getEquipmentBonusMana() {
+        return equipmentBonusMana;
+    }
+
+    public void setEquipmentBonusMana(double equipmentBonusMana) {
+        this.equipmentBonusMana = Math.max(0.0, equipmentBonusMana);
     }
 
     public void setMaxMana(double maxMana) {
@@ -863,6 +872,7 @@ public class TakashaRpgData {
         json.addProperty("souls", souls);
         json.addProperty("maxHomes", maxHomes);
         json.addProperty("showScoreboard", showScoreboard);
+        json.addProperty("currentMana", currentMana);
 
         // Ability Toggles
         JsonObject togglesObj = new JsonObject();
@@ -1071,6 +1081,13 @@ public class TakashaRpgData {
                     skillXp.put(AuraSkillType.ALCHEMY, Math.max(0.0, hXp));
                 }
             }
+        }
+
+        // Restore Mana (Clamped to fully loaded Max Mana)
+        if (json.has("currentMana")) {
+            this.currentMana = Math.max(0.0, Math.min(this.getMaxMana(), json.get("currentMana").getAsDouble()));
+        } else {
+            this.currentMana = this.getMaxMana();
         }
     }
 

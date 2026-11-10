@@ -1,0 +1,62 @@
+{
+  "textures": {
+    "0": "takasha_rpg:vfx/infernal_judgement_vfx/0",
+    "1": "takasha_rpg:vfx/infernal_judgement_vfx/1",
+    "2": "takasha_rpg:vfx/infernal_judgement_vfx/2",
+    "3": "takasha_rpg:vfx/infernal_judgement_vfx/3",
+    "particle": "#0"
+  },
+  "elements": [
+    {
+      "from": [
+        2.5,
+        2,
+        8
+      ],
+      "to": [
+        13.5,
+        28,
+        8
+      ],
+      "faces": {
+        "north": {
+          "texture": "#0",
+          "uv": [
+            6,
+            0,
+            7.375,
+            3.25
+          ]
+        },
+        "south": {
+          "texture": "#0",
+          "uv": [
+            7.375,
+            0,
+            6,
+            3.25
+          ]
+        }
+      }
+    }
+  ],
+  "display": {
+    "fixed": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    }
+  }
+}

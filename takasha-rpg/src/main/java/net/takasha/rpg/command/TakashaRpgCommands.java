@@ -52,6 +52,9 @@ import net.takasha.rpg.data.TakashaRpgData;
 import net.takasha.rpg.data.TakashaRpgManager;
 import net.takasha.rpg.dungeon.DungeonArenaEngine;
 import net.takasha.rpg.dungeon.DungeonTier;
+import net.takasha.rpg.dungeon.reward.DungeonRewardConfigManager;
+import net.takasha.rpg.menu.DungeonRewardManagerMenu;
+import net.takasha.rpg.menu.DungeonTierSelectorMenu;
 import net.takasha.rpg.economy.DynamicPricingEngine;
 import net.takasha.rpg.economy.TakashaDailyShopManager;
 import net.takasha.rpg.economy.catalog.ShopCatalog;
@@ -248,6 +251,7 @@ public class TakashaRpgCommands {
         dispatcher.register(Commands.literal("pay")
             .then(Commands.argument("target", EntityArgument.player())
                 .then(Commands.argument("amount", DoubleArgumentType.doubleArg(0.01))
+                    .suggests((ctx, b) -> SharedSuggestionProvider.suggest(List.of("100", "500", "1000", "5000", "10000"), b))
                     .executes(context -> {
                         ServerPlayer sender = context.getSource().getPlayerOrException();
                         ServerPlayer target = EntityArgument.getPlayer(context, "target");
@@ -325,11 +329,21 @@ public class TakashaRpgCommands {
         try {
             ServerPlayer player = context.getSource().getPlayerOrException();
             TakashaRpgData data = TakashaRpgManager.getOrCreateData(player);
-            for (String homeName : data.getHomes().keySet()) {
-                builder.suggest(homeName);
+            if (data.getHomes().isEmpty()) {
+                builder.suggest("[home_name]");
+            } else {
+                for (String homeName : data.getHomes().keySet()) {
+                    builder.suggest(homeName);
+                }
             }
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+            builder.suggest("[home_name]");
+        }
         return builder.buildFuture();
+    };
+
+    private static final SuggestionProvider<CommandSourceStack> SETHOME_SUGGESTIONS = (context, builder) -> {
+        return SharedSuggestionProvider.suggest(List.of("[home_name]", "home", "base", "farm", "mine"), builder);
     };
 
     private static void registerHomeCommands(CommandDispatcher<CommandSourceStack> dispatcher) {
@@ -344,7 +358,7 @@ public class TakashaRpgCommands {
         dispatcher.register(Commands.literal("sethome")
             .executes(context -> setHome(context.getSource().getPlayerOrException(), "home", false))
             .then(Commands.argument("name", StringArgumentType.word())
-                .suggests(HOME_SUGGESTIONS)
+                .suggests(SETHOME_SUGGESTIONS)
                 .executes(context -> setHome(context.getSource().getPlayerOrException(), StringArgumentType.getString(context, "name"), false))
                 .then(Commands.literal("confirm")
                     .executes(context -> setHome(context.getSource().getPlayerOrException(), StringArgumentType.getString(context, "name"), true))
@@ -1395,10 +1409,69 @@ public class TakashaRpgCommands {
                         )
                     )
                 )
+                // /dungeon rewards [tier] [wave] (OP level 2+)
+                .then(Commands.literal("rewards")
+                    .requires(source -> source.permissions().hasPermission(Permissions.COMMANDS_GAMEMASTER))
+                    .executes(context -> {
+                        ServerPlayer player = context.getSource().getPlayerOrException();
+                        DungeonTierSelectorMenu.open(player);
+                        return 1;
+                    })
+                    .then(Commands.argument("tier", StringArgumentType.word())
+                        .suggests(tierSuggestions)
+                        .executes(context -> {
+                            ServerPlayer player = context.getSource().getPlayerOrException();
+                            String tierStr = StringArgumentType.getString(context, "tier");
+                            DungeonTier t = DungeonTier.fromId(tierStr);
+                            DungeonRewardManagerMenu.open(player, t, 1);
+                            return 1;
+                        })
+                        .then(Commands.argument("wave", IntegerArgumentType.integer(1, 5))
+                            .executes(context -> {
+                                ServerPlayer player = context.getSource().getPlayerOrException();
+                                String tierStr = StringArgumentType.getString(context, "tier");
+                                int wave = IntegerArgumentType.getInteger(context, "wave");
+                                DungeonTier t = DungeonTier.fromId(tierStr);
+                                DungeonRewardManagerMenu.open(player, t, wave);
+                                return 1;
+                            })
+                        )
+                    )
+                )
+                // /dungeon loot (alias untuk rewards)
+                .then(Commands.literal("loot")
+                    .requires(source -> source.permissions().hasPermission(Permissions.COMMANDS_GAMEMASTER))
+                    .executes(context -> {
+                        ServerPlayer player = context.getSource().getPlayerOrException();
+                        DungeonTierSelectorMenu.open(player);
+                        return 1;
+                    })
+                    .then(Commands.argument("tier", StringArgumentType.word())
+                        .suggests(tierSuggestions)
+                        .executes(context -> {
+                            ServerPlayer player = context.getSource().getPlayerOrException();
+                            String tierStr = StringArgumentType.getString(context, "tier");
+                            DungeonTier t = DungeonTier.fromId(tierStr);
+                            DungeonRewardManagerMenu.open(player, t, 1);
+                            return 1;
+                        })
+                        .then(Commands.argument("wave", IntegerArgumentType.integer(1, 5))
+                            .executes(context -> {
+                                ServerPlayer player = context.getSource().getPlayerOrException();
+                                String tierStr = StringArgumentType.getString(context, "tier");
+                                int wave = IntegerArgumentType.getInteger(context, "wave");
+                                DungeonTier t = DungeonTier.fromId(tierStr);
+                                DungeonRewardManagerMenu.open(player, t, wave);
+                                return 1;
+                            })
+                        )
+                    )
+                )
                 // /dungeon reload (OP level 2+)
                 .then(Commands.literal("reload")
                     .requires(source -> source.permissions().hasPermission(Permissions.COMMANDS_GAMEMASTER))
                     .executes(context -> {
+                        DungeonRewardConfigManager.getInstance().loadFromDisk();
                         context.getSource().sendSuccess(() -> Component.literal("§a[Dungeon] Konfigurasi dungeon dan drops berhasil dimuat ulang!"), true);
                         return 1;
                     })
@@ -1951,9 +2024,8 @@ public class TakashaRpgCommands {
             return 0;
         }
 
-        String formatted = newName.replace('&', '§');
-        held.set(DataComponents.CUSTOM_NAME, Component.literal(formatted));
-        player.sendSystemMessage(Component.literal("§6§l[Golden Quill] §aNama item berhasil diubah menjadi: §r" + formatted));
+        held.set(DataComponents.CUSTOM_NAME, net.takasha.rpg.mmo.TakashaColorParser.parseItemName(newName));
+        player.sendSystemMessage(net.takasha.rpg.mmo.TakashaColorParser.parse("&6&l[Golden Quill] &aNama item berhasil diubah menjadi: &r").copy().append(net.takasha.rpg.mmo.TakashaColorParser.parseItemName(newName)));
         player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.VILLAGER_WORK_CARTOGRAPHER, SoundSource.PLAYERS, 1.0f, 1.2f);
         return 1;
     }
@@ -2558,6 +2630,16 @@ public class TakashaRpgCommands {
         return 1;
     }
 
+    private static final SuggestionProvider<CommandSourceStack> TITLE_SUGGESTION_PROVIDER = (context, builder) -> {
+        List<String> list = new ArrayList<>();
+        for (TakashaTitle t : TakashaTitle.values()) {
+            list.add(t.getCode());
+            list.add(t.getTitleName());
+            list.add(t.getRomanTitle());
+        }
+        return SharedSuggestionProvider.suggest(list, builder);
+    };
+
     private static void registerTitleCommands(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal("title")
             .executes(c -> executeTitleInfo(c.getSource().getPlayerOrException()))
@@ -2566,6 +2648,7 @@ public class TakashaRpgCommands {
             )
             .then(Commands.literal("set")
                 .then(Commands.argument("id", StringArgumentType.string())
+                    .suggests(TITLE_SUGGESTION_PROVIDER)
                     .executes(c -> executeTitleSet(c.getSource().getPlayerOrException(), StringArgumentType.getString(c, "id")))
                 )
             )
@@ -2581,19 +2664,24 @@ public class TakashaRpgCommands {
             .then(Commands.literal("nametag")
                 .executes(context -> {
                     ServerPlayer player = context.getSource().getPlayerOrException();
-                    player.sendSystemMessage(Component.literal("§6§l[Takasha-RPG] §fStatus Mob Nametag Level: §aAKTIF §7(Semua monster menampilkan Level & Darah)"));
+                    boolean active = net.takasha.rpg.world.TakashaMobLevelManager.isMobNametagEnabled();
+                    player.sendSystemMessage(Component.literal("§6§l[Takasha-RPG] §fStatus Mob Nametag Level: "
+                            + (active ? "§aAKTIF §7(Monster menampilkan Level & Darah)" : "§cNONAKTIF §7(Kompatibilitas mod nametag lain aktif)")));
                     return 1;
                 })
                 .then(Commands.literal("status")
                     .executes(context -> {
                         ServerPlayer player = context.getSource().getPlayerOrException();
-                        player.sendSystemMessage(Component.literal("§6§l[Takasha-RPG] §fStatus Mob Nametag Level: §aAKTIF"));
+                        boolean active = net.takasha.rpg.world.TakashaMobLevelManager.isMobNametagEnabled();
+                        player.sendSystemMessage(Component.literal("§6§l[Takasha-RPG] §fStatus Mob Nametag Level: "
+                                + (active ? "§aAKTIF" : "§cNONAKTIF")));
                         return 1;
                     })
                 )
                 .then(Commands.literal("on")
                     .executes(context -> {
                         ServerPlayer player = context.getSource().getPlayerOrException();
+                        net.takasha.rpg.world.TakashaMobLevelManager.setMobNametagEnabled(true);
                         player.sendSystemMessage(Component.literal("§6§l[Takasha-RPG] §fMob Nametag Level: §aDIAKTIFKAN"));
                         return 1;
                     })
@@ -2601,7 +2689,8 @@ public class TakashaRpgCommands {
                 .then(Commands.literal("off")
                     .executes(context -> {
                         ServerPlayer player = context.getSource().getPlayerOrException();
-                        player.sendSystemMessage(Component.literal("§6§l[Takasha-RPG] §fMob Nametag Level: §cDINONAKTIFKAN"));
+                        net.takasha.rpg.world.TakashaMobLevelManager.setMobNametagEnabled(false);
+                        player.sendSystemMessage(Component.literal("§6§l[Takasha-RPG] §fMob Nametag Level: §cDINONAKTIFKAN §7(Kompatibilitas mod nametag lain aktif)"));
                         return 1;
                     })
                 )
@@ -2665,6 +2754,7 @@ public class TakashaRpgCommands {
                 )
                 .then(Commands.literal("set")
                     .then(Commands.argument("id", StringArgumentType.string())
+                        .suggests(TITLE_SUGGESTION_PROVIDER)
                         .executes(c -> executeTitleSet(c.getSource().getPlayerOrException(), StringArgumentType.getString(c, "id")))
                     )
                 )
@@ -2672,6 +2762,7 @@ public class TakashaRpgCommands {
                     .executes(c -> executeTitleClear(c.getSource().getPlayerOrException()))
                 )
                 .then(Commands.argument("id", StringArgumentType.string())
+                    .suggests(TITLE_SUGGESTION_PROVIDER)
                     .executes(c -> executeTitleSet(c.getSource().getPlayerOrException(), StringArgumentType.getString(c, "id")))
                 )
             )
@@ -2951,10 +3042,11 @@ public class TakashaRpgCommands {
         dispatcher.register(Commands.literal("broadcast")
             .requires(src -> src.permissions().hasPermission(Permissions.COMMANDS_GAMEMASTER))
             .then(Commands.argument("message", StringArgumentType.greedyString())
+                .suggests((ctx, b) -> SharedSuggestionProvider.suggest(List.of("[message]"), b))
                 .executes(c -> {
-                    String msg = StringArgumentType.getString(c, "message").replace('&', '§');
+                    String msg = StringArgumentType.getString(c, "message");
                     c.getSource().getServer().getPlayerList().broadcastSystemMessage(
-                        Component.literal("§c§l[PENGUMUMAN] §f" + msg), false
+                        net.takasha.rpg.mmo.TakashaColorParser.parse("&c&l[PENGUMUMAN] &f").copy().append(net.takasha.rpg.mmo.TakashaColorParser.parse(msg)), false
                     );
                     return 1;
                 })
@@ -3048,10 +3140,13 @@ public class TakashaRpgCommands {
                     .suggests(ENCHANT_SUGGESTION_PROVIDER)
                     .executes(c -> executeAeBook(c.getSource().getPlayerOrException(), StringArgumentType.getString(c, "enchant"), 1, 100, 0, c.getSource().getPlayerOrException()))
                     .then(Commands.argument("level", IntegerArgumentType.integer(1, 10))
+                        .suggests((ctx, b) -> SharedSuggestionProvider.suggest(List.of("1", "2", "3", "5", "10"), b))
                         .executes(c -> executeAeBook(c.getSource().getPlayerOrException(), StringArgumentType.getString(c, "enchant"), IntegerArgumentType.getInteger(c, "level"), 100, 0, c.getSource().getPlayerOrException()))
                         .then(Commands.argument("success", IntegerArgumentType.integer(1, 100))
+                            .suggests((ctx, b) -> SharedSuggestionProvider.suggest(List.of("100", "75", "50", "25"), b))
                             .executes(c -> executeAeBook(c.getSource().getPlayerOrException(), StringArgumentType.getString(c, "enchant"), IntegerArgumentType.getInteger(c, "level"), IntegerArgumentType.getInteger(c, "success"), 0, c.getSource().getPlayerOrException()))
                             .then(Commands.argument("destroy", IntegerArgumentType.integer(0, 100))
+                                .suggests((ctx, b) -> SharedSuggestionProvider.suggest(List.of("0", "5", "10", "20"), b))
                                 .executes(c -> executeAeBook(c.getSource().getPlayerOrException(), StringArgumentType.getString(c, "enchant"), IntegerArgumentType.getInteger(c, "level"), IntegerArgumentType.getInteger(c, "success"), IntegerArgumentType.getInteger(c, "destroy"), c.getSource().getPlayerOrException()))
                                 .then(Commands.argument("target", EntityArgument.player())
                                     .executes(c -> executeAeBook(c.getSource().getPlayerOrException(), StringArgumentType.getString(c, "enchant"), IntegerArgumentType.getInteger(c, "level"), IntegerArgumentType.getInteger(c, "success"), IntegerArgumentType.getInteger(c, "destroy"), EntityArgument.getPlayer(c, "target")))
@@ -3066,6 +3161,7 @@ public class TakashaRpgCommands {
                     .suggests(ENCHANT_SUGGESTION_PROVIDER)
                     .executes(c -> executeAeApply(c.getSource().getPlayerOrException(), StringArgumentType.getString(c, "enchant"), 1))
                     .then(Commands.argument("level", IntegerArgumentType.integer(1, 10))
+                        .suggests((ctx, b) -> SharedSuggestionProvider.suggest(List.of("1", "2", "3", "5"), b))
                         .executes(c -> executeAeApply(c.getSource().getPlayerOrException(), StringArgumentType.getString(c, "enchant"), IntegerArgumentType.getInteger(c, "level")))
                     )
                 )
@@ -3091,6 +3187,7 @@ public class TakashaRpgCommands {
             )
             .then(Commands.literal("setsouls")
                 .then(Commands.argument("amount", IntegerArgumentType.integer(0, 10000))
+                    .suggests((ctx, b) -> SharedSuggestionProvider.suggest(List.of("100", "500", "1000", "5000"), b))
                     .executes(c -> executeAeSetSouls(c.getSource().getPlayerOrException(), IntegerArgumentType.getInteger(c, "amount"), c.getSource().getPlayerOrException()))
                     .then(Commands.argument("target", EntityArgument.player())
                         .executes(c -> executeAeSetSouls(c.getSource().getPlayerOrException(), IntegerArgumentType.getInteger(c, "amount"), EntityArgument.getPlayer(c, "target")))
@@ -3103,6 +3200,7 @@ public class TakashaRpgCommands {
                         .suggests(AE_ITEM_SUGGESTION_PROVIDER)
                         .executes(c -> executeAeGive(c.getSource().getPlayerOrException(), EntityArgument.getPlayer(c, "target"), StringArgumentType.getString(c, "item"), 1))
                         .then(Commands.argument("amount", IntegerArgumentType.integer(1, 64))
+                            .suggests((ctx, b) -> SharedSuggestionProvider.suggest(List.of("1", "16", "64"), b))
                             .executes(c -> executeAeGive(c.getSource().getPlayerOrException(), EntityArgument.getPlayer(c, "target"), StringArgumentType.getString(c, "item"), IntegerArgumentType.getInteger(c, "amount")))
                         )
                     )
